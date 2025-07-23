@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Pun.Demo.Cockpit;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
@@ -6,10 +7,9 @@ using UnityEngine.UI;
 
 public class Matchmaking: MonoBehaviourPunCallbacks
 {
-    [SerializeField]
-    private TMP_InputField passwordInputField = default;
-    [SerializeField]
-    private Button joinRoomButton = default;
+    [SerializeField] private TMP_InputField passwordInputField = default;
+    [SerializeField] private Button joinRoomButton = default;
+    [SerializeField] private ScrollView roomListView = default;
 
     private CanvasGroup canvasGroup;
 
@@ -21,7 +21,8 @@ public class Matchmaking: MonoBehaviourPunCallbacks
 
         // パスワードを入力する前は、ルーム参加ボタンを押せないようにする
         joinRoomButton.interactable = false;
-
+        // ルームリスト表示を初期化する
+        roomListView.Init(this);
         passwordInputField.onValueChanged.AddListener(OnPasswordInputFieldValueChanged);
         joinRoomButton.onClick.AddListener(OnJoinRoomButtonClick);
     }

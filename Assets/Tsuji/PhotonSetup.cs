@@ -12,6 +12,7 @@ public class PhotonSetup : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        PhotonNetwork.NickName = "Player";
         //サーバーに接続
         PhotonNetwork.ConnectUsingSettings();
     }
@@ -22,27 +23,27 @@ public class PhotonSetup : MonoBehaviourPunCallbacks
 
     //}
 
-    //サーバー接続完了
-    public override void OnConnectedToMaster()
-    {
-        PhotonNetwork.JoinRandomRoom();
-    }
+    ////サーバー接続完了
+    //public override void OnConnectedToMaster()
+    //{
+    //    PhotonNetwork.JoinRandomRoom();
+    //}
 
-    //ロビー入室完了
-    public override void OnJoinedLobby()
-    {
-        PhotonNetwork.JoinRandomRoom();
-    }
+    ////ロビー入室完了
+    //public override void OnJoinedLobby()
+    //{
+    //    PhotonNetwork.JoinRandomRoom();
+    //}
 
-    //入室失敗
-    // 入室に失敗した場合に呼ばれるコールバック
-    // １人目は部屋がないため必ず失敗するので部屋を作成する
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 4; // 最大8人まで入室可能
-        PhotonNetwork.CreateRoom(null, roomOptions); //第一引数はルーム名
-    }
+    ////入室失敗
+    //// 入室に失敗した場合に呼ばれるコールバック
+    //// １人目は部屋がないため必ず失敗するので部屋を作成する
+    //public override void OnJoinRandomFailed(short returnCode, string message)
+    //{
+    //    RoomOptions roomOptions = new RoomOptions();
+    //    roomOptions.MaxPlayers = 4; // 最大8人まで入室可能
+    //    PhotonNetwork.CreateRoom(null, roomOptions); //第一引数はルーム名
+    //}
 
 
     public override void OnJoinedRoom()
@@ -55,5 +56,11 @@ public class PhotonSetup : MonoBehaviourPunCallbacks
         );
         GameObject mainCamera = GameObject.FindWithTag("MainCamera");
         mainCamera.GetComponent<UnityChan.ThirdPersonCamera>().enabled = true;
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions(), TypedLobby.Default);
+        PhotonNetwork.JoinLobby();
     }
 }
