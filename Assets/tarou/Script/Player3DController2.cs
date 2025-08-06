@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Player3DController : MonoBehaviour
+public class Player3DController2 : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
@@ -23,8 +23,8 @@ public class Player3DController : MonoBehaviour
         // 地面との接触をレイヤーで判定
         isGrounded = CheckIfGrounded();
 
-        // ジャンプ処理
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        // ジャンプ処理（Wキーでジャンプ）
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, 0f);
         }
@@ -32,7 +32,10 @@ public class Player3DController : MonoBehaviour
 
     void FixedUpdate()
     {
-        float moveInput = Input.GetAxis("Horizontal");
+        float moveInput = 0f;
+        if (Input.GetKey(KeyCode.LeftArrow)) moveInput = -1f;
+        if (Input.GetKey(KeyCode.RightArrow)) moveInput = 1f;
+
         rb.velocity = new Vector3(moveInput * moveSpeed, rb.velocity.y, 0f);
     }
 
