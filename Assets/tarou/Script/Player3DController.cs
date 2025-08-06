@@ -15,7 +15,7 @@ public class Player3DController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         // ZŽ²‚ÌˆÚ“®‚ðŒÅ’è
-        rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+        //rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
     }
 
     void Update()

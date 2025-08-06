@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - MoveOb
+  - Enemy
+  - EnemyCharacter
+  - DefaultCamera
+  - CameraA
+  - CameraB
   layers:
   - Default
   - TransparentFX

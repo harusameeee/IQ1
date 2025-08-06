@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LobbyScene.unity
     guid: 4599e5937beed6c4aa1c1c045f83554f
+  - enabled: 1
+    path: Assets/tarou/Debug.unity
+    guid: 83476a6f96a00fc49935b4aa5c7d9b80
   m_configObjects: {}
