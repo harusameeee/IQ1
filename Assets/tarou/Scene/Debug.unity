@@ -4087,7 +4087,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1326299981}
-  - component: {fileID: 1326299980}
   - component: {fileID: 1326299982}
   - component: {fileID: 1326299983}
   m_Layer: 0
@@ -4097,21 +4096,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1326299980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1326299979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: deee3bd88cff95949bd0b5844b5e71c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabToSpawn: {fileID: 3209444459680877859, guid: be9a0c6fe9afcbf4188375209c22a2c2, type: 3}
-  spawnInterval: 2
-  spawnPoint: {fileID: 1326299981}
 --- !u!4 &1326299981
 Transform:
   m_ObjectHideFlags: 0
@@ -4140,6 +4124,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacles:
+  - prefab: {fileID: 3209444459680877859, guid: be9a0c6fe9afcbf4188375209c22a2c2, type: 3}
+    xOffsetRange: {x: 0, y: 0}
+    spawnIntervalRange: {x: 2, y: 4}
   - prefab: {fileID: 5431638749043460183, guid: 44d9789f26152284498d3bb1020c0c52, type: 3}
     xOffsetRange: {x: -3, y: 3}
     spawnIntervalRange: {x: 4, y: 8}
