@@ -16,6 +16,7 @@ public class ObstacleSpawner : MonoBehaviour
     private float timer;
     private float nextSpawnTime;
     private ObstacleData currentObstacle;
+    private bool playerInside = false;  // ← Playerが中にいるかどうか判定するフラグ
 
     void Start()
     {
@@ -24,6 +25,8 @@ public class ObstacleSpawner : MonoBehaviour
 
     void Update()
     {
+        if (playerInside) return; // ← プレイヤーが入ってる間は弾(障害物)を出さない
+
         timer += Time.deltaTime;
 
         if (timer >= nextSpawnTime)
@@ -55,4 +58,21 @@ public class ObstacleSpawner : MonoBehaviour
         // プレハブを生成
         Instantiate(currentObstacle.prefab, spawnPos, Quaternion.identity);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInside = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInside = false;
+        }
+    }
 }
+
