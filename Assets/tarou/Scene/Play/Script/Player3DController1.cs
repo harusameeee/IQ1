@@ -23,37 +23,16 @@ public class Player3DController1 : MonoBehaviour
         // 地面との接触をレイヤーで判定
         isGrounded = CheckIfGrounded();
 
-        // ジャンプ処理（Wキーでジャンプ）
-        if (Input.GetKeyDown(KeyCode.W) && isGrounded)
+        // ジャンプ処理（コントローラーのAボタン/joystick button 0でジャンプ）
+        if (Input.GetKeyDown("joystick button 0") && isGrounded)
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, 0f);
-        }
-        if (Input.GetKeyDown("joystick button 0"))
-        {
-            rb.velocity = new Vector3(rb.velocity.x, jumpForce, 0f);
-            Debug.Log("ボタンが押された");
         }
     }
 
     void FixedUpdate()
     {
-        float moveInput = 0f;
-        if (Input.GetKey(KeyCode.A)) moveInput = -1f;
-        if (Input.GetKey(KeyCode.D)) moveInput = 1f;
-
-        float axis_input =  Input.GetAxis("Horizontal Input");
-        if (axis_input == 1)
-        {
-            moveInput = 1f;
-            Debug.Log("joystick1");
-        }
-        if (axis_input == -1)
-        {
-            moveInput = -1f;
-            Debug.Log("joystick2");
-        }
-
-
+        float moveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector3(moveInput * moveSpeed, rb.velocity.y, 0f);
     }
 
