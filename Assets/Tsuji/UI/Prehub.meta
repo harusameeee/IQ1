@@ -1,8 +1,21 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
+=======
+<<<<<<<< HEAD:Assets/tarou/Scene/Play/Material/Rope.mat.meta
+guid: 261921b6efb478b4682739b9cdedb1c3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+========
+>>>>>>> Stashed changes
 guid: 9248563e52955894598b61f748db1ebc
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
+<<<<<<< Updated upstream
+=======
+>>>>>>>> Tsuji:Assets/Tsuji/UI/Prehub.meta
+>>>>>>> Stashed changes
   userData: 
   assetBundleName: 
   assetBundleVariant: 
