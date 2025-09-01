@@ -28,6 +28,11 @@ public class Player3DController1 : MonoBehaviour
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, 0f);
         }
+        if (Input.GetKeyDown("joystick button 0"))
+        {
+            rb.velocity = new Vector3(rb.velocity.x, jumpForce, 0f);
+            Debug.Log("ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½");
+        }
     }
 
     void FixedUpdate()
@@ -35,6 +40,19 @@ public class Player3DController1 : MonoBehaviour
         float moveInput = 0f;
         if (Input.GetKey(KeyCode.A)) moveInput = -1f;
         if (Input.GetKey(KeyCode.D)) moveInput = 1f;
+
+        float axis_input =  Input.GetAxis("Horizontal Input");
+        if (axis_input == 1)
+        {
+            moveInput = 1f;
+            Debug.Log("joystick1");
+        }
+        if (axis_input == -1)
+        {
+            moveInput = -1f;
+            Debug.Log("joystick2");
+        }
+
 
         rb.velocity = new Vector3(moveInput * moveSpeed, rb.velocity.y, 0f);
     }
