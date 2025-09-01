@@ -8,10 +8,23 @@ public class ConditionalZMovement : MonoBehaviour
 
     private float startZ;         // 最初のZ座標
     private bool isWaiting = false; // 停止中フラグ
+    public GameObject Danger;  // DangerUIを参照する
 
     void Start()
     {
         startZ = transform.position.z;
+
+        // タグでUIを探す（シーンに1つだけある想定）
+        Danger = GameObject.FindGameObjectWithTag("DangerUI");
+
+        if (Danger != null)
+        {
+            Danger.SetActive(false); // 最初は非表示にしておく
+        }
+        else
+        {
+            Debug.LogWarning("DangerUIタグを持つオブジェクトが見つかりません");
+        }
     }
 
     void Update()
@@ -37,13 +50,17 @@ public class ConditionalZMovement : MonoBehaviour
     {
         isWaiting = true;
 
+        if (Danger != null) Danger.SetActive(true); // DangerUIを表示
+
         // その場で5秒静止
         yield return new WaitForSeconds(5f);
-        
+
         // Z座標を加算
         Vector3 pos = transform.position;
         pos.z += addZ;
         transform.position = pos;
+
+        if (Danger != null) Danger.SetActive(false); // DangerUIを非表示
 
         isWaiting = false; // フラグ解除して再び動けるようにする
     }
