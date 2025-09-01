@@ -2265,7 +2265,7 @@ MonoBehaviour:
   playerIcon: {fileID: 883069423}
   distanceText: {fileID: 2102608212}
   totalDistance: 500
-  duration: 120
+  duration: 30
 --- !u!114 &627386457
 MonoBehaviour:
   m_ObjectHideFlags: 0
