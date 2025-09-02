@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement; // ƒV[ƒ“‘JˆÚ—p
 
@@ -20,7 +21,14 @@ public class TitleSceneController : MonoBehaviour
         {
             ShowSecondCanvas();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
+
+   
 
     // --- Ø‚è‘Ö‚¦ˆ— ---
     public void ShowFirstCanvas()

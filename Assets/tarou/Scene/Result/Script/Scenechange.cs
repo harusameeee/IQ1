@@ -9,7 +9,7 @@ public class Scenechange: MonoBehaviour
     void Update()
     {
         // スペースキーが押されたらシーン遷移
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown("joystick button 0"))
         {
             SceneManager.LoadScene(sceneName);
         }
