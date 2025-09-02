@@ -827,7 +827,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &229184331
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3488,6 +3488,7 @@ GameObject:
   - component: {fileID: 986084375}
   - component: {fileID: 986084374}
   - component: {fileID: 986084377}
+  - component: {fileID: 986084378}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -3560,9 +3561,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 986084374}
-        m_TargetAssemblyTypeName: UnityEngine.UI.Selectable, UnityEngine.UI
-        m_MethodName: Select
+      - m_Target: {fileID: 986084378}
+        m_TargetAssemblyTypeName: ButtonState, Assembly-CSharp
+        m_MethodName: OnCloseMenuButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3625,6 +3626,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 1, b: 0.9764706, a: 0.81960785}
   m_EffectDistance: {x: 2.44, y: -2.62}
   m_UseGraphicAlpha: 1
+--- !u!114 &986084378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986084372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fed7179707188f48ab71aa203f5778f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseScript: {fileID: 627386458}
 --- !u!1 &1006526848
 GameObject:
   m_ObjectHideFlags: 0
@@ -4723,6 +4737,7 @@ GameObject:
   - component: {fileID: 1217717304}
   - component: {fileID: 1217717303}
   - component: {fileID: 1217717306}
+  - component: {fileID: 1217717307}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -4794,7 +4809,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1217717304}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1217717307}
+        m_TargetAssemblyTypeName: ButtonState, Assembly-CSharp
+        m_MethodName: OnGoToSceneButton
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Title
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1217717304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4848,6 +4875,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 1, b: 0.9764706, a: 0.81960785}
   m_EffectDistance: {x: 2.44, y: -2.62}
   m_UseGraphicAlpha: 1
+--- !u!114 &1217717307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217717301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fed7179707188f48ab71aa203f5778f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseScript: {fileID: 627386458}
 --- !u!1 &1243361070
 GameObject:
   m_ObjectHideFlags: 0
@@ -5294,6 +5334,7 @@ GameObject:
   - component: {fileID: 1390496562}
   - component: {fileID: 1390496561}
   - component: {fileID: 1390496564}
+  - component: {fileID: 1390496565}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -5366,13 +5407,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1390496565}
+        m_TargetAssemblyTypeName: ButtonState, Assembly-CSharp
+        m_MethodName: OnRestartPlaySceneButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5431,6 +5472,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 1, b: 0.9742756, a: 0.81960785}
   m_EffectDistance: {x: 2.44, y: -2.62}
   m_UseGraphicAlpha: 1
+--- !u!114 &1390496565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390496559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fed7179707188f48ab71aa203f5778f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poseScript: {fileID: 627386458}
 --- !u!1 &1427937230
 GameObject:
   m_ObjectHideFlags: 0
@@ -8524,7 +8578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5706310913973286921, guid: 46deac0ef8c434a41b578e5e6401014f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5706310913973286921, guid: 46deac0ef8c434a41b578e5e6401014f, type: 3}
       propertyPath: m_TagString
