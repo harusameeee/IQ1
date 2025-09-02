@@ -14,10 +14,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Escが押された時
-        if (Input.GetKey(KeyCode.Escape))
-        {
 
+        //Escが押された時
+        if (Input.GetKeyDown("joystick button 6"))
+        {
+            Debug.Log("ボタンが押された");
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
 #else
