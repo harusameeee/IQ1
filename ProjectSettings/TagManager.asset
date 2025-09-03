@@ -10,6 +10,8 @@ TagManager:
   - DefaultCamera
   - UI
   - DangerUI
+  - EnemyAttack
+  - Player2
   layers:
   - Default
   - TransparentFX
