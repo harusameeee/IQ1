@@ -4,7 +4,7 @@ using System.Collections;
 public class MoveAndReturnTaggedObject : MonoBehaviour
 {
     public string targetTag = "EnemyCharacter"; // 動かしたいタグ
-    public float moveDistance = 1f;             // 進める距離
+    public float moveDistance = -1f;             // 進める距離
     public float moveDuration = 2f;             // 移動にかける時間（秒）
 
     private void OnTriggerEnter(Collider other)
