@@ -25,8 +25,4 @@ public class SceneChanger : MonoBehaviour
         Application.Quit();
     }
 
-    public void OpenOption()
-    {
-        //オプションを呼び出す
-    }
 }
