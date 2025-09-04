@@ -2191,7 +2191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallingPrefab: {fileID: 1500584360514757793, guid: 348e11f091d403c4f9972ba93eb201a0, type: 3}
   spawnY: 3.5
-  interval: 1.5
+  interval: 3
 --- !u!4 &538849498
 Transform:
   m_ObjectHideFlags: 0
@@ -8617,7 +8617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5706310913973286921, guid: 46deac0ef8c434a41b578e5e6401014f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5706310913973286921, guid: 46deac0ef8c434a41b578e5e6401014f, type: 3}
       propertyPath: m_TagString

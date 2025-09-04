@@ -46,6 +46,6 @@ public class TitleSceneController : MonoBehaviour
     // --- ƒV[ƒ“‘JˆÚˆ— ---
     public void LoadNextScene(string sceneName)
     {
-        SceneManager.LoadScene("Stage1");
+        FadeManager.Instance.LoadScene(2);
     }
 }
