@@ -11,7 +11,7 @@ public class EnemyMover : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player‚ÆÚGI");
+            //Debug.Log("Player‚ÆÚG");
             shouldMove = true;
             targetPosition = transform.position + Vector3.forward * moveDistance;
         }

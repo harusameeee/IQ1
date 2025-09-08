@@ -61,7 +61,7 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("Player2"))
         {
             playerInside = true;
         }
@@ -69,7 +69,7 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("Player2"))
         {
             playerInside = false;
         }

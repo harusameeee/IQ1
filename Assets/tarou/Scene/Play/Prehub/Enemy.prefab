@@ -2191,6 +2191,7 @@ GameObject:
   - component: {fileID: 7853651062306844718}
   - component: {fileID: 7853651062306844717}
   - component: {fileID: 7853651062306844716}
+  - component: {fileID: 5694709062415569956}
   - component: {fileID: 270057224999938599}
   m_Layer: 0
   m_Name: AttackSpawn
@@ -2249,6 +2250,22 @@ MonoBehaviour:
   - prefab: {fileID: 1859283459778535897, guid: 6f464dca56e01494cbdbde6242ca6ab4, type: 3}
     xOffsetRange: {x: 0, y: 0}
     spawnIntervalRange: {x: 10, y: 15}
+--- !u!114 &5694709062415569956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7853651062306844712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070eaf9f45fa304419e71e9d7e15243a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacles:
+  - prefab: {fileID: 0}
+    xOffsetRange: {x: 0, y: 0}
+    spawnIntervalRange: {x: 0, y: 0}
 --- !u!65 &270057224999938599
 BoxCollider:
   m_ObjectHideFlags: 0

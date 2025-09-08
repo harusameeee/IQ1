@@ -3,9 +3,9 @@ using System.Collections;
 
 public class MoveAndReturnTaggedObject : MonoBehaviour
 {
-    public string targetTag = "EnemyCharacter"; // 動かしたいタグ
-    public float moveDistance = -1f;             // 進める距離
-    public float moveDuration = 2f;             // 移動にかける時間（秒）
+    public string targetTag = "EnemyCharacter";
+    public float moveDistance = -1f;
+    public float moveDuration = 2f;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,23 +14,39 @@ public class MoveAndReturnTaggedObject : MonoBehaviour
             GameObject[] targets = GameObject.FindGameObjectsWithTag(targetTag);
             foreach (GameObject target in targets)
             {
-                StartCoroutine(MoveOverTime(target, moveDistance, moveDuration));
+                // ターゲットに移動用コルーチンを走らせる
+                target.AddComponent<MoveHelper>().StartMoving(moveDistance, moveDuration);
             }
+
+            // ★ 自分は当たった瞬間に消す
+            //Destroy(gameObject);
         }
     }
+}
 
-    private IEnumerator MoveOverTime(GameObject target, float distance, float duration)
+// ターゲット側に一時的に追加される補助クラス
+public class MoveHelper : MonoBehaviour
+{
+    public void StartMoving(float distance, float duration)
     {
-        Vector3 startPos = target.transform.position;
+        StartCoroutine(MoveOverTime(distance, duration));
+    }
+
+    private IEnumerator MoveOverTime(float distance, float duration)
+    {
+        Vector3 startPos = transform.position;
         Vector3 endPos = startPos + new Vector3(0, 0, distance);
         float elapsed = 0f;
 
         while (elapsed < duration)
         {
-            target.transform.position = Vector3.Lerp(startPos, endPos, elapsed / duration);
+            transform.position = Vector3.Lerp(startPos, endPos, elapsed / duration);
             elapsed += Time.deltaTime;
             yield return null;
         }
-        target.transform.position = endPos; // 最終位置を保証
+
+        transform.position = endPos;
+        // コルーチン終わったら補助コンポーネント削除
+        Destroy(this); 
     }
 }
