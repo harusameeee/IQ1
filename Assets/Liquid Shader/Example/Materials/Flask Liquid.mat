@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Flask Liquid
+  m_Shader: {fileID: 4800000, guid: 3fb9d4013e5b0034b93bf2350de8dd9a, type: 3}
+  m_ValidKeywords:
+  - USE_GRABPASS
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BubbleTex:
+        m_Texture: {fileID: 2800000, guid: 1c3e0f32c4084c343bc86ac263b01e69, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PerlinNoise:
+        m_Texture: {fileID: 2800000, guid: 75db980f975a83246a70fc765da4ae28, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WavesTex:
+        m_Texture: {fileID: 2800000, guid: c9fe0657ba9cefa45aa662993db585de, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BubbleCount: 30
+    - _BubbleScale: 1
+    - _EdgeThickness: 0.02
+    - _FoamAmount: 1
+    - _FresnelPower: 1.5
+    - _MeniscusCurve: 0.75
+    - _MeniscusHeight: 0.04
+    - _ProbeLod: 0.05
+    - _Refraction: 0.5
+    - _Syrup: 0
+    - _UseGrabpass: 1
+    m_Colors:
+    - _FoamColor: {r: 0.29803923, g: 0.6862745, b: 1, a: 1}
+    - _LiquidColor: {r: 0.2980392, g: 0.6155562, b: 1, a: 1}
+    - _TopColor: {r: 0.5371804, g: 0.93962264, b: 0.8924472, a: 1}
+  m_BuildTextureStacks: []
