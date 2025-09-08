@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class StageSelectcamera : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //playerに追従させたい
+    [SerializeField] GameObject player;
+    // 速度
+    Vector3 velocity = Vector3.zero;
+    // カメラ位置
+    [SerializeField] Vector3 position = new Vector3(0, 3, -6);
 
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        
+        transform.position = 
+            Vector3.SmoothDamp(transform.position,
+            player.transform.position + position,
+            ref velocity, 0.3f);	// カメラを少し遅れて移動させる処理
     }
 }
