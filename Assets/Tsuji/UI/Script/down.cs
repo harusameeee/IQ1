@@ -1,26 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class down : MonoBehaviour
 {
-    [SerializeField] GameObject buttongroup;
-    Vector3 position;
+    //ìÆÇ≠ïbêî
+    [SerializeField] float moveTime=1.0f;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-       
+        MoveDown();
     }
 
-    // Update is called once per frame
-    void Update()
+    //è„Ç©ÇÁç~Ç¡ÇƒÇ≠ÇÈÇ›ÇΩÇ¢Ç»
+    public void MoveDown()
     {
-        
-    }
-
-    void Down()
-    {
-
+        this.transform.DOLocalMoveY(0.0f, moveTime).SetEase(Ease.OutElastic);
     }
 }

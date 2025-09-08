@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -4069697594269030464}
   m_Layer: 0
   m_Name: Attack4
-  m_TagString: Untagged
+  m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,7 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: EnemyCharacter
-  moveDistance: -0.5
+  moveDistance: -1
+  moveDuration: 2
 --- !u!114 &4213631572443110733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b625f42ecf38a49a59eba1e57f0695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
+  speed: 5
   destroyZ: -70
 --- !u!54 &-4069697594269030464
 Rigidbody:

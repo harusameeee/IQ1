@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4015917793299076809}
   m_Layer: 0
   m_Name: Attack
-  m_TagString: Untagged
+  m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,5 +126,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: EnemyCharacter
-  moveDistance: -0.5
-  returnDuration: 0.5
+  moveDistance: -1
+  moveDuration: 2
