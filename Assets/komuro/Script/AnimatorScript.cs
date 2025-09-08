@@ -5,15 +5,26 @@ using UnityEngine;
 public class AnimatorScript : MonoBehaviour
 {
 
-    // Start is called before the first frame update
+    [SerializeField] Animator anim = null;
+    bool horizontalKey = true;
+
     void Start()
     {
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        //bool horizontalKey = Input.GetKey(KeyCode.RightArrow);
+
+        if (horizontalKey == true)
+        {
+            anim.SetBool("Run", true);
+            anim.SetBool("Fly", true);
+        }
+        else
+        {
+            anim.SetBool("Run", false);
+            anim.SetBool("Fly", false);
+        }
     }
 }
