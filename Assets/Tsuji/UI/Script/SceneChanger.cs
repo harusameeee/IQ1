@@ -12,7 +12,7 @@ public class SceneChanger : MonoBehaviour
 
     public void ToPlay()
     {
-        SceneManager.LoadScene("PlayScene");
+        SceneManager.LoadScene("Stage1");
     }
 
     public void ToResult()
