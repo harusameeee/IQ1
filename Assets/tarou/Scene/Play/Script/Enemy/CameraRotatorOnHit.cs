@@ -49,15 +49,15 @@ public class CameraRotatorOnHit : MonoBehaviour
                 targetCamera.transform.eulerAngles = new Vector3(euler.x, euler.y, newZ);
             }
 
-            // --- UIÇâÒÇ∑ ---
-            if (uiRoot != null)
-            {
-                float currentZUI = uiRoot.eulerAngles.z;
-                float newZUI = Mathf.MoveTowardsAngle(currentZUI, uiTargetZRotation, rotationSpeed * Time.deltaTime);
+            //// --- UIÇâÒÇ∑ ---
+            //if (uiRoot != null)
+            //{
+            //    float currentZUI = uiRoot.eulerAngles.z;
+            //    float newZUI = Mathf.MoveTowardsAngle(currentZUI, uiTargetZRotation, rotationSpeed * Time.deltaTime);
 
-                Vector3 eulerUI = uiRoot.eulerAngles;
-                uiRoot.eulerAngles = new Vector3(eulerUI.x, eulerUI.y, newZUI);
-            }
+            //    Vector3 eulerUI = uiRoot.eulerAngles;
+            //    uiRoot.eulerAngles = new Vector3(eulerUI.x, eulerUI.y, newZUI);
+            //}
 
             // óºï˚Ç™ìûíBÇµÇΩÇÁèIóπ
             bool cameraDone = (targetCamera == null) || Mathf.Approximately(targetCamera.transform.eulerAngles.z, targetZRotation);

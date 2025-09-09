@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1500584360514757793}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.19, y: 3.22, z: -61.96}
-  m_LocalScale: {x: 1.16475, y: 1, z: 1}
+  m_LocalScale: {x: 2.06, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -115,6 +115,7 @@ MonoBehaviour:
   shadowPrefab: {fileID: 965869864531455757, guid: 21202a59d82dd444187cfb731bfd063f, type: 3}
   groundY: 0.6
   waitTime: 2
+  spawnHeight: 3
 --- !u!54 &-6669401025947966644
 Rigidbody:
   m_ObjectHideFlags: 0
