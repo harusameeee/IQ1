@@ -16,7 +16,7 @@ public class Player3DController : MonoBehaviour
     private Rigidbody rb;
     private bool isGrounded;
 
-    // ステート管理（ノーマル or スロウ）
+    // ステート管理（ノーマル , スロウ）
     public enum State { Normal, Slow }
     public State currentState = State.Normal;
 

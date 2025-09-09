@@ -3,16 +3,18 @@ using UnityEngine;
 public class CameraRotatorOnHit : MonoBehaviour
 {
     public float rotationSpeed = 90f; // 回転速度（度/秒）
+    public float cooldown = 3f; // クールタイム（秒）
 
     private Camera targetCamera;
     private RectTransform uiRoot;
     private bool rotating = false;
     private float targetZRotation;
     private float uiTargetZRotation;
+    private float lastHitTime = -999f;
 
     void Start()
     {
-        // タグ "DefaultCamera" のついたカメラを探す
+        // タグ "MainCamera" のカメラを探す
         GameObject cameraObj = GameObject.FindGameObjectWithTag("MainCamera");
         if (cameraObj != null)
         {
@@ -20,10 +22,10 @@ public class CameraRotatorOnHit : MonoBehaviour
         }
         else
         {
-            Debug.LogError("タグ 'DefaultCamera' のついたカメラが見つかりません");
+            Debug.LogError("タグ 'MainCamera' のついたカメラが見つかりません");
         }
 
-        // タグ "RotatableUI" のUIを探す
+        // タグ "UI" のUIを探す
         GameObject uiObj = GameObject.FindGameObjectWithTag("UI");
         if (uiObj != null)
         {
@@ -49,7 +51,7 @@ public class CameraRotatorOnHit : MonoBehaviour
                 targetCamera.transform.eulerAngles = new Vector3(euler.x, euler.y, newZ);
             }
 
-            //// --- UIを回す ---
+            // --- UIを回す ---
             //if (uiRoot != null)
             //{
             //    float currentZUI = uiRoot.eulerAngles.z;
@@ -60,8 +62,8 @@ public class CameraRotatorOnHit : MonoBehaviour
             //}
 
             // 両方が到達したら終了
-            bool cameraDone = (targetCamera == null) || Mathf.Approximately(targetCamera.transform.eulerAngles.z, targetZRotation);
-            bool uiDone = (uiRoot == null) || Mathf.Approximately(uiRoot.eulerAngles.z, uiTargetZRotation);
+            bool cameraDone = (targetCamera == null) || Mathf.Abs(Mathf.DeltaAngle(targetCamera.transform.eulerAngles.z, targetZRotation)) < 0.1f;
+            bool uiDone = (uiRoot == null) || Mathf.Abs(Mathf.DeltaAngle(uiRoot.eulerAngles.z, uiTargetZRotation)) < 0.1f;
 
             if (cameraDone && uiDone)
             {
@@ -73,24 +75,30 @@ public class CameraRotatorOnHit : MonoBehaviour
     // 衝突時に回転スタート
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player")) // または条件を変更して自由に
+        if (other.CompareTag("Player"))
         {
-            StartRotation();
+            if (Time.time - lastHitTime >= cooldown)
+            {
+                StartRotation();
+                lastHitTime = Time.time;
+            }
         }
     }
+
+
 
     void StartRotation()
     {
         if (targetCamera != null)
         {
             float currentZ = targetCamera.transform.eulerAngles.z;
-            targetZRotation = currentZ + 180f;
+            targetZRotation = (currentZ + 180f) % 360f;
         }
 
         if (uiRoot != null)
         {
             float currentZUI = uiRoot.eulerAngles.z;
-            uiTargetZRotation = currentZUI + 180f;
+            uiTargetZRotation = (currentZUI + 180f) % 360f;
         }
 
         rotating = true;
