@@ -17,8 +17,9 @@ public class StageSelect : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")&& !isSelect)
         {
+
             // ボタン押してる風
             transform.localScale = new Vector3(1.0f, scaleY, 5.0f);
 
@@ -36,10 +37,10 @@ public class StageSelect : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")&& !isSelect)
         {
             // 離れたらリセット
-            transform.localScale = Vector3.one;
+            transform.localScale = new Vector3(1f, 0.1f, 5f);
             isSelect = false;
 
             // DOTween を止める
