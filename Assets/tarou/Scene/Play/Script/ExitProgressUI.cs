@@ -27,7 +27,7 @@ public class ExitProgressUI : MonoBehaviour
         if (elapsedTime >= duration)
         {
             // ƒS[ƒ‹ˆ—
-            SceneManager.LoadScene("Result");
+            SceneManager.LoadScene("ResultScene");
         }
     }
 
