@@ -12,6 +12,7 @@ TagManager:
   - DangerUI
   - EnemyAttack
   - Player2
+  - magic camera
   layers:
   - Default
   - TransparentFX
