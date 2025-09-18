@@ -21,10 +21,16 @@ public class Player3DController : MonoBehaviour
     public State currentState = State.Normal;
 
     private Coroutine slowCoroutine;
+    private Coroutine blinkCoroutine;
+
+    // 点滅で使う
+    private Renderer[] renderers;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        // 全てのRenderer取得（子オブジェクトも含む）
+        renderers = GetComponentsInChildren<Renderer>();
     }
 
     void Update()
@@ -64,6 +70,17 @@ public class Player3DController : MonoBehaviour
             // 連続で当たった場合もコルーチンを正しく管理
             if (slowCoroutine != null) StopCoroutine(slowCoroutine);
             slowCoroutine = StartCoroutine(SwitchToSlowAndReturn());
+
+            // 点滅コルーチンも管理
+            if (blinkCoroutine != null) StopCoroutine(blinkCoroutine);
+            blinkCoroutine = StartCoroutine(Blink(1f, 0.1f));
+        }
+
+        if(other.CompareTag("magic camera"))
+        {
+            // 連続で当たった場合もコルーチンを正しく管理
+            if (slowCoroutine != null) StopCoroutine(slowCoroutine);
+            slowCoroutine = StartCoroutine(SwitchToSlowAndReturn());
         }
     }
 
@@ -74,5 +91,29 @@ public class Player3DController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         currentState = State.Normal;
         slowCoroutine = null;
+    }
+
+    // 点滅コルーチン
+    private IEnumerator Blink(float duration, float interval)
+    {
+        float elapsed = 0f;
+        bool visible = true;
+        while (elapsed < duration)
+        {
+            SetRenderersVisible(visible);
+            visible = !visible;
+            yield return new WaitForSeconds(interval);
+            elapsed += interval;
+        }
+        SetRenderersVisible(true); // 最後は必ず表示状態にする
+        blinkCoroutine = null;
+    }
+
+    private void SetRenderersVisible(bool visible)
+    {
+        foreach (var r in renderers)
+        {
+            r.enabled = visible;
+        }
     }
 }

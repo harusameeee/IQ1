@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -6399101904963840915}
   m_Layer: 0
   m_Name: Attack3
-  m_TagString: EnemyAttack
+  m_TagString: magic camera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 180
+  cooldown: 3
 --- !u!114 &-6399101904963840915
 MonoBehaviour:
   m_ObjectHideFlags: 0
