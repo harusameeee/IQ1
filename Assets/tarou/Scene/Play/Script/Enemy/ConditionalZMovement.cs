@@ -3,23 +3,30 @@ using System.Collections;
 
 public class ConditionalZMovement : MonoBehaviour
 {
-    public float moveSpeed = 1f;  // 通常の移動スピード（Z方向）
-    public float addZ = 10f;      // 5秒後に加算するZ座標の量
-    public float addZDuration = 2f; // 加算移動にかける時間（秒）
+    public float moveSpeed = 1f;
+    public float addZ = 10f;
+    public float addZDuration = 2f;
 
-    private float startZ;         // 最初のZ座標
-    private bool isWaiting = false; // 停止中フラグ
-    public GameObject Danger;  // DangerUIを参照する
+    private float startZ;
+    private bool isWaiting = false;
+    public GameObject Danger;
+
+    public enum State { Start, Fly, Stop, Attack, None }
+    public State currentState = State.None;
+
+    private Animator animator;
 
     void Start()
     {
         startZ = transform.position.z;
+        animator = GetComponent<Animator>();
 
         Danger = GameObject.FindGameObjectWithTag("DangerUI");
 
         if (Danger != null)
         {
-            Danger.SetActive(false); // 最初は非表示
+            Danger.SetActive(false);
+            SetState(State.Start);
         }
         else
         {
@@ -31,15 +38,19 @@ public class ConditionalZMovement : MonoBehaviour
     {
         if (isWaiting) return;
 
-        // 初期位置より後ろにいるときだけ移動
         if (transform.position.z < startZ)
         {
             Vector3 pos = transform.position;
             pos.z += moveSpeed * Time.deltaTime;
             transform.position = pos;
+
+            // 飛行中としてみなす
+            if (currentState != State.Fly)
+            {
+                SetState(State.Fly);
+            }
         }
 
-        // Zが -60 より低くなったら停止処理
         if (transform.position.z < -60f && !isWaiting)
         {
             StartCoroutine(StopAndAddZ());
@@ -50,11 +61,12 @@ public class ConditionalZMovement : MonoBehaviour
     {
         isWaiting = true;
 
-        if (Danger != null) Danger.SetActive(true); // DangerUI表示
+        if (Danger != null) Danger.SetActive(true);
 
-        yield return new WaitForSeconds(5f); // その場で5秒静止
+        SetState(State.Stop);
 
-        // スーっと加算移動
+        yield return new WaitForSeconds(5f);
+
         float elapsed = 0f;
         Vector3 startPos = transform.position;
         Vector3 endPos = startPos + new Vector3(0f, 0f, addZ);
@@ -65,10 +77,20 @@ public class ConditionalZMovement : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
-        transform.position = endPos; // 最終位置を保証
+        transform.position = endPos;
 
-        if (Danger != null) Danger.SetActive(false); // DangerUI非表示
+        if (Danger != null) Danger.SetActive(false);
 
-        isWaiting = false; // 再び動けるように
+        isWaiting = false;
+        SetState(State.Start);
+    }
+
+    private void SetState(State state)
+    {
+        currentState = state;
+        if (animator != null)
+        {
+            animator.SetInteger("state", (int)state);
+        }
     }
 }

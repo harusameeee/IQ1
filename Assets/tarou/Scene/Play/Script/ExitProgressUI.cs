@@ -14,13 +14,26 @@ public class ExitProgressUI : MonoBehaviour
     [SerializeField] private float totalDistance = 1000f; // 初期距離
     [SerializeField] private float duration = 120f;       // 0m までにかかる時間(秒)
 
+    [Header("プレイヤー参照")]
+    public Player3DController player; // State参照用
+    public Player3DController player2; // State参照用
+
     private float elapsedTime = 0f;
 
     void Update()
     {
         if (elapsedTime < duration)
         {
-            elapsedTime += Time.deltaTime;
+            float timeScale = 1f;
+
+            // State.Slow なら timeScale = 0.5f
+            if ((player != null && player.currentState == Player3DController.State.Slow) ||
+                (player2 != null && player2.currentState == Player3DController.State.Slow))
+            {
+                timeScale = 0.5f;
+            }
+
+            elapsedTime += Time.deltaTime * timeScale;
             UpdateUI();
         }
 

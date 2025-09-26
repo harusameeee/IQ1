@@ -17,12 +17,12 @@ public class MoveLoop : MonoBehaviour
         defaultSpeed = speed;
 
         // Inspector未設定なら自動取得（例: プレイヤーに"Player"タグが付いている場合）
-        if (player == null)
-        {
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-            if (playerObj != null)
-                player = playerObj.GetComponent<Player3DController>();
-        }
+        //if (player == null)
+        //{
+        //    GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        //    if (playerObj != null)
+        //        player = playerObj.GetComponent<Player3DController>();
+        //}
     }
 
     void Update()
