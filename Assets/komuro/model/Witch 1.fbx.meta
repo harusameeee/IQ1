@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 6c0d749b9e7d64743ae17f3f491c0670
+guid: be010aef7d63e534cb281ed23c3ba3f2
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: "\u30DE\u30C6\u30EA\u30A2\u30EB"
-    second: {fileID: 2100000, guid: 5fb72dd340782264799a69f1e6da18f3, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -38,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Jump
-      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2.001|Jump"
-      internalID: -8085028020791155510
+      name: Witch_Fly
+      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Witch_Fly"
+      internalID: 1175813235156121895
       firstFrame: 0
-      lastFrame: 35
+      lastFrame: 180
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -67,40 +62,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Run
-      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2.001|Run"
-      internalID: 4398210546812770304
+      name: Witch_FlyAttackBeside
+      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Witch_FlyAttackBeside"
+      internalID: 2890174576020760450
       firstFrame: 0
-      lastFrame: 20
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: StartRunning
-      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2.001|StartRunning"
-      internalID: -7673636876925140497
-      firstFrame: 0
-      lastFrame: 40
+      lastFrame: 135
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -125,11 +91,40 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Stop
-      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2.001|Stop"
-      internalID: 711305884469960225
+      name: Witch_FlyAttackUp
+      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Witch_FlyAttackUp"
+      internalID: -8556779316443051894
       firstFrame: 0
-      lastFrame: 60
+      lastFrame: 115
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Witch_StartAnimation
+      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Witch_StartAnimation"
+      internalID: -6434363956754317376
+      firstFrame: 0
+      lastFrame: 80
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
