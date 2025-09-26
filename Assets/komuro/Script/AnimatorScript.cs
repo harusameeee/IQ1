@@ -6,7 +6,7 @@ public class AnimatorScript : MonoBehaviour
 {
 
     [SerializeField] Animator anim = null;
-    bool horizontalKey = true;
+    bool horizontal = true;
 
     void Start()
     {
@@ -16,7 +16,7 @@ public class AnimatorScript : MonoBehaviour
     {
         //bool horizontalKey = Input.GetKey(KeyCode.RightArrow);
 
-        if (horizontalKey == true)
+        if (horizontal == true)
         {
             anim.SetBool("Run", true);
             anim.SetBool("Fly", true);
