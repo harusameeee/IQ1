@@ -11,7 +11,7 @@ public class ConditionalZMovement : MonoBehaviour
     private bool isWaiting = false;
     public GameObject Danger;
 
-    public enum State { Start, Fly, Stop, Attack, None }
+    public enum State { Start, Fly, Attack1, Attack2, None }
     public State currentState = State.None;
 
     private Animator animator;
@@ -53,17 +53,20 @@ public class ConditionalZMovement : MonoBehaviour
 
         if (transform.position.z < -60f && !isWaiting)
         {
-            StartCoroutine(StopAndAddZ());
+            StartCoroutine(AttackAndAddZ());
         }
     }
 
-    private IEnumerator StopAndAddZ()
+    private IEnumerator AttackAndAddZ()
     {
         isWaiting = true;
 
+        // ƒ‰ƒ“ƒ_ƒ€‚ÅAttack1‚©Attack2‚ð‘I‘ð
+        State attackState = (Random.value < 0.5f) ? State.Attack1 : State.Attack2;
+
         if (Danger != null) Danger.SetActive(true);
 
-        SetState(State.Stop);
+        SetState(attackState);
 
         yield return new WaitForSeconds(5f);
 
