@@ -15,13 +15,40 @@ public class StageSelect : MonoBehaviour
     //
     private Tween fillTween;
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player")&& !isSelect)
-        {
+    // 衝突しているオブジェクトリスト
+    private List<GameObject> hitObjects = new List<GameObject>();
 
-            // ボタン押してる風
-            transform.localScale = new Vector3(1.0f, scaleY, 5.0f);
+    private void OnTriggerStay(UnityEngine.Collider other)
+    {
+        if (!other.CompareTag("Stage")&&!isSelect)
+        {
+            // 衝突しているオブジェクトをリストに登録する
+            hitObjects.Add(other.gameObject);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if ((other.CompareTag("Player")|| other.CompareTag("Player2"))&&!isSelect)
+        {
+            // 離れたらリセット
+            transform.localScale = new Vector3(1f, 0.1f, 5f);
+            isSelect = false;
+
+            // DOTween を止める
+            fillTween?.Kill();
+            circle.fillAmount = 0;
+
+            hitObjects.Clear();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (hitObjects.Count > 3)
+        { 
+        // ボタン押してる風
+        transform.localScale = new Vector3(1.0f, scaleY, 5.0f);
 
             if (fillTween == null || !fillTween.IsPlaying())
             {
@@ -32,20 +59,6 @@ public class StageSelect : MonoBehaviour
                     isSelect = true;
                 });
             }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player")&& !isSelect)
-        {
-            // 離れたらリセット
-            transform.localScale = new Vector3(1f, 0.1f, 5f);
-            isSelect = false;
-
-            // DOTween を止める
-            fillTween?.Kill();
-            circle.fillAmount = 0;
         }
     }
 }
