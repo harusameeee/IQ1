@@ -4,46 +4,42 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    float speed = 3.0f;
+    [SerializeField] float moveSpeed = 0.0f;         // 通常時の移動速度
+    private float rotationSpeed = 5.0f;
+    [SerializeField] public int playerNumber;        // プレイヤー番号（1か2）
 
-    Rigidbody rb;               //Rigidbody型の変数
-    public float jumpPower=3.0f;     //ジャンプ力　アクセス修飾子をpublicに指定
+    private Rigidbody rb;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();  //Rigidbodyを取得、変数に代入
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true; // プレイヤーが転がらないように    
     }
+
     void Update()
     {
-        // Wキー（前方移動）
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.position += speed * transform.forward * Time.deltaTime;
-        }
+        // プレイヤーごとに移動Axisを分ける
+        string horizontalAxis = playerNumber == 1 ? "Horizontal" : "Horizontal2";
+        string verticalAxis = playerNumber == 1 ? "Vertical" : "Vertical2";
 
-        // Sキー（後方移動）
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.position -= speed * transform.forward * Time.deltaTime;
-        }
+        // Raw入力でピタッと止まる
+        float moveX = Input.GetAxisRaw(horizontalAxis);
+        float moveZ = Input.GetAxisRaw(verticalAxis);
 
-        // Dキー（右移動）
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.position += speed * transform.right * Time.deltaTime;
-        }
+        // 入力方向に移動
+        Vector3 move = new Vector3(moveX, 0f, moveZ).normalized * moveSpeed;
 
-        // Aキー（左移動）
-        if (Input.GetKey(KeyCode.A))
+        // 入力があるときだけ向きを変える
+        if (move.magnitude > 0.1f)
         {
-            transform.position -= speed * transform.right * Time.deltaTime;
-        }
+            rb.velocity = new Vector3(move.x, 0.0f, move.z);
 
-        //上矢印キーが押されたとき
-        if (Input.GetKeyDown(KeyCode.Space))
+            Quaternion targetRotation = Quaternion.LookRotation(-move);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+        else
         {
-            //Rigidbodyに上方向にJumpPowerの力を加える
-            rb.AddForce(transform.up * jumpPower);
+            rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
         }
     }
 }
