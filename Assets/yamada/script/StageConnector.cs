@@ -3,7 +3,7 @@ using UnityEngine;
 public class StageConnector : MonoBehaviour
 {
     [Header("並べるステージモジュールPrefab（順番）")]
-    public GameObject[] modulePrefabs; // モジュールPrefab配列（順番通り並ぶ）
+    public GameObject[] modulePrefabs; // モジュールPrefab配列
 
     void Start()
     {
