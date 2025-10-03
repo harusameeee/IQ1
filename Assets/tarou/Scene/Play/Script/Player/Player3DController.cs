@@ -1,35 +1,35 @@
 using UnityEngine;
 using System.Collections;
 
-// Rigidbody•K{
+// Rigidbodyï¿½Kï¿½{
 [RequireComponent(typeof(Rigidbody))]
 public class Player3DController : MonoBehaviour
 {
-    public float moveSpeed = 5f;         // ’Êí‚ÌˆÚ“®‘¬“x
-    public float slowMoveSpeed = 2f;     // ƒXƒƒE‚ÌˆÚ“®‘¬“x
-    public float jumpForce = 7f;         // ƒWƒƒƒ“ƒv—Í
+    public float moveSpeed = 5f;         // ï¿½Êíï¿½ÌˆÚ“ï¿½ï¿½ï¿½ï¿½x
+    public float slowMoveSpeed = 2f;     // ï¿½Xï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½ÌˆÚ“ï¿½ï¿½ï¿½ï¿½x
+    public float jumpForce = 7f;         // ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½
 
     public LayerMask groundLayer;
 
-    public int playerNumber = 1;         // ƒvƒŒƒCƒ„[”Ô†i1‚©2j
+    public int playerNumber = 1;         // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Ôï¿½ï¿½i1ï¿½ï¿½2ï¿½j
 
     private Rigidbody rb;
     private bool isGrounded;
 
-    // ƒXƒe[ƒgŠÇ—iƒm[ƒ}ƒ‹ , ƒXƒƒEj
+    // ï¿½Xï¿½eï¿½[ï¿½gï¿½Ç—ï¿½ï¿½iï¿½mï¿½[ï¿½}ï¿½ï¿½ , ï¿½Xï¿½ï¿½ï¿½Eï¿½j
     public enum State { Normal, Slow }
     public State currentState = State.Normal;
 
     private Coroutine slowCoroutine;
     private Coroutine blinkCoroutine;
 
-    // “_–Å‚Åg‚¤
+    // ï¿½_ï¿½Å‚Ågï¿½ï¿½
     private Renderer[] renderers;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        // ‘S‚Ä‚ÌRendereræ“¾iqƒIƒuƒWƒFƒNƒg‚àŠÜ‚Şj
+        // ï¿½Sï¿½Ä‚ï¿½Rendererï¿½æ“¾ï¿½iï¿½qï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½Ü‚Şj
         renderers = GetComponentsInChildren<Renderer>();
     }
 
@@ -37,54 +37,54 @@ public class Player3DController : MonoBehaviour
     {
         isGrounded = CheckIfGrounded();
 
-        // ƒvƒŒƒCƒ„[‚²‚Æ‚ÉƒWƒƒƒ“ƒv“ü—Í‚ğ•ª‚¯‚é
+        // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Æ‚ÉƒWï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Í‚ğ•ª‚ï¿½ï¿½ï¿½
         string jumpButton = playerNumber == 1 ? "joystick 1 button 0" : "joystick 2 button 0";
         if (Input.GetKeyDown(jumpButton) && isGrounded)
         {
-            rb.velocity = new Vector3(rb.velocity.x, jumpForce, 0f);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, 0f);
         }
     }
 
     void FixedUpdate()
     {
-        // ƒvƒŒƒCƒ„[‚²‚Æ‚ÉˆÚ“®Axis‚ğ•ª‚¯‚é
+        // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Æ‚ÉˆÚ“ï¿½Axisï¿½ğ•ª‚ï¿½ï¿½ï¿½
         string horizontalAxis = playerNumber == 1 ? "Horizontal" : "Horizontal2";
         float moveInput = Input.GetAxis(horizontalAxis);
 
-        // ƒXƒe[ƒg‚É‚æ‚Á‚ÄˆÚ“®‘¬“x‚ğØ‚è‘Ö‚¦
+        // ï¿½Xï¿½eï¿½[ï¿½gï¿½É‚ï¿½ï¿½ï¿½ÄˆÚ“ï¿½ï¿½ï¿½ï¿½xï¿½ï¿½Ø‚ï¿½Ö‚ï¿½
         float speed = currentState == State.Normal ? moveSpeed : slowMoveSpeed;
-        rb.velocity = new Vector3(moveInput * speed, rb.velocity.y, 0f);
+        rb.linearVelocity = new Vector3(moveInput * speed, rb.linearVelocity.y, 0f);
     }
 
     private bool CheckIfGrounded()
     {
-        // ’n–Ê”»’è
+        // ï¿½nï¿½Ê”ï¿½ï¿½ï¿½
         return Physics.Raycast(transform.position, Vector3.down, 1.1f, groundLayer);
     }
 
-    // EnemyAttackƒ^ƒO‚ÌƒIƒuƒWƒFƒNƒg‚É“–‚½‚Á‚½‚Æ‚«‚ÉƒXƒƒE‚ÉØ‚è‘Ö‚¦A1•bŒãƒm[ƒ}ƒ‹‚Ö–ß‚·
+    // EnemyAttackï¿½^ï¿½Oï¿½ÌƒIï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½É“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ÉƒXï¿½ï¿½ï¿½Eï¿½ÉØ‚ï¿½Ö‚ï¿½ï¿½A1ï¿½bï¿½ï¿½mï¿½[ï¿½}ï¿½ï¿½ï¿½Ö–ß‚ï¿½
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("EnemyAttack"))
         {
-            // ˜A‘±‚Å“–‚½‚Á‚½ê‡‚àƒRƒ‹[ƒ`ƒ“‚ğ³‚µ‚­ŠÇ—
+            // ï¿½Aï¿½ï¿½ï¿½Å“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½ï¿½ï¿½Rï¿½ï¿½ï¿½[ï¿½`ï¿½ï¿½ï¿½ğ³‚ï¿½ï¿½ï¿½ï¿½Ç—ï¿½
             if (slowCoroutine != null) StopCoroutine(slowCoroutine);
             slowCoroutine = StartCoroutine(SwitchToSlowAndReturn());
 
-            // “_–ÅƒRƒ‹[ƒ`ƒ“‚àŠÇ—
+            // ï¿½_ï¿½ÅƒRï¿½ï¿½ï¿½[ï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½Ç—ï¿½
             if (blinkCoroutine != null) StopCoroutine(blinkCoroutine);
             blinkCoroutine = StartCoroutine(Blink(1f, 0.1f));
         }
 
         if(other.CompareTag("magic camera"))
         {
-            // ˜A‘±‚Å“–‚½‚Á‚½ê‡‚àƒRƒ‹[ƒ`ƒ“‚ğ³‚µ‚­ŠÇ—
+            // ï¿½Aï¿½ï¿½ï¿½Å“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‡ï¿½ï¿½ï¿½Rï¿½ï¿½ï¿½[ï¿½`ï¿½ï¿½ï¿½ğ³‚ï¿½ï¿½ï¿½ï¿½Ç—ï¿½
             if (slowCoroutine != null) StopCoroutine(slowCoroutine);
             slowCoroutine = StartCoroutine(SwitchToSlowAndReturn());
         }
     }
 
-    // ƒXƒƒEó‘Ô‚É1•b‚µ‚½‚çƒm[ƒ}ƒ‹‚É–ß‚·
+    // ï¿½Xï¿½ï¿½ï¿½Eï¿½ï¿½Ô‚ï¿½1ï¿½bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½mï¿½[ï¿½}ï¿½ï¿½ï¿½É–ß‚ï¿½
     private IEnumerator SwitchToSlowAndReturn()
     {
         currentState = State.Slow;
@@ -93,7 +93,7 @@ public class Player3DController : MonoBehaviour
         slowCoroutine = null;
     }
 
-    // “_–ÅƒRƒ‹[ƒ`ƒ“
+    // ï¿½_ï¿½ÅƒRï¿½ï¿½ï¿½[ï¿½`ï¿½ï¿½
     private IEnumerator Blink(float duration, float interval)
     {
         float elapsed = 0f;
@@ -105,7 +105,7 @@ public class Player3DController : MonoBehaviour
             yield return new WaitForSeconds(interval);
             elapsed += interval;
         }
-        SetRenderersVisible(true); // ÅŒã‚Í•K‚¸•\¦ó‘Ô‚É‚·‚é
+        SetRenderersVisible(true); // ï¿½ÅŒï¿½Í•Kï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½Ô‚É‚ï¿½ï¿½ï¿½
         blinkCoroutine = null;
     }
 

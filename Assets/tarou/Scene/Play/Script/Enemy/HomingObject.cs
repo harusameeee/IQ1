@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class HomingObject : MonoBehaviour
 {
-    public float speed = 10f;  // ”ò‚Ô‘¬“x
+    public float speed = 10f;  // ï¿½ï¿½Ô‘ï¿½ï¿½x
     public float destroyZ = -20f;
 
     private Transform target;
 
     void Start()
     {
-        // "Player"‚Æ"Player2"ƒ^ƒO‚ª‚Â‚¢‚½ƒIƒuƒWƒFƒNƒg‚ğ’T‚·
+        // "Player"ï¿½ï¿½"Player2"ï¿½^ï¿½Oï¿½ï¿½ï¿½Â‚ï¿½ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½Tï¿½ï¿½
         GameObject player1 = GameObject.FindGameObjectWithTag("Player");
         GameObject player2 = GameObject.FindGameObjectWithTag("Player2");
 
-        // ‚Ç‚¿‚ç‚©‚ª‘¶İ‚·‚ê‚ÎAƒ‰ƒ“ƒ_ƒ€‚Åƒ^[ƒQƒbƒg‚É‚·‚é
+        // ï¿½Ç‚ï¿½ï¿½ç‚©ï¿½ï¿½ï¿½ï¿½ï¿½İ‚ï¿½ï¿½ï¿½ÎAï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½Åƒ^ï¿½[ï¿½Qï¿½bï¿½gï¿½É‚ï¿½ï¿½ï¿½
         GameObject[] candidates = new GameObject[] { player1, player2 };
         candidates = System.Array.FindAll(candidates, go => go != null);
 
@@ -22,19 +22,19 @@ public class HomingObject : MonoBehaviour
             GameObject chosen = candidates[Random.Range(0, candidates.Length)];
             target = chosen.transform;
 
-            // Rigidbody ‚É‘¬“x‚ğİ’è‚µ‚ÄƒvƒŒƒCƒ„[‚Ì•ûŒü‚É”ò‚Î‚·
+            // Rigidbody ï¿½É‘ï¿½ï¿½xï¿½ï¿½İ’è‚µï¿½Äƒvï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Ì•ï¿½ï¿½ï¿½ï¿½É”ï¿½Î‚ï¿½
             Vector3 direction = (target.position - transform.position).normalized;
-            GetComponent<Rigidbody>().velocity = direction * speed;
+            GetComponent<Rigidbody>().linearVelocity = direction * speed;
         }
         else
         {
-            Debug.LogWarning("ƒvƒŒƒCƒ„[‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½");
+            Debug.LogWarning("ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Â‚ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½");
         }
     }
 
     void Update()
     {
-        // ‰æ–ÊŠO‚És‚Á‚½‚ç”jŠü
+        // ï¿½ï¿½ÊŠOï¿½Ésï¿½ï¿½ï¿½ï¿½ï¿½ï¿½jï¿½ï¿½
         if (transform.position.z < destroyZ)
         {
             Destroy(gameObject);
