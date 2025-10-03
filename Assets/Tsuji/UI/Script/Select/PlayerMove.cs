@@ -4,42 +4,42 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 0.0f;         // ’Êí‚ÌˆÚ“®‘¬“x
+    [SerializeField] float moveSpeed = 0.0f;         // ï¿½Êíï¿½ÌˆÚ“ï¿½ï¿½ï¿½ï¿½x
     private float rotationSpeed = 5.0f;
-    [SerializeField] public int playerNumber;        // ƒvƒŒƒCƒ„[”Ô†i1‚©2j
+    [SerializeField] public int playerNumber;        // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Ôï¿½ï¿½i1ï¿½ï¿½2ï¿½j
 
     private Rigidbody rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true; // ƒvƒŒƒCƒ„[‚ª“]‚ª‚ç‚È‚¢‚æ‚¤‚É    
+        rb.freezeRotation = true; // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½æ‚¤ï¿½ï¿½    
     }
 
     void Update()
     {
-        // ƒvƒŒƒCƒ„[‚²‚Æ‚ÉˆÚ“®Axis‚ğ•ª‚¯‚é
+        // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Æ‚ÉˆÚ“ï¿½Axisï¿½ğ•ª‚ï¿½ï¿½ï¿½
         string horizontalAxis = playerNumber == 1 ? "Horizontal" : "Horizontal2";
         string verticalAxis = playerNumber == 1 ? "Vertical" : "Vertical2";
 
-        // Raw“ü—Í‚Åƒsƒ^ƒb‚Æ~‚Ü‚é
+        // Rawï¿½ï¿½ï¿½Í‚Åƒsï¿½^ï¿½bï¿½Æ~ï¿½Ü‚ï¿½
         float moveX = Input.GetAxisRaw(horizontalAxis);
         float moveZ = Input.GetAxisRaw(verticalAxis);
 
-        // “ü—Í•ûŒü‚ÉˆÚ“®
+        // ï¿½ï¿½ï¿½Í•ï¿½ï¿½ï¿½ï¿½ÉˆÚ“ï¿½
         Vector3 move = new Vector3(moveX, 0f, moveZ).normalized * moveSpeed;
 
-        // “ü—Í‚ª‚ ‚é‚Æ‚«‚¾‚¯Œü‚«‚ğ•Ï‚¦‚é
+        // ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï‚ï¿½ï¿½ï¿½
         if (move.magnitude > 0.1f)
         {
-            rb.velocity = new Vector3(move.x, 0.0f, move.z);
+            rb.linearVelocity = new Vector3(move.x, 0.0f, move.z);
 
             Quaternion targetRotation = Quaternion.LookRotation(-move);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
         else
         {
-            rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
+            rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
         }
     }
 }

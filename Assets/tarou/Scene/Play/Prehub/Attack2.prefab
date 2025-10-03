@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  destroyZ: -150
+  destroyZ: 60
 --- !u!114 &-2532273471835917141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,5 +126,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: EnemyCharacter
-  moveDistance: -1
+  moveDistance: -4
   moveDuration: 2
