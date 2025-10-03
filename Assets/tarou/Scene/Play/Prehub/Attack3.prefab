@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 180
-  cooldown: 3
+  cooldown: 1
 --- !u!114 &-6399101904963840915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,4 +126,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  destroyZ: -150
+  destroyZ: 60

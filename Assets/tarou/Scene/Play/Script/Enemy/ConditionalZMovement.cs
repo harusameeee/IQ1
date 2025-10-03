@@ -15,14 +15,14 @@ public class ConditionalZMovement : MonoBehaviour
     // 攻撃中など待機状態かどうか
     private bool isWaiting = false;
     // 警告UI（DangerUI）
-    public GameObject Danger;             
+    public GameObject Danger;
 
     // 状態
     public enum State { Start, Fly, Attack1, Attack2, None }
     public State currentState = State.None;
 
     // アニメーターへの参照
-    private Animator animator;            
+    private Animator animator;
 
     void Start()
     {
@@ -62,9 +62,12 @@ public class ConditionalZMovement : MonoBehaviour
                 SetState(State.Fly);
             }
         }
+    }
 
-        // Z座標が小さくなったら攻撃を開始
-        if (transform.position.z < -115f && !isWaiting)
+    // BoxCollider (isTrigger = true) に当たったら攻撃を開始
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!isWaiting && other.CompareTag("AttackTrigger"))
         {
             StartCoroutine(AttackAndAddZ());
         }
@@ -98,7 +101,7 @@ public class ConditionalZMovement : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
-        transform.position = endPos; 
+        transform.position = endPos;
 
         // DangerUIを非表示にする
         if (Danger != null) Danger.SetActive(false);
