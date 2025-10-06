@@ -7,8 +7,8 @@ public class MoveForwardAndDestroy : MonoBehaviour
 
     void Update()
     {
-        // Z方向に移動（ワールド空間）
-        transform.Translate(Vector3.back * moveSpeed * Time.deltaTime, Space.World);
+        // Z??????
+        transform.Translate(Vector3.back * moveSpeed * Time.deltaTime, Space.Self);
 
         // 画面外に行ったら破棄
         if (transform.position.z < destroyZ)

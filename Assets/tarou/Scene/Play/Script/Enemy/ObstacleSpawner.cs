@@ -12,10 +12,12 @@ public class ObstacleData
 public class ObstacleSpawner : MonoBehaviour
 {
     public List<ObstacleData> obstacles; // 複数の障害物設定を持つ
+    public Transform basetransform; // スポナーの基準位置
 
     private float timer;
     private float nextSpawnTime;
     private ObstacleData currentObstacle;
+    public bool localspace = false;
     private bool playerInside = false;  // ← Playerが中にいるかどうか判定するフラグ
 
     void Start()
@@ -53,9 +55,13 @@ public class ObstacleSpawner : MonoBehaviour
 
         // スポナーの位置を基準に、X方向だけランダムにずらす
         float offsetX = Random.Range(currentObstacle.xOffsetRange.x, currentObstacle.xOffsetRange.y);
-        Vector3 spawnPos = transform.position + new Vector3(offsetX, 0f, 0f);
+        Vector3 spawnPos = transform.position + transform.rotation*new Vector3(offsetX, 0f, 0f);
 
         // プレハブを生成
+        if (localspace)
+        {
+            Instantiate(currentObstacle.prefab, spawnPos, Quaternion.identity, basetransform);
+        }
         Instantiate(currentObstacle.prefab, spawnPos, Quaternion.identity);
     }
 

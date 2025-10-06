@@ -1,32 +1,37 @@
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class MoveLoop : MonoBehaviour
 {
     [Header("移動設定")]
     public float speed = 2.0f; // 通常の移動速度
-    public Vector3 direction = new Vector3(0, 0, 1); // 奥(Z)方向に動く
 
     [Header("プレイヤー参照")]
     public Player3DController player; // Player3DController参照用
     public Player3DController player2; // Player3DController参照用
+    public Rigidbody rb;
+    
+    [SerializeField] private SplineContainer splinecont;
+    NativeSpline spline;
 
     private float defaultSpeed; // 初期速度保存用
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>(); 
         defaultSpeed = speed;
-
-        // Inspector未設定なら自動取得（例: プレイヤーに"Player"タグが付いている場合）
-        //if (player == null)
-        //{
-        //    GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-        //    if (playerObj != null)
-        //        player = playerObj.GetComponent<Player3DController>();
-        //}
     }
 
     void Update()
     {
+        spline = new NativeSpline(splinecont.Spline);
+        var dist = SplineUtility.GetNearestPoint(spline, transform.position, out var nearest, out var t);
+        Debug.Log(transform.position+"and"+nearest);
+        transform.position = nearest;
+        var forward = Vector3.Normalize(spline.EvaluateTangent(t));
+        Vector3 up = spline.EvaluateUpVector(t);
+        transform.rotation = Quaternion.Euler(new Vector3(0, Quaternion.LookRotation(forward, up).eulerAngles.y, 0));
+        var newforward = transform.forward;
         if ((player != null && player.currentState == Player3DController.State.Slow) ||
             (player2 != null && player2.currentState == Player3DController.State.Slow))
         {
@@ -37,6 +42,6 @@ public class MoveLoop : MonoBehaviour
             speed = defaultSpeed;
         }
         // 移動処理
-        transform.Translate(direction * speed * Time.deltaTime);
+        rb.linearVelocity = rb.linearVelocity.magnitude * 0.7f * newforward + newforward * speed;
     }
 }

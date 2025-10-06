@@ -4,7 +4,7 @@ public class HomingObject : MonoBehaviour
 {
     public float speed = 10f;  // ��ԑ��x
     public float destroyZ = -20f;
-
+    Rigidbody rb;
     private Transform target;
 
     void Start()
@@ -24,7 +24,8 @@ public class HomingObject : MonoBehaviour
 
             // Rigidbody �ɑ��x��ݒ肵�ăv���C���[�̕����ɔ�΂�
             Vector3 direction = (target.position - transform.position).normalized;
-            GetComponent<Rigidbody>().linearVelocity = direction * speed;
+            rb = GetComponent<Rigidbody>();
+            rb.linearVelocity = direction * speed;
         }
         else
         {
@@ -35,6 +36,8 @@ public class HomingObject : MonoBehaviour
     void Update()
     {
         // ��ʊO�ɍs������j��
+        Vector3 direction = (target.position - transform.position).normalized;
+        rb.linearVelocity = direction * speed;
         if (transform.position.z < destroyZ)
         {
             Destroy(gameObject);
