@@ -67,7 +67,7 @@ public class ConditionalZMovement : MonoBehaviour
     // BoxCollider (isTrigger = true) ‚É“–‚½‚Á‚½‚çUŒ‚‚ğŠJn
     private void OnTriggerEnter(Collider other)
     {
-        if (!isWaiting && other.CompareTag("AttackTrigger"))
+        if (!isWaiting && other.CompareTag("Player") || other.CompareTag("Player2"))
         {
             StartCoroutine(AttackAndAddZ());
         }
