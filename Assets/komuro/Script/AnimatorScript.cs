@@ -7,7 +7,7 @@ public class AnimatorScript : MonoBehaviour
 
     [SerializeField] Animator anim = null;
     bool horizontal = true;
-
+    
     void Start()
     {
     }
