@@ -4,32 +4,32 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 0.0f;         // �ʏ펞�̈ړ����x
+    [SerializeField] float moveSpeed = 0.0f;         // 動く速さ
     private float rotationSpeed = 5.0f;
-    [SerializeField] public int playerNumber;        // �v���C���[�ԍ��i1��2�j
+    [SerializeField] public int playerNumber;        // プレイヤー識別番号
 
     private Rigidbody rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true; // �v���C���[���]����Ȃ��悤��    
+        rb.freezeRotation = true; // 回転を止める    
     }
 
     void Update()
     {
-        // �v���C���[���ƂɈړ�Axis�𕪂���
+        // プレイヤーを識別
         string horizontalAxis = playerNumber == 1 ? "Horizontal" : "Horizontal2";
         string verticalAxis = playerNumber == 1 ? "Vertical" : "Vertical2";
 
-        // Raw���͂Ńs�^�b�Ǝ~�܂�
+        // 移動方向を取得
         float moveX = Input.GetAxisRaw(horizontalAxis);
         float moveZ = Input.GetAxisRaw(verticalAxis);
 
-        // ���͕����Ɉړ�
+        // 移動
         Vector3 move = new Vector3(moveX, 0f, moveZ).normalized * moveSpeed;
 
-        // ���͂�����Ƃ�����������ς���
+        // 一定の入力値を超えたら
         if (move.magnitude > 0.1f)
         {
             rb.linearVelocity = new Vector3(move.x, 0.0f, move.z);
