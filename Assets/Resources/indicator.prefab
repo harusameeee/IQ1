@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4583142336647818214}
   - component: {fileID: 6459963911145656792}
   - component: {fileID: 171924818444036679}
-  - component: {fileID: 6576977052261238408}
+  - component: {fileID: 5416568117200751054}
   m_Layer: 5
   m_Name: indicator
   m_TagString: Untagged
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6576977052261238408
+--- !u!114 &5416568117200751054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,14 +86,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3015244609780354251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6066f2540b509941812fdaa50dcfa15, type: 3}
+  m_Script: {fileID: 11500000, guid: 171b4bb0fa0e37749ab08eb743f608fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timer_ring: {fileID: 8807945662579888969}
   obstacle_transform: {fileID: 0}
-  player_transform: {fileID: 0}
   obstacleindex: 0
   offsetpos: 0
+  player: {fileID: 0}
 --- !u!1 &5266186978531780876
 GameObject:
   m_ObjectHideFlags: 0
