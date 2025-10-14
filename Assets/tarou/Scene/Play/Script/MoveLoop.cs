@@ -12,7 +12,6 @@ public class MoveLoop : MonoBehaviour
 
     private float defaultSpeed; // ‰Šú‘¬“x•Û‘¶—p
     public float current_t = 0f;
-    public static MoveLoop instance;
     public virtual void Start()
     {
         rb = GetComponent<Rigidbody>(); 

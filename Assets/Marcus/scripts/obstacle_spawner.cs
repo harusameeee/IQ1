@@ -11,7 +11,7 @@ public class obstacle_spawner : MonoBehaviour
     public Transform indicator_transform;
     public List<GameObject> obstacles = new List<GameObject>();
     public List<indicator> indicators = new List<indicator>();
-    public Transform playertransform;
+    public player_mover player;
     float indicator_countdown = 7.0f;
     //note need to allow for making double wide obstacles
     //need to make indicator for where obstacle will spawn
@@ -47,7 +47,7 @@ public class obstacle_spawner : MonoBehaviour
 
 
             var obstacle = Instantiate(obstacles[rng.Next(0, obstacles.Count)]);
-            Vector3 spawnpos = MoveLoop.instance.getobstaclespawnpos(temp, offset_dist, out bool valid);
+            Vector3 spawnpos = player.getobstaclespawnpos(temp, offset_dist, out bool valid);
             if (!valid)
             {
                 obstacleindicator.gameObject.SetActive(false);
@@ -57,7 +57,7 @@ public class obstacle_spawner : MonoBehaviour
             obstacleindicator.transform.localPosition = new Vector3(temp*200,0, 0);
             obstacleindicator.gameObject.SetActive(true);
             obstacle.transform.position = spawnpos;
-            obstacleindicator.setvalues(playertransform, obstacle.transform);
+            obstacleindicator.setvalues(player, obstacle.transform);
             //var obstacle = Instantiate(obstacles[rng.Next(0, obstacles.Count)]);
             //obstacle.transform.position = spawnpos;
         }

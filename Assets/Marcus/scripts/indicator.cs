@@ -7,11 +7,10 @@ public class indicator : MonoBehaviour
 {
     public Image timer_ring;
     public Transform obstacle_transform;
-    public Transform player_transform;
     public int obstacleindex = 0;
     public float offsetpos = 0;
     int initail_segment_count = 0;
-    
+    public player_mover player;
     public static Action<int,float> onIndicatorEnd;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,26 +21,26 @@ public class indicator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (obstacle_transform != null && player_transform != null)
+        if (obstacle_transform != null && player != null)
         {
-            int val = Mathf.RoundToInt(MoveLoop.instance.get_dist(player_transform.position, obstacle_transform.position) / 2);
+            int val = Mathf.RoundToInt(player.get_dist(player.transform.position, obstacle_transform.position) / 2);
             timer_ring.material.SetFloat("_removesegment", initail_segment_count-val);
             if(initail_segment_count-val>= initail_segment_count)
             {
                 //onIndicatorEnd?.Invoke(obstacleindex, offsetpos);
                 obstacle_transform = null;
-                player_transform = null;
+                player = null;
                 this.gameObject.SetActive(false);
             }
         }
     }
-    public void setvalues(Transform player, Transform obstacle, int index = 0,float offsetpos = 0)
+    public void setvalues(player_mover player, Transform obstacle, int index = 0,float offsetpos = 0)
     {
-        player_transform = player;
+        this.player = player;
         obstacle_transform = obstacle;
         this.offsetpos = offsetpos;
         obstacleindex = index;
-        initail_segment_count = Mathf.RoundToInt(MoveLoop.instance.get_dist(player.position, obstacle_transform.transform.position) / 2);
+        initail_segment_count = Mathf.RoundToInt(this.player.get_dist(player.transform.position, obstacle_transform.transform.position) / 2);
         timer_ring.material.SetFloat("_segmentcount", initail_segment_count);
 
     }
