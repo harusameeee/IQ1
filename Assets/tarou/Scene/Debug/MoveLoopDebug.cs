@@ -33,7 +33,7 @@ public class MoveLoopDebug : MonoBehaviour
         Vector3 right = Vector3.Normalize(Vector3.Cross(up, forward)); // �C��
 
         int lane = player != null ? player.currentLane : 0;
-       // float laneOffset = player != null ? player.laneOffset : 4f;
+        float laneOffset = player != null ? player.maxLane : 4f;
         //float jumpOffset = player != null ? player.jumpOffset : 0f;
 
         Vector3 nearestV3 = new Vector3(nearest.x, nearest.y, nearest.z);
