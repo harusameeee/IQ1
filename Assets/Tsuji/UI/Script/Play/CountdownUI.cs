@@ -8,7 +8,7 @@ public class CountdownUI : MonoBehaviour
     [SerializeField] Sprite[] images = new Sprite[4];  // 0:GO, 1:1, 2:2, 3:3
     [SerializeField] Image imageObject;
 
-    private float time = 3.0f;
+    //private float time = 3.0f;
 
     //Ç¢ÇÈÅH
     //public bool finishCount = false;

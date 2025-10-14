@@ -1,22 +1,31 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DistanceFromEnemy : MonoBehaviour
 {
-    //距離を持ってくる
-    [SerializeField] private Transform player, witch;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform witch;
+    private Slider slider;
+    private float distance;
 
-    //離れる距離(一定)
-    public const float distance = 200f;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        // スライダーを取得
+        slider = this.GetComponent<Slider>();
+
+        // 初期距離を測る
+        distance = Vector3.Distance(player.position, witch.position);
+
+        // 最大値を設定
+        slider.maxValue = distance;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        // 現在距離を測る
+        distance = Vector3.Distance(player.position, witch.position);
+
+        // スライダーに反映
+        slider.value = distance;
     }
 }
