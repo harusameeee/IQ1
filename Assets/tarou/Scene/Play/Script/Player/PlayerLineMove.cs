@@ -25,8 +25,7 @@ public class PlayerLineMove : MonoBehaviour
 
     void Update()
     {
-        // Ground判定
-        isGrounded = !isJumping && CheckIfGrounded();
+        
 
         // 入力設定
         string joyLeft = playerNumber == 1 ? "joystick 1 button 5" : "joystick 2 button 5";
@@ -50,7 +49,7 @@ public class PlayerLineMove : MonoBehaviour
         }
 
         // ジャンプ開始
-        if ((Input.GetKeyDown(joyJump) || Input.GetKeyDown(keyJump)) && isGrounded && !isJumping)
+        if ((Input.GetKeyDown(joyJump) || Input.GetKeyDown(keyJump)) && !isJumping)
         {
             Debug.Log($"P{playerNumber} ジャンプ開始！");
             isJumping = true;
@@ -84,9 +83,5 @@ public class PlayerLineMove : MonoBehaviour
         }
     }
 
-    private bool CheckIfGrounded()
-    {
-        Debug.DrawRay(transform.position, Vector3.down * 1.1f, Color.red);
-        return Physics.Raycast(transform.position, Vector3.down, 1.1f, groundLayer);
-    }
+    
 }
