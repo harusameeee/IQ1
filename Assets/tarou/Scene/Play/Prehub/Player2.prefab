@@ -598,7 +598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7093738820701480740}
-  - component: {fileID: 7093738820701480742}
+  - component: {fileID: 5299060836479072926}
   - component: {fileID: 7093738820701480741}
   - component: {fileID: 3837765794791309576}
   - component: {fileID: 4886088456589737982}
@@ -625,7 +625,7 @@ Transform:
   - {fileID: 4733669386848270954}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.65}
---- !u!114 &7093738820701480742
+--- !u!114 &5299060836479072926
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -634,9 +634,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7093738820701480743}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c38790683a504ac4d8df06390cc233ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 640af74042a069c449d185970cece0a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linePositions:
+  - -8
+  - -4
+  - 0
+  - 4
+  - 8
+  currentLane: 1
   moveSpeed: 5
   slowMoveSpeed: 2
   jumpForce: 7

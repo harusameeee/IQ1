@@ -46,12 +46,7 @@ public class ConditionalZMovement : MonoBehaviour
 
     void Update()
     {
-        // 攻撃中など待機状態なら動作しない
-        if (isWaiting) return;
-
-        // 初期位置より手前にいたら、Z方向に前進させる
-        if (transform.position.z < startZ)
-        {
+      
             Vector3 pos = transform.position;
             pos.z += moveSpeed * Time.deltaTime;
             transform.position = pos;
@@ -61,7 +56,7 @@ public class ConditionalZMovement : MonoBehaviour
             {
                 SetState(State.Fly);
             }
-        }
+        
     }
 
     // BoxCollider (isTrigger = true) に当たったら攻撃を開始
