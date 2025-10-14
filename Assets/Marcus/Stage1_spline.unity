@@ -160,8 +160,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4360734720680738040, guid: ab03d534127eff24cb652cf8c27da9b5, type: 3}
   m_PrefabInstance: {fileID: 1500701345}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-=======
 --- !u!1 &81025697
 GameObject:
   m_ObjectHideFlags: 0
@@ -251,7 +249,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0.07400513, y: 0}
   m_SizeDelta: {x: -9.851, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
->>>>>>> Stashed changes
 --- !u!4 &98019345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3821079140333395872, guid: ab03d534127eff24cb652cf8c27da9b5, type: 3}
@@ -5986,11 +5983,7 @@ Transform:
   m_GameObject: {fileID: 1337516033}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-<<<<<<< Updated upstream
-  m_LocalPosition: {x: -2.3, y: 0, z: 127.65}
-=======
   m_LocalPosition: {x: 0.58, y: 0, z: 90.59}
->>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6039,11 +6032,8 @@ MonoBehaviour:
   speed: 5
   rb: {fileID: 1337516035}
   splinecont: {fileID: 547397087}
-<<<<<<< Updated upstream
-=======
   current_t: 0
   progressBar: {fileID: 1043476778}
->>>>>>> Stashed changes
 --- !u!65 &1339538302
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9623,8 +9613,6 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
-<<<<<<< Updated upstream
-=======
 --- !u!1 &2094294741
 GameObject:
   m_ObjectHideFlags: 0
@@ -9729,7 +9717,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
->>>>>>> Stashed changes
 --- !u!1 &2102608210
 GameObject:
   m_ObjectHideFlags: 0
@@ -14933,8 +14920,5 @@ SceneRoots:
   - {fileID: 1893527902}
   - {fileID: 1128450763}
   - {fileID: 1320555490}
-<<<<<<< Updated upstream
-=======
   - {fileID: 2094294745}
   - {fileID: 292210989}
->>>>>>> Stashed changes
