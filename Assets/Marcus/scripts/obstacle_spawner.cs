@@ -36,7 +36,7 @@ public class obstacle_spawner : MonoBehaviour
             indicator obstacleindicator = null;
             foreach (var ind in indicators)
             {
-                if (!ind.gameObject.activeSelf)
+                    if (!ind.gameObject.activeSelf)
                 {
                     obstacleindicator = ind;
                     break;
