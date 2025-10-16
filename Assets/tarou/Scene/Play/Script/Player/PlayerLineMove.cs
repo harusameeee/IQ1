@@ -16,6 +16,11 @@ public class PlayerLineMove : MonoBehaviour
     private bool isJumping = false;
     private float jumpTimer = 0f;
     private Vector3 startPos;
+    
+    private float current_max_gcd = 0f;
+    private float gcd_timer = 0f;
+    public skilldata[] skills = new skilldata[3];
+    public Skill_icon[] skill_icons = new Skill_icon[3];
 
     void Start()
     {
@@ -31,6 +36,30 @@ public class PlayerLineMove : MonoBehaviour
         string joyLeft = playerNumber == 1 ? "joystick 1 button 5" : "joystick 2 button 5";
         string joyRight = playerNumber == 1 ? "joystick 1 button 4" : "joystick 2 button 4";
         string joyJump = playerNumber == 1 ? "joystick 1 button 0" : "joystick 2 button 0";
+
+        string joyAttack = playerNumber == 1 ? "joystick 1 button 1" : "joystick 2 button 1";
+
+        string joySkill = playerNumber == 1 ? "joystick 1 button 0" : "joystick 2 button 0";
+
+        string joyDefense = playerNumber == 1 ? "joystick 1 button 0" : "joystick 2 button 0";
+        for (int i = 0; i < skills.Length; i++)
+        {
+            if(skills[i].currentcooldown > 0)
+            {
+
+                skill_icons[i].gcd_icon.material.SetFloat("_removesegment", gcd_timer / current_max_gcd);
+                if(skills[i].has_cooldown&&skills[i].currentcooldown > 0)
+                {
+                    skills[i].currentcooldown -= Time.deltaTime;
+                    if (skills[i].maxstacks > skills[i].currentstacks&&skills[i].currentcooldown <= 0)
+                    {
+                        skills[i].currentstacks += 1;
+                        skills[i].currentcooldown = skills[i].cooldown;
+                        skill_icons[i].stacks_text.text = skills[i].currentstacks.ToString();
+                    }
+                }
+            }
+        }
 
         KeyCode keyLeft = playerNumber == 1 ? KeyCode.D : KeyCode.RightArrow;
         KeyCode keyRight = playerNumber == 1 ? KeyCode.A : KeyCode.LeftArrow;
