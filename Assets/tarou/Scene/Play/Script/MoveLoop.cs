@@ -3,15 +3,15 @@ using UnityEngine.Splines;
 
 public class MoveLoop : MonoBehaviour
 {
-    public float speed = 2.0f; // 通常の移動速度
+    public float speed = 2.0f; // 通晨の移動速度
 
     public Rigidbody rb;
     
     public SplineContainer splinecont;
     NativeSpline spline;
 
-    private float defaultSpeed; // 初期速度保存用
-    public float current_t_normalized = 0f;//レベル0からレベル1までの進行状況を表す
+    private float defaultSpeed; // 揄期速度保存用
+    public float current_t_normalized = 0f;//レベル0からレベル1までの拱捏暎況を表す
     public float current_t=> current_t_normalized * spline.GetLength();
     public virtual void Start()
     {
@@ -28,10 +28,10 @@ public class MoveLoop : MonoBehaviour
         Vector3 forward = Vector3.Normalize(spline.EvaluateTangent(current_t_normalized));
         Vector3 up = spline.EvaluateUpVector(current_t_normalized);
         Vector3 euler = Quaternion.LookRotation(forward, up).eulerAngles;
-        transform.rotation = Quaternion.LerpUnclamped(Quaternion.Euler(new Vector3(euler.x, euler.y, 0)), transform.rotation, 0.5f);
+        transform.localRotation = Quaternion.LerpUnclamped(Quaternion.Euler(new Vector3(0, euler.y, 0)), transform.localRotation, 0.5f);
         var newforward = transform.forward;
 
-        // 移動処理
+        // 移動揶理
         rb.linearVelocity = rb.linearVelocity.magnitude * 0.7f * newforward + newforward * speed;
     }
     public Vector3 getobstaclespawnpos(float offsetval, float dist, out bool valid)
