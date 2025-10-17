@@ -87,7 +87,7 @@ Material:
     - _ZWrite: 1
     - _linewidth: 0.05
     - _radius: 0.5
-    - _removesegment: 0.3
+    - _removesegment: 0.68
     - _rotation: -90
     - _segmentcount: 1
     - _segmentspacing: -0.62

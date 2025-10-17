@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerLineMove : MonoBehaviour
@@ -83,7 +84,7 @@ public class PlayerLineMove : MonoBehaviour
             Debug.Log($"P{playerNumber} ジャンプ開始！");
             isJumping = true;
             jumpTimer = 0f;
-            startPos = transform.position;
+            startPos = transform.localPosition;
         }
 
         // ジャンプ中の処理（KinematicでもOK）
@@ -92,13 +93,13 @@ public class PlayerLineMove : MonoBehaviour
             jumpTimer += Time.deltaTime;
             float t = jumpTimer / jumpDuration;
             float height = Mathf.Sin(Mathf.PI * t) * jumpHeight; // 放物線的な動き
-            transform.position = new Vector3(transform.position.x, startPos.y + height, transform.position.z);
+            transform.localPosition = new Vector3(transform.localPosition.x, startPos.y + height, transform.localPosition.z);
 
             // 終了判定
             if (t >= 1f)
             {
                 isJumping = false;
-                transform.position = new Vector3(transform.position.x, startPos.y, transform.position.z);
+                transform.localPosition = new Vector3(transform.localPosition.x, startPos.y, transform.localPosition.z);
             }
         }
     }
@@ -107,9 +108,25 @@ public class PlayerLineMove : MonoBehaviour
     {
         if (lanes != null && lanes.Length > currentLane)
         {
-            Vector3 lanePos = lanes[currentLane].position;
-            transform.position = new Vector3(lanePos.x, transform.position.y, lanePos.z);
+            Vector3 lanePos = lanes[currentLane].localPosition;
+            StartCoroutine(lerplane());
         }
+    }
+    public IEnumerator lerplane()
+    {
+        float duration = 0.1f; // 補間にかける時間
+        float elapsed = 0f;
+        Vector3 initialPos = transform.localPosition;
+        Vector3 targetPos = new Vector3(lanes[currentLane].localPosition.x, transform.localPosition.y,  transform.localPosition.z);
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            transform.localPosition = Vector3.Lerp(initialPos, targetPos, t);
+            yield return null;
+        }
+        transform.localPosition = targetPos; // 最終的にターゲット位置にセット
     }
 
     
