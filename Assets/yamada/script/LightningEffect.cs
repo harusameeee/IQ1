@@ -3,9 +3,9 @@ using UnityEngine;
 public class LightningEffect : MonoBehaviour
 {
 
-    public int pointsCount = 64;@// ”g‚ğì‚éƒMƒUƒMƒU‚Ì”
-    public float baseNoiseStrength = 0.5f;@// ƒMƒUƒMƒU‚Ì”g‚Ì‚‚³(‹­‚³)
-    public float baseNoiseSpeed = 6f;@// ”g•ÏŒ`‚ğ‚³‚¹‚éƒXƒs[ƒh
+    public int pointsCount = 64;// ”g‚ğì‚éƒMƒUƒMƒU‚Ì”
+    public float baseNoiseStrength = 0.5f;// ƒMƒUƒMƒU‚Ì”g‚Ì‚‚³(‹­‚³)
+    public float baseNoiseSpeed = 6f;// ”g•ÏŒ`‚ğ‚³‚¹‚éƒXƒs[ƒh
     public float flashInterval = 0.2f; // ‰½•b‚²‚Æ‚É—‹‚ª‹­‚­•Ï‰»‚·‚é‚©
 
     private LineRenderer lineRenderer;
