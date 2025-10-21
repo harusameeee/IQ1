@@ -36,7 +36,7 @@ public class obstacle_spawner : MonoBehaviour
             indicator obstacleindicator = null;
             foreach (var ind in indicators)
             {
-                if (!ind.gameObject.activeSelf)
+                    if (!ind.gameObject.activeSelf)
                 {
                     obstacleindicator = ind;
                     break;
@@ -54,7 +54,7 @@ public class obstacle_spawner : MonoBehaviour
                 Destroy(obstacle);
                 return;
             }
-            obstacleindicator.transform.localPosition = new Vector3(temp*200,0, 0);
+            obstacleindicator.transform.localPosition = new Vector3(temp*150,0, 0);
             obstacleindicator.gameObject.SetActive(true);
             obstacle.transform.position = spawnpos;
             obstacleindicator.setvalues(player, obstacle.transform);
