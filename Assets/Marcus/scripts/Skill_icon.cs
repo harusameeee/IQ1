@@ -34,7 +34,7 @@ public class Skill_icon : MonoBehaviour
             {
                 stacks_text.text = skill.currentstacks.ToString();
             }
-            if (skill.has_cooldown && skill.currentcooldown > 0)
+            if (skill.has_cooldown && skill.currentcooldown > 0 && skill.maxstacks > skill.currentstacks)
             {
                 cooldown_text.text = Mathf.Ceil(skill.currentcooldown).ToString();
             }
