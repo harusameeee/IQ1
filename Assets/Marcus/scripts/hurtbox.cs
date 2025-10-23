@@ -7,9 +7,6 @@ public class hurtbox : MonoBehaviour
     public virtual Vector2 position => new Vector2(-transform.localPosition.x, transform.localPosition.y + 1.5f);
     // the dimension of the hurtbox     // ハートボックスの寸法
     public virtual Vector2 dimension => new Vector2(1.0f, 1.0f);
-    
-    public static Action<int> onHit;
-    
     public hurtbox.targetype targettype;
 
     public enum targetype

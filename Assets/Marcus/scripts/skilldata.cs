@@ -14,6 +14,6 @@ public class skilldata : ScriptableObject
     public Sprite icon;
     public List<skilleffect> onHit_effect;
     public List<skilleffect> onUse_effects;
-
+ 
 
 }

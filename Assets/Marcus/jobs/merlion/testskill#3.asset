@@ -16,9 +16,10 @@ MonoBehaviour:
   cooldown: 5
   currentcooldown: 5
   gcd: 1.5
-  maxstacks: 0
-  currentstacks: 1
+  maxstacks: 3
+  currentstacks: 4
   coincost: 1
-  has_cooldown: 0
+  has_cooldown: 1
   icon: {fileID: 21300000, guid: 80360ab7b83eb7f448043d45b807cfe3, type: 3}
-  effects: []
+  onHit_effect: []
+  onUse_effects: []

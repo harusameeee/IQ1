@@ -19,7 +19,7 @@ public class witch_Ai : entity
     {
         
     }
-    public override bool TakeDamage(int damageAmount)
+    public override bool TakeDamage(float damageAmount,bool comboable = true)
     {
      
         float dmgmult = 1.0f;
@@ -31,12 +31,13 @@ public class witch_Ai : entity
             }
         }
            Debug.Log($"Witch took {damageAmount} damage with mult {dmgmult}");
-        onHit?.Invoke((int)(damageAmount * dmgmult));
+        onHit?.Invoke((int)(damageAmount * dmgmult),comboable);
         return true;
     }
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
+        base.Update();
         return;
         shootTimer += Time.deltaTime;
         if (shootTimer >= shootInterval)
@@ -45,7 +46,7 @@ public class witch_Ai : entity
             // Shoot a projectile
             Random rng = new Random(System.DateTime.Now.Millisecond);
             int xOffset = rng.Next(-maxdist, maxdist);
-            Vector3 spawnPos = mover.getobstaclespawnpos(0, 2.0f, out bool valid);
+            Vector3 spawnPos = mover.getobstaclespawnpos(0, 2.0f, out bool valid, out float new_t);
             if (valid)
             {
                 var temp = Instantiate(projectile, spawnPos, Quaternion.identity);

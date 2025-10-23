@@ -209,6 +209,7 @@ MonoBehaviour:
   maxoffset: 5
   offset_dist: 50
   indicator_transform: {fileID: 1815047366}
+  hitboxvis: {fileID: 1463910921}
   obstacles:
   - {fileID: 4772473273694988483, guid: a6ddf03d3ef23bd45b7941792e246ad2, type: 3}
   indicators: []
@@ -5188,7 +5189,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.546
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -8196,6 +8197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targettype: 0
   buffs: []
+  elapsedtime: 0
   mover: {fileID: 1893527903}
   projectile: {fileID: 7737990444165647914, guid: 0d1946c4e41ab184f9cfe9ba9b29140f, type: 3}
   shootInterval: 2
@@ -10429,7 +10431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -14574,7 +14576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7646478060091892400, guid: 38bcf62fe367ef14db0d7a46b5f0e799, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7698488052709093341, guid: 38bcf62fe367ef14db0d7a46b5f0e799, type: 3}
       propertyPath: m_LocalPosition.x

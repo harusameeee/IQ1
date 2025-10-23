@@ -9,13 +9,15 @@ public class inflictbuff : skilleffect
     {
         entity actualTarget = selftarget ? user : target;
         var existingBuff = actualTarget.buffs.Find(x => x.buffname == buff.buffname);
-        if (existingBuff != null && buff.stackable)
+        if (existingBuff != null )
         {
+            if (!buff.stackable) return;
             existingBuff.pow += buff.pow;
+            existingBuff.duration = Mathf.Max(existingBuff.duration, buff.duration);
         }
         else
         {
-            actualTarget.buffs.Add(buff);
+            actualTarget.buffs.Add(buff.copy());
         }
     }
 }

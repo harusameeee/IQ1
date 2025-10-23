@@ -9,17 +9,21 @@ public class score_counter : MonoBehaviour
     public TMPro.TMP_Text ComboText;
     void Start()
     {
-        hurtbox.onHit += addscore;
+        entity.onHit += addscore;
         scoretext.text = "Score: " + ((int)currentscore);
         ComboText.text = "Combo: " + combo;
 
     }
-    public void addscore(int scoretoadd)
+    public void addscore(float scoretoadd,bool comboable)
     {
         if (scoretoadd > 0)
         {
+            
             currentscore += scoretoadd * (1f + combo * 0.1f);
+            if (comboable)
+            {    
             combo += 1;
+            }
         }
         else
         {

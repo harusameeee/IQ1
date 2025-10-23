@@ -100,6 +100,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3accbf5952fd5254a867b6f1cb694f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targettype: 1
+  reftransform: {fileID: 0}
+  dmgamount: 5
+  skilldata: {fileID: 0}
+  owner: {fileID: 0}
+  damagables: []
+  alr_damaged: []
 --- !u!65 &4032238380910983646
 BoxCollider:
   m_ObjectHideFlags: 0

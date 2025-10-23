@@ -26,7 +26,8 @@ public class PlayerLineMove : entity
     public bool has_coins = false;
     public int current_coins = 0;//max coins is inf
     public float gcd_timer = 0f;
-    public int max_hp = 100;
+    [HideInInspector]public float current_hp = 100;
+    public float max_hp = 100;
     public List<skilldata> skills ;
     public hitbox hb;    public override Vector2 position => new Vector2(-transform.localPosition.x, transform.localPosition.y + 1.5f);
     public Vector2 dim;
@@ -48,6 +49,8 @@ public class PlayerLineMove : entity
     void Start()
     {
         hb.owner = this;
+        
+        ui.hp_bar.value = (float)current_hp / max_hp;
         rb = GetComponent<Rigidbody>();
         if (rb != null) rb.isKinematic = true; // 常にKinematicでもOK
         for(int i = 0; i < skills.Count; i++)
@@ -84,9 +87,9 @@ public class PlayerLineMove : entity
         }
     }
 
-    void Update()
+    public override void Update()
     {
-        countdownbuffdurations();//countdown buff durations
+        base.Update();//countdown buff durations
         refresh_cds();//refresh cooldowns
         useskills();//for activating skills
         movement();// for movement
@@ -135,7 +138,7 @@ public class PlayerLineMove : entity
             }
             if (skills[i].currentcooldown <= 0)
             {
-                Debug.Log($"skill{i} cooldown finished");
+                //Debug.Log($"skill{i} cooldown finished");
                 skills[i].currentstacks += 1;
                 skills[i].currentcooldown = skills[i].cooldown;
                 ui.skill_icons[i].stacks_text.text = skills[i].currentstacks.ToString();
@@ -173,7 +176,13 @@ public class PlayerLineMove : entity
                 hb.skilldata = skills[atkval];
                 gcd_timer = skills[atkval].gcd;
                 current_max_gcd = skills[atkval].gcd;
-                Debug.Log("use skill");
+                current_coins -= skills[atkval].coincost;
+                ui.coin_text.text = current_coins.ToString();
+                if (skills[atkval].has_cooldown&&skills[atkval].currentstacks> 0)
+                {
+                    skills[atkval].currentstacks -= 1;
+                }
+                Debug.Log($"skill stacks left:{skills[atkval].currentstacks}");
                 animator.Play(skills[atkval].skillname);
             }
         }
@@ -187,30 +196,24 @@ public class PlayerLineMove : entity
         }
         if (skill.has_cooldown)
         {
-            if (skill.currentstacks > 0)
+            if (skill.currentstacks <= 0)
             {
-                skill.currentstacks -= 1;
-                Debug.Log($"skill stacks left:{skill.currentstacks}");
-                return true;
+                Debug.Log("no skill stacks left");
+                return false;
             }
-            return false;
+
         }
-        else if (skill.coincost > 0)
+        if (skill.coincost > 0)
         {
             //コイン消費判定
-            if (current_coins >= skill.coincost)
+            if (current_coins < skill.coincost)
             {
-                current_coins -= skill.coincost;
-                ui.coin_text.text = current_coins.ToString();
-                return true;
+                
+                Debug.Log("not enough coins");
+                return false;
             }
-            return false;
-        }
-        else
-        {
-                Debug.Log("no cost skill used");
-            return true;
-        }
+        }        
+        return true;
     }
     void movement()
     {        // 左右移動
@@ -292,18 +295,7 @@ public class PlayerLineMove : entity
 
         }
     }
-    void countdownbuffdurations()
-    {
 
-        for(int i = buffs.Count -1; i >=0; i--)
-        {
-            if (buffs[i].duration <= 0)
-            {
-                Debug.Log($"P{playerNumber} buff {buffs[i].buffname} expired");
-                buffs.RemoveAt(i);
-            }
-        }
-    }
     public IEnumerator lerplane()
     {
         float duration = 0.1f; // 補間にかける時間
@@ -320,21 +312,22 @@ public class PlayerLineMove : entity
         }
         transform.localPosition = targetPos; // 最終的にターゲット位置にセット
     }
-    public override bool TakeDamage(int damageAmount)
+    public override bool TakeDamage(float damageAmount,bool comboable = true)
     {
         if(buffs.Exists(buff => buff.type == bufftypes.invuln|| buff.type == bufftypes.stealth))
         {
             Debug.Log($"P{playerNumber} is invulnerable and took no damage.");
             return false;
         }
-        max_hp -= damageAmount;
-        Debug.Log($"P{playerNumber} took {damageAmount} damage. Current HP: {max_hp}");
-        if (max_hp <= 0)
+        current_hp -= damageAmount;
+        ui.hp_bar.value = (float)current_hp / max_hp;
+        Debug.Log($"P{playerNumber} took {damageAmount} damage. Current HP: {current_hp}");
+        if (current_hp <= 0)
         {
             Debug.Log($"P{playerNumber} is defeated!");
         }
         
-        onHit?.Invoke(-damageAmount);
+        onHit?.Invoke(-damageAmount,false);
         return true;
     }
 

@@ -29,22 +29,26 @@ public class hitbox : hurtbox
             if (d.TakeDamage_screenaoe(dmgamount, this, targettype))
             {
                 float dmgmult = 1.0f;
-                for (int i =0; i< owner.buffs.Count;i++)
+                if (owner != null)
                 {
-                    var buff = owner.buffs[i];
-                    if (buff.type == entity.bufftypes.attack)
+                    for (int i =0; i< owner.buffs.Count;i++)
                     {
-                        dmgmult += buff.pow;
-                        Debug.Log($"P{owner.name} attack buff applied: {buff.pow}");
-                    }
-                    else if (buff.type == entity.bufftypes.stealth)
-                    {
-                        dmgmult += buff.pow;
-                        Debug.Log($"P{owner.name} stealth buff applied: {buff.pow}");
-                        owner.removebuff(i);
+                        var buff = owner.buffs[i];
+                        if (buff.type == entity.bufftypes.attack)
+                        {
+                            dmgmult += buff.pow;
+                            Debug.Log($"P{owner.name} attack buff applied: {buff.pow}");
+                        }
+                        else if (buff.type == entity.bufftypes.stealth)
+                        {
+                            dmgmult += buff.pow;
+                            Debug.Log($"P{owner.name} stealth buff applied: {buff.pow}");
+                            owner.removebuff(i);
+                        }
                     }
                 }
-                d.TakeDamage((int)(dmgamount * dmgmult));
+
+                d.TakeDamage((int)(dmgamount * dmgmult),true);
                 if(skilldata != null) {
                     foreach (var effect in skilldata.onHit_effect)
                     {
