@@ -8125,7 +8125,7 @@ GameObject:
   - component: {fileID: 1463910920}
   - component: {fileID: 1463910921}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: visualizer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8195,6 +8195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targettype: 0
+  buffs: []
   mover: {fileID: 1893527903}
   projectile: {fileID: 7737990444165647914, guid: 0d1946c4e41ab184f9cfe9ba9b29140f, type: 3}
   shootInterval: 2
@@ -10623,7 +10624,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14573,7 +14574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7646478060091892400, guid: 38bcf62fe367ef14db0d7a46b5f0e799, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7698488052709093341, guid: 38bcf62fe367ef14db0d7a46b5f0e799, type: 3}
       propertyPath: m_LocalPosition.x

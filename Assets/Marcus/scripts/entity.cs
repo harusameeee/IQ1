@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,8 +27,10 @@ public abstract class entity : hurtbox,Damagable
     {
         buffs.RemoveAt(index);
     }
+    [Serializable]
     public class buffdata
     {
+        public bool stackable;
         public string buffname;
         public bufftypes type;
         public float pow;

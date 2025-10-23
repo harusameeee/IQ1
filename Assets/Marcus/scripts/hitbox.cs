@@ -45,11 +45,15 @@ public class hitbox : hurtbox
                     }
                 }
                 d.TakeDamage((int)(dmgamount * dmgmult));
-                foreach (var effect in skilldata.effects)
-                {
-                    effect.activeeffect(owner, d);
+                if(skilldata != null) {
+                    foreach (var effect in skilldata.onHit_effect)
+                    {
+                        effect.activeeffect(owner, d);
+                    }
                 }
+
                 alr_damaged.Add(d);
+
             }
         }
     }

@@ -166,6 +166,10 @@ public class PlayerLineMove : entity
         {
             if (evaluateskilluse(skills[atkval]))
             {
+                foreach (var effect in skills[atkval].onUse_effects)
+                {
+                    effect.activeeffect(this, this);
+                }
                 hb.skilldata = skills[atkval];
                 gcd_timer = skills[atkval].gcd;
                 current_max_gcd = skills[atkval].gcd;
@@ -197,13 +201,14 @@ public class PlayerLineMove : entity
             if (current_coins >= skill.coincost)
             {
                 current_coins -= skill.coincost;
+                ui.coin_text.text = current_coins.ToString();
                 return true;
             }
             return false;
         }
         else
         {
-            Debug.Log("no cost skill used");
+                Debug.Log("no cost skill used");
             return true;
         }
     }
@@ -289,13 +294,13 @@ public class PlayerLineMove : entity
     }
     void countdownbuffdurations()
     {
-        foreach (var buff in buffs)
+
+        for(int i = buffs.Count -1; i >=0; i--)
         {
-            buff.duration -= Time.deltaTime;
-            if(buff.duration <= 0)
+            if (buffs[i].duration <= 0)
             {
-                //remove buff
-                buffs.Remove(buff);
+                Debug.Log($"P{playerNumber} buff {buffs[i].buffname} expired");
+                buffs.RemoveAt(i);
             }
         }
     }
