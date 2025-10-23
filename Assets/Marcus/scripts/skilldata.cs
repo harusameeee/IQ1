@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "skilldata", menuName = "ScriptableObjects/skilldata", order = 1)]
 public class skilldata : ScriptableObject
@@ -11,8 +12,8 @@ public class skilldata : ScriptableObject
     public int coincost;
     public bool has_cooldown;
     public Sprite icon;
-    public virtual void skilleffect(PlayerLineMove user)
-    {
-        
-    }
+    public List<skilleffect> onHit_effect;
+    public List<skilleffect> onUse_effects;
+
+
 }

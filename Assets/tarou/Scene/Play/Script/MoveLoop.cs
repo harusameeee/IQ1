@@ -54,7 +54,7 @@ public class MoveLoop : MonoBehaviour
     {
         spline = new NativeSpline(splinecont.Spline);
         SplineUtility.GetNearestPoint(spline, pos1, out var nearest1, out var t1);
-        SplineUtility.GetNearestPoint(spline, pos2, out var nearest2, out var t2);       
+        SplineUtility.GetNearestPoint(spline, pos2, out var nearest2, out var t2);
         return Mathf.Abs(t2 - t1) * spline.GetLength();
     }
 }
