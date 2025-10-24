@@ -11,6 +11,7 @@ public class player_ui : MonoBehaviour
     public Slider hp_bar;
     public TMP_Text coin_text;
     public Transform coin_texttransform;
+    public Transform skill_icon_transform;
     void Start()
     {
         coin_text.text = "0";

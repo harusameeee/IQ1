@@ -49,8 +49,10 @@ public class PlayerLineMove : entity
     public override void Start()
     {
         hb.owner = this;
-        
+        bufficonparent = ui.skill_icon_transform;
+        showbufficons = true;
         ui.hp_bar.value = (float)current_hp / max_hp;
+        base.Start();
         rb = GetComponent<Rigidbody>();
         if (rb != null) rb.isKinematic = true; // 常にKinematicでもOK
         for(int i = 0; i < skills.Count; i++)
