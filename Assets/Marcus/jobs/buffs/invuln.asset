@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9294da7133248a443b77285f500a00d2, type: 3}
-  m_Name: gain_invuln
+  m_Script: {fileID: 11500000, guid: fa2587049e2779f43805692a02ab288a, type: 3}
+  m_Name: invuln
   m_EditorClassIdentifier: 
-  buff: {fileID: 11400000, guid: d797dba01d6447d4d934745028257a80, type: 2}
-  selftarget: 1
+  stackable: 0
+  icon: {fileID: 21300000, guid: f2443a51ef1c1444abea07053de1faea, type: 3}
+  buffname: invuln
+  type: 6
+  pow: 0
+  duration: 0

@@ -12,10 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9294da7133248a443b77285f500a00d2, type: 3}
   m_Name: inflictpoison
   m_EditorClassIdentifier: 
-  buff:
-    stackable: 1
-    buffname: poison
-    type: 7
-    pow: 1
-    duration: 20
+  buff: {fileID: 11400000, guid: 09c136a2c4f8f994cb5aebfcf7446aef, type: 2}
   selftarget: 0

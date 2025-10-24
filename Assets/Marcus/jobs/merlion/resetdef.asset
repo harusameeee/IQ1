@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9294da7133248a443b77285f500a00d2, type: 3}
-  m_Name: gain_invuln
+  m_Script: {fileID: 11500000, guid: a148e6627a814db4da0f6fbfd3b6407e, type: 3}
+  m_Name: resetdef
   m_EditorClassIdentifier: 
-  buff: {fileID: 11400000, guid: d797dba01d6447d4d934745028257a80, type: 2}
-  selftarget: 1
+  reset_chance: 15
+  skillindex: 3

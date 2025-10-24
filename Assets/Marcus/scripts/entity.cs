@@ -4,11 +4,26 @@ using UnityEngine;
 
 public abstract class entity : hurtbox,Damagable
 {
+    [Header("buffs")]
+    [SerializeReference]
     public List<buffdata> buffs = new List<buffdata>();
-
-
+    public bool showbufficons = false;
+    public List<bufficon> bufficons = new List<bufficon>();
+    public Transform bufficonparent;
+    [Header("entity events")]
     public static Action<float,bool> onHit;
-    public float elapsedtime = 0f;
+    [HideInInspector]public float elapsedtime = 0f;
+    public virtual void Start()
+    {
+        if (showbufficons)
+        {     for (int i =0;i<5;i++)
+        {
+        bufficon temp =Instantiate(Resources.Load<bufficon>("buff_icon"),bufficonparent);
+        bufficons.Add(temp);
+        temp.gameObject.SetActive(false);
+        }
+        }
+    }
     public virtual void Update()
     {
         elapsedtime += Time.deltaTime;
@@ -38,7 +53,37 @@ public abstract class entity : hurtbox,Damagable
     }
     public void removebuff(int index)
     {
+        if (showbufficons)
+            bufficons.Find(b => b.referencedbuff.buffname == buffs[index].buffname)?.gameObject.SetActive(false);
         buffs.RemoveAt(index);
+    }
+    public void addbuff(buffdata newBuff)
+    {        
+        var existingBuff = buffs.Find(x => x.buffname == newBuff.buffname);
+        if (existingBuff != null )
+        {
+            if (!newBuff.stackable) return;
+            existingBuff.pow += newBuff.pow;
+            existingBuff.duration = Mathf.Max(existingBuff.duration, newBuff.duration);
+        }
+        else
+        {
+            buffdata buffToAdd = newBuff.copy();
+            buffs.Add(buffToAdd);
+            if (showbufficons)
+            {
+                var icon = bufficons.Find(b => !b.gameObject.activeSelf);
+                if (icon != null)
+                {
+                    
+                    icon.gameObject.SetActive(true);
+                    icon.referencedbuff = buffToAdd;
+                    icon.buffimg.sprite = buffToAdd.icon;
+                    icon.transform.SetAsLastSibling();
+                }
+            }
+        }
+        
     }
    public void countdownbuffdurations()
     {
@@ -49,7 +94,7 @@ public abstract class entity : hurtbox,Damagable
             buffs[i].duration --;
             if (buffs[i].duration <= 0)
             {
-                buffs.RemoveAt(i);
+               removebuff(i);
             }
             else if(buffs[i].type == bufftypes.poison)
             {
@@ -57,35 +102,7 @@ public abstract class entity : hurtbox,Damagable
             }
         }
     }
-    [Serializable]
-    public class buffdata
-    {
-        public bool stackable;
-        public string buffname;
-        public bufftypes type;
-        public float pow;
-        public float duration;
-        public buffdata copy()
-        {
-            buffdata newbuff = new buffdata();
-            newbuff.stackable = stackable;
-            newbuff.buffname = buffname;
-            newbuff.type = type;
-            newbuff.pow = pow;
-            newbuff.duration = duration;
-            return newbuff;
-        }
-    }
-    public enum bufftypes
-    {
-        gcd_reduction,
-        cooldown_reduction,
-        speed_increase,//speed increase buff
-        attack,//attack buff
-        vulnerability,//takes more damage
-        stealth,//invuln+ damage boost when hitting from stealth
-        invuln///completely invulnerable
-        ,poison
-    }
+
+
     
 }

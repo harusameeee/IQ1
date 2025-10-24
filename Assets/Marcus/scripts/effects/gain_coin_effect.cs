@@ -4,7 +4,7 @@ public class gain_coin_effect : skilleffect
 {
     public int coinAmount;
 
-    public override void activeeffect(entity user, entity target)
+    public override void activeeffect(entity user, entity target, skilldata skilldata = null)
     {
         PlayerLineMove pm = user as PlayerLineMove;
         if (user is PlayerLineMove)

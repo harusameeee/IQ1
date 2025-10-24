@@ -12,7 +12,7 @@ public class hitboxvisualizer : MonoBehaviour
      
         foreach (hitboxpair hbp in additionalhitboxes)
         {
-            if (hbp.todraw.gameObject.activeInHierarchy)
+            if (hbp.todraw.active)
             drawhurbox(hbp.todraw, hbp.hbcolor);
         }
     }

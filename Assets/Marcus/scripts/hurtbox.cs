@@ -8,6 +8,8 @@ public class hurtbox : MonoBehaviour
     // the dimension of the hurtbox     // ハートボックスの寸法
     public virtual Vector2 dimension => new Vector2(1.0f, 1.0f);
     public hurtbox.targetype targettype;
+    
+    public bool active = true;
 
     public enum targetype
     {
