@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38891d8f3526cf94c97b096f35e7cd97, type: 3}
+  m_Name: testskill#1
+  m_EditorClassIdentifier: 
+  skillname: testskill
+  cooldown: 0
+  currentcooldown: 0
+  gcd: 1.5
+  maxstacks: 0
+  currentstacks: 771
+  coincost: 0
+  has_cooldown: 0
+  icon: {fileID: 21300000, guid: a82776891963fb346ba45c670d25c849, type: 3}
+  onHit_effect:
+  - {fileID: 11400000, guid: 7fe76a4868cd5f6459103d954ec0d501, type: 2}
+  - {fileID: 11400000, guid: aca090217e38cb34f8b12a4af0a7df5a, type: 2}
+  onUse_effects: []

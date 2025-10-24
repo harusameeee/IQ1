@@ -1,14 +1,18 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PlayerLineMove : MonoBehaviour
+public class PlayerLineMove : entity
 {
     public Transform[] lanes;
     public int currentLane = 0;
     public int maxLane = 2;
 
-    public float jumpHeight = 2.0f;   // ã‚¸ãƒ£ãƒ³ãƒ—ã®é«˜ã•
-    public float jumpDuration = 0.6f; // ä¸Šæ˜‡ï¼‹ä¸‹é™ã«ã‹ã‹ã‚‹æ™‚é–“
+    public float jumpHeight = 2.0f;   // ¥¸¥ã¥ó¥×¤Î¹â¤µ
+    public float jumpDuration = 0.6f; // ¾å¾º¡Ü²¼¹ß¤Ë¤«¤«¤ë»ş´Ö
     public LayerMask groundLayer;
     public int playerNumber = 1;
 
@@ -17,91 +21,80 @@ public class PlayerLineMove : MonoBehaviour
     private bool isJumping = false;
     private float jumpTimer = 0f;
     private Vector3 startPos;
-    
-    private float current_max_gcd = 0f;
-    private float gcd_timer = 0f;
-    public skilldata[] skills = new skilldata[3];
-    public Skill_icon[] skill_icons = new Skill_icon[3];
+    [Header("combat system")]
+    public float current_max_gcd = 0f;
+    public bool has_coins = false;
+    public int current_coins = 0;//max coins is inf
+    public float gcd_timer = 0f;
+    [HideInInspector]public float current_hp = 100;
+    public float max_hp = 100;
+    public List<skilldata> skills ;
+    public hitbox hb;    public override Vector2 position => new Vector2(-transform.localPosition.x, transform.localPosition.y + 1.5f);
+    public Vector2 dim;
+    public override Vector2 dimension => dim;
+    public player_ui ui;
+    //hiddenvals
+    string joyLeft,joyRight,joyJump,joyAttack,joyAttack2,joySkill,joyDefense;
 
+    KeyCode keyLeft, keyRight, keyJump, keyAttack, keyAttack2, keySkill, keyDefense;
+    
+    
+    [Header("test move")]
+
+    [SerializeField] Vector3 velocity = Vector3.zero;
+    
+    [SerializeField] float speed = 10f;
+    [SerializeField] bool isLine = false;
+    public Animator animator;
     void Start()
     {
+        hb.owner = this;
+        
+        ui.hp_bar.value = (float)current_hp / max_hp;
         rb = GetComponent<Rigidbody>();
-        if (rb != null) rb.isKinematic = true; // å¸¸ã«Kinematicã§ã‚‚OK
+        if (rb != null) rb.isKinematic = true; // ¾ï¤ËKinematic¤Ç¤âOK
+        for(int i = 0; i < skills.Count; i++)
+        {
+            skills[i].currentcooldown = 0;
+        
+            skills[i].currentstacks = skills[i].maxstacks;
+            Debug.Log($"skill{i}:{skills[i].skillname}");
+            ui.skill_icons[i].setskill(skills[i], this);
+        }
+        
+        joyLeft = playerNumber == 1 ? "joystick 1 button 5" : "joystick 2 button 5";
+        joyRight = playerNumber == 1 ? "joystick 1 button 4" : "joystick 2 button 4";
+        joyJump = playerNumber == 1 ? "joystick 1 button 0" : "joystick 2 button 0";
+        joyAttack = playerNumber == 1 ? "joystick 1 button 1" : "joystick 2 button 1";
+        joyAttack2 = playerNumber == 1 ? "joystick 1 button 2" : "joystick 2 button 2";
+        joySkill = playerNumber == 1 ? "joystick 1 button 0" : "joystick 2 button 0";
+        joyDefense = playerNumber == 1 ? "joystick 1 button 0" : "joystick 2 button 0";
+
+        keyLeft = playerNumber == 1 ? KeyCode.RightArrow : KeyCode.D;
+        keyRight = playerNumber == 1 ? KeyCode.LeftArrow : KeyCode.A;
+        keyJump = playerNumber == 1 ? KeyCode.UpArrow : KeyCode.W;
+        keyAttack = playerNumber == 1 ? KeyCode.Alpha1 : KeyCode.Z;
+        keyAttack2 = playerNumber == 1 ? KeyCode.Alpha2 : KeyCode.X;
+        keySkill = playerNumber == 1 ? KeyCode.Alpha3 : KeyCode.C;
+        keyDefense = playerNumber == 1 ? KeyCode.Alpha4 : KeyCode.V;
+        if (has_coins)
+        {
+            ui.coin_texttransform.gameObject.SetActive(true);
+        }
+        else
+        {
+            ui.coin_texttransform.gameObject.SetActive(false);
+        }
     }
 
-    void Update()
+    public override void Update()
     {
+        base.Update();//countdown buff durations
+        refresh_cds();//refresh cooldowns
+        useskills();//for activating skills
+        movement();// for movement
+        // ÆşÎÏÀßÄê
         
-
-        // å…¥åŠ›è¨­å®š
-        string joyLeft = playerNumber == 1 ? "joystick 1 button 5" : "joystick 2 button 5";
-        string joyRight = playerNumber == 1 ? "joystick 1 button 4" : "joystick 2 button 4";
-        string joyJump = playerNumber == 1 ? "joystick 1 button 0" : "joystick 2 button 0";
-
-        string joyAttack = playerNumber == 1 ? "joystick 1 button 1" : "joystick 2 button 1";
-
-        string joySkill = playerNumber == 1 ? "joystick 1 button 0" : "joystick 2 button 0";
-
-        string joyDefense = playerNumber == 1 ? "joystick 1 button 0" : "joystick 2 button 0";
-        for (int i = 0; i < skills.Length; i++)
-        {
-            if(skills[i].currentcooldown > 0)
-            {
-
-                skill_icons[i].gcd_icon.material.SetFloat("_removesegment", gcd_timer / current_max_gcd);
-                if(skills[i].has_cooldown&&skills[i].currentcooldown > 0)
-                {
-                    skills[i].currentcooldown -= Time.deltaTime;
-                    if (skills[i].maxstacks > skills[i].currentstacks&&skills[i].currentcooldown <= 0)
-                    {
-                        skills[i].currentstacks += 1;
-                        skills[i].currentcooldown = skills[i].cooldown;
-                        skill_icons[i].stacks_text.text = skills[i].currentstacks.ToString();
-                    }
-                }
-            }
-        }
-
-        KeyCode keyLeft = playerNumber == 1 ? KeyCode.D : KeyCode.RightArrow;
-        KeyCode keyRight = playerNumber == 1 ? KeyCode.A : KeyCode.LeftArrow;
-        KeyCode keyJump = playerNumber == 1 ? KeyCode.W : KeyCode.UpArrow;
-
-        // å·¦å³ç§»å‹•
-        if ((Input.GetKeyDown(joyLeft) || Input.GetKeyDown(keyLeft)) && !isJumping)
-        {
-            currentLane = Mathf.Max(0, currentLane - 1);
-            MoveToLane();
-        }
-        if ((Input.GetKeyDown(joyRight) || Input.GetKeyDown(keyRight)) && !isJumping)
-        {
-            currentLane = Mathf.Min(maxLane, currentLane + 1);
-            MoveToLane();
-        }
-
-        // ã‚¸ãƒ£ãƒ³ãƒ—é–‹å§‹
-        if ((Input.GetKeyDown(joyJump) || Input.GetKeyDown(keyJump)) && !isJumping)
-        {
-            Debug.Log($"P{playerNumber} ã‚¸ãƒ£ãƒ³ãƒ—é–‹å§‹ï¼");
-            isJumping = true;
-            jumpTimer = 0f;
-            startPos = transform.localPosition;
-        }
-
-        // ã‚¸ãƒ£ãƒ³ãƒ—ä¸­ã®å‡¦ç†ï¼ˆKinematicã§ã‚‚OKï¼‰
-        if (isJumping)
-        {
-            jumpTimer += Time.deltaTime;
-            float t = jumpTimer / jumpDuration;
-            float height = Mathf.Sin(Mathf.PI * t) * jumpHeight; // æ”¾ç‰©ç·šçš„ãªå‹•ã
-            transform.localPosition = new Vector3(transform.localPosition.x, startPos.y + height, transform.localPosition.z);
-
-            // çµ‚äº†åˆ¤å®š
-            if (t >= 1f)
-            {
-                isJumping = false;
-                transform.localPosition = new Vector3(transform.localPosition.x, startPos.y, transform.localPosition.z);
-            }
-        }
     }
 
     void MoveToLane()
@@ -112,12 +105,203 @@ public class PlayerLineMove : MonoBehaviour
             StartCoroutine(lerplane());
         }
     }
+    public void refresh_cds()
+    {
+
+
+        float skill_cd_speed = 1.0f;
+        float gcd_speed = 1.0f; 
+        foreach (var buff in buffs)
+        {
+            if (buff.type == bufftypes.cooldown_reduction)
+            {
+                skill_cd_speed += buff.pow;
+            }
+            else if (buff.type == bufftypes.gcd_reduction)
+            {
+                gcd_speed += buff.pow;
+            }
+        }
+        if (gcd_timer > 0)
+        {
+            gcd_timer -= Time.deltaTime*gcd_speed;
+        }        
+        for (int i = 0; i < skills.Count; i++)
+        {
+            if (skills[i].currentcooldown > 0 && skills[i].has_cooldown)
+            {
+                if (skills[i].maxstacks > skills[i].currentstacks)
+                {
+                    skills[i].currentcooldown -= Time.deltaTime*skill_cd_speed;
+                }
+
+            }
+            if (skills[i].currentcooldown <= 0)
+            {
+                //Debug.Log($"skill{i} cooldown finished");
+                skills[i].currentstacks += 1;
+                skills[i].currentcooldown = skills[i].cooldown;
+                ui.skill_icons[i].stacks_text.text = skills[i].currentstacks.ToString();
+            }
+        }
+
+    }
+    void useskills()
+    {
+        int atkval = -1;
+        if (Input.GetKey(keySkill) || Input.GetKey(joySkill))
+        {
+            atkval = 2;
+        }
+        else if (Input.GetKey(keyDefense) || Input.GetKey(joyDefense))
+        {
+            atkval = 3;
+        }
+        else if (Input.GetKey(keyAttack) || Input.GetKey(joyAttack))
+        {
+            atkval = 0;
+        }
+        else if (Input.GetKey(keyAttack2) || Input.GetKey(joyAttack2))
+        {
+            atkval = 1;
+        }
+        if(atkval != -1)
+        {
+            if (evaluateskilluse(skills[atkval]))
+            {
+                foreach (var effect in skills[atkval].onUse_effects)
+                {
+                    effect.activeeffect(this, this);
+                }
+                hb.skilldata = skills[atkval];
+                gcd_timer = skills[atkval].gcd;
+                current_max_gcd = skills[atkval].gcd;
+                current_coins -= skills[atkval].coincost;
+                ui.coin_text.text = current_coins.ToString();
+                if (skills[atkval].has_cooldown&&skills[atkval].currentstacks> 0)
+                {
+                    skills[atkval].currentstacks -= 1;
+                }
+                Debug.Log($"skill stacks left:{skills[atkval].currentstacks}");
+                animator.Play(skills[atkval].skillname);
+            }
+        }
+    }
+    bool evaluateskilluse(skilldata skill)
+    {
+        if(gcd_timer > 0)
+        {
+            Debug.Log("GCD active");
+            return false;
+        }
+        if (skill.has_cooldown)
+        {
+            if (skill.currentstacks <= 0)
+            {
+                Debug.Log("no skill stacks left");
+                return false;
+            }
+
+        }
+        if (skill.coincost > 0)
+        {
+            //¥³¥¤¥ó¾ÃÈñÈ½Äê
+            if (current_coins < skill.coincost)
+            {
+                
+                Debug.Log("not enough coins");
+                return false;
+            }
+        }        
+        return true;
+    }
+    void movement()
+    {        // º¸±¦°ÜÆ°
+
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f, groundLayer);
+        if (!isLine)
+        {
+            int moveInput = 0;
+            if (Input.GetKey(joyLeft) || Input.GetKey(keyLeft))
+            {
+                moveInput = -1;
+            }
+            else if (Input.GetKey(joyRight) || Input.GetKey(keyRight))
+            {
+                moveInput = 1;
+            }
+            float speedbuff = 1;
+            foreach (var buff in buffs)
+            {
+                if (buff.type == bufftypes.speed_increase)
+                {
+                    speedbuff += buff.pow;
+                }
+            }
+            velocity = velocity * 0.8f + new Vector3(moveInput * speed * speedbuff, 0, 0);
+            transform.localPosition += velocity * Time.deltaTime;
+            transform.localPosition = new Vector3(Mathf.Clamp(transform.localPosition.x, -7.5f, 7.5f), transform.localPosition.y, transform.localPosition.z);
+            // ÃÏÌÌÈ½Äê
+        }
+        else
+        {
+            if ((Input.GetKeyDown(joyLeft) || Input.GetKeyDown(keyLeft)) && !isJumping)
+            {
+                currentLane = Mathf.Max(0, currentLane - 1);
+                MoveToLane();
+            }
+            if ((Input.GetKeyDown(joyRight) || Input.GetKeyDown(keyRight)) && !isJumping)
+            {
+                currentLane = Mathf.Min(maxLane, currentLane + 1);
+                MoveToLane();
+            }
+            // ¥¸¥ã¥ó¥×³«»Ï
+        }
+        if ((Input.GetKeyDown(joyJump) || Input.GetKeyDown(keyJump)) && !isJumping)
+        {
+            Debug.Log($"P{playerNumber} ¥¸¥ã¥ó¥×³«»Ï¡ª");
+            isJumping = true;
+            jumpTimer = 0f;
+            startPos = transform.localPosition;
+        }
+        // ¥¸¥ã¥ó¥×Ãæ¤Î½èÍı¡ÊKinematic¤Ç¤âOK¡Ë
+        if (isJumping)
+        {
+            if (isLine)
+            {
+
+                jumpTimer += Time.deltaTime;
+                float t = jumpTimer / jumpDuration;
+                if (t >= 1f)
+                {
+                    isJumping = false;
+
+                }
+            }
+            else
+            {
+                jumpTimer += Time.deltaTime;
+                float t = jumpTimer / jumpDuration;
+                float height = Mathf.Sin(Mathf.PI * t) * jumpHeight; // ÊüÊªÀşÅª¤ÊÆ°¤­
+                transform.localPosition = new Vector3(transform.localPosition.x, startPos.y + height, transform.localPosition.z);
+
+                // ½ªÎ»È½Äê
+                if (t >= 1f)
+                {
+                    isJumping = false;
+                    transform.localPosition = new Vector3(transform.localPosition.x, startPos.y, transform.localPosition.z);
+                }
+            }
+
+        }
+    }
+
     public IEnumerator lerplane()
     {
-        float duration = 0.1f; // è£œé–“ã«ã‹ã‘ã‚‹æ™‚é–“
+        float duration = 0.1f; // Êä´Ö¤Ë¤«¤±¤ë»ş´Ö
         float elapsed = 0f;
         Vector3 initialPos = transform.localPosition;
-        Vector3 targetPos = new Vector3(lanes[currentLane].localPosition.x, transform.localPosition.y,  transform.localPosition.z);
+        Vector3 targetPos = new Vector3(lanes[currentLane].localPosition.x, transform.localPosition.y, transform.localPosition.z);
 
         while (elapsed < duration)
         {
@@ -126,8 +310,28 @@ public class PlayerLineMove : MonoBehaviour
             transform.localPosition = Vector3.Lerp(initialPos, targetPos, t);
             yield return null;
         }
-        transform.localPosition = targetPos; // æœ€çµ‚çš„ã«ã‚¿ãƒ¼ã‚²ãƒƒãƒˆä½ç½®ã«ã‚»ãƒƒãƒˆ
+        transform.localPosition = targetPos; // ºÇ½ªÅª¤Ë¥¿¡¼¥²¥Ã¥È°ÌÃÖ¤Ë¥»¥Ã¥È
+    }
+    public override bool TakeDamage(float damageAmount,bool comboable = true)
+    {
+        if(buffs.Exists(buff => buff.type == bufftypes.invuln|| buff.type == bufftypes.stealth))
+        {
+            Debug.Log($"P{playerNumber} is invulnerable and took no damage.");
+            return false;
+        }
+        current_hp -= damageAmount;
+        ui.hp_bar.value = (float)current_hp / max_hp;
+        Debug.Log($"P{playerNumber} took {damageAmount} damage. Current HP: {current_hp}");
+        if (current_hp <= 0)
+        {
+            Debug.Log($"P{playerNumber} is defeated!");
+        }
+        
+        onHit?.Invoke(-damageAmount,false);
+        return true;
     }
 
-    
+
+
+
 }

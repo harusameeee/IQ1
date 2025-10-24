@@ -14,6 +14,7 @@ public class player_mover : MoveLoop
     public override void Update()
     {
         base.Update();
-        progressBar.value = current_t;
+        //Debug.Log($"Progress: {current_t_normalized}");
+        progressBar.value = current_t_normalized;
     }
 }
