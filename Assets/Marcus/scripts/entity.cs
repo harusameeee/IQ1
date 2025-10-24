@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class entity : hurtbox,Damagable
 {
     [Header("buffs")]
+    [SerializeReference]
     public List<buffdata> buffs = new List<buffdata>();
     public bool showbufficons = false;
     public List<bufficon> bufficons = new List<bufficon>();
@@ -67,16 +68,18 @@ public abstract class entity : hurtbox,Damagable
         }
         else
         {
-            buffs.Add(newBuff.copy());
+            buffdata buffToAdd = newBuff.copy();
+            buffs.Add(buffToAdd);
             if (showbufficons)
             {
                 var icon = bufficons.Find(b => !b.gameObject.activeSelf);
                 if (icon != null)
                 {
-                    icon.referencedbuff = newBuff;
-                    icon.buffimg.sprite = newBuff.icon;
-                    icon.transform.SetAsLastSibling();
+                    
                     icon.gameObject.SetActive(true);
+                    icon.referencedbuff = buffToAdd;
+                    icon.buffimg.sprite = buffToAdd.icon;
+                    icon.transform.SetAsLastSibling();
                 }
             }
         }
@@ -99,36 +102,7 @@ public abstract class entity : hurtbox,Damagable
             }
         }
     }
-    [Serializable]
-    public class buffdata
-    {
-        public bool stackable;
-        public Sprite icon;
-        public string buffname;
-        public bufftypes type;
-        public float pow;
-        public float duration;
-        public buffdata copy()
-        {
-            buffdata newbuff = new buffdata();
-            newbuff.stackable = stackable;
-            newbuff.buffname = buffname;
-            newbuff.type = type;
-            newbuff.pow = pow;
-            newbuff.duration = duration;
-            return newbuff;
-        }
-    }
-    public enum bufftypes
-    {
-        gcd_reduction,
-        cooldown_reduction,
-        speed_increase,//speed increase buff
-        attack,//attack buff
-        vulnerability,//takes more damage
-        stealth,//invuln+ damage boost when hitting from stealth
-        invuln///completely invulnerable
-        ,poison
-    }
+
+
     
 }

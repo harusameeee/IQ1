@@ -9,7 +9,7 @@ public class detonate_poison : skilleffect
 
         for (int i = target.buffs.Count - 1; i >= 0; i--)
         {
-            if (target.buffs[i].type == entity.bufftypes.poison)
+            if (target.buffs[i].type == bufftypes.poison)
             {
                 total_poison += target.buffs[i].pow * target.buffs[i].duration;
                 target.removebuff(i);

@@ -1,4 +1,4 @@
-using UnityEngine;
+    using UnityEngine;
 using UnityEngine.UI;
 
 public class bufficon : MonoBehaviour
@@ -6,8 +6,9 @@ public class bufficon : MonoBehaviour
     public Image buffimg;
     public TMPro.TMP_Text stacktext;
     public TMPro.TMP_Text durationtext;
-    [HideInInspector]
-    public entity.buffdata referencedbuff;
+    
+    [SerializeReference]
+    public buffdata referencedbuff;
 
     void Update()
     {

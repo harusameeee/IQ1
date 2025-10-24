@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 using Random = System.Random;
@@ -12,6 +13,8 @@ public class obstacle_spawner : MonoBehaviour
     public hitboxvisualizer hitboxvis;//will remove later
     public List<GameObject> obstacles = new List<GameObject>();
     public List<indicator> indicators = new List<indicator>();
+    
+    public List<entity> damagables = new List<entity>(); 
     public player_mover player;
     float indicator_countdown = 7.0f;
     //note need to allow for making double wide obstacles
@@ -24,6 +27,10 @@ public class obstacle_spawner : MonoBehaviour
             var indicatorobj = Instantiate(Resources.Load<GameObject>("indicator"), indicator_transform);
             indicatorobj.SetActive(false);
             indicators.Add(indicatorobj.GetComponent<indicator>());
+        }
+        var ss = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<entity>();
+        foreach (entity s in ss) {
+            damagables.Add (s);
         }
     }
 
@@ -59,6 +66,7 @@ public class obstacle_spawner : MonoBehaviour
             obs.pos.x = temp;
             hitboxvis.additionalhitboxes.Add(new hitboxvisualizer.hitboxpair { todraw = obs, hbcolor = Color.red });
             obs.tvalue = new_t;
+            obs.damagables = damagables;
             obs.hitboxvis = hitboxvis;
             obs.reftransform = player.transform;
             obstacleindicator.transform.localPosition = new Vector3(temp*100,0, 0);
