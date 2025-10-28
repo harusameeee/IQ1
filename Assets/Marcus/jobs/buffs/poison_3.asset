@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa2587049e2779f43805692a02ab288a, type: 3}
-  m_Name: invuln
+  m_Name: poison_3
   m_EditorClassIdentifier: 
-  stackable: 0
-  icon: {fileID: 21300000, guid: f2443a51ef1c1444abea07053de1faea, type: 3}
-  buffname: invuln
-  type: 6
-  pow: 0
-  duration: 0
+  stackable: 1
+  icon: {fileID: 21300000, guid: 2389b3cfad1165849ae8be60e482c5b0, type: 3}
+  buffname: poison
+  type: 7
+  pow: 3
+  duration: 5

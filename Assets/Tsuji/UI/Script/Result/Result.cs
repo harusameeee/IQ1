@@ -7,14 +7,14 @@ using UnityEngine.UI;
 
 public class Result : MonoBehaviour
 {
-    [Header("スコア関連")]
+    [Header("score")]
     [SerializeField] private ScoreData scoreData;
     [SerializeField] private TextMeshProUGUI scoreText;
 
-    [Header("ランク表示")]
+    [Header("rank")]
     [SerializeField] private Image rank;
 
-    [Header("クリアロゴ")]
+    [Header("logo")]
     [SerializeField] private Image logo;
 
     private bool isResultShown = false;

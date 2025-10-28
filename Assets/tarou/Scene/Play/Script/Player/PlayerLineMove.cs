@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerLineMove : entity
 {
-    public Transform[] lanes;
+    public Transform[] lanes= new Transform[5];
     public int currentLane = 0;
     public int maxLane = 2;
 
@@ -57,7 +57,7 @@ public class PlayerLineMove : entity
         if (rb != null) rb.isKinematic = true; // 常にKinematicでもOK
         for(int i = 0; i < skills.Count; i++)
         {
-            skills[i].currentcooldown = 0;
+            skills[i].currentcooldown = skills[i].cooldown;
         
             skills[i].currentstacks = skills[i].maxstacks;
             Debug.Log($"skill{i}:{skills[i].skillname}");

@@ -10,17 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38891d8f3526cf94c97b096f35e7cd97, type: 3}
-  m_Name: testskill#1
+  m_Name: testskill#4
   m_EditorClassIdentifier: 
-  skillname: testskill
-  cooldown: 0
+  skillname: testskill4
+  cooldown: 12
   currentcooldown: 0
-  gcd: 1.1
-  maxstacks: 0
+  gcd: 1.5
+  maxstacks: 1
   currentstacks: 0
   coincost: 0
-  has_cooldown: 0
-  icon: {fileID: 21300000, guid: a82776891963fb346ba45c670d25c849, type: 3}
-  onHit_effect:
-  - {fileID: 11400000, guid: 7fe76a4868cd5f6459103d954ec0d501, type: 2}
-  onUse_effects: []
+  has_cooldown: 1
+  icon: {fileID: 21300000, guid: 9b7740d1134f3b341ba5fe81642d580e, type: 3}
