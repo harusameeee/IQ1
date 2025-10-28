@@ -7,8 +7,6 @@ public class PoisonMagic : MonoBehaviour
     [SerializeField]
     private float stretchDuration = 5.0f; // 伸びにかける時間（秒）※5秒なら5→0ぴったり
 
-    [SerializeField]
-    private float targetLength = 25.0f; // 最終的な長さ（Z）
 
     [SerializeField]
     private TextMeshPro countdownTMP; // 3D TMP テキスト参照
@@ -31,8 +29,7 @@ public class PoisonMagic : MonoBehaviour
     {
         float elapsed = 0f;
         float startLength = initialScale.z;
-        float delta = targetLength - startLength;
-
+       
         int startCount = 5; // カウント開始値
         int currentCount = startCount;
 
@@ -40,12 +37,7 @@ public class PoisonMagic : MonoBehaviour
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / stretchDuration);
-            float currentLength = Mathf.Lerp(startLength, targetLength, t);
-
-            // スケールと位置を更新
-            transform.localScale = new Vector3(initialScale.x, initialScale.y, currentLength);
-            transform.position = initialPosition + new Vector3(0, 0, (currentLength - startLength) / 2f);
-
+          
             // 残り時間に応じてカウント更新
             float remaining = Mathf.Lerp(startCount, 0, t);
             int newCount = Mathf.CeilToInt(remaining);
@@ -60,9 +52,6 @@ public class PoisonMagic : MonoBehaviour
             yield return null;
         }
 
-        // 最終値補正
-        transform.localScale = new Vector3(initialScale.x, initialScale.y, targetLength);
-        transform.position = initialPosition + new Vector3(0, 0, delta / 2f);
 
         // カウントを0にしてテキストを消す
         if (countdownTMP != null)

@@ -1,16 +1,37 @@
 using UnityEngine;
+using Cysharp.Threading.Tasks; 
 
 public class CameraEventMagic : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private ObstacleManager obstacleManager;
+
+    [System.Obsolete]
+    private void Start()
     {
-        
+        // シーン上のObstacleManagerを探して参照保持
+        obstacleManager = FindObjectOfType<ObstacleManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player") || other.CompareTag("Player2"))
+        {
+            TriggerEvent().Forget();
+            Destroy(gameObject);
+        }
+    }
+
+    private async UniTaskVoid TriggerEvent()
+    {
+        if (obstacleManager == null) return;
+
+        // フラグをONにしてイベント開始
+        obstacleManager.isActive = true;
+
+        // 待機
+        await UniTask.Delay(1500);
+
+        // フラグをOFFにしてイベント終了
+        obstacleManager.isActive = false;
     }
 }

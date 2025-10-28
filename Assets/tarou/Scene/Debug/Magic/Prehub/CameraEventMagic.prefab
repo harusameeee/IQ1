@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1210896690152514974}
   - component: {fileID: 8734089737855074094}
   - component: {fileID: 8060537528309977078}
+  - component: {fileID: 1776316890528737618}
   m_Layer: 0
   m_Name: CameraEventMagic
   m_TagString: EnemyAttack
@@ -123,3 +124,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 20
   destroycountlimit: 6
+--- !u!114 &1776316890528737618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474956157416789949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 324c9b44e525cca46accb2f094fa4325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
