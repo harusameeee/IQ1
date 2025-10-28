@@ -49,7 +49,7 @@ public class hitbox : hurtbox
                     }
                 }
 
-                d.TakeDamage((int)(dmgamount * dmgmult), true);
+                d.TakeDamage((int)(dmgamount * dmgmult), true, null);
                 if (skilldata != null) {
                     foreach (var effect in skilldata.onHit_effect)
                     {

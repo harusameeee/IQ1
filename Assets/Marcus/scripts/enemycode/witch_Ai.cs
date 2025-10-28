@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 using Random = System.Random;
@@ -19,7 +20,7 @@ public class witch_Ai : entity
     {
         base.Start();
     }
-    public override bool TakeDamage(float damageAmount,bool comboable = true)
+    public override bool TakeDamage(float damageAmount,bool comboable = true,List<damagable_type> damagable_Types = null)
     {
      
         float dmgmult = 1.0f;

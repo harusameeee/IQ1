@@ -6,7 +6,7 @@ public class playerspawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static playerspawner instance;
     public hitboxvisualizer hbv;
-    public player_ui[] playeruis = new player_ui[2];
+    public player_ui[] playeruis = new player_ui[2];//ui for player 1 and 2
 
     public Transform[] lanes = new Transform[5];
     public GameObject[] characters_prefabs = new GameObject[3];
@@ -20,7 +20,7 @@ public class playerspawner : MonoBehaviour
         spawnchara(class_type.merlion, 0);
         spawnchara(class_type.ninja, 1);
     }
-    void spawnchara(class_type ct, int playernum)//note player numn should be 0 or 1
+    void spawnchara(class_type ct, int playernum)// used for spawning characters note player numn should be 0 or 1
     {
         GameObject chara = Instantiate(characters_prefabs[(int)ct], transform);
         if (playernum == 1)

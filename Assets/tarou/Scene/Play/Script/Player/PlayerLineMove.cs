@@ -327,7 +327,7 @@ public class PlayerLineMove : entity
         }
         transform.localPosition = targetPos; // 最終的にターゲット位置にセット
     }
-    public override bool TakeDamage(float damageAmount,bool comboable = true)
+    public override bool TakeDamage(float damageAmount,bool comboable = true,List<damagable_type> damagable_Types = null)
     {
         if(buffs.Exists(buff => buff.type == bufftypes.invuln|| buff.type == bufftypes.stealth))
         {
