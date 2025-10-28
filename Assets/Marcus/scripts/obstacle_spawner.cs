@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 using Random = System.Random;
@@ -9,8 +10,11 @@ public class obstacle_spawner : MonoBehaviour
     public int maxoffset = 5;
     public float offset_dist = 50;
     public Transform indicator_transform;
+    public hitboxvisualizer hitboxvis;//will remove later
     public List<GameObject> obstacles = new List<GameObject>();
     public List<indicator> indicators = new List<indicator>();
+    
+    public List<entity> damagables = new List<entity>(); 
     public player_mover player;
     float indicator_countdown = 7.0f;
     //note need to allow for making double wide obstacles
@@ -23,6 +27,10 @@ public class obstacle_spawner : MonoBehaviour
             var indicatorobj = Instantiate(Resources.Load<GameObject>("indicator"), indicator_transform);
             indicatorobj.SetActive(false);
             indicators.Add(indicatorobj.GetComponent<indicator>());
+        }
+        var ss = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<entity>();
+        foreach (entity s in ss) {
+            damagables.Add (s);
         }
     }
 
@@ -46,18 +54,25 @@ public class obstacle_spawner : MonoBehaviour
             float temp = (float)rng.Next(-maxoffset, maxoffset);
 
 
-            var obstacle = Instantiate(obstacles[rng.Next(0, obstacles.Count)]);
-            Vector3 spawnpos = player.getobstaclespawnpos(temp, offset_dist, out bool valid);
+  
+            Vector3 spawnpos = player.getobstaclespawnpos(temp, offset_dist, out bool valid,out float new_t);
             if (!valid)
             {
-                obstacleindicator.gameObject.SetActive(false);
-                Destroy(obstacle);
+
                 return;
             }
-            obstacleindicator.transform.localPosition = new Vector3(temp*200,0, 0);
+            obstacle obs = Instantiate(obstacles[rng.Next(0, obstacles.Count)]).GetComponent<obstacle>();
+            obs.player = player;
+            obs.pos.x = temp;
+            hitboxvis.additionalhitboxes.Add(new hitboxvisualizer.hitboxpair { todraw = obs, hbcolor = Color.red });
+            obs.tvalue = new_t;
+            obs.damagables = damagables;
+            obs.hitboxvis = hitboxvis;
+            obs.reftransform = player.transform;
+            obstacleindicator.transform.localPosition = new Vector3(temp*100,0, 0);
             obstacleindicator.gameObject.SetActive(true);
-            obstacle.transform.position = spawnpos;
-            obstacleindicator.setvalues(player, obstacle.transform);
+            obs.transform.position = spawnpos;
+            obstacleindicator.setvalues(player, obs.transform);
             //var obstacle = Instantiate(obstacles[rng.Next(0, obstacles.Count)]);
             //obstacle.transform.position = spawnpos;
         }
