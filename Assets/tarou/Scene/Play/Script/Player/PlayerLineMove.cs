@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerLineMove : entity
 {
-    public Transform[] lanes;
+    public Transform[] lanes= new Transform[5];
     public int currentLane = 0;
     public int maxLane = 2;
 
@@ -46,16 +46,18 @@ public class PlayerLineMove : entity
     [SerializeField] float speed = 10f;
     [SerializeField] bool isLine = false;
     public Animator animator;
-    void Start()
+    public override void Start()
     {
         hb.owner = this;
-        
+        bufficonparent = ui.skill_icon_transform;
+        showbufficons = true;
         ui.hp_bar.value = (float)current_hp / max_hp;
+        base.Start();
         rb = GetComponent<Rigidbody>();
         if (rb != null) rb.isKinematic = true; // 常にKinematicでもOK
         for(int i = 0; i < skills.Count; i++)
         {
-            skills[i].currentcooldown = 0;
+            skills[i].currentcooldown = skills[i].cooldown;
         
             skills[i].currentstacks = skills[i].maxstacks;
             Debug.Log($"skill{i}:{skills[i].skillname}");
@@ -128,7 +130,11 @@ public class PlayerLineMove : entity
         }        
         for (int i = 0; i < skills.Count; i++)
         {
-            if (skills[i].currentcooldown > 0 && skills[i].has_cooldown)
+            if(!skills[i].has_cooldown)
+            {
+                continue;
+            }
+            if (skills[i].currentcooldown > 0 )
             {
                 if (skills[i].maxstacks > skills[i].currentstacks)
                 {
@@ -165,7 +171,7 @@ public class PlayerLineMove : entity
         {
             atkval = 1;
         }
-        if(atkval != -1)
+        if (atkval != -1)
         {
             if (evaluateskilluse(skills[atkval]))
             {
@@ -178,13 +184,22 @@ public class PlayerLineMove : entity
                 current_max_gcd = skills[atkval].gcd;
                 current_coins -= skills[atkval].coincost;
                 ui.coin_text.text = current_coins.ToString();
-                if (skills[atkval].has_cooldown&&skills[atkval].currentstacks> 0)
+                if (skills[atkval].has_cooldown && skills[atkval].currentstacks > 0)
                 {
                     skills[atkval].currentstacks -= 1;
                 }
                 Debug.Log($"skill stacks left:{skills[atkval].currentstacks}");
                 animator.Play(skills[atkval].skillname);
             }
+        }
+    }
+    public void resetskillcd(int skillindex)
+    {
+        if(skillindex>=0&& skillindex<skills.Count)
+        {
+            skills[skillindex].currentcooldown = 12;
+            skills[skillindex].currentstacks = skills[skillindex].maxstacks;
+
         }
     }
     bool evaluateskilluse(skilldata skill)

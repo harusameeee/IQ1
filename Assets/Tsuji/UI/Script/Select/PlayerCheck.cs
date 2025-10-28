@@ -22,12 +22,12 @@ public class PlayerCheck : MonoBehaviour
 
     private void Start()
     {
+        GameObject obj = GameObject.Find("Stage1");
+        stageSelect = obj.GetComponent<StageSelect>();
         // ç≈èâÇÕîÒï\é¶
         transform.localScale = Vector3.zero;
         p1ReadyImage.transform.localScale = Vector3.zero;
         p2ReadyImage.transform.localScale = Vector3.zero;
-
-        stageSelect = FindObjectOfType<StageSelect>();
 
         playerNumber = p1.GetComponent<PlayerMove>().playerNumber;
         player2Number = p2.GetComponent<PlayerMove>().playerNumber;

@@ -5,10 +5,11 @@ public class hitbox : hurtbox
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Transform reftransform;
-    public override Vector2 position => transform.localPosition-reftransform.localPosition;
+    public override Vector2 position => getpos();
     public override Vector2 dimension => transform.localScale;
     public int dmgamount;
     public skilldata skilldata;
+    public bool flipx=false;
     //notes pos x and y are for abs pos
     //scale x and y are for size
     //maybe will add delay timer???
@@ -31,15 +32,15 @@ public class hitbox : hurtbox
                 float dmgmult = 1.0f;
                 if (owner != null)
                 {
-                    for (int i =0; i< owner.buffs.Count;i++)
+                    for (int i = 0; i < owner.buffs.Count; i++)
                     {
                         var buff = owner.buffs[i];
-                        if (buff.type == entity.bufftypes.attack)
+                        if (buff.type == bufftypes.attack)
                         {
                             dmgmult += buff.pow;
                             Debug.Log($"P{owner.name} attack buff applied: {buff.pow}");
                         }
-                        else if (buff.type == entity.bufftypes.stealth)
+                        else if (buff.type == bufftypes.stealth)
                         {
                             dmgmult += buff.pow;
                             Debug.Log($"P{owner.name} stealth buff applied: {buff.pow}");
@@ -48,8 +49,8 @@ public class hitbox : hurtbox
                     }
                 }
 
-                d.TakeDamage((int)(dmgamount * dmgmult),true);
-                if(skilldata != null) {
+                d.TakeDamage((int)(dmgamount * dmgmult), true);
+                if (skilldata != null) {
                     foreach (var effect in skilldata.onHit_effect)
                     {
                         effect.activeeffect(owner, d);
@@ -60,6 +61,23 @@ public class hitbox : hurtbox
 
             }
         }
+    }
+    public Vector2 getpos()
+    {
+        Vector3 temp = transform.localPosition;
+        if (reftransform == null)
+        {
+            return transform.localPosition;
+        }
+        if (flipx)
+        {
+            return transform.localPosition + new Vector3(-reftransform.localPosition.x, reftransform.localPosition.y, reftransform.localPosition.z);
+        }
+        else
+        {
+            return transform.localPosition + reftransform.localPosition;
+        }
+            
     }
     void OnDisable()
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "otamesitable", menuName = "Scriptable Objects/otamesitable")]
+[CreateAssetMenu(fileName = "otamesitable", menuName = "ScriptableObjects/otamesitable")]
 public class otamesitable : ScriptableObject
 {
     //êEã∆ñº

@@ -10,12 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9294da7133248a443b77285f500a00d2, type: 3}
-  m_Name: inflictpoison
+  m_Name: gain_invuln
   m_EditorClassIdentifier: 
-  buff:
-    stackable: 1
-    buffname: poison
-    type: 7
-    pow: 1
-    duration: 20
-  selftarget: 0
+  buff: {fileID: 11400000, guid: d797dba01d6447d4d934745028257a80, type: 2}
+  selftarget: 1

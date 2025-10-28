@@ -9,13 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9294da7133248a443b77285f500a00d2, type: 3}
-  m_Name: gain_invuln
+  m_Script: {fileID: 11500000, guid: 1a61781c10e94bf46a641a249c421166, type: 3}
+  m_Name: detonate_poison
   m_EditorClassIdentifier: 
-  buff:
-    stackable: 0
-    buffname: testinvuln
-    type: 6
-    pow: 0
-    duration: 10
-  selftarget: 1

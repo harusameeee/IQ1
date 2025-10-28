@@ -101,12 +101,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targettype: 1
+  active: 0
   reftransform: {fileID: 0}
   dmgamount: 5
   skilldata: {fileID: 0}
+  flipx: 0
   owner: {fileID: 0}
   damagables: []
   alr_damaged: []
+  tvalue: 0
+  range_window: 2
+  despawn_range: 10
+  pos: {x: 0, y: 1}
+  player: {fileID: 0}
+  dim: {x: 4, y: 3}
+  hitboxvis: {fileID: 0}
 --- !u!65 &4032238380910983646
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1,7 +1,5 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
-using System.Collections;
-using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,71 +7,93 @@ using UnityEngine.UI;
 
 public class Result : MonoBehaviour
 {
-    //Score取得
-    [SerializeField] int score;
-    [SerializeField] TextMeshProUGUI scoreText;
+    [Header("score")]
+    [SerializeField] private ScoreData scoreData;
+    [SerializeField] private TextMeshProUGUI scoreText;
 
-    //rank表示
-    [SerializeField] Sprite[] rankSprites;
-    [SerializeField] Image rank;
+    [Header("rank")]
+    [SerializeField] private Image rank;
 
-    //clearロゴ
-    [SerializeField] Sprite[] rogoSprites;
-    [SerializeField] Image rogo;
+    [Header("logo")]
+    [SerializeField] private Image logo;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private bool isResultShown = false;
+
+    private void Start()
     {
-        //クリアロゴ表示
-        //でかくする
-       // rank.sprite.scale(new Vector3(1.5f, 1.5f, 1.5f));
+        // 初期状態で非表示などの設定をしておく
+        rank.transform.localScale = Vector3.zero;
+        logo.transform.localScale = Vector3.zero;
+
+        // 実行開始
+        WaitForSubmitAsync().Forget();
+    }
+
+    // 入力待ち
+    private async UniTaskVoid WaitForSubmitAsync()
+    {
+        //await UniTask.WaitUntil(() => Input.GetButtonDown("Submit"));
+        await UniTask.WaitUntil(() => Input.GetMouseButtonDown(0));
+        if (isResultShown) return; // 二重実行防止
+
+        isResultShown = true;
+
+        // ScriptableObject からスコアを取得
+        int score = scoreData != null ? scoreData.score : 0;
+        await ShowResultAsync(score);
+    }
+
+    // 一連のリザルト演出
+    private async UniTask ShowResultAsync(int score)
+    {
+        // ロゴ演出
+        await LogoAnimAsync();
+
+        // スコアアニメーション
+        await ScoreAnimationAsync(score, 2.5f);
+
+        // ランク演出
+        await RankAnimAsync();
 
     }
 
-    // Update is called once per frame
-    private async UniTask Update()
+    // スコアアニメーション
+    private async UniTask ScoreAnimationAsync(int addScore, float time)
     {
-        //ボタンを押したら
-        //スコア
-        await UniTask.WaitUntil(() => Input.GetButtonDown("Submit"));
-        await ScoreAnimation(score, 3f);
-        //ランク表示
-
-        //効果音
-    }
-
-    //ランクアニメーション
-    public async UniTask RankAnim(float time)
-    {
-        //一気に小さくする
-        rank.transform.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 1f);
-        //戻す
-        rank.transform.DOScale(new Vector3(1,1,1), 1f);
-    }
-
-
-    // スコアをアニメーションさせる
-    public async UniTask ScoreAnimation(int addScore, float time)
-    {
-        float before = 0;
-        float after = score + addScore;
-        score += addScore;
-
+        float before = 0f;
+        float after = addScore;
         float elapsedTime = 0f;
 
-
-        // timeが経過するまでループ
         while (elapsedTime < time)
         {
             float rate = elapsedTime / time;
-            scoreText.text = (before + (after - before) * rate).ToString("f0");
-
+            scoreText.text = Mathf.Lerp(before, after, rate).ToString("f0");
             elapsedTime += Time.deltaTime;
-
-            await UniTask.Delay(10); // 10ミリ秒待つ
+            await UniTask.Yield(); // 毎フレーム更新
         }
 
-        // 最終的な着地スコアを表示
-        scoreText.text = after.ToString("f0");
+        scoreText.text = after.ToString("N0");
+    }
+
+    // ランク演出
+    private async UniTask RankAnimAsync()
+    {
+        rank.transform.localScale = Vector3.zero;
+        rank.DOFade(1f, 0f); // フェード即時反映
+        rank.transform.DOScale(Vector3.one * 1.2f, 0.6f).SetEase(Ease.OutBack);
+        await UniTask.Delay(600);
+        rank.transform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutCubic);
+        await UniTask.Delay(400);
+    }
+
+    // ロゴ演出
+    private async UniTask LogoAnimAsync()
+    {
+        logo.transform.localScale = Vector3.zero;
+
+        // ポップアップ風に表示
+        logo.transform.DOScale(Vector3.one * 1.2f, 0.4f).SetEase(Ease.OutBack);
+        await UniTask.Delay(400);
+        logo.transform.DOScale(Vector3.one, 0.2f);
     }
 }

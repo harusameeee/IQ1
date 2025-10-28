@@ -15,9 +15,9 @@ public class witch_Ai : entity
     public Vector2 dim;
     public override Vector2 dimension => dim;
     public override Vector2 position => new Vector2(transform.localPosition.x, transform.localPosition.y + 8f);
-    void Start()
+    public override void Start()
     {
-        
+        base.Start();
     }
     public override bool TakeDamage(float damageAmount,bool comboable = true)
     {

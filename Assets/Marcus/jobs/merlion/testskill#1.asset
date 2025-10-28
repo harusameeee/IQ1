@@ -15,13 +15,12 @@ MonoBehaviour:
   skillname: testskill
   cooldown: 0
   currentcooldown: 0
-  gcd: 1.5
+  gcd: 1.1
   maxstacks: 0
-  currentstacks: 771
+  currentstacks: 0
   coincost: 0
   has_cooldown: 0
   icon: {fileID: 21300000, guid: a82776891963fb346ba45c670d25c849, type: 3}
   onHit_effect:
   - {fileID: 11400000, guid: 7fe76a4868cd5f6459103d954ec0d501, type: 2}
-  - {fileID: 11400000, guid: aca090217e38cb34f8b12a4af0a7df5a, type: 2}
   onUse_effects: []
