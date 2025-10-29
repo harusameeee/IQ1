@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: testskill#4
   m_EditorClassIdentifier: 
   skillname: testskill4
-  cooldown: 12
-  currentcooldown: 10.817374
+  cooldown: 5
+  currentcooldown: 0.27518874
   gcd: 0.3
   maxstacks: 1
   currentstacks: 0
-  coincost: 0
+  coincost: 5
   has_cooldown: 1
   icon: {fileID: 21300000, guid: 9b7740d1134f3b341ba5fe81642d580e, type: 3}
   onHit_effect: []
   onUse_effects:
-  - {fileID: 11400000, guid: 2c8bd8776ccd608438890066051aa548, type: 2}
+  - {fileID: 11400000, guid: 98a7a282b09e42d4bba1cadd52953a6a, type: 2}

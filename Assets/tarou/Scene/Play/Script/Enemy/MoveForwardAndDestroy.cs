@@ -7,40 +7,30 @@ public class MoveForwardAndDestroy : MonoBehaviour
 
     private float destroycount = 0f;
 
-    private Transform followTarget;  // 出した元（例：spawnPoint）
-    private Vector3 lastTargetPos;   // 前フレームの位置
-    private Quaternion lastTargetRot; // 前フレームの回転
+    private Transform followTarget;
+    private Vector3 initialOffset;     // ターゲットとの初期距離
+    private Quaternion initialRotation; // ターゲットとの初期回転差
 
-    // 呼び出し元からターゲットをセット
     public void SetFollowTarget(Transform target)
     {
         followTarget = target;
         if (target != null)
         {
-            lastTargetPos = target.position;
-            lastTargetRot = target.rotation;
+            initialOffset = transform.position - target.position;
+            initialRotation = Quaternion.Inverse(target.rotation) * transform.rotation;
         }
     }
 
     void Update()
     {
-        // 自分の forward 方向に進む（ローカル空間で）
+        // 自分のforward方向に進む
         transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime, Space.Self);
 
         if (followTarget != null)
         {
-            // --- 位置の差分を加算 ---
-            Vector3 offset = followTarget.position - lastTargetPos;
-            transform.position += offset;
-
-            // --- 回転の差分を加算 ---
-            // 回転の「差分」をクォータニオンで計算
-            Quaternion deltaRot = followTarget.rotation * Quaternion.Inverse(lastTargetRot);
-            transform.rotation = deltaRot * transform.rotation;
-
-            // 状態を更新
-            lastTargetPos = followTarget.position;
-            lastTargetRot = followTarget.rotation;
+            // ターゲットに対して初期オフセットを維持する形で追従
+            transform.position = followTarget.position + followTarget.rotation * initialOffset;
+            transform.rotation = followTarget.rotation * initialRotation;
         }
 
         // 一定時間経過で破棄

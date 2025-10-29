@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
+    public void ToTitle()
+    {
+        SceneManager.LoadScene("Title");
+    }
+
     public void ToSelect()
     {
         SceneManager.LoadScene("SelectScene");

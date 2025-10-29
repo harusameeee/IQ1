@@ -26,6 +26,7 @@ public class JobTitleSelection : MonoBehaviour
         //if () { return; }
         //player‚È‚çE‚ğ—^‚¦‚é
         //other.gameObject.AddComponent
+
     }
 
     private void ImageRotate()

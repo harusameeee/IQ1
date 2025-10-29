@@ -33,11 +33,11 @@ public abstract class entity : hurtbox,Damagable
         }
     }
 
-    public virtual bool TakeDamage(float damageAmount,bool comboable)
+    public virtual bool TakeDamage(float damageAmount,bool comboable,List<damagable_type> damagable_Types = null)
     {
         return true;
     }
-    public bool TakeDamage_screenaoe(float damageAmount, hurtbox hb, hurtbox.targetype targettype)
+    public bool TakeDamage_screenaoe(float damageAmount, hurtbox hb, hurtbox.targetype targettype,List<damagable_type> damagable_Types = null)
     {
         if (targettype != this.targettype)
         {

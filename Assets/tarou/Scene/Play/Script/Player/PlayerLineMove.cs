@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class PlayerLineMove : entity
 {
-    public Transform[] lanes;
+    public Transform[] lanes= new Transform[5];
     public int currentLane = 0;
     public int maxLane = 2;
 
@@ -57,7 +57,7 @@ public class PlayerLineMove : entity
         if (rb != null) rb.isKinematic = true; // 常にKinematicでもOK
         for(int i = 0; i < skills.Count; i++)
         {
-            skills[i].currentcooldown = 0;
+            skills[i].currentcooldown = skills[i].cooldown;
         
             skills[i].currentstacks = skills[i].maxstacks;
             Debug.Log($"skill{i}:{skills[i].skillname}");
@@ -327,7 +327,7 @@ public class PlayerLineMove : entity
         }
         transform.localPosition = targetPos; // 最終的にターゲット位置にセット
     }
-    public override bool TakeDamage(float damageAmount,bool comboable = true)
+    public override bool TakeDamage(float damageAmount,bool comboable = true,List<damagable_type> damagable_Types = null)
     {
         if(buffs.Exists(buff => buff.type == bufftypes.invuln|| buff.type == bufftypes.stealth))
         {

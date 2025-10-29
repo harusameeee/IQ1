@@ -1,16 +1,28 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class ElectricityMagic : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.CompareTag("Player") || other.CompareTag("Player2"))
+        {
+            TriggerEvent();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void TriggerEvent()
     {
-        
+        Destroy(gameObject);
+        HPEvent();
     }
+
+
+    private void HPEvent()
+    {
+
+    }
+
 }

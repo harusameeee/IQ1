@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,59 +5,90 @@ using DG.Tweening;
 
 public class StageSelect : MonoBehaviour
 {
-    //　ボタン押すときの
-    private float scaleY = 0.01f;
-    //　円ゲージ
-    [SerializeField] Image circle;
-    //　ステージ選択状態か
-    public bool isSelect { get; set; } = false;
-    //
+    [Header("ボタンのYスケール（押し込み度）")]
+    [SerializeField] private float pressedScaleY = 0.01f;
+
+    [Header("円ゲージUI")]
+    [SerializeField] private Image circle;
+
+    [Header("選択ステージ情報")]
+    [SerializeField] private SelectedStage selectedStage;
+
+    // ステージ選択完了状態
+    public bool isSelect { get; private set; } = false;
+
+    // Tweenの参照
     private Tween fillTween;
 
-    // 衝突しているオブジェクトリスト
-    private List<GameObject> hitObjects = new List<GameObject>();
+    // 衝突中のプレイヤーリスト
+    private readonly List<GameObject> hitObjects = new();
 
-    private void OnTriggerStay(UnityEngine.Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Stage")&&!isSelect)
+        if ((other.CompareTag("Player") || other.CompareTag("Player2")) && !isSelect)
         {
-            // 衝突しているオブジェクトをリストに登録する
-            hitObjects.Add(other.gameObject);
+            // 重複登録を防ぐ
+            if (!hitObjects.Contains(other.gameObject))
+            {
+                hitObjects.Add(other.gameObject);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if ((other.CompareTag("Player")|| other.CompareTag("Player2"))&&!isSelect)
+        if (other.CompareTag("Player") || other.CompareTag("Player2"))
         {
-            // 離れたらリセット
-            transform.localScale = new Vector3(1f, 0.1f, 5f);
-            isSelect = false;
+            hitObjects.Remove(other.gameObject);
 
-            // DOTween を止める
-            fillTween?.Kill();
-            circle.fillAmount = 0;
-
-            hitObjects.Clear();
+            // 誰も乗っていない場合はリセット
+            if (hitObjects.Count < 2 && !isSelect)
+            {
+                ResetCircle();
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        if (hitObjects.Count > 3)
-        { 
-        // ボタン押してる風
-        transform.localScale = new Vector3(transform.localScale.x, scaleY, transform.localScale.z);
+        // 2人乗っていて、まだ選択完了していない場合
+        if (hitObjects.Count >= 2 && !isSelect)
+        {
+            // 押し込みエフェクト
+            transform.localScale = new Vector3(transform.localScale.x, pressedScaleY, transform.localScale.z);
 
+            // DOTweenが未再生なら再生開始
             if (fillTween == null || !fillTween.IsPlaying())
             {
-                // 3秒かけて fillAmount を 1 に
                 circle.fillAmount = 0;
-                fillTween = circle.DOFillAmount(1f, 3f).OnComplete(() =>
+                fillTween = circle.DOFillAmount(1f, 3f).SetEase(Ease.Linear).OnComplete(() =>
                 {
                     isSelect = true;
+                    OnStageSelected();
                 });
             }
         }
+    }
+
+    private void ResetCircle()
+    {
+        // Tweenを停止してリセット
+        fillTween?.Kill();
+        fillTween = null;
+        circle.fillAmount = 0f;
+        transform.localScale = new Vector3(1f, 0.1f, 5f);
+    }
+
+    private void OnStageSelected()
+    {
+        Debug.Log($"ステージ「{gameObject.name}」が選択されました！");
+        // ScriptableObjectに記録（例：選ばれたステージ名を保存）
+        if (selectedStage != null)
+        {
+            selectedStage.SetStageName(gameObject.name);
+        }
+
+        // 選択演出（例：光る・拡大）
+        circle.transform.DOScale(1.2f, 0.3f).SetLoops(2, LoopType.Yoyo);
     }
 }
