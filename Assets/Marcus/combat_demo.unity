@@ -668,6 +668,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 204457725}
   m_CullTransparentMesh: 1
+--- !u!4 &219253376 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6008316553191129786, guid: 916e2e8c272c19048906c43bda9c7508, type: 3}
+  m_PrefabInstance: {fileID: 1497594768}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &229184330
 GameObject:
   m_ObjectHideFlags: 0
@@ -1264,6 +1269,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422748740}
   m_CullTransparentMesh: 1
+--- !u!4 &437542119 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5901356782292454134, guid: 916e2e8c272c19048906c43bda9c7508, type: 3}
+  m_PrefabInstance: {fileID: 1497594768}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &518360654
 GameObject:
   m_ObjectHideFlags: 0
@@ -2781,6 +2791,11 @@ CanvasRenderer:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1304443150686870621, guid: 2e65c9e846972a2429ad743ae62ad9e6, type: 3}
   m_PrefabInstance: {fileID: 1304443150511609398}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &930923473 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3489673889140649270, guid: 916e2e8c272c19048906c43bda9c7508, type: 3}
+  m_PrefabInstance: {fileID: 1497594768}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &976899896 stripped
 RectTransform:
@@ -5058,7 +5073,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoretext: {fileID: 1314566796}
-  ComboText: {fileID: 1282313156}
+  comboText: {fileID: 0}
+  floatDistance: 50
+  duration: 0.5
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  defaultPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1320555489
 GameObject:
   m_ObjectHideFlags: 0
@@ -6334,6 +6353,11 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6722210877167539354, guid: 55fc722c964cf0c4c8e967392bca6a04, type: 3}
   m_PrefabInstance: {fileID: 1503525552}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1554165881 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4530403120520596400, guid: 916e2e8c272c19048906c43bda9c7508, type: 3}
+  m_PrefabInstance: {fileID: 1497594768}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1597368342 stripped
 Transform:
@@ -7830,6 +7854,11 @@ MonoBehaviour:
   splinecont: {fileID: 547397087}
   current_t_normalized: 0
   progressBar: {fileID: 200595495}
+--- !u!4 &1896377758 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5991597150617561717, guid: 916e2e8c272c19048906c43bda9c7508, type: 3}
+  m_PrefabInstance: {fileID: 1497594768}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1937640683
 GameObject:
   m_ObjectHideFlags: 0
@@ -9196,6 +9225,38 @@ PrefabInstance:
     - target: {fileID: 2408453464892107828, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.06095583
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
+      propertyPath: spawnList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
+      propertyPath: 'spawnPoints.Array.data[0]'
+      value: 
+      objectReference: {fileID: 219253376}
+    - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
+      propertyPath: 'spawnPoints.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1554165881}
+    - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
+      propertyPath: 'spawnPoints.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1896377758}
+    - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
+      propertyPath: 'spawnPoints.Array.data[3]'
+      value: 
+      objectReference: {fileID: 437542119}
+    - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
+      propertyPath: 'spawnPoints.Array.data[4]'
+      value: 
+      objectReference: {fileID: 930923473}
+    - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
+      propertyPath: spawnList.Array.data[0].spawnIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
+      propertyPath: spawnList.Array.data[0].triggerPoint
+      value: 0.101
       objectReference: {fileID: 0}
     - target: {fileID: 3418718579575961743, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
