@@ -20,7 +20,7 @@ public class score_counter : MonoBehaviour
     {
         entity.onHit += addscore;
         scoretext.text = "Score: " + ((int)currentscore);
-        comboText.text = combo + "\ncombo ";
+        comboText.text = combo + "\nCOMBO ";
 
     }
 

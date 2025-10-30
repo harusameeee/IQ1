@@ -8,10 +8,15 @@ public class JobTitleSelection : MonoBehaviour
     //職業のモチーフ画像　オブジェクトの方がいいか？
     [SerializeField] Image jobImage;
 
+    //playerspawner playerspawner;
+    string jobName;
+
+    [SerializeField] private SelectedPlayerJob[] playerJob;
 
     private void Start()
     {
         ImageRotate();
+        jobName=jobImage.name;
     }
 
     void Update()
@@ -22,10 +27,14 @@ public class JobTitleSelection : MonoBehaviour
     // 職業オブジェクトに触れたら
     private void OnTriggerEnter(Collider other)
     {
+        string name=other.name;
+        int player = name == "Player1" ? 0 : 1;
         //既にその職業ならスキップ
-        //if () { return; }
-        //playerなら職を与える
-        //other.gameObject.AddComponent
+        if (playerJob[0].playerJobName==jobName) { return; }
+        //playerなら職を与える(見た目だけかも→別スクリプト必要)
+        playerJob[0].playerJobName=jobName;
+        Debug.Log(playerJob[0].playerJobName);
+   
 
     }
 

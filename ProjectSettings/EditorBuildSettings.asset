@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Tsuji/Scene/ResultScene.unity
     guid: 5b95012088a748749ab8862b53d83220
+  - enabled: 1
+    path: Assets/ee.unity
+    guid: d5e32515bb088c947a818d8896ef2209
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
