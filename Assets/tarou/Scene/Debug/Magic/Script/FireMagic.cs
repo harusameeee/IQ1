@@ -15,8 +15,8 @@ public class FireMagic : MonoBehaviour
 
     private void TriggerEvent(Collider player)
     {
-        Destroy(gameObject); // –‚–@‚ğíœ
         HPEvent(player);
+        Destroy(gameObject); // –‚–@‚ğíœ
     }
 
     private void HPEvent(Collider player)

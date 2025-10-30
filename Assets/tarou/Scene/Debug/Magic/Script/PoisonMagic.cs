@@ -1,18 +1,20 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
 using TMPro;
 
 public class PoisonMagic : MonoBehaviour
 {
     [SerializeField]
-    private float stretchDuration = 5.0f; // L‚Ñ‚É‚©‚¯‚éŠÔi•bj¦5•b‚È‚ç5¨0‚Ò‚Á‚½‚è
-
+    private float stretchDuration = 5.0f; // ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³æ™‚é–“
 
     [SerializeField]
-    private TextMeshPro countdownTMP; // 3D TMP ƒeƒLƒXƒgQÆ
+    private TextMeshPro countdownTMP; // 3Dãƒ†ã‚­ã‚¹ãƒˆå‚ç…§
 
     private Vector3 initialScale;
     private Vector3 initialPosition;
+
+    private PoisonZone zone; // Zone å‚ç…§
+    private MoveForwardAndDestroy root; // ãŠãŠã‚‚ã¨å‚ç…§
 
     void Awake()
     {
@@ -22,23 +24,31 @@ public class PoisonMagic : MonoBehaviour
 
     void Start()
     {
+        // Zone ã¨ Root ã‚’å–å¾—ã—ã¦ãŠãï¼ˆã¾ã é–‹å§‹ã¯ã—ãªã„ï¼‰
+        zone = GetComponentInChildren<PoisonZone>(includeInactive: true);
+        root = GetComponentInParent<MoveForwardAndDestroy>();
+
+        if (zone != null && root != null)
+        {
+            zone.SetRoot(root);
+        }
+
+        // ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³é–‹å§‹
         StartCoroutine(StretchAndCountdownCoroutine());
     }
 
     IEnumerator StretchAndCountdownCoroutine()
     {
         float elapsed = 0f;
-        float startLength = initialScale.z;
-       
-        int startCount = 5; // ƒJƒEƒ“ƒgŠJn’l
+        int startCount = Mathf.RoundToInt(stretchDuration);
         int currentCount = startCount;
 
         while (elapsed < stretchDuration)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / stretchDuration);
-          
-            // c‚èŠÔ‚É‰‚¶‚ÄƒJƒEƒ“ƒgXV
+
+            // æ®‹ã‚Šæ™‚é–“ã®ã‚«ã‚¦ãƒ³ãƒˆæ›´æ–°
             float remaining = Mathf.Lerp(startCount, 0, t);
             int newCount = Mathf.CeilToInt(remaining);
 
@@ -52,13 +62,19 @@ public class PoisonMagic : MonoBehaviour
             yield return null;
         }
 
-
-        // ƒJƒEƒ“ƒg‚ğ0‚É‚µ‚ÄƒeƒLƒXƒg‚ğÁ‚·
+        // ã‚«ã‚¦ãƒ³ãƒˆçµ‚äº†å¾Œ
         if (countdownTMP != null)
         {
             countdownTMP.text = "0";
-            yield return new WaitForSeconds(0.5f); // ­‚µŠÔ‚ğ‚¨‚¢‚Ä”ñ•\¦‚É
+            yield return new WaitForSeconds(0.5f);
             countdownTMP.gameObject.SetActive(false);
+        }
+
+        // ã‚«ã‚¦ãƒ³ãƒˆçµ‚äº†å¾Œã«Zoneã‚’èµ·å‹•ï¼
+        if (zone != null)
+        {
+            zone.gameObject.SetActive(true); // éã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªã‚‰æœ‰åŠ¹åŒ–
+            zone.StartZone(); // Zoneã®å‡¦ç†ã‚’ã‚¹ã‚¿ãƒ¼ãƒˆ
         }
     }
 }
