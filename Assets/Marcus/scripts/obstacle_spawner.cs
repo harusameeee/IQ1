@@ -40,7 +40,9 @@ public class obstacle_spawner : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > spawnfrequency)
         {
-            timer = 0.0f;
+
+            Random rng = new Random(System.DateTime.Now.Millisecond);
+            timer = (float)rng.Next(-3, 3)/10;
             indicator obstacleindicator = null;
             foreach (var ind in indicators)
             {
@@ -50,9 +52,8 @@ public class obstacle_spawner : MonoBehaviour
                     break;
                 }
             }
-            Random rng = new Random(System.DateTime.Now.Millisecond);
+             rng = new Random(System.DateTime.Now.Millisecond+1);
             float temp = (float)rng.Next(-maxoffset, maxoffset);
-
 
   
             Vector3 spawnpos = player.getobstaclespawnpos(temp, offset_dist, out bool valid,out float new_t);
