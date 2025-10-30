@@ -16363,6 +16363,9 @@ MonoBehaviour:
   - {fileID: 999029502394767362, guid: 38bcf62fe367ef14db0d7a46b5f0e799, type: 3}
   - {fileID: 979975582730178483, guid: dbb7fb3f6eadd5a48a879a51695e04f7, type: 3}
   - {fileID: 979975582730178483, guid: dbb7fb3f6eadd5a48a879a51695e04f7, type: 3}
+  playerJob:
+  - {fileID: 11400000, guid: db21ffe62c6f1344faaf8a34679d7ba8, type: 2}
+  - {fileID: 11400000, guid: c9cdfd0213adb8641a27669d9953e266, type: 2}
 --- !u!1 &1466684931
 GameObject:
   m_ObjectHideFlags: 0
