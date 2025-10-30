@@ -15,9 +15,9 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene("SelectScene");
     }
 
-    public void ToPlay()
+    public void ToPlay(string stageName)
     {
-        SceneManager.LoadScene("Stage1");
+        SceneManager.LoadScene(stageName);
     }
 
     public void ToResult()
