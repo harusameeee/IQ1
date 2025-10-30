@@ -5,15 +5,16 @@ public class dmgnum : MonoBehaviour
 {
     public TMPro.TMP_Text dmgnumtext;
     public Image dmgnumimg;
-    void Start()
+    public Animation dmgnumanim;
+    public void Update()
     {
         
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x,
+            Camera.main.transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
     }
-
-    // Update is called once per frame
-    void Update()
+    public void DisableDmgNum()
     {
-
+        this.gameObject.SetActive(false);
     }
     
 }

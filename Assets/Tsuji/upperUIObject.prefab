@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 1893613891126051562}
   - component: {fileID: 561906512491469214}
   - component: {fileID: 6615963831427395215}
+  - component: {fileID: 3713903291410013022}
   m_Layer: 5
   m_Name: rank
   m_TagString: Untagged
@@ -114,6 +115,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3713903291410013022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23549701771534883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 175692613dca4a649acc186d6723ab91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreData: {fileID: 11400000, guid: 30ff291e163b145478655a7be6a0c2b7, type: 2}
+  rankSprites:
+  - {fileID: 21300000, guid: 04b4a032c4c81154799fd38406d09da2, type: 3}
+  - {fileID: 21300000, guid: f21b08816d0ed8f46a7ed2bffb53bca2, type: 3}
+  - {fileID: 21300000, guid: 39f857546274c3f45b4ad432b924fbb2, type: 3}
+  - {fileID: 21300000, guid: 49f7225edf5c9d043b8aa01fac211ecb, type: 3}
 --- !u!1 &134388301284729193
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoretext: {fileID: 7994059263781534646}
-  comboText: {fileID: 0}
+  comboText: {fileID: 1879502563996581037}
   floatDistance: 50
   duration: 0.5
   startColor: {r: 1, g: 1, b: 1, a: 1}

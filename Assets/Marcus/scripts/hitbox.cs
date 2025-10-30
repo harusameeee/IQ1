@@ -27,7 +27,7 @@ public class hitbox : hurtbox
     {
         foreach (entity d in damagables.Where(d => !alr_damaged.Contains(d)))
         {
-            if (d.TakeDamage_screenaoe(dmgamount, this, targettype))
+            if (d.TakeDamage_screenaoe(dmgamount, this, targettype, out Rect overlap))
             {
                 float dmgmult = 1.0f;
                 if (owner != null)
@@ -48,8 +48,7 @@ public class hitbox : hurtbox
                         }
                     }
                 }
-
-                d.TakeDamage((int)(dmgamount * dmgmult), true, null);
+                d.TakeDamage((int)(dmgamount * dmgmult), true, null,new Vector2( overlap.center.x*1.5f+2, overlap.center.y-8f));
                 if (skilldata != null) {
                     foreach (var effect in skilldata.onHit_effect)
                     {

@@ -16,13 +16,14 @@ public class witch_Ai : entity
     public Vector2 dim;
     public override Vector2 dimension => dim;
     public override Vector2 position => new Vector2(transform.localPosition.x, transform.localPosition.y + 8f);
+    public static Action<float,List<damagable_type>,Vector2> enemyhit ;
     public override void Start()
     {
         base.Start();
     }
-    public override bool TakeDamage(float damageAmount,bool comboable = true,List<damagable_type> damagable_Types = null)
+    public override bool TakeDamage(float damageAmount, bool comboable = true, List<damagable_type> damagable_Types = null, Vector2 hitpoint = new Vector2())
     {
-     
+
         float dmgmult = 1.0f;
         foreach (var buff in buffs)
         {
@@ -31,10 +32,15 @@ public class witch_Ai : entity
                 dmgmult += buff.pow;
             }
         }
-           Debug.Log($"Witch took {damageAmount} damage with mult {dmgmult}");
-        onHit?.Invoke((int)(damageAmount * dmgmult),comboable);
+        Debug.Log($"Witch took {damageAmount} damage with mult {dmgmult}");
+        onHit?.Invoke((int)(damageAmount * dmgmult), comboable);
+        float xOffset = rng.Next(-5, 5);
+        float yOffset = rng.Next(-5, 5);
+        hitpoint = new Vector2(hitpoint.x + xOffset/5, hitpoint.y + yOffset/5);
+        enemyhit?.Invoke((int)(damageAmount * dmgmult), damagable_Types, hitpoint);
         return true;
     }
+    
     // Update is called once per frame
     public override void Update()
     {

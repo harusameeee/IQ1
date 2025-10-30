@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ae49f4597d7a54fa15b99e1a53e86c, type: 3}
   m_Name: Player1Job
   m_EditorClassIdentifier: 
-  playerJob: 
+  playerJobName: ninja
