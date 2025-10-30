@@ -2605,6 +2605,7 @@ MonoBehaviour:
   - {fileID: 999029502394767362, guid: 38bcf62fe367ef14db0d7a46b5f0e799, type: 3}
   - {fileID: 979975582730178483, guid: dbb7fb3f6eadd5a48a879a51695e04f7, type: 3}
   - {fileID: 979975582730178483, guid: dbb7fb3f6eadd5a48a879a51695e04f7, type: 3}
+  playerJob: []
 --- !u!1001 &490410903
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3123,6 +3124,14 @@ PrefabInstance:
     - target: {fileID: 2408453464892107828, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.06095583
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
+      propertyPath: showbufficons
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
       propertyPath: spawnList.Array.size
