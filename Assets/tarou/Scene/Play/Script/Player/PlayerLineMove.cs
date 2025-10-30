@@ -12,7 +12,7 @@ public class PlayerLineMove : entity
     public int maxLane = 2;
 
     public float jumpHeight = 2.0f;   // ¥¸¥ã¥ó¥×¤Î¹â¤µ
-    public float jumpDuration = 0.6f; // ¾å¾º¡Ü²¼¹ß¤Ë¤«¤«¤ë»ş´Ö
+    public float jumpDuration = 0.6f; // ¾å¾º¡Ü²¼¹ß¤Ë¤«¤«¤Eş´Ö
     public LayerMask groundLayer;
     public int playerNumber = 1;
 
@@ -54,7 +54,7 @@ public class PlayerLineMove : entity
         ui.hp_bar.value = (float)current_hp / max_hp;
         base.Start();
         rb = GetComponent<Rigidbody>();
-        if (rb != null) rb.isKinematic = true; // ¾ï¤ËKinematic¤Ç¤âOK
+        if (rb != null) rb.isKinematic = true; // ¾EËKinematic¤Ç¤âOK
         for(int i = 0; i < skills.Count; i++)
         {
             skills[i].currentcooldown = skills[i].cooldown;
@@ -95,7 +95,7 @@ public class PlayerLineMove : entity
         refresh_cds();//refresh cooldowns
         useskills();//for activating skills
         movement();// for movement
-        // ÆşÎÏÀßÄê
+        // ÆşÎÏÀßÄE
         
     }
 
@@ -220,7 +220,7 @@ public class PlayerLineMove : entity
         }
         if (skill.coincost > 0)
         {
-            //¥³¥¤¥ó¾ÃÈñÈ½Äê
+            //¥³¥¤¥ó¾ÃÈñÈ½ÄE
             if (current_coins < skill.coincost)
             {
                 
@@ -256,7 +256,7 @@ public class PlayerLineMove : entity
             velocity = velocity * 0.8f + new Vector3(moveInput * speed * speedbuff, 0, 0);
             transform.localPosition += velocity * Time.deltaTime;
             transform.localPosition = new Vector3(Mathf.Clamp(transform.localPosition.x, -7.5f, 7.5f), transform.localPosition.y, transform.localPosition.z);
-            // ÃÏÌÌÈ½Äê
+            // ÃÏÌÌÈ½ÄE
         }
         else
         {
@@ -297,10 +297,10 @@ public class PlayerLineMove : entity
             {
                 jumpTimer += Time.deltaTime;
                 float t = jumpTimer / jumpDuration;
-                float height = Mathf.Sin(Mathf.PI * t) * jumpHeight; // ÊüÊªÀşÅª¤ÊÆ°¤­
+                float height = Mathf.Sin(Mathf.PI * t) * jumpHeight; // ÊEªÀşÅª¤ÊÆ°¤­
                 transform.localPosition = new Vector3(transform.localPosition.x, startPos.y + height, transform.localPosition.z);
 
-                // ½ªÎ»È½Äê
+                // ½ªÎ»È½ÄE
                 if (t >= 1f)
                 {
                     isJumping = false;
@@ -313,7 +313,7 @@ public class PlayerLineMove : entity
 
     public IEnumerator lerplane()
     {
-        float duration = 0.1f; // Êä´Ö¤Ë¤«¤±¤ë»ş´Ö
+        float duration = 0.1f; // Êä´Ö¤Ë¤«¤±¤Eş´Ö
         float elapsed = 0f;
         Vector3 initialPos = transform.localPosition;
         Vector3 targetPos = new Vector3(lanes[currentLane].localPosition.x, transform.localPosition.y, transform.localPosition.z);
