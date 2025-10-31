@@ -631,7 +631,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7853651061382388816}
   - component: {fileID: 7853651061382388823}
-  - component: {fileID: 6389243869176154804}
+  - component: {fileID: 2776479874355673809}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: EnemyCharacter
@@ -674,7 +674,7 @@ MonoBehaviour:
   addZDuration: 2
   Danger: {fileID: 0}
   currentState: 4
---- !u!114 &6389243869176154804
+--- !u!114 &2776479874355673809
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -683,12 +683,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 7853651061382388817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d849da50fad855f449380dbcb1bcbc92, type: 3}
+  m_Script: {fileID: 11500000, guid: e06a2cebfca615a479ec85b264933333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveLoop: {fileID: 0}
-  magicParent: {fileID: 0}
-  autoFindTriggers: 1
+  targettype: 0
+  active: 1
+  buffs: []
+  showbufficons: 0
+  bufficons: []
+  bufficonparent: {fileID: 0}
+  elapsedtime: 0
+  mover: {fileID: 0}
+  magicPrefabs:
+  - {fileID: 6474956157416789949, guid: e5fa39729526c764dae8518b6c74540e, type: 3}
+  - {fileID: 8958339223245086701, guid: 4c8886b9c9bf9f548a7ad77a67935b19, type: 3}
+  - {fileID: 5414853814212897527, guid: 8240b48b9d3bd3844bb666bc91420aa9, type: 3}
+  - {fileID: 4628317687965226858, guid: bb34dc41a177b1b4ba1cd0a46f700ec1, type: 3}
+  - {fileID: 4004852848523884033, guid: 836a6100ed9e06446aed14d888ec559a, type: 3}
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spawnList: []
+  projectile: {fileID: 0}
+  shootInterval: 2
+  maxdist: 5
+  dim: {x: 0, y: 0}
 --- !u!1 &7853651062306844712
 GameObject:
   m_ObjectHideFlags: 0

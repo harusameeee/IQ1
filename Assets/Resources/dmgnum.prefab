@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 3114539475692450771}
   - component: {fileID: 5508113424532903228}
   - component: {fileID: 1192216128134150505}
+  - component: {fileID: 2765425526683725117}
   m_Layer: 5
   m_Name: dmgnum
   m_TagString: Untagged
@@ -200,7 +201,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6969561023659431852}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 0
@@ -258,7 +259,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &5508113424532903228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,14 +286,29 @@ Animation:
   m_GameObject: {fileID: 6969561023659431852}
   m_Enabled: 1
   serializedVersion: 4
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: 1127fca6a1ef9e540a987433f752d599, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 1127fca6a1ef9e540a987433f752d599, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
+--- !u!114 &2765425526683725117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6969561023659431852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38940e24ac79a974fb685cf248595a20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dmgnumtext: {fileID: 6704032184380772022}
+  dmgnumimg: {fileID: 2086983336945360379}
+  dmgnumanim: {fileID: 1192216128134150505}
 --- !u!1 &9214447660403757548
 GameObject:
   m_ObjectHideFlags: 0

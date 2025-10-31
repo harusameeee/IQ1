@@ -18,16 +18,14 @@ public class hitbox : hurtbox
     public List<entity> alr_damaged = new List<entity>();
     void Start()
     {
-        var ss = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<entity>();
-        foreach (entity s in ss) {
-            damagables.Add (s);
-        }
+        entity.onspawn += addtodamagables;
     }
     public virtual void FixedUpdate()
     {
         foreach (entity d in damagables.Where(d => !alr_damaged.Contains(d)))
         {
-            if (d.TakeDamage_screenaoe(dmgamount, this, targettype))
+            Debug.Log($"Hitbox checking {d.name}");
+            if (d.TakeDamage_screenaoe(dmgamount, this, targettype, out Rect overlap))
             {
                 float dmgmult = 1.0f;
                 if (owner != null)
@@ -48,8 +46,8 @@ public class hitbox : hurtbox
                         }
                     }
                 }
-
-                d.TakeDamage((int)(dmgamount * dmgmult), true, null);
+                Debug.Log($"Hitbox dealing {(int)(dmgamount * dmgmult)} damage to {d.name}");
+                d.TakeDamage((int)(dmgamount * dmgmult), true, null,new Vector2( overlap.center.x*1.5f+2, overlap.center.y-8f));
                 if (skilldata != null) {
                     foreach (var effect in skilldata.onHit_effect)
                     {
@@ -87,5 +85,13 @@ public class hitbox : hurtbox
     void OnEnable()
     {
         alr_damaged.Clear();//clear damagables on enable
+    }
+    void addtodamagables(entity d)
+    {
+        Debug.Log($"Hitbox registering {d.name} to damagables");
+        if (!damagables.Contains(d))
+        {
+            damagables.Add(d);
+        }
     }
 }

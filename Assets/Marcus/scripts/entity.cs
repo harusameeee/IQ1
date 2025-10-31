@@ -12,17 +12,20 @@ public abstract class entity : hurtbox,Damagable
     public Transform bufficonparent;
     [Header("entity events")]
     public static Action<float,bool> onHit;
-    [HideInInspector]public float elapsedtime = 0f;
+    [HideInInspector] public float elapsedtime = 0f;
+    public static Action<entity> onspawn;
     public virtual void Start()
     {
         if (showbufficons)
-        {     for (int i =0;i<5;i++)
         {
-        bufficon temp =Instantiate(Resources.Load<bufficon>("buff_icon"),bufficonparent);
-        bufficons.Add(temp);
-        temp.gameObject.SetActive(false);
+            for (int i = 0; i < 5; i++)
+            {
+                bufficon temp = Instantiate(Resources.Load<bufficon>("buff_icon"), bufficonparent);
+                bufficons.Add(temp);
+                temp.gameObject.SetActive(false);
+            }
         }
-        }
+        onspawn?.Invoke(this);
     }
     public virtual void Update()
     {
@@ -33,19 +36,21 @@ public abstract class entity : hurtbox,Damagable
         }
     }
 
-    public virtual bool TakeDamage(float damageAmount,bool comboable,List<damagable_type> damagable_Types = null)
+    public virtual bool TakeDamage(float damageAmount,bool comboable,List<damagable_type> damagable_Types = null,Vector2 hitpoint = new Vector2())
     {
         return true;
     }
-    public bool TakeDamage_screenaoe(float damageAmount, hurtbox hb, hurtbox.targetype targettype,List<damagable_type> damagable_Types = null)
+    public virtual  bool TakeDamage_screenaoe(float damageAmount, hurtbox hb, hurtbox.targetype targettype,out Rect overlap,List<damagable_type> damagable_Types = null)
     {
         if (targettype != this.targettype)
         {
+            overlap = new Rect();
             return false;
         }
         Rect self = new Rect(position - dimension / 2, dimension);
         Rect other = new Rect(hb.position - hb.dimension / 2, hb.dimension);
-        if (self.Overlaps(other))
+        overlap = GetOverlapRect(self, other, out bool isOverlapping);
+        if (isOverlapping)
         {
             return true;
         }
@@ -85,22 +90,37 @@ public abstract class entity : hurtbox,Damagable
         }
         
     }
-   public void countdownbuffdurations()
+    public void countdownbuffdurations()
     {
 
-        for(int i = buffs.Count -1; i >=0; i--)
+        for (int i = buffs.Count - 1; i >= 0; i--)
         {
-            
-            buffs[i].duration --;
+
+            buffs[i].duration--;
             if (buffs[i].duration <= 0)
             {
-               removebuff(i);
+                removebuff(i);
             }
-            else if(buffs[i].type == bufftypes.poison)
+            else if (buffs[i].type == bufftypes.poison)
             {
-                TakeDamage(buffs[i].pow,false);
+                TakeDamage(buffs[i].pow, false, new List<damagable_type>() { damagable_type.poison },Vector2.zero);
             }
         }
+    }
+      Rect GetOverlapRect(Rect a, Rect b,out bool isOverlapping)
+    {
+        isOverlapping = false;
+        float xMin = Mathf.Max(a.xMin, b.xMin);
+        float yMin = Mathf.Max(a.yMin, b.yMin);
+        float xMax = Mathf.Min(a.xMax, b.xMax);
+        float yMax = Mathf.Min(a.yMax, b.yMax);
+
+        // Check if they actually overlap
+        if (xMax <= xMin || yMax <= yMin)
+            return new Rect(); // Empty rect (no overlap)
+
+        isOverlapping = true;
+        return new Rect(xMin, yMin, xMax - xMin, yMax - yMin);
     }
 
 

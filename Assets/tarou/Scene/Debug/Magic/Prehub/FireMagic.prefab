@@ -9895,7 +9895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8bfef3e674bb5943b7113e300c85669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 20
+  moveSpeed: 25
   destroycountlimit: 5
 --- !u!114 &5163502845109684445
 MonoBehaviour:
@@ -9909,3 +9909,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb4597f2b608ca41b309d610fc877d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageAmount: 10

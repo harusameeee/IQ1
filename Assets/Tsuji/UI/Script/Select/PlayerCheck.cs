@@ -20,9 +20,12 @@ public class PlayerCheck : MonoBehaviour
     private int playerNumber = 0;
     private int player2Number = 0;
 
+    [SerializeField] private SelectedStage stage;
+
     private void Start()
     {
-        GameObject obj = GameObject.Find("Stage1");
+        GameObject obj = GameObject.Find(stage.StageName);
+        //GameObject obj = GameObject.Find("Stage1");
         stageSelect = obj.GetComponent<StageSelect>();
         // Å‰‚Í”ñ•\¦
         transform.localScale = Vector3.zero;
@@ -73,6 +76,6 @@ public class PlayerCheck : MonoBehaviour
         await UniTask.WaitUntil(() => p1Ready && p2Ready);
         await UniTask.Delay(1000); // ­‚µ‘Ò‚Á‚Ä‚©‚çƒV[ƒ“‘JˆÚ
         changer = new SceneChanger();
-        changer.ToPlay();
+        changer.ToPlay(stage.ToString());
     }
 }

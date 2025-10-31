@@ -13,8 +13,9 @@ public class obstacle_spawner : MonoBehaviour
     public hitboxvisualizer hitboxvis;//will remove later
     public List<GameObject> obstacles = new List<GameObject>();
     public List<indicator> indicators = new List<indicator>();
-    
-    public List<entity> damagables = new List<entity>(); 
+
+    public List<entity> damagables = new List<entity>();
+    public List<Sprite> obstacle_sprites = new List<Sprite>();
     public player_mover player;
     float indicator_countdown = 7.0f;
     //note need to allow for making double wide obstacles
@@ -22,15 +23,12 @@ public class obstacle_spawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        entity.onspawn += addtodamagables;
         for (int i = 0; i < 10; i++)
         {
             var indicatorobj = Instantiate(Resources.Load<GameObject>("indicator"), indicator_transform);
             indicatorobj.SetActive(false);
             indicators.Add(indicatorobj.GetComponent<indicator>());
-        }
-        var ss = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<entity>();
-        foreach (entity s in ss) {
-            damagables.Add (s);
         }
     }
 
@@ -40,22 +38,23 @@ public class obstacle_spawner : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > spawnfrequency)
         {
-            timer = 0.0f;
+
+            Random rng = new Random(System.DateTime.Now.Millisecond);
+            timer = (float)rng.Next(-3, 3) / 10;
             indicator obstacleindicator = null;
             foreach (var ind in indicators)
             {
-                    if (!ind.gameObject.activeSelf)
+                if (!ind.gameObject.activeSelf)
                 {
                     obstacleindicator = ind;
                     break;
                 }
             }
-            Random rng = new Random(System.DateTime.Now.Millisecond);
+            rng = new Random(System.DateTime.Now.Millisecond + 1);
             float temp = (float)rng.Next(-maxoffset, maxoffset);
 
 
-  
-            Vector3 spawnpos = player.getobstaclespawnpos(temp, offset_dist, out bool valid,out float new_t);
+            Vector3 spawnpos = player.getobstaclespawnpos(temp, offset_dist, out bool valid, out float new_t);
             if (!valid)
             {
 
@@ -69,7 +68,7 @@ public class obstacle_spawner : MonoBehaviour
             obs.damagables = damagables;
             obs.hitboxvis = hitboxvis;
             obs.reftransform = player.transform;
-            obstacleindicator.transform.localPosition = new Vector3(temp*100,0, 0);
+            obstacleindicator.transform.localPosition = new Vector3(temp * 100, 0, 0);
             obstacleindicator.gameObject.SetActive(true);
             obs.transform.position = spawnpos;
             obstacleindicator.setvalues(player, obs.transform);
@@ -77,4 +76,13 @@ public class obstacle_spawner : MonoBehaviour
             //obstacle.transform.position = spawnpos;
         }
     }
+    void addtodamagables(entity d)
+    {
+        Debug.Log($"Hitbox registering {d.name} to damagables");
+        if (!damagables.Contains(d))
+        {
+            damagables.Add(d);
+        }
+    }
+
 }

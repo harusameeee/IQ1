@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "detonate_poison", menuName = "ScriptableObjects/Skilleffects/detonate_poison", order = 4)]
 public class detonate_poison : skilleffect
@@ -15,6 +16,6 @@ public class detonate_poison : skilleffect
                 target.removebuff(i);
             }
         }
-        target.TakeDamage(total_poison * dmg_mult, false);
+        target.TakeDamage(total_poison * dmg_mult, false, new List<damagable_type>() { damagable_type.poison_deluge });
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 public class obstacle : hitbox
 {
     public float tvalue = 0;
-    public float range_window = 5.0f;
+    public Vector2 range_window = new Vector2(1.0f, 2.0f);//x represents the start range and y represents the end range
     public float despawn_range = 10.0f;
     public Vector2 pos = new Vector2(0, 0);
     public player_mover player;
@@ -14,16 +14,14 @@ public class obstacle : hitbox
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     public override void FixedUpdate()
     {
 
-        if (tvalue > player.current_t - range_window/2.0f && tvalue < player.current_t + range_window)
+        if (tvalue > player.current_t - range_window.x && tvalue < player.current_t + range_window.y)
         {
-            Debug.Log("Obstacle Active");
             base.FixedUpdate();
             active = true;
         }
