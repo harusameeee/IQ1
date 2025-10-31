@@ -29,5 +29,6 @@ public class buffdata : ScriptableObject
         vulnerability,//takes more damage
         stealth,//invuln+ damage boost when hitting from stealth
         invuln///completely invulnerable
-        ,poison
+        , poison
+        
     }

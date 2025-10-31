@@ -24,7 +24,7 @@ public class witch_Ai2 : entity
         // 発動済みかどうか
         // Whether this magic has already been triggered
     }
-
+    
     protected static Random rng = new();
     public witch_mover mover; // 移動経路制御クラスへの参照 / Reference to the movement controller
 
@@ -53,7 +53,8 @@ public class witch_Ai2 : entity
     public override void Start()
     {
         base.Start();
-
+        
+        onspawn?.Invoke(this);
         // moverが未設定なら自動取得
         // Auto-find the witch_mover component if not manually assigned
         if (mover == null)
