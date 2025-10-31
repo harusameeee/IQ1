@@ -53,7 +53,7 @@ public class witch_Ai2 : entity
     public override void Start()
     {
         base.Start();
-        
+        Debug.Log($"Witch Ai2 Start called for {name}");
         onspawn?.Invoke(this);
         // moverが未設定なら自動取得
         // Auto-find the witch_mover component if not manually assigned

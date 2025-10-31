@@ -52,7 +52,6 @@ public class PlayerLineMove : entity
         
         hb.owner = this;
         
-        onspawn?.Invoke(this);
         bufficonparent = ui.skill_icon_transform;
         showbufficons = true;
         ui.hp_bar.value = (float)current_hp / max_hp;
