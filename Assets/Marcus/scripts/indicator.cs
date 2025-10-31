@@ -1,10 +1,14 @@
     using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class indicator : MonoBehaviour
 {
+    public Image indicator_colour;
+    public Transform danger_icon_transform;
+    public Image item_icon;
     public Image timer_ring;
     public Transform obstacle_transform;
     public int obstacleindex = 0;
@@ -30,11 +34,15 @@ public class indicator : MonoBehaviour
                 //onIndicatorEnd?.Invoke(obstacleindex, offsetpos);
                 obstacle_transform = null;
                 player = null;
+                
+                item_icon.gameObject.SetActive(false);
+                danger_icon_transform.gameObject.SetActive(true);
+                indicator_colour.color = Color.red;
                 this.gameObject.SetActive(false);
             }
         }
     }
-    public void setvalues(player_mover player, Transform obstacle, int index = 0,float offsetpos = 0)
+    public void setvalues(player_mover player, Transform obstacle, int index = 0, float offsetpos = 0)
     {
         this.player = player;
         obstacle_transform = obstacle;
@@ -42,6 +50,14 @@ public class indicator : MonoBehaviour
         obstacleindex = index;
         initail_segment_count = Mathf.RoundToInt(this.player.get_dist(player.transform.position, obstacle_transform.transform.position) / 2);
         timer_ring.material.SetFloat("_segmentcount", initail_segment_count);
+
+    }
+    public void setitem(Sprite icon)
+    {
+        indicator_colour.color = Color.blue;
+        item_icon.gameObject.SetActive(true);
+        item_icon.sprite = icon;
+        danger_icon_transform.gameObject.SetActive(false);
 
     }
 }

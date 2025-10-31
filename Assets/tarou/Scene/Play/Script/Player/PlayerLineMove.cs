@@ -46,9 +46,13 @@ public class PlayerLineMove : entity
     [SerializeField] float speed = 10f;
     [SerializeField] bool isLine = false;
     public Animator animator;
+    
     public override void Start()
     {
+        
         hb.owner = this;
+        
+        onspawn?.Invoke(this);
         bufficonparent = ui.skill_icon_transform;
         showbufficons = true;
         ui.hp_bar.value = (float)current_hp / max_hp;

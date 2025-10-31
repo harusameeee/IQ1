@@ -12,17 +12,20 @@ public abstract class entity : hurtbox,Damagable
     public Transform bufficonparent;
     [Header("entity events")]
     public static Action<float,bool> onHit;
-    [HideInInspector]public float elapsedtime = 0f;
+    [HideInInspector] public float elapsedtime = 0f;
+    public static Action<entity> onspawn;
     public virtual void Start()
     {
         if (showbufficons)
-        {     for (int i =0;i<5;i++)
         {
-        bufficon temp =Instantiate(Resources.Load<bufficon>("buff_icon"),bufficonparent);
-        bufficons.Add(temp);
-        temp.gameObject.SetActive(false);
+            for (int i = 0; i < 5; i++)
+            {
+                bufficon temp = Instantiate(Resources.Load<bufficon>("buff_icon"), bufficonparent);
+                bufficons.Add(temp);
+                temp.gameObject.SetActive(false);
+            }
         }
-        }
+        onspawn?.Invoke(this);
     }
     public virtual void Update()
     {

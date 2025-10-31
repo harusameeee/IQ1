@@ -14,7 +14,6 @@ public class obstacle : hitbox
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -23,7 +22,6 @@ public class obstacle : hitbox
 
         if (tvalue > player.current_t - range_window.x && tvalue < player.current_t + range_window.y)
         {
-            Debug.Log("Obstacle Active");
             base.FixedUpdate();
             active = true;
         }
