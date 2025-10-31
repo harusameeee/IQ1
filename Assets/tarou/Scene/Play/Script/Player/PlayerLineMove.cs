@@ -234,12 +234,17 @@ public class PlayerLineMove : entity
         return true;
     }
     void movement()
-    {        // º¸±¦°ÜÆ°
-
+    {
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f, groundLayer);
+
         if (!isLine)
         {
-            int moveInput = 0;
+            float moveInput = 0f;
+
+            // ƒXƒeƒBƒbƒN“ü—Íi-1 ` +1j
+            float stickInput = playerNumber == 1 ? Input.GetAxis("Horizontal") : Input.GetAxis("Horizontal2");
+
+            // ƒ{ƒ^ƒ““ü—Í‚à•¹—pi‹ŒŽ®“ü—Í‘Î‰žj
             if (Input.GetKey(joyLeft) || Input.GetKey(keyLeft))
             {
                 moveInput = -1;
@@ -248,6 +253,11 @@ public class PlayerLineMove : entity
             {
                 moveInput = 1;
             }
+            else if (Mathf.Abs(stickInput) > 0.2f) // ƒXƒeƒBƒbƒN“ü—Í‚ªˆê’èˆÈã‚È‚çÌ—p
+            {
+                moveInput = stickInput;
+            }
+
             float speedbuff = 1;
             foreach (var buff in buffs)
             {
@@ -256,13 +266,20 @@ public class PlayerLineMove : entity
                     speedbuff += buff.pow;
                 }
             }
+
             velocity = velocity * 0.8f + new Vector3(moveInput * speed * speedbuff, 0, 0);
             transform.localPosition += velocity * Time.deltaTime;
-            transform.localPosition = new Vector3(Mathf.Clamp(transform.localPosition.x, -7.5f, 7.5f), transform.localPosition.y, transform.localPosition.z);
-            // ÃÏÌÌÈ½ÄE
+
+            // XˆÊ’u§ŒÀ
+            transform.localPosition = new Vector3(
+                Mathf.Clamp(transform.localPosition.x, -7.5f, 7.5f),
+                transform.localPosition.y,
+                transform.localPosition.z
+            );
         }
         else
         {
+            // ƒŒ[ƒ“ˆÚ“®ƒ‚[ƒh
             if ((Input.GetKeyDown(joyLeft) || Input.GetKeyDown(keyLeft)) && !isJumping)
             {
                 currentLane = Mathf.Max(0, currentLane - 1);
@@ -273,44 +290,38 @@ public class PlayerLineMove : entity
                 currentLane = Mathf.Min(maxLane, currentLane + 1);
                 MoveToLane();
             }
-            // ¥¸¥ã¥ó¥×³«»Ï
         }
+
+        // ƒWƒƒƒ“ƒvˆ—i‚»‚Ì‚Ü‚Üj
         if ((Input.GetKeyDown(joyJump) || Input.GetKeyDown(keyJump)) && !isJumping)
         {
-            Debug.Log($"P{playerNumber} ¥¸¥ã¥ó¥×³«»Ï¡ª");
+            Debug.Log($"P{playerNumber} ƒWƒƒƒ“ƒv");
             isJumping = true;
             jumpTimer = 0f;
             startPos = transform.localPosition;
         }
-        // ¥¸¥ã¥ó¥×Ãæ¤Î½èÍý¡ÊKinematic¤Ç¤âOK¡Ë
+
         if (isJumping)
         {
             if (isLine)
             {
-
                 jumpTimer += Time.deltaTime;
                 float t = jumpTimer / jumpDuration;
-                if (t >= 1f)
-                {
-                    isJumping = false;
-
-                }
+                if (t >= 1f) isJumping = false;
             }
             else
             {
                 jumpTimer += Time.deltaTime;
                 float t = jumpTimer / jumpDuration;
-                float height = Mathf.Sin(Mathf.PI * t) * jumpHeight; // ÊEªÀþÅª¤ÊÆ°¤­
+                float height = Mathf.Sin(Mathf.PI * t) * jumpHeight;
                 transform.localPosition = new Vector3(transform.localPosition.x, startPos.y + height, transform.localPosition.z);
 
-                // ½ªÎ»È½ÄE
                 if (t >= 1f)
                 {
                     isJumping = false;
                     transform.localPosition = new Vector3(transform.localPosition.x, startPos.y, transform.localPosition.z);
                 }
             }
-
         }
     }
 
