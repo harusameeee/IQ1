@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 0.0f;         // 動く速さ
+    [SerializeField] float moveSpeed = 2.0f;         // 動く速さ
     private float rotationSpeed = 5.0f;
     [SerializeField] public int playerNumber;        // プレイヤー識別番号
 

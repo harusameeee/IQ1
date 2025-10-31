@@ -5,7 +5,7 @@ using UnityEngine;
 public class score_counter : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    static float currentscore = 0;
+    public static float currentscore = 0;
     int combo = 0;
     public TMPro.TMP_Text scoretext;
     public TMPro.TMP_Text comboText;

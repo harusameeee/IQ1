@@ -11,7 +11,7 @@ public class JobTitleSelection : MonoBehaviour
     //playerspawner playerspawner;
     string jobName;
 
-    [SerializeField] private SelectedPlayerJob[] playerJob;
+    [SerializeField] private SelectedPlayerJob[] playerJob=new SelectedPlayerJob[2];
 
     private void Start()
     {

@@ -2181,6 +2181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmgnumtext: {fileID: 0}
   dmgnumimg: {fileID: 0}
+  dmgnumanim: {fileID: 0}
 --- !u!1 &292210988
 GameObject:
   m_ObjectHideFlags: 0
@@ -27709,6 +27710,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.06095583
       objectReference: {fileID: 0}
+    - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
+      propertyPath: mover
+      value: 
+      objectReference: {fileID: 1893527903}
+    - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
+      propertyPath: bufficonparent
+      value: 
+      objectReference: {fileID: 16005213}
     - target: {fileID: 3418718579575961743, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.00000006420467

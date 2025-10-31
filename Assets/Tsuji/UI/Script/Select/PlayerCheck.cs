@@ -76,6 +76,6 @@ public class PlayerCheck : MonoBehaviour
         await UniTask.WaitUntil(() => p1Ready && p2Ready);
         await UniTask.Delay(1000); // ­‚µ‘Ò‚Á‚Ä‚©‚çƒV[ƒ“‘JˆÚ
         changer = new SceneChanger();
-        changer.ToPlay(stage.ToString());
+        changer.ToPlay(stage.StageName);
     }
 }

@@ -12,6 +12,7 @@ public class playerspawner : MonoBehaviour
     public GameObject[] characters_prefabs = new GameObject[3];
 
     [SerializeField] private SelectedPlayerJob[] playerJob;
+
     void Awake()
     {
         instance = this;
@@ -19,13 +20,13 @@ public class playerspawner : MonoBehaviour
     void Start()
     {
         playerspawner.class_type type1 =
-        (playerspawner.class_type)System.Enum.Parse(typeof(playerspawner.class_type), playerJob[0].playerJobName,true);
+    (playerspawner.class_type)System.Enum.Parse(typeof(playerspawner.class_type), playerJob[0].playerJobName, true);
         playerspawner.class_type type2 =
-        (playerspawner.class_type)System.Enum.Parse(typeof(playerspawner.class_type), playerJob[1].playerJobName,true);
-        spawnchara(type1, 0);
-        spawnchara(type2, 1);
+            (playerspawner.class_type)System.Enum.Parse(typeof(playerspawner.class_type), playerJob[1].playerJobName, true);
+        spawnchara(class_type.merlion, 0);
+        spawnchara(class_type.ninja, 1);
     }
-    public void spawnchara(class_type ct, int playernum)// used for spawning characters note player numn should be 0 or 1
+    void spawnchara(class_type ct, int playernum)// used for spawning characters note player numn should be 0 or 1
     {
         GameObject chara = Instantiate(characters_prefabs[(int)ct], transform);
         if (playernum == 1)
