@@ -2,17 +2,19 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 
-public class WindMagic : MonoBehaviour
+public class BeamMagic : MonoBehaviour
 {
     [SerializeField]
-    private float stretchDuration = 5.0f; // 伸びにかける時間（秒）※5秒なら5→0ぴったり
-
+    private float stretchDuration = 5.0f; // カウントダウン時間
 
     [SerializeField]
-    private TextMeshPro countdownTMP; // 3D TMP テキスト参照
+    private TextMeshPro countdownTMP; // 3Dテキスト参照
 
     private Vector3 initialScale;
     private Vector3 initialPosition;
+
+    private BeamZone zone; // Zone 参照
+    private MoveForwardAndDestroy root; // おおもと参照
 
     void Awake()
     {
@@ -22,15 +24,23 @@ public class WindMagic : MonoBehaviour
 
     void Start()
     {
+        // Zone と Root を取得しておく（まだ開始はしない）
+        zone = GetComponentInChildren<BeamZone>(includeInactive: true);
+        root = GetComponentInParent<MoveForwardAndDestroy>();
+
+        if (zone != null && root != null)
+        {
+            zone.SetRoot(root);
+        }
+
+        // カウントダウン開始
         StartCoroutine(StretchAndCountdownCoroutine());
     }
 
     IEnumerator StretchAndCountdownCoroutine()
     {
         float elapsed = 0f;
-        float startLength = initialScale.z;
-
-        int startCount = 5; // カウント開始値
+        int startCount = Mathf.RoundToInt(stretchDuration);
         int currentCount = startCount;
 
         while (elapsed < stretchDuration)
@@ -38,7 +48,7 @@ public class WindMagic : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / stretchDuration);
 
-            // 残り時間に応じてカウント更新
+            // 残り時間のカウント更新
             float remaining = Mathf.Lerp(startCount, 0, t);
             int newCount = Mathf.CeilToInt(remaining);
 
@@ -52,13 +62,19 @@ public class WindMagic : MonoBehaviour
             yield return null;
         }
 
-
-        // カウントを0にしてテキストを消す
+        // カウント終了後
         if (countdownTMP != null)
         {
             countdownTMP.text = "0";
-            yield return new WaitForSeconds(0.5f); // 少し間をおいて非表示に
+            yield return new WaitForSeconds(0.5f);
             countdownTMP.gameObject.SetActive(false);
+        }
+
+        // カウント終了後にZoneを起動！
+        if (zone != null)
+        {
+            zone.gameObject.SetActive(true); // 非アクティブなら有効化
+            zone.StartZone(); // Zoneの処理をスタート
         }
     }
 }
