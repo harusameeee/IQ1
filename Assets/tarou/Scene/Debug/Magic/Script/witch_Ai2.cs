@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using Random = System.Random;
 
@@ -11,34 +12,11 @@ public class witch_Ai2 : entity
         [Range(0f, 1f)]
         public float triggerPoint;   // 発動タイミング（0〜1）
         // Activation timing (0–1 normalized progress along the movement path)
-
-        [Tooltip("magicPrefabs配列のインデックス番号（0〜）")]
-        public int prefabIndex;      // 出す魔法の番号
-        // Index number of the magic prefab to spawn (refers to magicPrefabs array)
-
-        [Tooltip("spawnPoints配列のインデックス番号（0〜）")]
-        public int spawnIndex;       // 出す位置の番号
-        // Index number of the spawn position (refers to spawnPoints array)
-
-        [HideInInspector] public bool triggered = false;
-        // 発動済みかどうか
-        // Whether this magic has already been triggered
+        public enemypattern magicPattern; // 使用する魔法パターン（未使用）
     }
     
     protected static Random rng = new();
     public witch_mover mover; // 移動経路制御クラスへの参照 / Reference to the movement controller
-
-    [Header("魔法プレハブリスト（番号で指定）")]
-    // List of magic prefabs (specified by index in the inspector)
-    public GameObject[] magicPrefabs;
-
-    [Header("出現位置（ここに5か所登録）")]
-    // Spawn points (register 5 or more locations here)
-    public Transform[] spawnPoints;
-
-    [Header("魔法発動リスト（タイミング＋どの魔法＋どの位置）")]
-    // Magic spawn list (trigger timing + which magic + which spawn point)
-    public MagicSpawnData[] spawnList;
 
     public Vector2 dim; // 当たり判定の大きさ / Hitbox dimensions
     public override Vector2 dimension => dim;
@@ -48,12 +26,17 @@ public class witch_Ai2 : entity
     // 表示・判定上の位置補正 / Position offset for display or collision
 
     public static Action<float, List<damagable_type>, Vector2> enemyhit;
+    public Transform spellcastpoint; // 魔法発動位置 / Magic casting position
     // 被弾時に通知するイベント / Event called when this enemy takes damage
-
+    public int currentmagicindex = 0; // 現在の魔法発動インデックス / Current magic spawn index
+    public int queuedspellindex = -1; // キューに入っている魔法発動インデックス / Queued spell index
+    public List<MagicSpawnData> magicspawns = new List<MagicSpawnData>(); // 魔法発動データリスト / List of magic spawn data
+    public Animator animator; // アニメーター参照 / Reference to the animator
     public override void Start()
     {
         base.Start();
         Debug.Log($"Witch Ai2 Start called for {name}");
+        AnimatorStateController.activespell += SpawnMagic;
         onspawn?.Invoke(this);
         // moverが未設定なら自動取得
         // Auto-find the witch_mover component if not manually assigned
@@ -75,7 +58,10 @@ public class witch_Ai2 : entity
                 dmgmult += buff.pow;
             }
         }
-
+        if (comboable)
+        {
+            StartCoroutine(dmgflash());
+        }
         Debug.Log($"Witch took {damageAmount} damage with mult {dmgmult}");
 
         // ヒットイベント呼び出し
@@ -104,65 +90,30 @@ public class witch_Ai2 : entity
         // 現在の移動経路上の進行度（0〜1）
         // Current normalized progress along the movement path
         float t = mover.current_t_normalized;
-
-        // --- 魔法発動処理 ---
-        // --- Magic spawning process ---
-        foreach (var data in spawnList)
+        if(currentmagicindex < magicspawns.Count)
         {
-            if (!data.triggered && t >= data.triggerPoint)
+            var magicdata = magicspawns[currentmagicindex];
+            if (t >= magicdata.triggerPoint)
             {
-                data.triggered = true;
-                SpawnMagic(data);
+                queuedspellindex=currentmagicindex;
+                currentmagicindex++;
+                animator.Play("spellcast");
             }
         }
     }
 
-    private void SpawnMagic(MagicSpawnData data)
+    private void SpawnMagic()
     {
-        // 魔法プレハブとインデックスを確認
-        // Validate prefab index and existence
-        if (magicPrefabs == null || data.prefabIndex < 0 || data.prefabIndex >= magicPrefabs.Length)
-            return;
-
-        GameObject prefab = magicPrefabs[data.prefabIndex];
-        if (prefab == null)
-            return;
-
-        Vector3 pos;
-        Quaternion rot;
-
-        // 出現位置を取得（指定があれば）
-        // Get spawn position and rotation (if specified)
-        if (spawnPoints != null && data.spawnIndex >= 0 && data.spawnIndex < spawnPoints.Length)
+        if(queuedspellindex < 0 || queuedspellindex >= magicspawns.Count) return;
+        var data = magicspawns[queuedspellindex];
+        foreach (var pattern in data.magicPattern.patterndata)
         {
-            Transform point = spawnPoints[data.spawnIndex];
-            pos = point.position;
-            rot = point.rotation;
+            var temp = Instantiate(pattern.attackhbobj, spellcastpoint);
+            temp.transform.localPosition = pattern.offset;
         }
-        else
-        {
-            // 指定が無ければ自分の位置に生成
-            // Default to witch’s current position
-            pos = transform.position;
-            rot = transform.rotation;
-        }
-
-        // 魔法を生成
-        // Instantiate the magic prefab
-        var temp = Instantiate(prefab, pos, rot);
-
-        // moverのスプラインに沿った制御を引き継ぐ
-        // Inherit the spline controller reference from the witch mover
-        moving_obstacle mov = temp.GetComponent<moving_obstacle>();
-        if (mov != null)
-            mov.splinecont = mover.splinecont;
+        queuedspellindex = -1;
     }
-
     // MoveLoop再スタート時に呼び出し（発動済みリセット）
     // Called when the movement loop restarts (resets triggered states)
-    public void ResetTriggers()
-    {
-        foreach (var data in spawnList)
-            data.triggered = false;
-    }
+
 }

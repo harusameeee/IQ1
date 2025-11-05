@@ -48,7 +48,7 @@ public class hitbox : hurtbox
                         }
                     }
                 }
-                Debug.Log($"Hitbox dealing {(int)(dmgamount * dmgmult)} damage to {d.name}");
+                Debug.Log($"{name} dealing {(int)(dmgamount * dmgmult)} damage to {d.name}");
                 d.TakeDamage((int)(dmgamount * dmgmult), true, null,new Vector2( overlap.center.x*1.5f+2, overlap.center.y-8f));
                 if (skilldata != null) {
                     foreach (var effect in skilldata.onHit_effect)

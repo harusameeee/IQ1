@@ -19,6 +19,7 @@ public class score_counter : MonoBehaviour
     void Start()
     {
         entity.onHit += addscore;
+        itempickup.scorechange += addscore;
         currentscore = 0;
         scoretext.text = "Score: " + ((int)currentscore);
         comboText.text = combo + "\nCOMBO ";
