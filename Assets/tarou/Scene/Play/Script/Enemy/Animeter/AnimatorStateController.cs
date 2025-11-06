@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class AnimatorStateController : MonoBehaviour
@@ -5,6 +6,7 @@ public class AnimatorStateController : MonoBehaviour
     [SerializeField] Animator anim = null;
     [SerializeField] ConditionalZMovement stateController = null;
     [SerializeField] string stateParam = "state";
+    public static Action activespell;
     ConditionalZMovement.State prevState;
 
     void Start()
@@ -47,5 +49,9 @@ public class AnimatorStateController : MonoBehaviour
         //        prevState = ConditionalZMovement.State.Start;
         //    }
         //}
+    }
+    void castspell()
+    {
+        activespell?.Invoke();
     }
 }

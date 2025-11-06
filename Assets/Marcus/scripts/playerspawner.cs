@@ -20,7 +20,7 @@ public class playerspawner : MonoBehaviour
     void Start()
     {
         playerspawner.class_type type1 =
-    (playerspawner.class_type)System.Enum.Parse(typeof(playerspawner.class_type), playerJob[0].playerJobName, true);
+        (playerspawner.class_type)System.Enum.Parse(typeof(playerspawner.class_type), playerJob[0].playerJobName, true);
         playerspawner.class_type type2 =
             (playerspawner.class_type)System.Enum.Parse(typeof(playerspawner.class_type), playerJob[1].playerJobName, true);
         spawnchara(class_type.merlion, 0);

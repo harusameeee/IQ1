@@ -341,13 +341,14 @@ public class PlayerLineMove : entity
         }
         transform.localPosition = targetPos; // 最終的にターゲット位置にセット
     }
-    public override bool TakeDamage(float damageAmount,bool comboable = true,List<damagable_type> damagable_Types = null,Vector2 hitpoint = new Vector2())
+    public override bool TakeDamage(float damageAmount, bool comboable = true, List<damagable_type> damagable_Types = null, Vector2 hitpoint = new Vector2())
     {
-        if(buffs.Exists(buff => buff.type == bufftypes.invuln|| buff.type == bufftypes.stealth))
+        if (buffs.Exists(buff => buff.type == bufftypes.invuln || buff.type == bufftypes.stealth))
         {
             Debug.Log($"P{playerNumber} is invulnerable and took no damage.");
             return false;
         }
+        StartCoroutine(dmgflash());
         current_hp -= damageAmount;
         ui.hp_bar.value = (float)current_hp / max_hp;
         Debug.Log($"P{playerNumber} took {damageAmount} damage. Current HP: {current_hp}");
@@ -355,9 +356,13 @@ public class PlayerLineMove : entity
         {
             Debug.Log($"P{playerNumber} is defeated!");
         }
-        
-        onHit?.Invoke(-damageAmount,false);
+
+        onHit?.Invoke(-damageAmount, false);
         return true;
+    }
+    public void heal(float healamount)
+    {
+        current_hp = Mathf.Min(current_hp + healamount, max_hp);
     }
 
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public abstract class entity : hurtbox,Damagable
     public static Action<float,bool> onHit;
     [HideInInspector] public float elapsedtime = 0f;
     public static Action<entity> onspawn;
+    public SkinnedMeshRenderer rend;
     public virtual void Start()
     {
         if (showbufficons)
@@ -44,6 +46,37 @@ public abstract class entity : hurtbox,Damagable
     {
         if (targettype != this.targettype)
         {
+            overlap = new Rect();
+            return false;
+        }
+        if (hb.is_circle)
+        {
+            // Circle-rectangle collision detection
+            Vector2 circleCenter = hb.position;
+            float radius = hb.dimension.x / 2; // Assuming dimension.x is diameter
+
+            Rect rect = new Rect(position - dimension / 2, dimension);
+
+            // Find the closest point to the circle within the rectangle
+            float closestX = Mathf.Clamp(circleCenter.x, rect.xMin, rect.xMax);
+            float closestY = Mathf.Clamp(circleCenter.y, rect.yMin, rect.yMax);
+
+            // Calculate the distance between the circle's center and this closest point
+            float distanceX = circleCenter.x - closestX;
+            float distanceY = circleCenter.y - closestY;
+
+            // If the distance is less than the circle's radius, an intersection occurs
+            float distanceSquared = (distanceX * distanceX) + (distanceY * distanceY);
+            if (distanceSquared < (radius * radius))
+            {
+                // Calculate overlap rectangle
+                float overlapXMin = Mathf.Max(rect.xMin, circleCenter.x - radius);
+                float overlapYMin = Mathf.Max(rect.yMin, circleCenter.y - radius);
+                float overlapXMax = Mathf.Min(rect.xMax, circleCenter.x + radius);
+                float overlapYMax = Mathf.Min(rect.yMax, circleCenter.y + radius);
+                overlap = new Rect(overlapXMin, overlapYMin, overlapXMax - overlapXMin, overlapYMax - overlapYMin);
+                return true;
+            }
             overlap = new Rect();
             return false;
         }
@@ -107,7 +140,7 @@ public abstract class entity : hurtbox,Damagable
             }
         }
     }
-      Rect GetOverlapRect(Rect a, Rect b,out bool isOverlapping)
+    Rect GetOverlapRect(Rect a, Rect b,out bool isOverlapping)
     {
         isOverlapping = false;
         float xMin = Mathf.Max(a.xMin, b.xMin);
@@ -123,6 +156,23 @@ public abstract class entity : hurtbox,Damagable
         return new Rect(xMin, yMin, xMax - xMin, yMax - yMin);
     }
 
-
+    public IEnumerator dmgflash()
+    {
+        int flashlength = 5;
+        foreach (var mat in rend.materials)
+        {
+            mat.SetColor("_Emissive_Color", Color.white);
+        }
+        while (flashlength > 0)
+        {
+            flashlength--;
+            yield return null;
+        }
+        foreach (var mat in rend.materials)
+        {
+            mat.SetColor("_Emissive_Color", Color.black);
+        }
+        
+    }
     
 }
