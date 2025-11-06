@@ -14,16 +14,20 @@ public class obstacle_spawner : MonoBehaviour
     public List<GameObject> obstacles = new List<GameObject>();
     public List<indicator> indicators = new List<indicator>();
 
-    public List<entity> damagables = new List<entity>();
+    static public List<entity> damagables = new List<entity>();
     public List<Sprite> obstacle_sprites = new List<Sprite>();
     public player_mover player;
     float indicator_countdown = 7.0f;
     //note need to allow for making double wide obstacles
     //need to make indicator for where obstacle will spawn
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Awake()
+    {
+        damagables = new List<entity>();
+        entity.onspawn += addtodamagables;
+    }
     void Start()
     {
-        entity.onspawn += addtodamagables;
         for (int i = 0; i < 10; i++)
         {
             var indicatorobj = Instantiate(Resources.Load<GameObject>("indicator"), indicator_transform);
@@ -65,7 +69,6 @@ public class obstacle_spawner : MonoBehaviour
             obs.pos.x = temp;
             hitboxvis.additionalhitboxes.Add(new hitboxvisualizer.hitboxpair { todraw = obs, hbcolor = Color.red });
             obs.tvalue = new_t;
-            obs.damagables = damagables;
             obs.hitboxvis = hitboxvis;
             obs.reftransform = player.transform;
             obstacleindicator.transform.localPosition = new Vector3(temp * 100, 0, 0);

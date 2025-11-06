@@ -89,6 +89,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 171b4bb0fa0e37749ab08eb743f608fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  indicator_colour: {fileID: 171924818444036679}
+  danger_icon_transform: {fileID: 4724014198656375937}
+  item_icon: {fileID: 2588961618343081186}
   timer_ring: {fileID: 8807945662579888969}
   obstacle_transform: {fileID: 0}
   obstacleindex: 0

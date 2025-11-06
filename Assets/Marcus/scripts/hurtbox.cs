@@ -1,4 +1,5 @@
 using System;
+using NUnit.Framework;
 using UnityEngine;
 
 public class hurtbox : MonoBehaviour
@@ -8,8 +9,9 @@ public class hurtbox : MonoBehaviour
     // the dimension of the hurtbox     // ハートボックスの寸法
     public virtual Vector2 dimension => new Vector2(1.0f, 1.0f);
     public hurtbox.targetype targettype;
-    
+
     public bool active = true;
+    public bool is_circle = false;
 
     public enum targetype
     {

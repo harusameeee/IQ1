@@ -50,11 +50,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targettype: 1
   active: 1
+  is_circle: 0
   buffs: []
   showbufficons: 0
   bufficons: []
   bufficonparent: {fileID: 0}
   elapsedtime: 0
+  rend: {fileID: 3503358498416053651}
   lanes:
   - {fileID: 0}
   - {fileID: 0}
@@ -1081,10 +1083,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targettype: 0
   active: 1
+  is_circle: 0
   reftransform: {fileID: 4931644813139551025}
   dmgamount: 1
   skilldata: {fileID: 0}
   flipx: 1
   owner: {fileID: 0}
-  damagables: []
   alr_damaged: []

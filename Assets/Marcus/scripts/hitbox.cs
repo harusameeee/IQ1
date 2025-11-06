@@ -14,15 +14,17 @@ public class hitbox : hurtbox
     //scale x and y are for size
     //maybe will add delay timer???
     public entity owner;
-    public List<entity> damagables = new List<entity>();
     public List<entity> alr_damaged = new List<entity>();
+    void Awake()
+    {
+        
+    }
     void Start()
     {
-        entity.onspawn += addtodamagables;
     }
     public virtual void FixedUpdate()
     {
-        foreach (entity d in damagables.Where(d => !alr_damaged.Contains(d)))
+        foreach (entity d in obstacle_spawner.damagables.Where(d => !alr_damaged.Contains(d)))
         {
             Debug.Log($"Hitbox checking {d.name}");
             if (d.TakeDamage_screenaoe(dmgamount, this, targettype, out Rect overlap))
@@ -46,7 +48,7 @@ public class hitbox : hurtbox
                         }
                     }
                 }
-                Debug.Log($"Hitbox dealing {(int)(dmgamount * dmgmult)} damage to {d.name}");
+                Debug.Log($"{name} dealing {(int)(dmgamount * dmgmult)} damage to {d.name}");
                 d.TakeDamage((int)(dmgamount * dmgmult), true, null,new Vector2( overlap.center.x*1.5f+2, overlap.center.y-8f));
                 if (skilldata != null) {
                     foreach (var effect in skilldata.onHit_effect)
@@ -85,13 +87,5 @@ public class hitbox : hurtbox
     void OnEnable()
     {
         alr_damaged.Clear();//clear damagables on enable
-    }
-    void addtodamagables(entity d)
-    {
-        Debug.Log($"Hitbox registering {d.name} to damagables");
-        if (!damagables.Contains(d))
-        {
-            damagables.Add(d);
-        }
     }
 }
