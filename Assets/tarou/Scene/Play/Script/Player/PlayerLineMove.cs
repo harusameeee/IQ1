@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,6 +47,7 @@ public class PlayerLineMove : entity
     [SerializeField] float speed = 10f;
     [SerializeField] bool isLine = false;
     public Animator animator;
+    public PlayerLineMove otherplayer;
     
     public override void Start()
     {
@@ -98,7 +100,7 @@ public class PlayerLineMove : entity
         refresh_cds();//refresh cooldowns
         useskills();//for activating skills
         movement();// for movement
-        // ÆþÎÏÀßÄE
+
         
     }
 
@@ -182,7 +184,7 @@ public class PlayerLineMove : entity
                 {
                     effect.activeeffect(this, this);
                 }
-                hb.skilldata = skills[atkval];
+                hb.effects = skills[atkval].onHit_effect;
                 gcd_timer = skills[atkval].gcd;
                 current_max_gcd = skills[atkval].gcd;
                 current_coins -= skills[atkval].coincost;
@@ -364,8 +366,61 @@ public class PlayerLineMove : entity
     {
         current_hp = Mathf.Min(current_hp + healamount, max_hp);
     }
+    public override void addbuff(buffdata newBuff)
+    {        
+        var existingBuff = buffs.Find(x => x.buffname == newBuff.buffname);
+        if (existingBuff != null )
+        {
+            if (!newBuff.stackable) return;
+            existingBuff.pow += newBuff.pow;
+            existingBuff.duration = Mathf.Max(existingBuff.duration, newBuff.duration);
+        }
+        else
+        {
+            buffdata buffToAdd = newBuff.copy();
+            buffs.Add(buffToAdd);
+            if (showbufficons)
+            {
+                var icon = bufficons.Find(b => !b.gameObject.activeSelf);
+                if (icon != null)
+                {
 
+                    icon.gameObject.SetActive(true);
+                    icon.referencedbuff = buffToAdd;
+                    icon.buffimg.sprite = buffToAdd.icon;
+                    icon.transform.SetAsLastSibling();
+                }
+            }
+            if (newBuff.type == bufftypes.sticktogether)
+            {
 
+            }
+            else if (newBuff.type == bufftypes.stayaway)
+            {
 
+            }
+            else if (newBuff.type == bufftypes.nojump)
+            {
 
+            }
+        }
+        
+    }
+
+    public void exit_stayaway_buff(float pow)
+    {
+        if (Mathf.Abs(otherplayer.currentLane - this.currentLane) < 2)
+        {
+            otherplayer.TakeDamage(pow, false, new List<damagable_type>(), new Vector2(otherplayer.transform.localPosition.x, otherplayer.transform.localPosition.y));
+        }
+
+    }
+    public void exit_staytogether_buff(float pow)
+    {
+        if (Mathf.Abs(otherplayer.currentLane - this.currentLane) > 2)
+        {
+            otherplayer.TakeDamage(pow, false,new List<damagable_type>(), new Vector2(otherplayer.transform.localPosition.x, otherplayer.transform.localPosition.y));
+        }
+
+    }
 }

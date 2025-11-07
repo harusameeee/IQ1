@@ -23,8 +23,8 @@ public class playerspawner : MonoBehaviour
         (playerspawner.class_type)System.Enum.Parse(typeof(playerspawner.class_type), playerJob[0].playerJobName, true);
         playerspawner.class_type type2 =
             (playerspawner.class_type)System.Enum.Parse(typeof(playerspawner.class_type), playerJob[1].playerJobName, true);
-        spawnchara(class_type.merlion, 0);
         spawnchara(class_type.ninja, 1);
+        spawnchara(class_type.ninja, 0);
     }
     void spawnchara(class_type ct, int playernum)// used for spawning characters note player numn should be 0 or 1
     {

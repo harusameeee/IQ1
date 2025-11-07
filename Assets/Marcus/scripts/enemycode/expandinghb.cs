@@ -26,7 +26,7 @@ public class expandinghb : MonoBehaviour
             return;
         }
         hb.transform.localScale = Vector3.LerpUnclamped(hb.transform.localScale, new Vector3(lerpsize.x, lerpsize.y, lerpsize.x), lerptime * Time.deltaTime);
-        Debug.Log("xsize "+hb.transform.localScale.x);
+
         if(Vector2.Distance(new Vector2(hb.transform.localScale.x, hb.transform.localScale.y), lerpsize) < 0.1f)
         {
             if (destroyonend)

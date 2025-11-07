@@ -8,7 +8,7 @@ public class hitbox : hurtbox
     public override Vector2 position => getpos();
     public override Vector2 dimension => transform.localScale;
     public int dmgamount;
-    public skilldata skilldata;
+    public List<skilleffect> effects;
     public bool flipx=false;
     //notes pos x and y are for abs pos
     //scale x and y are for size
@@ -50,8 +50,8 @@ public class hitbox : hurtbox
                 }
                 Debug.Log($"{name} dealing {(int)(dmgamount * dmgmult)} damage to {d.name}");
                 d.TakeDamage((int)(dmgamount * dmgmult), true, null,new Vector2( overlap.center.x*1.5f+2, overlap.center.y-8f));
-                if (skilldata != null) {
-                    foreach (var effect in skilldata.onHit_effect)
+                if (effects != null && effects.Count > 0) {
+                    foreach (var effect in effects)
                     {
                         effect.activeeffect(owner, d);
                     }
@@ -82,7 +82,7 @@ public class hitbox : hurtbox
     void OnDisable()
     {
         alr_damaged.Clear();//clear damagables on disable
-        skilldata = null;
+        effects = null;
     }
     void OnEnable()
     {

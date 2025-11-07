@@ -95,7 +95,7 @@ public abstract class entity : hurtbox,Damagable
             bufficons.Find(b => b.referencedbuff.buffname == buffs[index].buffname)?.gameObject.SetActive(false);
         buffs.RemoveAt(index);
     }
-    public void addbuff(buffdata newBuff)
+    public virtual void addbuff(buffdata newBuff)
     {        
         var existingBuff = buffs.Find(x => x.buffname == newBuff.buffname);
         if (existingBuff != null )

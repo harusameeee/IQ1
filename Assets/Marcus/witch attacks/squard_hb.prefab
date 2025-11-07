@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 2039074143491485808}
   - component: {fileID: 8493503863410728556}
   m_Layer: 0
-  m_Name: squareexpand
+  m_Name: squard_hb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

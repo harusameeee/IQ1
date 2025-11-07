@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-
+[CreateAssetMenu(fileName = "new_itempickup", menuName = "ScriptableObjects/itempickup")]
 public class itempickup : skilleffect
 {
     public itemtypes itemtype;
@@ -8,7 +8,6 @@ public class itempickup : skilleffect
     public buffdata speedbuff;
 
     public buffdata dmgbuff;
-    public buffdata vulnbuff;
     public buffdata invulnbuff;
     public buffdata cdrbuff;
     public static Action<float, bool> scorechange;

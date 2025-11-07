@@ -8,8 +8,9 @@ public class obstacle : hitbox
     public Vector2 pos = new Vector2(0, 0);
     public player_mover player;
     public Vector2 dim = new Vector2(1, 1);
-    public override Vector2 position => pos;    
+    public override Vector2 position => pos;
     public override Vector2 dimension => dim;
+    public Sprite sprite=null;
     public hitboxvisualizer hitboxvis;//will remove later
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
