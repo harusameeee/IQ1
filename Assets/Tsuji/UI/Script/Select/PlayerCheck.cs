@@ -11,29 +11,24 @@ public class PlayerCheck : MonoBehaviour
     [SerializeField] private GameObject p1;
     [SerializeField] private GameObject p2;
 
-    private StageSelect stageSelect;
+    [SerializeField] StageSelect stageSelect;
     private SceneChanger changer;
 
-    private bool p1Ready = false;
-    private bool p2Ready = false;
+    public bool[] playerReady{get; set; }
 
-    private int playerNumber = 0;
-    private int player2Number = 0;
+    public bool isActive = false;
 
     [SerializeField] private SelectedStage stage;
 
     private void Start()
     {
-        GameObject obj = GameObject.Find(stage.StageName);
-        //GameObject obj = GameObject.Find("Stage1");
-        stageSelect = obj.GetComponent<StageSelect>();
         // 最初は非表示
         transform.localScale = Vector3.zero;
         p1ReadyImage.transform.localScale = Vector3.zero;
         p2ReadyImage.transform.localScale = Vector3.zero;
 
-        playerNumber = p1.GetComponent<PlayerMove>().playerNumber;
-        player2Number = p2.GetComponent<PlayerMove>().playerNumber;
+        // 初期化を明示
+        playerReady = new bool[2] { false, false };
 
         // 処理スタート
         CheckSelect().Forget();
@@ -44,37 +39,36 @@ public class PlayerCheck : MonoBehaviour
     {
         if (!stageSelect.isSelect) return;
 
-        string jumpButton = playerNumber == 1 ? "Submit" : "Submit2";
-        string jumpButton2 = player2Number == 2 ? "Submit2" : "Submit";
-
-        // 1P の入力 (例: Aボタン)
-        if (Input.GetButtonDown(jumpButton)&&!p1Ready)
+        // 1P の入力 (Aボタン)
+        if (Input.GetButtonDown("Submit") && playerReady[0])
         {
-            p1Ready = true;
             p1ReadyImage.transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack);
-            Debug.Log(playerNumber);
         }
-
-        // 2P の入力 (例: Aボタン)
-        else if (Input.GetButtonDown(jumpButton2) && !p2Ready)
+        // 2P の入力 (Aボタン)
+        if (Input.GetButtonDown("Submit2") && playerReady[1])
         {
-            p2Ready = true;
             p2ReadyImage.transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack);
-            Debug.Log(player2Number);
-
         }
     }
 
     private async UniTask CheckSelect()
     {
+        //ステージ選択状態
         await UniTask.WaitUntil(() => stageSelect.isSelect);
         transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack);
+        isActive = true;
     }
 
     private async UniTask CheckBothReady()
     {
-        await UniTask.WaitUntil(() => p1Ready && p2Ready);
-        await UniTask.Delay(1000); // 少し待ってからシーン遷移
+        await UniTask.WaitUntil(() => {
+            bool ready = (playerReady[0] && playerReady[1]);
+            if (ready)
+            {
+                Debug.Log($"両方準備完了！ P1={playerReady[0]}, P2={playerReady[1]}");
+            }
+            return ready;
+        }); await UniTask.Delay(1000); // 少し待ってからシーン遷移
         changer = new SceneChanger();
         changer.ToPlay(stage.StageName);
     }
