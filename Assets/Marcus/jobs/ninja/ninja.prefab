@@ -92,6 +92,7 @@ MonoBehaviour:
   isLine: 0
   animator: {fileID: 4041127130042055112}
   otherplayer: {fileID: 0}
+  playercanvas: {fileID: 6367334136828528262}
 --- !u!54 &3337665984992667223
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1324,6 +1325,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6967292860617983373, guid: c5acb3924e008874aa0964f2bc96dffd, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1334,3 +1339,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6742087114048138980, guid: c5acb3924e008874aa0964f2bc96dffd, type: 3}
   m_PrefabInstance: {fileID: 8048105816988901150}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6367334136828528262 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4030102851895351704, guid: c5acb3924e008874aa0964f2bc96dffd, type: 3}
+  m_PrefabInstance: {fileID: 8048105816988901150}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e48885589fbf78a43ac2498c057cd07d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

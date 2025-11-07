@@ -15,3 +15,5 @@ MonoBehaviour:
   patterndata:
   - attackhbobj: {fileID: 5041760334301984476, guid: a2b433d449f098343866fceb9dcacc05, type: 3}
     offset: {x: 0, y: 0}
+  - attackhbobj: {fileID: 5041760334301984476, guid: a2b433d449f098343866fceb9dcacc05, type: 3}
+    offset: {x: 0, y: 0}

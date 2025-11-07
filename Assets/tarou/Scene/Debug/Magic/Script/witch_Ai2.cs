@@ -22,7 +22,7 @@ public class witch_Ai2 : entity
     public override Vector2 dimension => dim;
 
     public override Vector2 position =>
-        new Vector2(transform.localPosition.x, transform.localPosition.y + 8f);
+        new Vector2(-transform.localPosition.x, transform.localPosition.y + 8f);
     // 表示・判定上の位置補正 / Position offset for display or collision
 
     public static Action<float, List<damagable_type>, Vector2> enemyhit;

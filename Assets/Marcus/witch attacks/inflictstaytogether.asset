@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa2587049e2779f43805692a02ab288a, type: 3}
-  m_Name: stay_away
+  m_Script: {fileID: 11500000, guid: 9294da7133248a443b77285f500a00d2, type: 3}
+  m_Name: inflictstaytogether
   m_EditorClassIdentifier: 
-  stackable: 0
-  icon: {fileID: 21300000, guid: 4b36ce33cd6654e45b0c90fd4c7264d5, type: 3}
-  buffname: stay_away
-  type: 9
-  pow: 10
-  duration: 5
+  buff: {fileID: 11400000, guid: ba740e390f6b8fd4ea11d30903caef50, type: 2}
+  selftarget: 0

@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1058367521102483950
 RectTransform:
   m_ObjectHideFlags: 0
@@ -229,7 +229,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3880173277091237733}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -375,7 +375,8 @@ MonoBehaviour:
   reftransform: {fileID: 0}
   dmgamount: 4
   effects:
-  - {fileID: 11400000, guid: 8099ea5359a7b6240a62a1307f1dac50, type: 2}
+  - {fileID: 11400000, guid: ebd8a2e0c38dbb640b517655b139e40e, type: 2}
+  - {fileID: 11400000, guid: 5710140a73f5fe2499d9654951380547, type: 2}
   flipx: 0
   owner: {fileID: 0}
   alr_damaged: []

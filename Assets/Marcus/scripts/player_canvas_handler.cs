@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class player_canvas_handler : MonoBehaviour
     public TMP_Text stay_apart_text;
     public Slider progress_slider;
     public PlayerLineMove owner;
-    [HideInInspector] public buffdata visualized_buff;
+    public buffdata visualized_buff;
     float buffdurationmax = 0;
     void Start()
     {
@@ -22,12 +23,20 @@ public class player_canvas_handler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (owner == null)
+        {
+            return;
+        }
+        if (owner.buffs.Any(obj => obj.type == bufftypes.nojump))
+        {
+            anchor_image.gameObject.SetActive(true);
+        }
+        else
+        {
+            anchor_image.gameObject.SetActive(false);
+        }
         if(visualized_buff != null)
         {
-            if(buffdurationmax == 0)
-            {
-                buffdurationmax = visualized_buff.duration;
-            }
             if(visualized_buff.duration <= 0)
             {
                 if (visualized_buff.type == bufftypes.stayaway)
@@ -48,14 +57,17 @@ public class player_canvas_handler : MonoBehaviour
                 buffdurationmax = 0;
                 stay_apart_text.gameObject.SetActive(false);
                 stay_together_text.gameObject.SetActive(false);
+                dmg_zoneimg.gameObject.SetActive(false);
+                progress_slider.gameObject.SetActive(false);
             }
             else
             {
-                progress_slider.value = visualized_buff.duration / buffdurationmax;
+                Debug.Log("updating buff visualizer=" + visualized_buff.duration + "/" + visualized_buff.duration / buffdurationmax);
+                progress_slider.value = (buffdurationmax-visualized_buff.duration) / buffdurationmax;
             }
         }
     }
-    public void addbuffvisual(buffdata b)
+    public void addbuffvisual(ref buffdata b)
     {
         visualized_buff = b;
         buffdurationmax = b.duration;
@@ -64,21 +76,24 @@ public class player_canvas_handler : MonoBehaviour
         stay_together_text.gameObject.SetActive(false);
         anchor_image.gameObject.SetActive(false);
         dmg_zoneimg.gameObject.SetActive(false);
+        progress_slider.gameObject.SetActive(false);
 
         if (visualized_buff.type == bufftypes.stayaway)
         {
+
             stay_apart_text.gameObject.SetActive(true);
             dmg_zoneimg.gameObject.SetActive(true);
+            progress_slider.gameObject.SetActive(true);
+            dmg_zoneimg.color = new Color(1,0,0,0.5f);
         }
         else if (visualized_buff.type == bufftypes.sticktogether)
         {
             stay_together_text.gameObject.SetActive(true);
             dmg_zoneimg.gameObject.SetActive(true);
+            progress_slider.gameObject.SetActive(true);
+            dmg_zoneimg.color = new Color(0,1,0,0.5f);
         }
-        else if (visualized_buff.type == bufftypes.nojump)
-        {
-            anchor_image.gameObject.SetActive(true);
-        }
+
         progress_slider.value = 1;
     }
     public void removebuffvisual()
