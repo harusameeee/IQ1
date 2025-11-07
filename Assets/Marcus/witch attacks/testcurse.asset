@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5a84bc208e43dd44a6d623c6a659646, type: 3}
   m_Name: testcurse
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 3}
+  duration: 6
   patterndata:
   - attackhbobj: {fileID: 5041760334301984476, guid: a2b433d449f098343866fceb9dcacc05, type: 3}
     offset: {x: 0, y: 0}

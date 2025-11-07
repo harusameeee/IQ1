@@ -9872,7 +9872,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 4181a09166cdfed408842e5137b06828, type: 2}
     - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
       propertyPath: magicspawns.Array.data[1].triggerPoint
-      value: 0.445
+      value: 0.313
       objectReference: {fileID: 0}
     - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
       propertyPath: magicspawns.Array.data[2].magicPattern
@@ -9880,7 +9880,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 4181a09166cdfed408842e5137b06828, type: 2}
     - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
       propertyPath: magicspawns.Array.data[2].triggerPoint
-      value: 0.5
+      value: 0.595
       objectReference: {fileID: 0}
     - target: {fileID: 3418718579575961743, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9964,11 +9964,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7853651061382388816, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.09
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7853651061382388816, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.08
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7853651061382388816, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
       propertyPath: m_LocalPosition.z

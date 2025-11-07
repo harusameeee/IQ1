@@ -67,8 +67,8 @@ MonoBehaviour:
   - {fileID: 0}
   currentLane: 3
   maxLane: 4
-  jumpHeight: 4
-  jumpDuration: 0.6
+  jumpHeight: 5.5
+  jumpDuration: 0.75
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -88,7 +88,7 @@ MonoBehaviour:
   dim: {x: 2.5, y: 2.5}
   ui: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
-  speed: 5
+  speed: 4
   isLine: 0
   animator: {fileID: 4041127130042055112}
   otherplayer: {fileID: 0}

@@ -101,7 +101,11 @@ public class PlayerLineMove : entity
     {
         base.Update();//countdown buff durations
         refresh_cds();//refresh cooldowns
-        useskills();//for activating skills
+        if (current_hp > 0)
+        {
+             useskills();
+        }
+       //for activating skills
         movement();// for movement
 
         
@@ -348,18 +352,23 @@ public class PlayerLineMove : entity
     }
     public override bool TakeDamage(float damageAmount, bool comboable = true, List<damagable_type> damagable_Types = null, Vector2 hitpoint = new Vector2())
     {
-        if (buffs.Exists(buff => buff.type == bufftypes.invuln || buff.type == bufftypes.stealth))
+        
+        if (buffs.Exists(buff => buff.type == bufftypes.invuln || buff.type == bufftypes.stealth)||current_hp <=0)
         {
             Debug.Log($"P{playerNumber} is invulnerable and took no damage.");
             return false;
         }
-        StartCoroutine(dmgflash());
         current_hp -= damageAmount;
         ui.hp_bar.value = (float)current_hp / max_hp;
         Debug.Log($"P{playerNumber} took {damageAmount} damage. Current HP: {current_hp}");
         if (current_hp <= 0)
         {
             Debug.Log($"P{playerNumber} is defeated!");
+            StartCoroutine(becomeghost(10.0f));
+        }
+        else
+        {
+            StartCoroutine(dmgflash());
         }
 
         onHit?.Invoke(-damageAmount, false);
@@ -421,8 +430,22 @@ public class PlayerLineMove : entity
         if (Mathf.Abs(otherplayer.transform.localPosition.x - this.transform.localPosition.x) > 2)
         {
             Debug.Log("stay together buff exited, dealing damage");
-            otherplayer.TakeDamage(pow, false,new List<damagable_type>(), new Vector2(otherplayer.transform.localPosition.x, otherplayer.transform.localPosition.y));
+            otherplayer.TakeDamage(pow, false, new List<damagable_type>(), new Vector2(otherplayer.transform.localPosition.x, otherplayer.transform.localPosition.y));
         }
 
+    }
+    public IEnumerator becomeghost(float duration)
+    {
+        //_Tweak_transparency
+        foreach (var mat in rend.materials)
+        {
+            mat.SetFloat("_Tweak_transparency", -0.9f);
+        }
+        yield return new WaitForSeconds(duration);
+        foreach (var mat in rend.materials)
+        {
+            mat.SetFloat("_Tweak_transparency", 0);
+        }
+        current_hp = max_hp;
     }
 }
