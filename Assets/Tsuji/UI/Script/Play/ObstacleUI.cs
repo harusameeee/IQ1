@@ -12,7 +12,7 @@ public class ObstacleUI : MonoBehaviour
     private void Start()
     {
         y = this.transform.position.y;
-        MoveObstacle();
+        MoveObstacle().Forget();
     }
 
     private async UniTask MoveObstacle()

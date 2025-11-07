@@ -64,7 +64,7 @@ public class JobSelect : MonoBehaviour
             {
                 isSelect = true;
                 pc.playerReady[playerNumber] = true;
-                Debug.Log($"{playerNumber + 1}P €”õŠ®—¹: {jobImages[jobNum].name}");
+                //Debug.Log($"{playerNumber + 1}P €”õŠ®—¹: {jobImages[jobNum].name}");
                 foreach (Image img in arrows)
                     img.enabled = false;
             }
