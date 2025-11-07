@@ -14,7 +14,7 @@ public class StageSelect : MonoBehaviour
     private Transform[] playerTransforms;
     //ステージ記録用
     [SerializeField] private SelectedStage selectedStage;
-    //
+    //選択中の番号
     int selectNum = 1;
     //動作中か？
     bool isMove = false;

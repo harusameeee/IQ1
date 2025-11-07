@@ -13,7 +13,7 @@ public class ChangeLanguage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(dropdown.value);
+        //Debug.Log(dropdown.value);
         switch (dropdown.value){
 
             //japanese

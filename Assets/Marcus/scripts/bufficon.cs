@@ -16,7 +16,6 @@ public class bufficon : MonoBehaviour
         {
             return;
         }
-        Debug.Log("stacks: " + referencedbuff.pow.ToString()+" duration: " + referencedbuff.duration.ToString("F1"));
         stacktext.text = referencedbuff.pow.ToString();
         durationtext.text = referencedbuff.duration.ToString("F1");
     }

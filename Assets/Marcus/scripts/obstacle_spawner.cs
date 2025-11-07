@@ -177,7 +177,7 @@ public class obstacle_spawner : MonoBehaviour
             obs.tvalue = new_t;
             obs.hitboxvis = hitboxvis;
             obs.reftransform = player.transform;
-            itemindicator.transform.localPosition = new Vector3(temp * 90, 0, 0);
+            itemindicator.transform.localPosition = new Vector3(temp * 80, 0, 0);
             itemindicator.gameObject.SetActive(true);
             itemindicator.setitem(obs.sprite);
             obs.transform.position = spawnpos;

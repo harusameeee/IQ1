@@ -10,6 +10,7 @@ public class OptionPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI masterText;
     [SerializeField] private TextMeshProUGUI bgmText;
     [SerializeField] private TextMeshProUGUI sfxText;
+    [SerializeField] private TextMeshProUGUI brightnessText;
 
     [SerializeField] private UnityEngine.UI.Image[] images;
 
@@ -38,9 +39,11 @@ public class OptionPanel : MonoBehaviour
         var master = (int)(SoundManager.Instance.GetMasterVolume() * 100);
         var bgm = (int)(SoundManager.Instance.GetBGMVolume() * 100);
         var sfx = (int)(SoundManager.Instance.GetSFXVolume() * 100);
+        var brightness = (int)(BrightnessAdjustment.Instance.GetBrightness()*10);
         masterText.text = master.ToString();
         bgmText.text = bgm.ToString();
         sfxText.text = sfx.ToString();
+        brightnessText.text = brightness.ToString();
 
         ChangeImages(master, 0);
         ChangeImages(bgm, 1);

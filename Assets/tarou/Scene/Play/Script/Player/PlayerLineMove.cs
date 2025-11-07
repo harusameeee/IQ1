@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
@@ -47,7 +48,8 @@ public class PlayerLineMove : entity
     [SerializeField] float speed = 10f;
     [SerializeField] bool isLine = false;
     public Animator animator;
-    public PlayerLineMove otherplayer;
+    [HideInInspector] public PlayerLineMove otherplayer;
+    public player_canvas_handler playercanvas;
     
     public override void Start()
     {
@@ -92,13 +94,18 @@ public class PlayerLineMove : entity
         {
             ui.coin_texttransform.gameObject.SetActive(false);
         }
+        playercanvas.owner = this;
     }
 
     public override void Update()
     {
         base.Update();//countdown buff durations
         refresh_cds();//refresh cooldowns
-        useskills();//for activating skills
+        if (current_hp > 0)
+        {
+             useskills();
+        }
+       //for activating skills
         movement();// for movement
 
         
@@ -274,7 +281,7 @@ public class PlayerLineMove : entity
 
             // X位置制限
             transform.localPosition = new Vector3(
-                Mathf.Clamp(transform.localPosition.x, -7.5f, 7.5f),
+                Mathf.Clamp(transform.localPosition.x, -8f, 8f),
                 transform.localPosition.y,
                 transform.localPosition.z
             );
@@ -295,7 +302,7 @@ public class PlayerLineMove : entity
         }
 
         // ジャンプ処理（そのまま）
-        if ((Input.GetKeyDown(joyJump) || Input.GetKeyDown(keyJump)) && !isJumping)
+        if ((Input.GetKeyDown(joyJump) || Input.GetKeyDown(keyJump)) && !isJumping&&!buffs.Any(b=>b.type == bufftypes.nojump))
         {
             Debug.Log($"P{playerNumber} ジャンプ");
             isJumping = true;
@@ -345,18 +352,23 @@ public class PlayerLineMove : entity
     }
     public override bool TakeDamage(float damageAmount, bool comboable = true, List<damagable_type> damagable_Types = null, Vector2 hitpoint = new Vector2())
     {
-        if (buffs.Exists(buff => buff.type == bufftypes.invuln || buff.type == bufftypes.stealth))
+        
+        if (buffs.Exists(buff => buff.type == bufftypes.invuln || buff.type == bufftypes.stealth)||current_hp <=0)
         {
             Debug.Log($"P{playerNumber} is invulnerable and took no damage.");
             return false;
         }
-        StartCoroutine(dmgflash());
         current_hp -= damageAmount;
         ui.hp_bar.value = (float)current_hp / max_hp;
         Debug.Log($"P{playerNumber} took {damageAmount} damage. Current HP: {current_hp}");
         if (current_hp <= 0)
         {
             Debug.Log($"P{playerNumber} is defeated!");
+            StartCoroutine(becomeghost(10.0f));
+        }
+        else
+        {
+            StartCoroutine(dmgflash());
         }
 
         onHit?.Invoke(-damageAmount, false);
@@ -391,36 +403,49 @@ public class PlayerLineMove : entity
                     icon.transform.SetAsLastSibling();
                 }
             }
-            if (newBuff.type == bufftypes.sticktogether)
+            if (buffToAdd.type == bufftypes.sticktogether)
             {
-
+                playercanvas.addbuffvisual(ref buffToAdd);
             }
-            else if (newBuff.type == bufftypes.stayaway)
+            else if (buffToAdd.type == bufftypes.stayaway)
             {
-
+                playercanvas.addbuffvisual(ref buffToAdd);
             }
-            else if (newBuff.type == bufftypes.nojump)
-            {
 
-            }
         }
         
     }
 
     public void exit_stayaway_buff(float pow)
     {
-        if (Mathf.Abs(otherplayer.currentLane - this.currentLane) < 2)
+        if (Mathf.Abs(otherplayer.transform.localPosition.x - this.transform.localPosition.x) < 2)
         {
+            Debug.Log("stay away buff exited, dealing damage");
             otherplayer.TakeDamage(pow, false, new List<damagable_type>(), new Vector2(otherplayer.transform.localPosition.x, otherplayer.transform.localPosition.y));
         }
 
     }
     public void exit_staytogether_buff(float pow)
     {
-        if (Mathf.Abs(otherplayer.currentLane - this.currentLane) > 2)
+        if (Mathf.Abs(otherplayer.transform.localPosition.x - this.transform.localPosition.x) > 2)
         {
-            otherplayer.TakeDamage(pow, false,new List<damagable_type>(), new Vector2(otherplayer.transform.localPosition.x, otherplayer.transform.localPosition.y));
+            Debug.Log("stay together buff exited, dealing damage");
+            otherplayer.TakeDamage(pow, false, new List<damagable_type>(), new Vector2(otherplayer.transform.localPosition.x, otherplayer.transform.localPosition.y));
         }
 
+    }
+    public IEnumerator becomeghost(float duration)
+    {
+        //_Tweak_transparency
+        foreach (var mat in rend.materials)
+        {
+            mat.SetFloat("_Tweak_transparency", -0.9f);
+        }
+        yield return new WaitForSeconds(duration);
+        foreach (var mat in rend.materials)
+        {
+            mat.SetFloat("_Tweak_transparency", 0);
+        }
+        current_hp = max_hp;
     }
 }

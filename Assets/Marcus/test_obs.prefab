@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5913211350418585393}
   - component: {fileID: 4032238380910983646}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: test_obs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,19 +102,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targettype: 1
   active: 0
+  is_circle: 0
   reftransform: {fileID: 0}
   dmgamount: 5
-  skilldata: {fileID: 0}
+  effects: []
   flipx: 0
   owner: {fileID: 0}
-  damagables: []
   alr_damaged: []
   tvalue: 0
-  range_window: 2
+  range_window: {x: -1, y: 2}
   despawn_range: 10
   pos: {x: 0, y: 1}
   player: {fileID: 0}
   dim: {x: 4, y: 3}
+  sprite: {fileID: 0}
   hitboxvis: {fileID: 0}
 --- !u!65 &4032238380910983646
 BoxCollider:

@@ -13,7 +13,7 @@ public class obstacle : hitbox
     public Sprite sprite=null;
     public hitboxvisualizer hitboxvis;//will remove later
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual void  Start()
     {
     }
 

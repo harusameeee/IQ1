@@ -22,7 +22,7 @@ public class witch_Ai2 : entity
     public override Vector2 dimension => dim;
 
     public override Vector2 position =>
-        new Vector2(transform.localPosition.x, transform.localPosition.y + 8f);
+        new Vector2(-transform.localPosition.x, transform.localPosition.y + 8f);
     // 表示・判定上の位置補正 / Position offset for display or collision
 
     public static Action<float, List<damagable_type>, Vector2> enemyhit;
@@ -30,6 +30,9 @@ public class witch_Ai2 : entity
     // 被弾時に通知するイベント / Event called when this enemy takes damage
     public int currentmagicindex = 0; // 現在の魔法発動インデックス / Current magic spawn index
     public int queuedspellindex = -1; // キューに入っている魔法発動インデックス / Queued spell index
+    public Vector2 targetpos; // 目標位置（未使用） / Target position (unused)
+    public float move_duration = 2.0f; // 移動にかかる時間（未使用） / Duration of movement (unused)
+    public float move_speed= 4.0f; // 移動速度（未使用） / Movement speed (unused)
     public List<MagicSpawnData> magicspawns = new List<MagicSpawnData>(); // 魔法発動データリスト / List of magic spawn data
     public Animator animator; // アニメーター参照 / Reference to the animator
     public override void Start()
@@ -89,13 +92,27 @@ public class witch_Ai2 : entity
 
         // 現在の移動経路上の進行度（0〜1）
         // Current normalized progress along the movement path
+        this.transform.localPosition = Vector3.Lerp(
+            this.transform.localPosition,
+            new Vector3(targetpos.x, targetpos.y, 0),
+            Time.deltaTime * move_speed);
+        if (move_duration > 0)
+        {
+            move_duration -= Time.deltaTime;
+        }
+        else
+        {
+            targetpos = Vector2.zero;
+        }
         float t = mover.current_t_normalized;
         if(currentmagicindex < magicspawns.Count)
         {
             var magicdata = magicspawns[currentmagicindex];
             if (t >= magicdata.triggerPoint)
             {
-                queuedspellindex=currentmagicindex;
+                queuedspellindex = currentmagicindex;
+                targetpos = magicspawns[currentmagicindex].magicPattern.position;
+                move_duration = magicspawns[currentmagicindex].magicPattern.duration;
                 currentmagicindex++;
                 animator.Play("spellcast");
             }
