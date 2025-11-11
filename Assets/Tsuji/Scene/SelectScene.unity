@@ -290,7 +290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 23615980}
   m_Layer: 0
-  m_Name: combat_demo
+  m_Name: level_scene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4391,6 +4391,7 @@ MonoBehaviour:
   playerNumber: 0
   pc: {fileID: 1987024562}
   inputCooldownTime: 0.4
+  job: {fileID: 0}
 --- !u!1001 &1763892472
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5076,6 +5077,7 @@ MonoBehaviour:
   playerNumber: 1
   pc: {fileID: 1987024562}
   inputCooldownTime: 0.4
+  job: {fileID: 0}
 --- !u!1 &1909644052
 GameObject:
   m_ObjectHideFlags: 0
