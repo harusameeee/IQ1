@@ -67,8 +67,6 @@ public class PlayerCheck : MonoBehaviour
         });
         
         await UniTask.Delay(1000); // ­‚µ‘Ò‚Á‚Ä‚©‚çƒV[ƒ“‘JˆÚ
-        IrisShot.Instance.IrisOut();
-        await UniTask.WaitUntil(() => !IrisShot.Instance.isIrisShot);
         changer = new SceneChanger();
         changer.ToPlay(stage.StageName);
     }

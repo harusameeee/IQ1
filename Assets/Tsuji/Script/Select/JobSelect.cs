@@ -27,6 +27,8 @@ public class JobSelect : MonoBehaviour
 
     [SerializeField] private float inputCooldownTime = 0.4f;
 
+    [SerializeField] private SelectedPlayerJob job;
+
     private void Start()
     {
         select.sprite = jobImages[jobNum];
@@ -91,6 +93,7 @@ public class JobSelect : MonoBehaviour
         await UniTask.Delay(100);
         select.sprite = jobImages[jobNum];
         select.transform.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
+        job.playerJobName = jobImages[jobNum].name;
         UpdateArrowVisibility();
         await UniTask.Delay((int)(inputCooldownTime * 1000));
         isInputCooldown = false;

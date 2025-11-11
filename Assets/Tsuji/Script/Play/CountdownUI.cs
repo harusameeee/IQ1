@@ -8,10 +8,6 @@ public class CountdownUI : MonoBehaviour
     [SerializeField] Sprite[] images = new Sprite[4];  // 0:GO, 1:1, 2:2, 3:3
     [SerializeField] Image imageObject;
 
-    //private float time = 3.0f;
-
-    //‚¢‚éH
-    //public bool finishCount = false;
 
     private void Start()
     {
@@ -21,6 +17,7 @@ public class CountdownUI : MonoBehaviour
 
     private async UniTaskVoid StartCountdown()
     {
+        await UniTask.Delay(3000);
         // 3, 2, 1 ‚Ì•\Ž¦
         for (int i = 3; i > 0; i--)
         {
