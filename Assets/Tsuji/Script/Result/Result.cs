@@ -41,7 +41,6 @@ public class Result : MonoBehaviour
     private async UniTaskVoid WaitForSubmitAsync()
     {
         await UniTask.Delay(2000);
-        //await UniTask.WaitUntil(() => Input.GetMouseButtonDown(0));
         if (isResultShown) return; // 二重実行防止
 
         isResultShown = true;
@@ -56,15 +55,12 @@ public class Result : MonoBehaviour
     {
         // ロゴ演出
         await LogoAnimAsync();
-
         // スコアアニメーション
         await ScoreAnimationAsync(score, 2.5f);
-
         // ランク演出
         await RankAnimAsync();
-
+        //ボタン使えるようにする
         ButtonsControl();
-
     }
 
     // スコアアニメーション
