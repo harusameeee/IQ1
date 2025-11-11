@@ -5,14 +5,15 @@ public class ClearJudge : MonoBehaviour
 {
     private Image image;
     [SerializeField] private Sprite[] clearSprites=new Sprite[2];
+    [SerializeField] private ScoreData scoreData;
 
-    bool isClear=true;
+    bool isClear =true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //‘¼ƒNƒ‰ƒX‚©‚çŽ‚Á‚Ä‚­‚éA‘½•ª
-        bool judge = isClear /*!= null ? true : false*/;
+        bool judge = scoreData.score >0 ? true : false;
 
         //
         image = gameObject.GetComponent<Image>();

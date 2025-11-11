@@ -59,6 +59,9 @@ public class SoundManager : MonoBehaviour
         }
 
         LoadVolumes();
+        Debug.Log(GetBGMVolume());
+        Debug.Log(GetMasterVolume());
+        Debug.Log(GetSFXVolume());
     }
 
     private void SetupBgmSource(AudioSource src)

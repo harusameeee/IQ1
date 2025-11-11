@@ -63,12 +63,12 @@ public class PlayerCheck : MonoBehaviour
     {
         await UniTask.WaitUntil(() => {
             bool ready = (playerReady[0] && playerReady[1]);
-            if (ready)
-            {
-                Debug.Log($"両方準備完了！ P1={playerReady[0]}, P2={playerReady[1]}");
-            }
             return ready;
-        }); await UniTask.Delay(1000); // 少し待ってからシーン遷移
+        });
+        
+        await UniTask.Delay(1000); // 少し待ってからシーン遷移
+        IrisShot.Instance.IrisOut();
+        await UniTask.WaitUntil(() => !IrisShot.Instance.isIrisShot);
         changer = new SceneChanger();
         changer.ToPlay(stage.StageName);
     }

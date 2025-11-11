@@ -7,7 +7,7 @@ public class score_counter : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static float currentscore = 0;
     int combo = 0;
-    public TMPro.TMP_Text scoretext;
+    //public TMPro.TMP_Text scoretext;
     public TMPro.TMP_Text comboText;
 
     [SerializeField] private float floatDistance = 50f;
@@ -16,12 +16,14 @@ public class score_counter : MonoBehaviour
 
     [SerializeField]private Vector3 defaultPosition;
 
+    [SerializeField] private ScoreData scoreData;
+
     void Start()
     {
         entity.onHit += addscore;
         itempickup.scorechange += addscore;
         currentscore = 0;
-        scoretext.text = "Score: " + ((int)currentscore);
+        //scoretext.text = "Score: " + ((int)currentscore);
         comboText.text = combo + "\nCOMBO ";
 
     }
@@ -50,10 +52,11 @@ public class score_counter : MonoBehaviour
         {
             combo = 0;
             currentscore += scoretoadd;
+            scoreData.score = (int)currentscore;
 
         }
         
-            scoretext.text = "Score: " +  ((int)currentscore);
+           // scoretext.text = "Score: " +  ((int)currentscore);
             comboText.text =  combo+ "\nCombo ";
     }
 

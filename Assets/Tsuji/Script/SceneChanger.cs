@@ -7,6 +7,7 @@ public class SceneChanger : MonoBehaviour
 {
     public void ToTitle()
     {
+        
         SceneManager.LoadScene("Title");
     }
 

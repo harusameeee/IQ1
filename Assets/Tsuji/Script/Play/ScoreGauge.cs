@@ -28,10 +28,12 @@ public class ScoreGauge : MonoBehaviour
             img.transform.localScale = Vector3.one;
             img.color = new Color(1, 1, 1, 0.3f); // 半透明
         }
+        AnimateRank(0).Forget();
     }
 
     private void Update()
     {
+        if (scoreData.score <= 0) { scoreData.score = 0; }
         // スコア値を正規化してスライダーに反映
         float normalizedScore = Mathf.InverseLerp(0, ScoreRankBoundary.RANK_S, scoreData.score);
         scoreSlider.value = Mathf.Lerp(scoreSlider.value, normalizedScore, Time.deltaTime * fillSpeed);
