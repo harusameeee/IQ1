@@ -16,6 +16,9 @@ public class Result : MonoBehaviour
 
     [Header("logo")]
     [SerializeField] private Image logo;
+    
+    [Header("button")]
+    [SerializeField] private Button[] buttons;
 
     private bool isResultShown = false;
 
@@ -25,6 +28,11 @@ public class Result : MonoBehaviour
         rank.transform.localScale = Vector3.zero;
         logo.transform.localScale = Vector3.zero;
 
+        for (int i = 0; i < buttons.Length; i++) 
+        {
+            buttons[i].interactable = false;
+        }
+
         // 実行開始
         WaitForSubmitAsync().Forget();
     }
@@ -32,14 +40,13 @@ public class Result : MonoBehaviour
     // 入力待ち
     private async UniTaskVoid WaitForSubmitAsync()
     {
-        //await UniTask.WaitUntil(() => Input.GetButtonDown("Submit"));
-        await UniTask.WaitUntil(() => Input.GetMouseButtonDown(0));
+        await UniTask.Delay(2000);
+        //await UniTask.WaitUntil(() => Input.GetMouseButtonDown(0));
         if (isResultShown) return; // 二重実行防止
 
         isResultShown = true;
 
         // ScriptableObject からスコアを取得
-        //int score = scoreData != null ? scoreData.score : 0;
         int score = (int)score_counter.currentscore;
         await ShowResultAsync(score);
     }
@@ -55,6 +62,8 @@ public class Result : MonoBehaviour
 
         // ランク演出
         await RankAnimAsync();
+
+        ButtonsControl();
 
     }
 
@@ -82,7 +91,7 @@ public class Result : MonoBehaviour
         rank.transform.localScale = Vector3.zero;
         rank.DOFade(1f, 0f); // フェード即時反映
         rank.transform.DOScale(Vector3.one * 1.2f, 0.6f).SetEase(Ease.OutBack);
-        await UniTask.Delay(600);
+        await UniTask.Delay(300);
         rank.transform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutCubic);
         await UniTask.Delay(400);
     }
@@ -96,5 +105,14 @@ public class Result : MonoBehaviour
         logo.transform.DOScale(Vector3.one * 1.2f, 0.4f).SetEase(Ease.OutBack);
         await UniTask.Delay(400);
         logo.transform.DOScale(Vector3.one, 0.2f);
+    }
+
+    private  void ButtonsControl()
+    {
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].interactable = true;
+        }
+
     }
 }

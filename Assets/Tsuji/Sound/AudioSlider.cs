@@ -8,7 +8,7 @@ public class AudioSlider : MonoBehaviour
     [SerializeField] private Slider slider;
 
 
-    void Awake()
+    void Start()
     {
         if (slider == null) slider = GetComponent<Slider>();
 
