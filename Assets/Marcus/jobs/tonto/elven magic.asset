@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38891d8f3526cf94c97b096f35e7cd97, type: 3}
-  m_Name: testskill#4
+  m_Name: elven magic
   m_EditorClassIdentifier: 
-  skillname: testskill4
+  skillname: elven magic
   cooldown: 12
   currentcooldown: 0
   gcd: 1.5
@@ -21,3 +21,9 @@ MonoBehaviour:
   coincost: 0
   has_cooldown: 1
   icon: {fileID: 21300000, guid: 9b7740d1134f3b341ba5fe81642d580e, type: 3}
+  onHit_effect:
+  - {fileID: 11400000, guid: 05630b8df3259b848b34166a71dec0d0, type: 2}
+  - {fileID: 11400000, guid: 3f5da62ec3867a445bee35925e59db58, type: 2}
+  onUse_effects:
+  - {fileID: 11400000, guid: 66e742c9800cb06448f565521ade178e, type: 2}
+  - {fileID: 11400000, guid: 38c6f30b4177cce4cab36e455d42076d, type: 2}

@@ -11,10 +11,18 @@ public class player_canvas_handler : MonoBehaviour
     public Image dmg_zoneimg;
     public TMP_Text stay_together_text;
     public TMP_Text stay_apart_text;
+    public TMP_Text Keep_moving_text;
+    public TMP_Text Stop_moving_text;
     public Slider progress_slider;
-    public PlayerLineMove owner;
-    public buffdata visualized_buff;
+    
+    public Slider progress_slider2;
+    [HideInInspector] public PlayerLineMove owner;
+    [HideInInspector]public buffdata visualized_buff;
+    
+    [HideInInspector]public buffdata visualized_buff2;
     float buffdurationmax = 0;
+    
+    float buffdurationmax2 = 0;
     void Start()
     {
         
@@ -35,20 +43,20 @@ public class player_canvas_handler : MonoBehaviour
         {
             anchor_image.gameObject.SetActive(false);
         }
-        if(visualized_buff != null)
+        if (visualized_buff != null)
         {
-            if(visualized_buff.duration <= 0)
+            if (visualized_buff.duration <= 0)
             {
                 if (visualized_buff.type == bufftypes.stayaway)
                 {
-                    if(owner != null)
+                    if (owner != null)
                     {
                         owner.exit_stayaway_buff(visualized_buff.pow);
                     }
                 }
                 else if (visualized_buff.type == bufftypes.sticktogether)
                 {
-                    if(owner != null)
+                    if (owner != null)
                     {
                         owner.exit_staytogether_buff(visualized_buff.pow);
                     }
@@ -63,21 +71,68 @@ public class player_canvas_handler : MonoBehaviour
             else
             {
                 Debug.Log("updating buff visualizer=" + visualized_buff.duration + "/" + visualized_buff.duration / buffdurationmax);
-                progress_slider.value = (buffdurationmax-visualized_buff.duration) / buffdurationmax;
+                progress_slider.value = (buffdurationmax - visualized_buff.duration) / buffdurationmax;
+            }
+        }
+        if(visualized_buff2 != null)
+        {
+            if(visualized_buff2.duration <= 0)
+            {
+                if (visualized_buff2.type == bufftypes.keep_moving)
+                {
+                    if(owner != null)
+                    {
+                        owner.exit_keepmoving_buff(visualized_buff2.pow);
+                    }
+                }
+                else if (visualized_buff2.type == bufftypes.Stop_moving)
+                {
+                    if(owner != null)
+                    {
+                        owner.exit_stopmoving_buff(visualized_buff2.pow);
+                    }
+                }
+                visualized_buff2 = null;
+                buffdurationmax2 = 0;
+                stay_apart_text.gameObject.SetActive(false);
+                stay_together_text.gameObject.SetActive(false);
+                dmg_zoneimg.gameObject.SetActive(false);
+                progress_slider.gameObject.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("updating buff visualizer=" + visualized_buff2.duration + "/" + visualized_buff2.duration / buffdurationmax2);
+                progress_slider2.value = (buffdurationmax2-visualized_buff2.duration) / buffdurationmax2;
             }
         }
     }
     public void addbuffvisual(ref buffdata b)
     {
-        visualized_buff = b;
-        buffdurationmax = b.duration;
+        if (b.type == bufftypes.keep_moving || b.type == bufftypes.Stop_moving)
+        {
+            visualized_buff2 = b;
+            buffdurationmax2 = b.duration;
 
-        stay_apart_text.gameObject.SetActive(false);
-        stay_together_text.gameObject.SetActive(false);
-        anchor_image.gameObject.SetActive(false);
-        dmg_zoneimg.gameObject.SetActive(false);
-        progress_slider.gameObject.SetActive(false);
 
+            if (visualized_buff2.type == bufftypes.keep_moving)
+            {
+
+                Keep_moving_text.gameObject.SetActive(true);
+                progress_slider2.gameObject.SetActive(true);
+            }
+            else if (visualized_buff2.type == bufftypes.Stop_moving)
+            {
+                Stop_moving_text.gameObject.SetActive(true);
+                progress_slider2.gameObject.SetActive(true);
+            }
+
+            progress_slider2.value = 1;
+            return;
+        }
+        else if (b.type == bufftypes.stayaway || b.type == bufftypes.sticktogether)
+        {
+            visualized_buff = b;
+            buffdurationmax = b.duration;
         if (visualized_buff.type == bufftypes.stayaway)
         {
 
@@ -95,6 +150,8 @@ public class player_canvas_handler : MonoBehaviour
         }
 
         progress_slider.value = 1;
+        }
+
     }
     public void removebuffvisual()
     {

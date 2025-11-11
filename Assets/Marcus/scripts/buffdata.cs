@@ -33,6 +33,8 @@ public enum bufftypes
     sticktogether,
     stayaway,
     nojump,
+    keep_moving,
+    Stop_moving
 
 
 }

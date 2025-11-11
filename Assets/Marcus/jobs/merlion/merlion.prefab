@@ -136,6 +136,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  levelLayer:
+    serializedVersion: 2
+    m_Bits: 512
   playerNumber: 2
   current_max_gcd: 0
   has_coins: 1

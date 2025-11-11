@@ -16,6 +16,7 @@ public class PlayerLineMove : entity
     public float jumpHeight = 2.0f;   // •∏•„•Û•◊§Œπ‚§µ
     public float jumpDuration = 0.6f; // æÂæ∫°‹≤ºπﬂ§À§´§´§ÅE˛¥÷
     public LayerMask groundLayer;
+    public LayerMask levelLayer;
     public int playerNumber = 1;
 
     private Rigidbody rb;
@@ -50,7 +51,7 @@ public class PlayerLineMove : entity
     public Animator animator;
     [HideInInspector] public PlayerLineMove otherplayer;
     public player_canvas_handler playercanvas;
-    
+     float moveInput = 0f;
     public override void Start()
     {
         
@@ -101,6 +102,7 @@ public class PlayerLineMove : entity
     {
         base.Update();//countdown buff durations
         refresh_cds();//refresh cooldowns
+
         if (current_hp > 0)
         {
              useskills();
@@ -110,7 +112,6 @@ public class PlayerLineMove : entity
 
         
     }
-
     void MoveToLane()
     {
         if (lanes != null && lanes.Length > currentLane)
@@ -245,10 +246,9 @@ public class PlayerLineMove : entity
     void movement()
     {
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f, groundLayer);
-
         if (!isLine)
         {
-            float moveInput = 0f;
+            moveInput = 0f;
 
             // ÉXÉeÉBÉbÉNì¸óÕÅi-1 Å` +1Åj
             float stickInput = playerNumber == 1 ? Input.GetAxis("Horizontal") : Input.GetAxis("Horizontal2");
@@ -332,6 +332,16 @@ public class PlayerLineMove : entity
                 }
             }
         }
+        else
+        {
+            Debug.Log("Raycasting to adjust Y position");
+            if(Physics.Raycast(transform.position+ Vector3.up*2f, Vector3.down, out RaycastHit hitInfo, 10f, levelLayer))
+            {
+                Debug.Log("Hit level layer, adjusting Y position");
+                transform.position = new Vector3(transform.position.x,hitInfo.point.y, transform.position.z); 
+            }
+
+        }
     }
 
     public IEnumerator lerplane()
@@ -403,11 +413,8 @@ public class PlayerLineMove : entity
                     icon.transform.SetAsLastSibling();
                 }
             }
-            if (buffToAdd.type == bufftypes.sticktogether)
-            {
-                playercanvas.addbuffvisual(ref buffToAdd);
-            }
-            else if (buffToAdd.type == bufftypes.stayaway)
+            if (buffToAdd.type == bufftypes.sticktogether|| buffToAdd.type == bufftypes.stayaway||
+                buffToAdd.type == bufftypes.keep_moving|| buffToAdd.type == bufftypes.Stop_moving)
             {
                 playercanvas.addbuffvisual(ref buffToAdd);
             }
@@ -434,6 +441,22 @@ public class PlayerLineMove : entity
         }
 
     }
+    public void exit_keepmoving_buff(float pow)
+    {
+        if (moveInput == 0)
+        {
+            Debug.Log("keep moving buff exited, dealing damage");
+            TakeDamage(pow, false, new List<damagable_type>(), new Vector2(transform.localPosition.x, transform.localPosition.y));
+        }
+    }
+    public void exit_stopmoving_buff(float pow)
+    {
+        if (moveInput != 0)
+        {
+            Debug.Log("stop moving buff exited, dealing damage");
+            TakeDamage(pow, false, new List<damagable_type>(), new Vector2(transform.localPosition.x, transform.localPosition.y));
+        }
+    }
     public IEnumerator becomeghost(float duration)
     {
         //_Tweak_transparency
@@ -448,4 +471,9 @@ public class PlayerLineMove : entity
         }
         current_hp = max_hp;
     }
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down *5f);
+         }
 }

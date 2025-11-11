@@ -33,7 +33,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: kunaistab
+  m_Name: spin
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -47,7 +47,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 16592bb7ec50c4c4c96c5d61a4a4bc38, type: 2}
+  m_Motion: {fileID: 7400000, guid: 20eb3fcae4e25094da01ff420899bd9f, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -85,10 +85,10 @@ AnimatorStateMachine:
     m_Position: {x: 540, y: -420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5786073381359248904}
-    m_Position: {x: 30, y: -140, z: 0}
+    m_Position: {x: 0, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3024476265789476211}
-    m_Position: {x: 500, y: -310, z: 0}
+    m_Position: {x: 490, y: -310, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -131,7 +131,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: stealthscroll
+  m_Name: elven magic
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -145,7 +145,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a9e2ef791c358c441842f189c0465df4, type: 2}
+  m_Motion: {fileID: 7400000, guid: e8f2693f2cf36dd4aad3960225ef7bef, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -232,7 +232,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ninja
+  m_Name: tonto
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Run
@@ -360,7 +360,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: shuriken
+  m_Name: lantern fire
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -374,7 +374,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e92f5ba8c7e1d0d44a9a229151d79e8e, type: 2}
+  m_Motion: {fileID: 7400000, guid: ad29909d09cdcff469b77c8b8a043b09, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -464,7 +464,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: kunaislash
+  m_Name: sauna ladle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -478,7 +478,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 113dfaa5b7cda0140867bddf9ba69bd1, type: 2}
+  m_Motion: {fileID: 7400000, guid: fc4ce5a798816b741a1cafb7f8ed764f, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
