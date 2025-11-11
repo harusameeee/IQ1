@@ -6472,8 +6472,8 @@ MonoBehaviour:
   - {fileID: 1470310896}
   - {fileID: 632102751}
   characters_prefabs:
+  - {fileID: 979975582730178483, guid: f8fd914f21b980749b16cb03a42d9d87, type: 3}
   - {fileID: 999029502394767362, guid: 38bcf62fe367ef14db0d7a46b5f0e799, type: 3}
-  - {fileID: 979975582730178483, guid: dbb7fb3f6eadd5a48a879a51695e04f7, type: 3}
   - {fileID: 979975582730178483, guid: dbb7fb3f6eadd5a48a879a51695e04f7, type: 3}
   players:
   - {fileID: 0}
