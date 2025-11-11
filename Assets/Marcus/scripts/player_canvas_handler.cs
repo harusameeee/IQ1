@@ -80,28 +80,27 @@ public class player_canvas_handler : MonoBehaviour
             {
                 if (visualized_buff2.type == bufftypes.keep_moving)
                 {
-                    if(owner != null)
+                    if (owner != null)
                     {
                         owner.exit_keepmoving_buff(visualized_buff2.pow);
                     }
                 }
                 else if (visualized_buff2.type == bufftypes.Stop_moving)
                 {
-                    if(owner != null)
+                    if (owner != null)
                     {
                         owner.exit_stopmoving_buff(visualized_buff2.pow);
                     }
                 }
                 visualized_buff2 = null;
                 buffdurationmax2 = 0;
-                stay_apart_text.gameObject.SetActive(false);
-                stay_together_text.gameObject.SetActive(false);
-                dmg_zoneimg.gameObject.SetActive(false);
-                progress_slider.gameObject.SetActive(false);
+                Stop_moving_text.gameObject.SetActive(false);
+                Keep_moving_text.gameObject.SetActive(false);
+                progress_slider2.gameObject.SetActive(false);
             }
             else
             {
-                Debug.Log("updating buff visualizer=" + visualized_buff2.duration + "/" + visualized_buff2.duration / buffdurationmax2);
+               
                 progress_slider2.value = (buffdurationmax2-visualized_buff2.duration) / buffdurationmax2;
             }
         }

@@ -76,8 +76,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   playerNumber: 2
+  profilepic: {fileID: 21300000, guid: de58998cb1d6794489a5a9db8ead42d5, type: 3}
   current_max_gcd: 0
-  has_coins: 1
+  has_coins: 0
   current_coins: 0
   gcd_timer: 0
   current_hp: 100

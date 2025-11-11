@@ -23,6 +23,7 @@ public class PlayerLineMove : entity
     private bool isGrounded = true;
     private bool isJumping = false;
     private float jumpTimer = 0f;
+    public Sprite profilepic;
     private Vector3 startPos;
     [Header("combat system")]
     public float current_max_gcd = 0f;
@@ -71,7 +72,11 @@ public class PlayerLineMove : entity
             Debug.Log($"skill{i}:{skills[i].skillname}");
             ui.skill_icons[i].setskill(skills[i], this);
         }
-        
+        ui.profilepic_img.sprite = profilepic;
+        if (!has_coins)
+        {
+            ui.coin_texttransform.gameObject.SetActive(false);
+        }
         joyLeft = playerNumber == 1 ? "joystick 1 button 5" : "joystick 2 button 5";
         joyRight = playerNumber == 1 ? "joystick 1 button 4" : "joystick 2 button 4";
         joyJump = playerNumber == 1 ? "joystick 1 button 0" : "joystick 2 button 0";
@@ -334,12 +339,12 @@ public class PlayerLineMove : entity
         }
         else
         {
-            Debug.Log("Raycasting to adjust Y position");
-            if(Physics.Raycast(transform.position+ Vector3.up*2f, Vector3.down, out RaycastHit hitInfo, 10f, levelLayer))
-            {
-                Debug.Log("Hit level layer, adjusting Y position");
-                transform.position = new Vector3(transform.position.x,hitInfo.point.y, transform.position.z); 
-            }
+            //Debug.Log("Raycasting to adjust Y position");
+            //if(Physics.Raycast(transform.position+ Vector3.up*2f, Vector3.down, out RaycastHit hitInfo, 10f, levelLayer))
+            //{
+             //   Debug.Log("Hit level layer, adjusting Y position");
+             //   transform.position = new Vector3(transform.position.x,hitInfo.point.y, transform.position.z); 
+            //}
 
         }
     }
@@ -471,9 +476,5 @@ public class PlayerLineMove : entity
         }
         current_hp = max_hp;
     }
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, transform.position + Vector3.down *5f);
-         }
+
 }

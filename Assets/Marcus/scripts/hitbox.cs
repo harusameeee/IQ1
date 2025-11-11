@@ -26,7 +26,6 @@ public class hitbox : hurtbox
     {
         foreach (entity d in obstacle_spawner.damagables.Where(d => !alr_damaged.Contains(d)))
         {
-            Debug.Log($"Hitbox checking {d.name}");
             if (d.TakeDamage_screenaoe(dmgamount, this, targettype, out Rect overlap))
             {
                 float dmgmult = 1.0f;

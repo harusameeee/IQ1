@@ -10,6 +10,7 @@ public class player_ui : MonoBehaviour
     public List<Skill_icon> skill_icons;
     public Slider hp_bar;
     public TMP_Text coin_text;
+    public Image profilepic_img;
     public Transform coin_texttransform;
     public Transform skill_icon_transform;
     void Start()
