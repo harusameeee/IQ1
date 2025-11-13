@@ -7,14 +7,14 @@ public static class ScoreRankBoundary
     public const int RANK_X = 0;
 
     //C
-    public const int RANK_C = 1000;
+    public const int RANK_C = 100;
 
     //B
-    public const int RANK_B = 2000;
+    public const int RANK_B = 500;
 
     //A
-    public const int RANK_A = 3000;
+    public const int RANK_A = 1000;
 
     //S
-    public const int RANK_S = 5000;
+    public const int RANK_S = 2000;
 }

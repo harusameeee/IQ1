@@ -47,6 +47,7 @@ public class Result : MonoBehaviour
 
         // ScriptableObject ‚©‚çƒXƒRƒA‚ğæ“¾
         int score = (int)score_counter.currentscore;
+        if(score < 0) score = 0;
         await ShowResultAsync(score);
     }
 
