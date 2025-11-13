@@ -62,19 +62,17 @@ public class PoisonMagic : MonoBehaviour
             yield return null;
         }
 
-        // カウント終了後
-        if (countdownTMP != null)
-        {
-            countdownTMP.text = "0";
-            yield return new WaitForSeconds(0.5f);
-            countdownTMP.gameObject.SetActive(false);
-        }
-
+        // カウント終了後 
+        if (countdownTMP != null) 
+        { 
+            countdownTMP.text = "0"; yield return new WaitForSeconds(0.5f); 
+            countdownTMP.gameObject.SetActive(false); 
+        } 
+        
         // カウント終了後にZoneを起動！
-        if (zone != null)
-        {
-            zone.gameObject.SetActive(true); // 非アクティブなら有効化
-            zone.StartZone(); // Zoneの処理をスタート
-        }
+         if (zone != null) 
+            zone.gameObject.SetActive(true); 
+         // 非アクティブなら有効化
+         zone.StartZone(); // Zoneの処理をスタート } }
     }
 }

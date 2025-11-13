@@ -46,21 +46,6 @@ public class witch_Ai : entity
     {
         base.Update();
         return;
-        shootTimer += Time.deltaTime;
-        if (shootTimer >= shootInterval)
-        {
-            shootTimer = 0.0f;
-            // Shoot a projectile
-            Random rng = new Random(System.DateTime.Now.Millisecond);
-            int xOffset = rng.Next(-maxdist, maxdist);
-            Vector3 spawnPos = mover.getobstaclespawnpos(0, 2.0f, out bool valid, out float new_t);
-            if (valid)
-            {
-                var temp = Instantiate(projectile, spawnPos, Quaternion.identity);
-                moving_obstacle mov = temp.GetComponent<moving_obstacle>();
-                mov.splinecont = mover.splinecont;
-                mov.obstacle.localPosition = new Vector3(xOffset,mov.obstacle.localPosition.y,mov.obstacle.localPosition.z);
-            }
-        }
+       
     }
 }

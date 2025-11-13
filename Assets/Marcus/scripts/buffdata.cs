@@ -20,15 +20,21 @@ public class buffdata : ScriptableObject
         return newbuff;
     }
 }
-    public enum bufftypes
-    {
-        gcd_reduction,
-        cooldown_reduction,
-        speed_increase,//speed increase buff
-        attack,//attack buff
-        vulnerability,//takes more damage
-        stealth,//invuln+ damage boost when hitting from stealth
-        invuln///completely invulnerable
-        , poison
-        
-    }
+public enum bufftypes
+{
+    gcd_reduction,
+    cooldown_reduction,
+    speed_increase,//speed increase buff
+    attack,//attack buff
+    vulnerability,//takes more damage
+    stealth,//invuln+ damage boost when hitting from stealth
+    invuln///completely invulnerable
+    , poison,
+    sticktogether,
+    stayaway,
+    nojump,
+    keep_moving,
+    Stop_moving
+
+
+}

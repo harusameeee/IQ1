@@ -11,7 +11,6 @@ public class indicator : MonoBehaviour
     public Image item_icon;
     public Image timer_ring;
     public Transform obstacle_transform;
-    public int obstacleindex = 0;
     public float offsetpos = 0;
     int initail_segment_count = 0;
     public player_mover player;
@@ -42,12 +41,11 @@ public class indicator : MonoBehaviour
             }
         }
     }
-    public void setvalues(player_mover player, Transform obstacle, int index = 0, float offsetpos = 0)
+    public void setvalues(player_mover player, Transform obstacle, float offsetpos = 0)
     {
         this.player = player;
         obstacle_transform = obstacle;
         this.offsetpos = offsetpos;
-        obstacleindex = index;
         initail_segment_count = Mathf.RoundToInt(this.player.get_dist(player.transform.position, obstacle_transform.transform.position) / 2);
         timer_ring.material.SetFloat("_segmentcount", initail_segment_count);
 

@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,12 +16,14 @@ public class PlayerLineMove : entity
     public float jumpHeight = 2.0f;   // •∏•„•Û•◊§Œπ‚§µ
     public float jumpDuration = 0.6f; // æÂæ∫°‹≤ºπﬂ§À§´§´§ÅE˛¥÷
     public LayerMask groundLayer;
+    public LayerMask levelLayer;
     public int playerNumber = 1;
 
     private Rigidbody rb;
     private bool isGrounded = true;
     private bool isJumping = false;
     private float jumpTimer = 0f;
+    public Sprite profilepic;
     private Vector3 startPos;
     [Header("combat system")]
     public float current_max_gcd = 0f;
@@ -46,13 +50,14 @@ public class PlayerLineMove : entity
     [SerializeField] float speed = 10f;
     [SerializeField] bool isLine = false;
     public Animator animator;
-    
+    [HideInInspector] public PlayerLineMove otherplayer;
+    public player_canvas_handler playercanvas;
+     float moveInput = 0f;
     public override void Start()
     {
         
         hb.owner = this;
         
-        onspawn?.Invoke(this);
         bufficonparent = ui.skill_icon_transform;
         showbufficons = true;
         ui.hp_bar.value = (float)current_hp / max_hp;
@@ -67,7 +72,11 @@ public class PlayerLineMove : entity
             Debug.Log($"skill{i}:{skills[i].skillname}");
             ui.skill_icons[i].setskill(skills[i], this);
         }
-        
+        ui.profilepic_img.sprite = profilepic;
+        if (!has_coins)
+        {
+            ui.coin_texttransform.gameObject.SetActive(false);
+        }
         joyLeft = playerNumber == 1 ? "joystick 1 button 5" : "joystick 2 button 5";
         joyRight = playerNumber == 1 ? "joystick 1 button 4" : "joystick 2 button 4";
         joyJump = playerNumber == 1 ? "joystick 1 button 0" : "joystick 2 button 0";
@@ -91,18 +100,23 @@ public class PlayerLineMove : entity
         {
             ui.coin_texttransform.gameObject.SetActive(false);
         }
+        playercanvas.owner = this;
     }
 
     public override void Update()
     {
         base.Update();//countdown buff durations
         refresh_cds();//refresh cooldowns
-        useskills();//for activating skills
+
+        if (current_hp > 0)
+        {
+             useskills();
+        }
+       //for activating skills
         movement();// for movement
-        // ∆˛Œœ¿ﬂƒÅE
+
         
     }
-
     void MoveToLane()
     {
         if (lanes != null && lanes.Length > currentLane)
@@ -183,7 +197,7 @@ public class PlayerLineMove : entity
                 {
                     effect.activeeffect(this, this);
                 }
-                hb.skilldata = skills[atkval];
+                hb.effects = skills[atkval].onHit_effect;
                 gcd_timer = skills[atkval].gcd;
                 current_max_gcd = skills[atkval].gcd;
                 current_coins -= skills[atkval].coincost;
@@ -235,12 +249,16 @@ public class PlayerLineMove : entity
         return true;
     }
     void movement()
-    {        // ∫∏±¶∞‹∆∞
-
+    {
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.1f, groundLayer);
         if (!isLine)
         {
-            int moveInput = 0;
+            moveInput = 0f;
+
+            // ÉXÉeÉBÉbÉNì¸óÕÅi-1 Å` +1Åj
+            float stickInput = playerNumber == 1 ? Input.GetAxis("Horizontal") : Input.GetAxis("Horizontal2");
+
+            // É{É^Éìì¸óÕÇ‡ïπópÅiãåéÆì¸óÕëŒâûÅj
             if (Input.GetKey(joyLeft) || Input.GetKey(keyLeft))
             {
                 moveInput = -1;
@@ -249,6 +267,11 @@ public class PlayerLineMove : entity
             {
                 moveInput = 1;
             }
+            else if (Mathf.Abs(stickInput) > 0.2f) // ÉXÉeÉBÉbÉNì¸óÕÇ™àÍíËà»è„Ç»ÇÁçÃóp
+            {
+                moveInput = stickInput;
+            }
+
             float speedbuff = 1;
             foreach (var buff in buffs)
             {
@@ -257,13 +280,20 @@ public class PlayerLineMove : entity
                     speedbuff += buff.pow;
                 }
             }
+
             velocity = velocity * 0.8f + new Vector3(moveInput * speed * speedbuff, 0, 0);
             transform.localPosition += velocity * Time.deltaTime;
-            transform.localPosition = new Vector3(Mathf.Clamp(transform.localPosition.x, -7.5f, 7.5f), transform.localPosition.y, transform.localPosition.z);
-            // √œÃÃ»ΩƒÅE
+
+            // Xà íuêßå¿
+            transform.localPosition = new Vector3(
+                Mathf.Clamp(transform.localPosition.x, -8f, 8f),
+                transform.localPosition.y,
+                transform.localPosition.z
+            );
         }
         else
         {
+            // ÉåÅ[Éìà⁄ìÆÉÇÅ[Éh
             if ((Input.GetKeyDown(joyLeft) || Input.GetKeyDown(keyLeft)) && !isJumping)
             {
                 currentLane = Mathf.Max(0, currentLane - 1);
@@ -274,43 +304,47 @@ public class PlayerLineMove : entity
                 currentLane = Mathf.Min(maxLane, currentLane + 1);
                 MoveToLane();
             }
-            // •∏•„•Û•◊≥´ªœ
         }
-        if ((Input.GetKeyDown(joyJump) || Input.GetKeyDown(keyJump)) && !isJumping)
+
+        // ÉWÉÉÉìÉvèàóùÅiÇªÇÃÇ‹Ç‹Åj
+        if ((Input.GetKeyDown(joyJump) || Input.GetKeyDown(keyJump)) && !isJumping&&!buffs.Any(b=>b.type == bufftypes.nojump))
         {
-            Debug.Log($"P{playerNumber} •∏•„•Û•◊≥´ªœ°™");
+            Debug.Log($"P{playerNumber} ÉWÉÉÉìÉv");
             isJumping = true;
             jumpTimer = 0f;
             startPos = transform.localPosition;
         }
-        // •∏•„•Û•◊√Ê§ŒΩËÕ˝° Kinematic§«§‚OK°À
+
         if (isJumping)
         {
             if (isLine)
             {
-
                 jumpTimer += Time.deltaTime;
                 float t = jumpTimer / jumpDuration;
-                if (t >= 1f)
-                {
-                    isJumping = false;
-
-                }
+                if (t >= 1f) isJumping = false;
             }
             else
             {
                 jumpTimer += Time.deltaTime;
                 float t = jumpTimer / jumpDuration;
-                float height = Mathf.Sin(Mathf.PI * t) * jumpHeight; //  ÅE™¿˛≈™§ ∆∞§≠
+                float height = Mathf.Sin(Mathf.PI * t) * jumpHeight;
                 transform.localPosition = new Vector3(transform.localPosition.x, startPos.y + height, transform.localPosition.z);
 
-                // Ω™Œª»ΩƒÅE
                 if (t >= 1f)
                 {
                     isJumping = false;
                     transform.localPosition = new Vector3(transform.localPosition.x, startPos.y, transform.localPosition.z);
                 }
             }
+        }
+        else
+        {
+            //Debug.Log("Raycasting to adjust Y position");
+            //if(Physics.Raycast(transform.position+ Vector3.up*2f, Vector3.down, out RaycastHit hitInfo, 10f, levelLayer))
+            //{
+             //   Debug.Log("Hit level layer, adjusting Y position");
+             //   transform.position = new Vector3(transform.position.x,hitInfo.point.y, transform.position.z); 
+            //}
 
         }
     }
@@ -331,9 +365,10 @@ public class PlayerLineMove : entity
         }
         transform.localPosition = targetPos; // ∫«Ω™≈™§À•ø°º•≤•√•»∞Ã√÷§À•ª•√•»
     }
-    public override bool TakeDamage(float damageAmount,bool comboable = true,List<damagable_type> damagable_Types = null,Vector2 hitpoint = new Vector2())
+    public override bool TakeDamage(float damageAmount, bool comboable = true, List<damagable_type> damagable_Types = null, Vector2 hitpoint = new Vector2())
     {
-        if(buffs.Exists(buff => buff.type == bufftypes.invuln|| buff.type == bufftypes.stealth))
+        
+        if (buffs.Exists(buff => buff.type == bufftypes.invuln || buff.type == bufftypes.stealth)||current_hp <=0)
         {
             Debug.Log($"P{playerNumber} is invulnerable and took no damage.");
             return false;
@@ -344,13 +379,120 @@ public class PlayerLineMove : entity
         if (current_hp <= 0)
         {
             Debug.Log($"P{playerNumber} is defeated!");
+            StartCoroutine(becomeghost(10.0f));
+        }
+        else
+        {
+            StartCoroutine(dmgflash());
+        }
+
+        onHit?.Invoke(-damageAmount, false);
+        return true;
+    }
+    public void heal(float healamount)
+    {
+        current_hp = Mathf.Min(current_hp + healamount, max_hp);
+    }
+    public override void addbuff(buffdata newBuff)
+    {        
+        var existingBuff = buffs.Find(x => x.buffname == newBuff.buffname);
+        if (existingBuff != null )
+        {
+            if (!newBuff.stackable) return;
+            existingBuff.pow += newBuff.pow;
+            existingBuff.duration = Mathf.Max(existingBuff.duration, newBuff.duration);
+        }
+        else
+        {
+            buffdata buffToAdd = newBuff.copy();
+            buffs.Add(buffToAdd);
+            if (showbufficons)
+            {
+                var icon = bufficons.Find(b => !b.gameObject.activeSelf);
+                if (icon != null)
+                {
+
+                    icon.gameObject.SetActive(true);
+                    icon.referencedbuff = buffToAdd;
+                    icon.buffimg.sprite = buffToAdd.icon;
+                    icon.transform.SetAsLastSibling();
+                }
+            }
+            if (buffToAdd.type == bufftypes.sticktogether|| buffToAdd.type == bufftypes.stayaway||
+                buffToAdd.type == bufftypes.keep_moving|| buffToAdd.type == bufftypes.Stop_moving)
+            {
+                playercanvas.addbuffvisual(ref buffToAdd);
+            }
+
         }
         
-        onHit?.Invoke(-damageAmount,false);
-        return true;
+    }
+
+    public void exit_stayaway_buff(float pow)
+    {
+        if (Mathf.Abs(otherplayer.transform.localPosition.x - this.transform.localPosition.x) < 2)
+        {
+            Debug.Log("stay away buff exited, dealing damage");
+            otherplayer.TakeDamage(pow, false, new List<damagable_type>(), new Vector2(otherplayer.transform.localPosition.x, otherplayer.transform.localPosition.y));
+        }
+
+    }
+    public void exit_staytogether_buff(float pow)
+    {
+        if (Mathf.Abs(otherplayer.transform.localPosition.x - this.transform.localPosition.x) > 2)
+        {
+            Debug.Log("stay together buff exited, dealing damage");
+            otherplayer.TakeDamage(pow, false, new List<damagable_type>(), new Vector2(otherplayer.transform.localPosition.x, otherplayer.transform.localPosition.y));
+        }
+
+    }
+    public void exit_keepmoving_buff(float pow)
+    {
+        if (moveInput == 0)
+        {
+            Debug.Log("keep moving buff exited, dealing damage");
+            TakeDamage(pow, false, new List<damagable_type>(), new Vector2(transform.localPosition.x, transform.localPosition.y));
+        }
+    }
+    public void exit_stopmoving_buff(float pow)
+    {
+        if (moveInput != 0)
+        {
+            Debug.Log("stop moving buff exited, dealing damage");
+            TakeDamage(pow, false, new List<damagable_type>(), new Vector2(transform.localPosition.x, transform.localPosition.y));
+        }
+    }
+    public IEnumerator becomeghost(float duration)
+    {
+        //_Tweak_transparency
+        foreach (var mat in rend.materials)
+        {
+            mat.SetFloat("_Tweak_transparency", -0.9f);
+        }
+        yield return new WaitForSeconds(duration);
+        foreach (var mat in rend.materials)
+        {
+            mat.SetFloat("_Tweak_transparency", 0);
+        }
+        current_hp = max_hp;
     }
 
 
+    public override void PlayBuffVFX(bufftypes type)
+    {
+        //base.PlayBuffVFX(type); // ã§í ÇÃèàóùÇ‡åƒÇ‘ÅiîCà”Åj
 
+        switch (type)
+        {
+            case bufftypes.speed_increase:
+                var fx1 = Instantiate(Resources.Load<GameObject>("VFX/SpeedBuff_Player"), transform.position, Quaternion.identity);
+                fx1.transform.SetParent(transform);
+                break;
 
+            case bufftypes.attack:
+                var fx2 = Instantiate(Resources.Load<GameObject>("VFX/AttackBuff_Player"), transform.position, Quaternion.identity);
+                fx2.transform.SetParent(transform);
+                break;
+        }
+    }
 }

@@ -8,23 +8,24 @@ public class hitbox : hurtbox
     public override Vector2 position => getpos();
     public override Vector2 dimension => transform.localScale;
     public int dmgamount;
-    public skilldata skilldata;
+    public List<skilleffect> effects;
     public bool flipx=false;
     //notes pos x and y are for abs pos
     //scale x and y are for size
     //maybe will add delay timer???
     public entity owner;
-    public List<entity> damagables = new List<entity>();
     public List<entity> alr_damaged = new List<entity>();
+    void Awake()
+    {
+        
+    }
     void Start()
     {
-        entity.onspawn += addtodamagables;
     }
     public virtual void FixedUpdate()
     {
-        foreach (entity d in damagables.Where(d => !alr_damaged.Contains(d)))
+        foreach (entity d in obstacle_spawner.damagables.Where(d => !alr_damaged.Contains(d)))
         {
-            Debug.Log($"Hitbox checking {d.name}");
             if (d.TakeDamage_screenaoe(dmgamount, this, targettype, out Rect overlap))
             {
                 float dmgmult = 1.0f;
@@ -46,10 +47,10 @@ public class hitbox : hurtbox
                         }
                     }
                 }
-                Debug.Log($"Hitbox dealing {(int)(dmgamount * dmgmult)} damage to {d.name}");
+                Debug.Log($"{name} dealing {(int)(dmgamount * dmgmult)} damage to {d.name}");
                 d.TakeDamage((int)(dmgamount * dmgmult), true, null,new Vector2( overlap.center.x*1.5f+2, overlap.center.y-8f));
-                if (skilldata != null) {
-                    foreach (var effect in skilldata.onHit_effect)
+                if (effects != null && effects.Count > 0) {
+                    foreach (var effect in effects)
                     {
                         effect.activeeffect(owner, d);
                     }
@@ -80,18 +81,10 @@ public class hitbox : hurtbox
     void OnDisable()
     {
         alr_damaged.Clear();//clear damagables on disable
-        skilldata = null;
+        effects = null;
     }
     void OnEnable()
     {
         alr_damaged.Clear();//clear damagables on enable
-    }
-    void addtodamagables(entity d)
-    {
-        Debug.Log($"Hitbox registering {d.name} to damagables");
-        if (!damagables.Contains(d))
-        {
-            damagables.Add(d);
-        }
     }
 }

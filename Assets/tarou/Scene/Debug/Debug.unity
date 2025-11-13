@@ -2237,7 +2237,7 @@ MonoBehaviour:
   obstacles:
   - {fileID: 4772473273694988483, guid: a6ddf03d3ef23bd45b7941792e246ad2, type: 3}
   indicators: []
-  damagables: []
+  obstacle_sprites: []
   player: {fileID: 801511698}
 --- !u!4 &431725499
 Transform:
@@ -3175,7 +3175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
       propertyPath: spawnList.Array.data[0].prefabIndex
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2776479874355673809, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
       propertyPath: spawnList.Array.data[1].prefabIndex
@@ -9456,7 +9456,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7393213262640191428, guid: 682bb5c22fd69074d82ab92916588c48, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1023
+      value: -928
       objectReference: {fileID: 0}
     - target: {fileID: 7393213262640191428, guid: 682bb5c22fd69074d82ab92916588c48, type: 3}
       propertyPath: m_AnchoredPosition.y

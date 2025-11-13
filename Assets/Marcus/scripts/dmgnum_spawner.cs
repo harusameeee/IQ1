@@ -11,7 +11,7 @@ public class dmgnum_spawner : MonoBehaviour
     }
     void Start()
     {
-        witch_Ai.enemyhit += SpawnDmgNum;
+        witch_Ai2.enemyhit += SpawnDmgNum;
         for(int i = 0; i < 25; i++)
         {
             dmgnum temp = Instantiate(Resources.Load<dmgnum>("dmgnum"), this.transform);

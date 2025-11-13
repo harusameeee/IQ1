@@ -12,16 +12,33 @@ public class hitboxvisualizer : MonoBehaviour
      
         foreach (hitboxpair hbp in additionalhitboxes)
         {
-            if (hbp.todraw.active&&hbp.todraw.gameObject.activeInHierarchy)
-            drawhurbox(hbp.todraw, hbp.hbcolor);
+            if (hbp.todraw.active && hbp.todraw.gameObject.activeInHierarchy)
+            {
+                if (!hbp.todraw.is_circle)
+                {
+
+                    drawhurbox(hbp.todraw, hbp.hbcolor);
+                }
+                else
+                {
+                    drawcirclehurbox(hbp.todraw, hbp.hbcolor);
+                }
+            }
         }
     }
     public void drawhurbox(hurtbox hb, Color col)//この関数を使用して、ギズモにヒットボックスを描画します
     {
-        Matrix4x4 rotationMatrix = Matrix4x4.TRS(transform.parent.position, transform.parent.rotation*quaternion.Euler(0, math.PI, 0), transform.lossyScale);
-        Gizmos.matrix = rotationMatrix;	
+        Matrix4x4 rotationMatrix = Matrix4x4.TRS(transform.parent.position, transform.parent.rotation * quaternion.Euler(0, math.PI, 0), transform.lossyScale);
+        Gizmos.matrix = rotationMatrix;
         Gizmos.color = col;
         Gizmos.DrawWireCube(new Vector3(hb.position.x, hb.position.y, 0), new Vector3(hb.dimension.x, hb.dimension.y, 1.0f));
+    }
+    public void drawcirclehurbox(hurtbox hb, Color col)//この関数を使用して、ギズモにヒットボックスを描画します
+    {
+        Matrix4x4 rotationMatrix = Matrix4x4.TRS(transform.parent.position, transform.parent.rotation * quaternion.Euler(0, math.PI, 0), transform.lossyScale);
+        Gizmos.matrix = rotationMatrix;
+        Gizmos.color = col;
+        Gizmos.DrawWireSphere(new Vector3(hb.position.x, hb.position.y, 0), hb.dimension.x/2);
     }
     [Serializable]
     public class hitboxpair

@@ -10,8 +10,10 @@ public class playerspawner : MonoBehaviour
 
     public Transform[] lanes = new Transform[5];
     public GameObject[] characters_prefabs = new GameObject[3];
+    [HideInInspector] public PlayerLineMove[] players = new PlayerLineMove[2];
 
     [SerializeField] private SelectedPlayerJob[] playerJob;
+
     void Awake()
     {
         instance = this;
@@ -19,13 +21,15 @@ public class playerspawner : MonoBehaviour
     void Start()
     {
         playerspawner.class_type type1 =
-        (playerspawner.class_type)System.Enum.Parse(typeof(playerspawner.class_type), playerJob[0].playerJobName,true);
+        (playerspawner.class_type)System.Enum.Parse(typeof(playerspawner.class_type), playerJob[0].playerJobName, true);
         playerspawner.class_type type2 =
-        (playerspawner.class_type)System.Enum.Parse(typeof(playerspawner.class_type), playerJob[1].playerJobName,true);
-        spawnchara(type1, 0);
+            (playerspawner.class_type)System.Enum.Parse(typeof(playerspawner.class_type), playerJob[1].playerJobName, true);
         spawnchara(type2, 1);
+        spawnchara(type1, 0);
+        players[0].otherplayer = players[1];
+        players[1].otherplayer = players[0];
     }
-    public void spawnchara(class_type ct, int playernum)// used for spawning characters note player numn should be 0 or 1
+    void spawnchara(class_type ct, int playernum)// used for spawning characters note player numn should be 0 or 1
     {
         GameObject chara = Instantiate(characters_prefabs[(int)ct], transform);
         if (playernum == 1)
@@ -44,6 +48,7 @@ public class playerspawner : MonoBehaviour
         player.playerNumber = playernum + 1;
         player.ui = playeruis[playernum];
         player.lanes = lanes;
+        players[playernum] = player;
     }
     public enum class_type
     {
