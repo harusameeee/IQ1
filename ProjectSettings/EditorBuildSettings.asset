@@ -23,5 +23,11 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Tsuji/Scene/StageOtamesi.unity
     guid: c2d3a10a29e2d0e41a6edd7983b9fbe2
+  - enabled: 0
+    path: Assets/yamada/yamadaScene.unity
+    guid: c5c989b6f70e7974ca97222f61020ff3
+  - enabled: 0
+    path: Assets/yamada/DemoScene.unity
+    guid: 4a394d53a020e1f488d2cc283c798074
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

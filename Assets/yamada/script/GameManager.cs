@@ -25,6 +25,5 @@ public class GameManager : MonoBehaviour
     Application.Quit();//ゲームプレイ終了
 #endif
         }
-        //FadeManager.Instance.LoadScene(1);
     }
 }
