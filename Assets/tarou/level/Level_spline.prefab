@@ -175,21 +175,21 @@ MonoBehaviour:
       TangentIn:
         x: -0
         y: -0
-        z: -17.750397
+        z: -17.849108
       TangentOut:
         x: 0
         y: 0
-        z: 22.968071
+        z: 23.291513
       Rotation:
         value:
-          x: 0.16279079
-          y: 0.93037057
-          z: -0.0961263
-          w: -0.31411713
+          x: 0.16283976
+          y: 0.92833346
+          z: -0.09668643
+          w: -0.31989366
     - Position:
-        x: -705.6
+        x: -708
         y: 31.2
-        z: -375.2
+        z: -375.4
       TangentIn:
         x: 0
         y: 0
@@ -201,27 +201,27 @@ MonoBehaviour:
       Rotation:
         value:
           x: 0
-          y: -0.69415367
-          z: -0
-          w: 0.71982694
+          y: -0.9850878
+          z: 0
+          w: 0.17205238
     - Position:
         x: -753.8
-        y: 17
+        y: 12.2
         z: -469.1
       TangentIn:
         x: -0
         y: -0
-        z: -34.995007
+        z: -34.83412
       TangentOut:
         x: 0
         y: 0
-        z: 34.155594
+        z: 33.936047
       Rotation:
         value:
-          x: 0.07781093
-          y: 0.9719513
-          z: -0.10100272
-          w: -0.19762261
+          x: 0.0775259
+          y: 0.97302216
+          z: -0.100322165
+          w: -0.19275126
     - Position:
         x: -788.85
         y: -3
@@ -245,19 +245,19 @@ MonoBehaviour:
         y: -1.5
         z: -753.2
       TangentIn:
-        x: 0
-        y: 0
-        z: 0
+        x: -0
+        y: -0
+        z: -40.529617
       TangentOut:
         x: 0
         y: 0
-        z: 0
+        z: 17.713882
       Rotation:
         value:
-          x: 0.88847286
-          y: -0.36626798
-          z: -0.25638732
-          w: 0.103582755
+          x: 0.8884729
+          y: -0.366268
+          z: -0.25638708
+          w: 0.103582665
     - Position:
         x: -887.4
         y: -1.5
@@ -281,19 +281,19 @@ MonoBehaviour:
         y: -1.5
         z: -805.9
       TangentIn:
-        x: 0
-        y: 0
-        z: 0
+        x: -0
+        y: -0
+        z: -21.85385
       TangentOut:
         x: 0
         y: 0
-        z: 0
+        z: 17.03779
       Rotation:
         value:
-          x: -0.07495117
-          y: -0.4612016
-          z: 0.14182098
-          w: 0.87267536
+          x: 0.08978868
+          y: 0.7597373
+          z: -0.075584486
+          w: -0.63955003
     - Position:
         x: -1005.15
         y: -1.5
@@ -301,21 +301,21 @@ MonoBehaviour:
       TangentIn:
         x: -0
         y: -0
-        z: -12.863693
+        z: -17.539803
       TangentOut:
         x: 0
         y: 0
-        z: 9.335917
+        z: 23.94768
       Rotation:
         value:
-          x: 0.03390985
-          y: -0.68022954
-          z: -0.04403897
-          w: 0.73088884
+          x: 0.03553265
+          y: -0.6586476
+          z: -0.042715967
+          w: 0.75039715
     - Position:
-        x: -1029.1
+        x: -1087.8
         y: -1
-        z: -802.7
+        z: -783.3
       TangentIn:
         x: 0
         y: 0
@@ -326,28 +326,28 @@ MonoBehaviour:
         z: 0
       Rotation:
         value:
-          x: 0.0018070451
-          y: -0.27927518
-          z: -0.011662879
-          w: 0.96013856
+          x: 0.0047639604
+          y: -0.58652025
+          z: -0.0059391847
+          w: 0.8098987
     - Position:
         x: -1147.9
         y: -1.4000015
         z: -761.3
       TangentIn:
-        x: 0
-        y: 0
-        z: 0
+        x: -0
+        y: -0
+        z: -18.023998
       TangentOut:
         x: 0
         y: 0
-        z: 0
+        z: 13.410747
       Rotation:
         value:
-          x: 0.00812089
-          y: -0.59182364
-          z: -0.005517659
-          w: 0.8060077
+          x: 0.010591735
+          y: -0.5139735
+          z: -0.0035142335
+          w: 0.85773355
     - Position:
         x: -1176.5
         y: -2.2000008
@@ -371,19 +371,19 @@ MonoBehaviour:
         y: -2.2999992
         z: -698.9
       TangentIn:
-        x: 0
-        y: 0
-        z: 0
+        x: -0
+        y: -0
+        z: -14.951169
       TangentOut:
         x: 0
         y: 0
-        z: 0
+        z: 14.672134
       Rotation:
         value:
-          x: -0.038504634
-          y: 0.16263312
-          z: 0.08674656
-          w: 0.9821114
+          x: -0.012399946
+          y: -0.13585243
+          z: 0.09407723
+          w: 0.98617435
     - Position:
         x: -1200.8
         y: -2.2999992
@@ -407,19 +407,19 @@ MonoBehaviour:
         y: -2.2999992
         z: -602.3
       TangentIn:
-        x: 0
-        y: 0
-        z: 0
+        x: -0
+        y: -0
+        z: -24.936224
       TangentOut:
         x: 0
         y: 0
-        z: 0
+        z: 48.34963
       Rotation:
         value:
-          x: 0
-          y: 0.29631
-          z: 0
-          w: 0.9550918
+          x: -6.041037e-10
+          y: 0.26270843
+          z: 1.6448046e-10
+          w: 0.96487534
     - Position:
         x: -1046.5
         y: -2.2999992
@@ -497,19 +497,19 @@ MonoBehaviour:
         y: -0.98000336
         z: -272.5
       TangentIn:
-        x: 0
-        y: 0
-        z: 0
+        x: -0
+        y: -0
+        z: -18.980745
       TangentOut:
         x: 0
         y: 0
-        z: 0
+        z: 23.39536
       Rotation:
         value:
-          x: -0.0000000039503036
-          y: -0.5539664
-          z: 0.0000000059367897
-          w: 0.8325391
+          x: 0.000000013028446
+          y: -0.4658079
+          z: 0.000000014747856
+          w: 0.8848859
     - Position:
         x: -1109.7
         y: -0.98000336
@@ -945,25 +945,9 @@ MonoBehaviour:
       Tension: 0.5
     - Mode: 1
       Tension: 0.5
-    - Mode: 1
-      Tension: 0.5
     - Mode: 0
       Tension: 0.5
-    - Mode: 1
-      Tension: 0.5
     - Mode: 0
-      Tension: 0.5
-    - Mode: 1
-      Tension: 0.5
-    - Mode: 1
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 1
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 1
       Tension: 0.5
     - Mode: 0
       Tension: 0.5
@@ -973,7 +957,23 @@ MonoBehaviour:
       Tension: 0.5
     - Mode: 0
       Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
     - Mode: 1
+      Tension: 0.5
+    - Mode: 0
+      Tension: 0.5
+    - Mode: 0
       Tension: 0.5
     - Mode: 1
       Tension: 0.5
