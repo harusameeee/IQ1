@@ -24,8 +24,8 @@ public class playerspawner : MonoBehaviour
         (playerspawner.class_type)System.Enum.Parse(typeof(playerspawner.class_type), playerJob[0].playerJobName, true);
         playerspawner.class_type type2 =
             (playerspawner.class_type)System.Enum.Parse(typeof(playerspawner.class_type), playerJob[1].playerJobName, true);
-        spawnchara(class_type.merlion, 1);
-        spawnchara(class_type.ninja, 0);
+        spawnchara(type2, 1);
+        spawnchara(type1, 0);
         players[0].otherplayer = players[1];
         players[1].otherplayer = players[0];
     }
