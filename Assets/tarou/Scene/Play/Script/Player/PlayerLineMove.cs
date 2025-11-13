@@ -269,7 +269,7 @@ public class PlayerLineMove : entity
             }
             else if (Mathf.Abs(stickInput) > 0.2f) // スティック入力が一定以上なら採用
             {
-                moveInput = stickInput;
+                moveInput = -stickInput;
             }
 
             float speedbuff = 1;

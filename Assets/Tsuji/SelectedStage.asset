@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94099804239e3bd429d433fc661b8ba9, type: 3}
   m_Name: SelectedStage
   m_EditorClassIdentifier: 
-  stageName: combat_demo
+  stageName: level_scene
