@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class entity : hurtbox,Damagable
+public abstract class entity : hurtbox, Damagable
 {
     [Header("buffs")]
     [SerializeReference]
@@ -12,7 +12,7 @@ public abstract class entity : hurtbox,Damagable
     public List<bufficon> bufficons = new List<bufficon>();
     public Transform bufficonparent;
     [Header("entity events")]
-    public static Action<float,bool> onHit;
+    public static Action<float, bool> onHit;
     [HideInInspector] public float elapsedtime = 0f;
     public static Action<entity> onspawn;
     public SkinnedMeshRenderer rend;
@@ -32,17 +32,18 @@ public abstract class entity : hurtbox,Damagable
     public virtual void Update()
     {
         elapsedtime += Time.deltaTime;
-        if (elapsedtime >= 1f) {
-            elapsedtime = elapsedtime % 1f; 
+        if (elapsedtime >= 1f)
+        {
+            elapsedtime = elapsedtime % 1f;
             countdownbuffdurations();
         }
     }
 
-    public virtual bool TakeDamage(float damageAmount,bool comboable,List<damagable_type> damagable_Types = null,Vector2 hitpoint = new Vector2())
+    public virtual bool TakeDamage(float damageAmount, bool comboable, List<damagable_type> damagable_Types = null, Vector2 hitpoint = new Vector2())
     {
         return true;
     }
-    public virtual  bool TakeDamage_screenaoe(float damageAmount, hurtbox hb, hurtbox.targetype targettype,out Rect overlap,List<damagable_type> damagable_Types = null)
+    public virtual bool TakeDamage_screenaoe(float damageAmount, hurtbox hb, hurtbox.targetype targettype, out Rect overlap, List<damagable_type> damagable_Types = null)
     {
         if (targettype != this.targettype)
         {
@@ -96,9 +97,9 @@ public abstract class entity : hurtbox,Damagable
         buffs.RemoveAt(index);
     }
     public virtual void addbuff(buffdata newBuff)
-    {        
+    {
         var existingBuff = buffs.Find(x => x.buffname == newBuff.buffname);
-        if (existingBuff != null )
+        if (existingBuff != null)
         {
             if (!newBuff.stackable) return;
             existingBuff.pow += newBuff.pow;
@@ -113,15 +114,17 @@ public abstract class entity : hurtbox,Damagable
                 var icon = bufficons.Find(b => !b.gameObject.activeSelf);
                 if (icon != null)
                 {
-                    
+
                     icon.gameObject.SetActive(true);
                     icon.referencedbuff = buffToAdd;
                     icon.buffimg.sprite = buffToAdd.icon;
                     icon.transform.SetAsLastSibling();
                 }
             }
+
+            PlayBuffVFX(buffToAdd.type);
         }
-        
+
     }
     public void countdownbuffdurations()
     {
@@ -136,11 +139,11 @@ public abstract class entity : hurtbox,Damagable
             }
             else if (buffs[i].type == bufftypes.poison)
             {
-                TakeDamage(buffs[i].pow, false, new List<damagable_type>() { damagable_type.poison },Vector2.zero);
+                TakeDamage(buffs[i].pow, false, new List<damagable_type>() { damagable_type.poison }, Vector2.zero);
             }
         }
     }
-    Rect GetOverlapRect(Rect a, Rect b,out bool isOverlapping)
+    Rect GetOverlapRect(Rect a, Rect b, out bool isOverlapping)
     {
         isOverlapping = false;
         float xMin = Mathf.Max(a.xMin, b.xMin);
@@ -172,7 +175,31 @@ public abstract class entity : hurtbox,Damagable
         {
             mat.SetColor("_Emissive_Color", Color.black);
         }
-        
+
     }
-    
+
+    public virtual void PlayBuffVFX(bufftypes type)
+    {
+        GameObject fxPrefab = null;
+
+        switch (type)
+        {
+            case bufftypes.speed_increase:
+                fxPrefab = Resources.Load<GameObject>("VFX/SpeedBuff_VFX");
+                break;
+            case bufftypes.attack:
+                fxPrefab = Resources.Load<GameObject>("VFX/AttackBuff_VFX");
+                break;
+        }
+
+        if (fxPrefab != null)
+        {
+            GameObject fx = Instantiate(fxPrefab, transform.position, Quaternion.identity);
+            fx.transform.SetParent(transform, worldPositionStays: true);
+
+            //  àÍíËéûä‘å„Ç…è¡Ç∑ÅiVFXÇ™é©ìÆÇ≈èIÇÌÇÁÇ»Ç¢èÍçáÅj
+            //Destroy(fx, 3f);
+        }
+    }
+
 }

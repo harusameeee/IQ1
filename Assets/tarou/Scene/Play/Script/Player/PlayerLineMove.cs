@@ -477,4 +477,22 @@ public class PlayerLineMove : entity
         current_hp = max_hp;
     }
 
+
+    public override void PlayBuffVFX(bufftypes type)
+    {
+        //base.PlayBuffVFX(type); // ‹¤’Ê‚Ìˆ—‚àŒÄ‚Ôi”CˆÓj
+
+        switch (type)
+        {
+            case bufftypes.speed_increase:
+                var fx1 = Instantiate(Resources.Load<GameObject>("VFX/SpeedBuff_Player"), transform.position, Quaternion.identity);
+                fx1.transform.SetParent(transform);
+                break;
+
+            case bufftypes.attack:
+                var fx2 = Instantiate(Resources.Load<GameObject>("VFX/AttackBuff_Player"), transform.position, Quaternion.identity);
+                fx2.transform.SetParent(transform);
+                break;
+        }
+    }
 }
