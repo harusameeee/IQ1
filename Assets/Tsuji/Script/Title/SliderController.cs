@@ -32,7 +32,8 @@ public class SliderControllerUI : MonoBehaviour
             {
                 isAdjusting = true;
             }
-            else if(Input.GetButtonDown("Cancel"))
+
+            if (Input.GetButtonDown("Cancel"))
             {
                 closeButton.onClick.Invoke();
             }
@@ -48,6 +49,9 @@ public class SliderControllerUI : MonoBehaviour
                 isAdjusting = false;
             }
         }
+
+
+        
     }
 
     // スライダーを上下で選択
