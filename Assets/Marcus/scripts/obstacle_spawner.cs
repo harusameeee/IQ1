@@ -181,6 +181,7 @@ public class obstacle_spawner : MonoBehaviour
             itemindicator.gameObject.SetActive(true);
             itemindicator.setitem(obs.sprite);
             obs.transform.position = spawnpos;
+            obs.transform.rotation = player.transform.rotation;
             itemindicator.setvalues(player, obs.transform, temp);
     }
     
