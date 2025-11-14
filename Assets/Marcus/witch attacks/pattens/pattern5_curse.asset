@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5a84bc208e43dd44a6d623c6a659646, type: 3}
   m_Name: pattern5_curse
   m_EditorClassIdentifier: 
-  position: {x: 4, y: 1}
+  position: {x: -4, y: 0}
   duration: 6
   patterndata:
   - attackhbobj: {fileID: 5041760334301984476, guid: 96269da352b880749ad814ebebe5d452, type: 3}
-    offset: {x: -11.5, y: 2.5}
+    offset: {x: -10, y: 3}
   - attackhbobj: {fileID: 5041760334301984476, guid: 4c43b55fc0e4760488a08e95de2bebbf, type: 3}
-    offset: {x: -7.2, y: 2.5}
+    offset: {x: 0, y: 0}
   - attackhbobj: {fileID: 5041760334301984476, guid: a2b433d449f098343866fceb9dcacc05, type: 3}
     offset: {x: 0, y: 0}
