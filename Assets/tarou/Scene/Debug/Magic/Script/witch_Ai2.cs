@@ -35,6 +35,12 @@ public class witch_Ai2 : entity
     public float move_speed= 4.0f; // 移動速度（未使用） / Movement speed (unused)
     public List<MagicSpawnData> magicspawns = new List<MagicSpawnData>(); // 魔法発動データリスト / List of magic spawn data
     public Animator animator; // アニメーター参照 / Reference to the animator
+    [Header("random pattern mode")]
+    
+    public bool randompattern = false; // ランダムパターン使用フラグ / Flag to use random patterns
+    public enemypattern currentrandompattern; // 現在のランダムパターン（未使用） / Current random pattern (unused)
+    public List<enemypattern> spellpatterns = new List<enemypattern>(); // 使用する魔法パターンリスト / List of spell patterns to use
+    public List<enemypattern> usedpatterns = new List<enemypattern>(); // 既に使用したパターンリスト / List of already used patterns
     public override void Start()
     {
         base.Start();
@@ -105,7 +111,35 @@ public class witch_Ai2 : entity
             targetpos = Vector2.zero;
         }
         float t = mover.current_t_normalized;
-        if(currentmagicindex < magicspawns.Count)
+        if (randompattern)
+        {
+            if(spellpatterns.Count == 0)
+            {
+                // すべてのパターンを使用済みに移動
+                spellpatterns.AddRange(usedpatterns);
+                var count = spellpatterns.Count;
+                var last = count - 1;
+                for (var i = 0; i < last; ++i) {
+                    var r = UnityEngine.Random.Range(i, count);
+                    var tmp = spellpatterns[i];
+                    spellpatterns[i] = spellpatterns[r];
+                    spellpatterns[r] = tmp;
+                 }
+                usedpatterns.Clear();
+                Debug.Log("All patterns used, resetting used patterns.");
+            }
+            {
+                var pattern = spellpatterns[0];
+                spellpatterns.RemoveAt(0);
+                usedpatterns.Add(pattern);
+                queuedspellindex = -1; // Clear queued spell index
+                currentrandompattern = pattern;
+                targetpos = pattern.position;
+                move_duration = pattern.duration;
+                animator.Play("spellcast");
+            }
+        }
+        else if(currentmagicindex < magicspawns.Count)
         {
             var magicdata = magicspawns[currentmagicindex];
             if (t >= magicdata.triggerPoint)
@@ -122,6 +156,16 @@ public class witch_Ai2 : entity
     private void SpawnMagic()
     {
         if(queuedspellindex < 0 || queuedspellindex >= magicspawns.Count) return;
+        if(randompattern)
+        {
+            if(currentrandompattern == null) return;
+            foreach (var pattern in currentrandompattern.patterndata)
+            {
+                var temp = Instantiate(pattern.attackhbobj, spellcastpoint);
+                temp.transform.localPosition = pattern.offset;
+            }
+            return;
+        }
         var data = magicspawns[queuedspellindex];
         foreach (var pattern in data.magicPattern.patterndata)
         {
