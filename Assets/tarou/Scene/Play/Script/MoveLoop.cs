@@ -34,7 +34,7 @@ public class MoveLoop : MonoBehaviour
         // à⁄ìÆùàóù
         rb.linearVelocity = rb.linearVelocity.magnitude * 0.7f * newforward + newforward * speed;
     }
-    public Vector3 getobstaclespawnpos(float offsetval, float dist, out bool valid,out float New_t)
+    public Vector4 getobstaclespawnpos(float offsetval, float dist, out bool valid,out float New_t)
     {
         valid = true;
         spline = new NativeSpline(splinecont.Spline);
@@ -49,6 +49,8 @@ public class MoveLoop : MonoBehaviour
         Vector3 up = spline.EvaluateUpVector(New_t);
         New_t *= spline.GetLength();
         pos += Vector3.Cross(forward, up).normalized * offsetval;
+        Vector4 temp =pos;
+        temp.w=Quaternion.LookRotation(forward, up).eulerAngles.y;
         return pos;
     }
     public float get_dist(Vector3 pos1, Vector3 pos2)

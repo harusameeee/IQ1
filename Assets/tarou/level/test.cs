@@ -5,7 +5,6 @@ using UnityEngine.Splines;
 public class test : MonoBehaviour
 {
     public SplineContainer splineContainer;
-    public float3 translationOffset = new float3(1f, 0f, 0f);
 
     void Start()
     {
@@ -18,7 +17,7 @@ public class test : MonoBehaviour
         for (int i = 0; i < spline.Count; i++)
         {
             BezierKnot currentKnot = spline[i];
-            currentKnot.Position += translationOffset;
+            currentKnot.Position += (float3)this.transform.position;
             spline[i] = currentKnot;
         }
 
