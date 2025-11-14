@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a84bc208e43dd44a6d623c6a659646, type: 3}
+  m_Name: pattern6_nocurse
+  m_EditorClassIdentifier: 
+  position: {x: 0, y: 0}
+  duration: 6
+  patterndata:
+  - attackhbobj: {fileID: 5041760334301984476, guid: 96269da352b880749ad814ebebe5d452, type: 3}
+    offset: {x: -11.5, y: 3.5}
+  - attackhbobj: {fileID: 5041760334301984476, guid: 3a7fb251dd1f61843a6fac004fe1aea9, type: 3}
+    offset: {x: -3, y: 1}
