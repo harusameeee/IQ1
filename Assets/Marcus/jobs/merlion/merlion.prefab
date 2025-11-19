@@ -123,7 +123,8 @@ MonoBehaviour:
   bufficons: []
   bufficonparent: {fileID: 0}
   elapsedtime: 0
-  rend: {fileID: 425703849171747283}
+  rend:
+  - {fileID: 425703849171747283}
   lanes:
   - {fileID: 0}
   - {fileID: 0}

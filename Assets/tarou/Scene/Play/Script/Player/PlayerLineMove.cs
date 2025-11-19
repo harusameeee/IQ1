@@ -465,18 +465,29 @@ public class PlayerLineMove : entity
     public IEnumerator becomeghost(float duration)
     {
         //_Tweak_transparency
-        foreach (var mat in rend.materials)
+        foreach (var rendInstance in rend)
         {
-            mat.SetFloat("_Tweak_transparency", -0.9f);
+            foreach (var mat in rendInstance.materials)
+            {
+                mat.SetFloat("_Tweak_transparency", -0.9f);
+            }
         }
         yield return new WaitForSeconds(duration);
-        foreach (var mat in rend.materials)
+        foreach (var rendInstance in rend)
         {
-            mat.SetFloat("_Tweak_transparency", 0);
+            foreach (var mat in rendInstance.materials)
+            {
+                mat.SetFloat("_Tweak_transparency", 0);
+            }
         }
         current_hp = max_hp;
     }
-
+    public IEnumerator hitstop(float duration)
+    {
+        animator.speed = 0;
+        yield return new WaitForSecondsRealtime(duration);
+        animator.speed = 1;
+    }
 
     public override void PlayBuffVFX(bufftypes type)
     {
