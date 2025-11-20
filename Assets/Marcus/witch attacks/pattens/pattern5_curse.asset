@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: pattern5_curse
   m_EditorClassIdentifier: 
   position: {x: -4, y: 0}
-  duration: 6
+  duration: 8
   patterndata:
   - attackhbobj: {fileID: 5041760334301984476, guid: 96269da352b880749ad814ebebe5d452, type: 3}
     offset: {x: -10, y: 3}
   - attackhbobj: {fileID: 5041760334301984476, guid: 4c43b55fc0e4760488a08e95de2bebbf, type: 3}
-    offset: {x: 0, y: 0}
+    offset: {x: -5, y: 4.3}
   - attackhbobj: {fileID: 5041760334301984476, guid: a2b433d449f098343866fceb9dcacc05, type: 3}
     offset: {x: 0, y: 0}

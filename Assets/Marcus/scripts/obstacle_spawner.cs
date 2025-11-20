@@ -103,7 +103,7 @@ public class obstacle_spawner : MonoBehaviour
                 attempts++;
             }
 
-        Vector3 spawnpos = player.getobstaclespawnpos(temp, offset_dist, out bool valid, out float new_t);
+        Vector4 spawnpos = player.getobstaclespawnpos(temp, offset_dist, out bool valid, out float new_t);
         if (!valid)
         {
 
@@ -118,7 +118,8 @@ public class obstacle_spawner : MonoBehaviour
         obs.reftransform = player.transform;
         obstacleindicator.transform.localPosition = new Vector3(temp * 80, 0, 0);
         obstacleindicator.gameObject.SetActive(true);
-        obs.transform.position = spawnpos;
+        obs.transform.position = new Vector3(spawnpos.x, spawnpos.y, spawnpos.z);
+        obs.transform.rotation = Quaternion.Euler(0, spawnpos.w, 0);
         obstacleindicator.setvalues(player, obs.transform, temp);
     }
     void spawnitem()

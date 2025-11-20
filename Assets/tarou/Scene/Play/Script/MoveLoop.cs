@@ -23,18 +23,21 @@ public class MoveLoop : MonoBehaviour
     {
         spline = new NativeSpline(splinecont.Spline);
         var dist = SplineUtility.GetNearestPoint(spline, transform.position, out var nearest, out current_t_normalized);
-
+        Physics.Raycast(transform.position + Vector3.up * 3f, Vector3.down, out RaycastHit hitInfo, 50f,LayerMask.GetMask("lvll"));
+        if(hitInfo.collider != null)
+        {
+            //nearest.y = hitInfo.point.y;      
+        }
         transform.position = Vector3.LerpUnclamped(transform.position, nearest, 0.4f);
         Vector3 forward = Vector3.Normalize(spline.EvaluateTangent(current_t_normalized));
         Vector3 up = spline.EvaluateUpVector(current_t_normalized);
         Vector3 euler = Quaternion.LookRotation(forward, up).eulerAngles;
         transform.localRotation = Quaternion.LerpUnclamped(Quaternion.Euler(new Vector3(0, euler.y, 0)), transform.localRotation, 0.5f);
-        var newforward = transform.forward;
-
         // à⁄ìÆùàóù
-        rb.linearVelocity = rb.linearVelocity.magnitude * 0.7f * newforward + newforward * speed;
+
+        rb.linearVelocity = rb.linearVelocity.magnitude * 0.7f *forward + forward* speed;
     }
-    public Vector3 getobstaclespawnpos(float offsetval, float dist, out bool valid,out float New_t)
+    public Vector4 getobstaclespawnpos(float offsetval, float dist, out bool valid,out float New_t)
     {
         valid = true;
         spline = new NativeSpline(splinecont.Spline);
@@ -49,6 +52,8 @@ public class MoveLoop : MonoBehaviour
         Vector3 up = spline.EvaluateUpVector(New_t);
         New_t *= spline.GetLength();
         pos += Vector3.Cross(forward, up).normalized * offsetval;
+        Vector4 temp =pos;
+        temp.w=Quaternion.LookRotation(forward, up).eulerAngles.y;
         return pos;
     }
     public float get_dist(Vector3 pos1, Vector3 pos2)
