@@ -92,7 +92,7 @@ public abstract class entity : hurtbox, Damagable
     }
     public void removebuff(int index)
     {
-        if (showbufficons)
+        if (showbufficons&&buffs[index].showbufficon)
             bufficons.Find(b => b.referencedbuff.buffname == buffs[index].buffname)?.gameObject.SetActive(false);
         buffs.RemoveAt(index);
     }

@@ -406,7 +406,7 @@ public class PlayerLineMove : entity
         {
             buffdata buffToAdd = newBuff.copy();
             buffs.Add(buffToAdd);
-            if (showbufficons)
+            if (showbufficons&& buffToAdd.showbufficon)
             {
                 var icon = bufficons.Find(b => !b.gameObject.activeSelf);
                 if (icon != null)
@@ -465,6 +465,7 @@ public class PlayerLineMove : entity
     public IEnumerator becomeghost(float duration)
     {
         //_Tweak_transparency
+        Debug.Log("becoming ghost for "+ duration+" seconds");
         foreach (var rendInstance in rend)
         {
             foreach (var mat in rendInstance.materials)
@@ -477,7 +478,7 @@ public class PlayerLineMove : entity
         {
             foreach (var mat in rendInstance.materials)
             {
-                mat.SetFloat("_Tweak_transparency", 0);
+                mat.SetFloat("_Tweak_transparency", 1);
             }
         }
         current_hp = max_hp;

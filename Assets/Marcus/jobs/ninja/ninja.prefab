@@ -776,6 +776,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ninja
       objectReference: {fileID: 0}
+    - target: {fileID: 1630794972795428178, guid: 3e983d32356726d42b2c9f5b9dc7ed1d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cf0d4c7ef446b9c4c803ed6b923df6b3, type: 2}
     - target: {fileID: 2315159633908945968, guid: 3e983d32356726d42b2c9f5b9dc7ed1d, type: 3}
       propertyPath: m_IsActive
       value: 1

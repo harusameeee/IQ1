@@ -70,8 +70,7 @@ public class player_canvas_handler : MonoBehaviour
             }
             else
             {
-                Debug.Log("updating buff visualizer=" + visualized_buff.duration + "/" + visualized_buff.duration / buffdurationmax);
-                progress_slider.value = (buffdurationmax - visualized_buff.duration) / buffdurationmax;
+              progress_slider.value = (buffdurationmax - visualized_buff.duration) / buffdurationmax;
             }
         }
         if(visualized_buff2 != null)
