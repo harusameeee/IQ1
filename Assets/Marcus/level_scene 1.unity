@@ -369,7 +369,7 @@ MonoBehaviour:
   - {fileID: 4772473273694988483, guid: 56636b095caf1fc4cb5af6f5260b692b, type: 3}
   - {fileID: 4772473273694988483, guid: 50ca9d7eba9a3ec40a1956fd6f36c747, type: 3}
   - {fileID: 4772473273694988483, guid: debd5e97f26e6d340ad460000c6e654a, type: 3}
-  - {fileID: 4772473273694988483, guid: c0d01375affad584aa574e61996c0daa, type: 3}
+  - {fileID: 4772473273694988483, guid: a6aa6bbe77bb9d54f8a4bf42645507a8, type: 3}
   indicators: []
   obstacle_sprites: []
   player: {fileID: 1337516036}
