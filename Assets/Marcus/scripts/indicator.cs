@@ -40,6 +40,12 @@ public class indicator : MonoBehaviour
                 this.gameObject.SetActive(false);
             }
         }
+        else
+        {
+            this.gameObject.SetActive(false);
+            obstacle_transform = null;
+            player = null;
+        }
     }
     public void setvalues(player_mover player, Transform obstacle, float offsetpos = 0)
     {
