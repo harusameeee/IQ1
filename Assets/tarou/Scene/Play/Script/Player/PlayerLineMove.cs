@@ -478,7 +478,7 @@ public class PlayerLineMove : entity
         {
             foreach (var mat in rendInstance.materials)
             {
-                mat.SetFloat("_Tweak_transparency", 1);
+                mat.SetFloat("_Tweak_transparency", 0);
             }
         }
         current_hp = max_hp;
