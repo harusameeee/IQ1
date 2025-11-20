@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Result : MonoBehaviour
 {
     [Header("score")]
-    //[SerializeField] private ScoreData scoreData;
+    [SerializeField] private ScoreData scoreData;
     [SerializeField] private TextMeshProUGUI scoreText;
 
     [Header("rank")]
@@ -46,7 +46,7 @@ public class Result : MonoBehaviour
         isResultShown = true;
 
         // ScriptableObject ‚©‚çƒXƒRƒA‚ðŽæ“¾
-        int score = (int)score_counter.currentscore;
+        int score = (int)scoreData.score;
         if(score < 0) score = 0;
         await ShowResultAsync(score);
     }
@@ -111,5 +111,10 @@ public class Result : MonoBehaviour
             buttons[i].interactable = true;
         }
 
+    }
+
+    private void OnDestroy()
+    {
+        scoreData.score = 0;
     }
 }

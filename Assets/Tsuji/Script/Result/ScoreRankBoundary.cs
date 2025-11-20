@@ -7,7 +7,7 @@ public static class ScoreRankBoundary
     public const int RANK_X = 0;
 
     //C
-    public const int RANK_C = 100;
+    public const int RANK_C = 1;
 
     //B
     public const int RANK_B = 500;

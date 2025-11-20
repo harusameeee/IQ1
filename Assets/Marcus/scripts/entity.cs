@@ -15,7 +15,7 @@ public abstract class entity : hurtbox, Damagable
     public static Action<float, bool> onHit;
     [HideInInspector] public float elapsedtime = 0f;
     public static Action<entity> onspawn;
-    public SkinnedMeshRenderer rend;
+    public List<SkinnedMeshRenderer> rend= new List<SkinnedMeshRenderer>();
     public virtual void Start()
     {
         if (showbufficons)
@@ -162,18 +162,24 @@ public abstract class entity : hurtbox, Damagable
     public IEnumerator dmgflash()
     {
         int flashlength = 5;
-        foreach (var mat in rend.materials)
+        foreach (var rendInstance in rend)
         {
-            mat.SetColor("_Emissive_Color", Color.white);
+            foreach (var mat in rendInstance.materials)
+            {
+                mat.SetColor("_Emissive_Color", Color.white);
+            }
         }
         while (flashlength > 0)
         {
             flashlength--;
             yield return null;
         }
-        foreach (var mat in rend.materials)
+        foreach (var rendInstance in rend)
         {
-            mat.SetColor("_Emissive_Color", Color.black);
+            foreach (var mat in rendInstance.materials)
+            {
+                mat.SetColor("_Emissive_Color", Color.black);
+            }
         }
 
     }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: pattern1_nocurses
   m_EditorClassIdentifier: 
   position: {x: 5, y: 0}
-  duration: 6
+  duration: 8
   patterndata:
   - attackhbobj: {fileID: 5041760334301984476, guid: 7d9b793242512ec47905517b4b20e075, type: 3}
     offset: {x: -4.5, y: 0}
