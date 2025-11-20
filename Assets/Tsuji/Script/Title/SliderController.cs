@@ -8,6 +8,8 @@ public class SliderControllerUI : MonoBehaviour
 
     [SerializeField] private Button closeButton;
 
+    [SerializeField] private Image[] submitImages;
+
     private int currentIndex = 0;     // 現在選択中のスライダー番号
     private bool isAdjusting = false; // スライダー操作中かどうか
     private float inputCooldown = 0.2f;
@@ -16,6 +18,11 @@ public class SliderControllerUI : MonoBehaviour
     void Start()
     {
         HighlightSlider(currentIndex);
+
+        for (int i = 0; i < submitImages.Length; i++) 
+        {
+            submitImages[i].enabled = false;
+        }
     }
 
     void Update()
@@ -31,6 +38,7 @@ public class SliderControllerUI : MonoBehaviour
             if (Input.GetButtonDown("Submit"))
             {
                 isAdjusting = true;
+                submitImages[currentIndex].enabled = true;
             }
 
             if (Input.GetButtonDown("Cancel"))
@@ -47,11 +55,10 @@ public class SliderControllerUI : MonoBehaviour
             if (Input.GetButtonDown("Cancel"))
             {
                 isAdjusting = false;
+                submitImages[currentIndex].enabled = false;
+
             }
         }
-
-
-        
     }
 
     // スライダーを上下で選択

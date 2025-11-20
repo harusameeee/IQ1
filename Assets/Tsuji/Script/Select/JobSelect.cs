@@ -9,11 +9,18 @@ public class JobSelect : MonoBehaviour
     [NamedArray(new string[] { "Ninja", "Marlion", "Tonto" })]
     [SerializeField] private Sprite[] jobImages = new Sprite[3];
 
+    [Header("ジョブ名")]
+    [NamedArray(new string[] { "Ninja", "Marlion", "Tonto" })]
+    [SerializeField] private Sprite[] jobNames = new Sprite[3];
+
     [Header("矢印画像")]
     [SerializeField] private Image[] arrows = new Image[2];
 
-    [Header("ジョブ差し替え画像")]
+    [Header("ジョブ差し替え位置")]
     [SerializeField] private Image select;
+    
+    [Header("ジョブ差し替え位置")]
+    [SerializeField] private Image selectJobName;
 
     [Header("プレイヤー番号 (1P=0, 2P=1)")]
     public int playerNumber = 0;
@@ -92,7 +99,9 @@ public class JobSelect : MonoBehaviour
         select.transform.DOScale(1.2f, 0.1f).SetEase(Ease.OutQuad);
         await UniTask.Delay(100);
         select.sprite = jobImages[jobNum];
+        selectJobName.sprite=jobNames[jobNum];
         select.transform.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
+        selectJobName.transform.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
         job.playerJobName = jobImages[jobNum].name;
         UpdateArrowVisibility();
         await UniTask.Delay((int)(inputCooldownTime * 1000));

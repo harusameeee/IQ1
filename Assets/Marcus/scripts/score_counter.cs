@@ -10,8 +10,8 @@ public class score_counter : MonoBehaviour
     //public TMPro.TMP_Text scoretext;
     public TMPro.TMP_Text comboText;
 
-    [SerializeField] private float floatDistance = 50f;
-    [SerializeField] private float duration = 0.5f;
+    [SerializeField] private float floatDistance = 30f;
+    [SerializeField] private float duration = 2.0f;
     [SerializeField] private Color startColor = Color.white;
 
     [SerializeField]private Vector3 defaultPosition;
@@ -37,7 +37,7 @@ public class score_counter : MonoBehaviour
     }
     public void addscore(float scoretoadd,bool comboable)
     {
-        //o—ˆ‚Ä‚é‚©Šm”F
+
         if (scoretoadd > 0)
         {
             

@@ -5,18 +5,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class OptionPanel : MonoBehaviour
+public class VolumeOption : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI masterText;
     [SerializeField] private TextMeshProUGUI bgmText;
     [SerializeField] private TextMeshProUGUI sfxText;
-    [SerializeField] private TextMeshProUGUI brightnessText;
 
     [SerializeField] private UnityEngine.UI.Image[] images;
 
     [SerializeField] private Sprite[] volumeImages;
 
-    public static OptionPanel instance;
+    public static VolumeOption instance;
 
     private void Awake()
     {
@@ -43,7 +42,7 @@ public class OptionPanel : MonoBehaviour
         masterText.text = master.ToString();
         bgmText.text = bgm.ToString();
         sfxText.text = sfx.ToString();
-        brightnessText.text = brightness.ToString();
+        //brightnessText.text = brightness.ToString();
 
         ChangeImages(master, 0);
         ChangeImages(bgm, 1);
