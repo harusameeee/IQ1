@@ -8,6 +8,7 @@ public class buffdata : ScriptableObject
     public bufftypes type;
     public float pow;
     public float duration;
+    public bool showbufficon = true;
     public buffdata copy()
     {
         buffdata newbuff = CreateInstance<buffdata>();
@@ -17,6 +18,7 @@ public class buffdata : ScriptableObject
         newbuff.type = type;
         newbuff.pow = pow;
         newbuff.duration = duration;
+        newbuff.showbufficon = showbufficon;
         return newbuff;
     }
 }

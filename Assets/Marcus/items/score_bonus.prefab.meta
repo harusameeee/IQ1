@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/yamada/Prefab/HItDamageParticle.prefab.meta
+guid: a6aa6bbe77bb9d54f8a4bf42645507a8
+========
 guid: c0d01375affad584aa574e61996c0daa
+>>>>>>>> main:Assets/Marcus/items/score_bonus.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

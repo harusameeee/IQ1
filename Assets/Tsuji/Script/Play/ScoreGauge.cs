@@ -16,7 +16,7 @@ public class ScoreGauge : MonoBehaviour
     [SerializeField] private Slider scoreSlider;
 
     [Header("ゲージ更新速度 (スコア連動速度)")]
-    [SerializeField] private float fillSpeed = 0.5f;
+    [SerializeField] private float fillSpeed = 1f;
 
     // 現在のランクを記録
     private int currentRankIndex = 0;

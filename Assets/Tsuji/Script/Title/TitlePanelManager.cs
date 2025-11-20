@@ -6,11 +6,11 @@ public class TitlePanelManager : MonoBehaviour
 {
     public void OptionOpen()
     {
-        OptionPanel.instance.Open();
+        VolumeOption.instance.Open();
     }
     public void OptionClose()
     {
-        OptionPanel.instance.Close();
+        VolumeOption.instance.Close();
     }
 
 

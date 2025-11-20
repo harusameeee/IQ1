@@ -82,7 +82,6 @@ public class obstacle_spawner : MonoBehaviour
             float temp = 0;
             while(!validpos && attempts<10)
             {
-                Debug.Log("Finding valid obstacle position :"+ attempts);
                 rng = new Random(System.DateTime.Now.Millisecond * 2 + 1 + attempts);
                 temp = (float)rng.Next(-maxoffset, maxoffset);
                 foreach(indicator ind in indicators)

@@ -18,3 +18,4 @@ MonoBehaviour:
   type: 8
   pow: 10
   duration: 5
+  showbufficon: 0
