@@ -2681,6 +2681,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1846542623 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4349362284594936533, guid: 0fd818f48dcb3374db7a4313987c96a6, type: 3}
+  m_PrefabInstance: {fileID: 9100082962236308965}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1886055087
 GameObject:
   m_ObjectHideFlags: 0
@@ -5334,6 +5339,14 @@ PrefabInstance:
       propertyPath: defaultBrightness
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 799724552357032010, guid: 0fd818f48dcb3374db7a4313987c96a6, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4349362284594936533, guid: 0fd818f48dcb3374db7a4313987c96a6, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9100082961562885544, guid: 0fd818f48dcb3374db7a4313987c96a6, type: 3}
       propertyPath: m_Name
       value: SoundManager
@@ -5341,7 +5354,7 @@ PrefabInstance:
     - target: {fileID: 9100082961562885546, guid: 0fd818f48dcb3374db7a4313987c96a6, type: 3}
       propertyPath: bgmSourceA
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1846542623}
     - target: {fileID: 9100082961562885546, guid: 0fd818f48dcb3374db7a4313987c96a6, type: 3}
       propertyPath: defaultBGM
       value: 1
