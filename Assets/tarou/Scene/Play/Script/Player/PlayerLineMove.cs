@@ -13,8 +13,8 @@ public class PlayerLineMove : entity
     public int currentLane = 0;
     public int maxLane = 2;
 
-    public float jumpHeight = 2.0f;   // ¥¸¥ã¥ó¥×¤Î¹â¤µ
-    public float jumpDuration = 0.6f; // ¾å¾º¡Ü²¼¹ß¤Ë¤«¤«¤Eş´Ö
+    public float jumpHeight = 2.0f;   // ï¿½ï¿½ï¿½ï¿½ï¿½×¤Î¹â¤µ
+    public float jumpDuration = 0.6f; // ï¿½å¾ºï¿½Ü²ï¿½ï¿½ß¤Ë¤ï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½
     public LayerMask groundLayer;
     public LayerMask levelLayer;
     public int playerNumber = 1;
@@ -63,7 +63,7 @@ public class PlayerLineMove : entity
         ui.hp_bar.value = (float)current_hp / max_hp;
         base.Start();
         rb = GetComponent<Rigidbody>();
-        if (rb != null) rb.isKinematic = true; // ¾EËKinematic¤Ç¤âOK
+        if (rb != null) rb.isKinematic = true; // ï¿½ï¿½Eï¿½Kinematicï¿½Ç¤ï¿½OK
         for(int i = 0; i < skills.Count; i++)
         {
             skills[i].currentcooldown = skills[i].cooldown;
@@ -238,7 +238,7 @@ public class PlayerLineMove : entity
         }
         if (skill.coincost > 0)
         {
-            //¥³¥¤¥ó¾ÃÈñÈ½ÄE
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È½ÄE
             if (current_coins < skill.coincost)
             {
                 
@@ -255,10 +255,10 @@ public class PlayerLineMove : entity
         {
             moveInput = 0f;
 
-            // ƒXƒeƒBƒbƒN“ü—Íi-1 ` +1j
+            // ï¿½Xï¿½eï¿½Bï¿½bï¿½Nï¿½ï¿½ï¿½Íi-1 ï¿½` +1ï¿½j
             float stickInput = playerNumber == 1 ? Input.GetAxis("Horizontal") : Input.GetAxis("Horizontal2");
 
-            // ƒ{ƒ^ƒ““ü—Í‚à•¹—pi‹Œ®“ü—Í‘Î‰j
+            // ï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ï¿½ï¿½pï¿½iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í‘Î‰ï¿½ï¿½j
             if (Input.GetKey(joyLeft) || Input.GetKey(keyLeft))
             {
                 moveInput = -1;
@@ -267,7 +267,7 @@ public class PlayerLineMove : entity
             {
                 moveInput = 1;
             }
-            else if (Mathf.Abs(stickInput) > 0.2f) // ƒXƒeƒBƒbƒN“ü—Í‚ªˆê’èˆÈã‚È‚çÌ—p
+            else if (Mathf.Abs(stickInput) > 0.2f) // ï¿½Xï¿½eï¿½Bï¿½bï¿½Nï¿½ï¿½ï¿½Í‚ï¿½ï¿½ï¿½ï¿½Èï¿½È‚ï¿½Ì—p
             {
                 moveInput = -stickInput;
             }
@@ -284,7 +284,7 @@ public class PlayerLineMove : entity
             velocity = velocity * 0.8f + new Vector3(moveInput * speed * speedbuff, 0, 0);
             transform.localPosition += velocity * Time.deltaTime;
 
-            // XˆÊ’u§ŒÀ
+            // Xï¿½Ê’uï¿½ï¿½ï¿½ï¿½
             transform.localPosition = new Vector3(
                 Mathf.Clamp(transform.localPosition.x, -8f, 8f),
                 transform.localPosition.y,
@@ -293,7 +293,7 @@ public class PlayerLineMove : entity
         }
         else
         {
-            // ƒŒ[ƒ“ˆÚ“®ƒ‚[ƒh
+            // ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ú“ï¿½ï¿½ï¿½ï¿½[ï¿½h
             if ((Input.GetKeyDown(joyLeft) || Input.GetKeyDown(keyLeft)) && !isJumping)
             {
                 currentLane = Mathf.Max(0, currentLane - 1);
@@ -306,10 +306,10 @@ public class PlayerLineMove : entity
             }
         }
 
-        // ƒWƒƒƒ“ƒvˆ—i‚»‚Ì‚Ü‚Üj
+        // ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½iï¿½ï¿½ï¿½Ì‚Ü‚Üj
         if ((Input.GetKeyDown(joyJump) || Input.GetKeyDown(keyJump)) && !isJumping&&!buffs.Any(b=>b.type == bufftypes.nojump))
         {
-            Debug.Log($"P{playerNumber} ƒWƒƒƒ“ƒv");
+            Debug.Log($"P{playerNumber} ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½v");
             isJumping = true;
             jumpTimer = 0f;
             startPos = transform.localPosition;
@@ -351,7 +351,7 @@ public class PlayerLineMove : entity
 
     public IEnumerator lerplane()
     {
-        float duration = 0.1f; // Êä´Ö¤Ë¤«¤±¤Eş´Ö
+        float duration = 0.1f; // ï¿½ï¿½Ö¤Ë¤ï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½
         float elapsed = 0f;
         Vector3 initialPos = transform.localPosition;
         Vector3 targetPos = new Vector3(lanes[currentLane].localPosition.x, transform.localPosition.y, transform.localPosition.z);
@@ -363,7 +363,7 @@ public class PlayerLineMove : entity
             transform.localPosition = Vector3.Lerp(initialPos, targetPos, t);
             yield return null;
         }
-        transform.localPosition = targetPos; // ºÇ½ªÅª¤Ë¥¿¡¼¥²¥Ã¥È°ÌÃÖ¤Ë¥»¥Ã¥È
+        transform.localPosition = targetPos; // ï¿½Ç½ï¿½Åªï¿½Ë¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¥È°ï¿½ï¿½Ö¤Ë¥ï¿½ï¿½Ã¥ï¿½
     }
     public override bool TakeDamage(float damageAmount, bool comboable = true, List<damagable_type> damagable_Types = null, Vector2 hitpoint = new Vector2())
     {
@@ -466,15 +466,16 @@ public class PlayerLineMove : entity
     {
         //_Tweak_transparency
         Debug.Log("becoming ghost for "+ duration+" seconds");
-        foreach (var rendInstance in rend)
+        // ï¿½Åï¿½ï¿½Ì“ï¿½ï¿½ï¿½ï¿½ï¿½
+        foreach (var mat in rend.materials)
         {
-            foreach (var mat in rendInstance.materials)
-            {
-                mat.SetFloat("_Tweak_transparency", -0.9f);
-            }
+            mat.SetFloat("_Tweak_transparency", -0.9f);
         }
+
         yield return new WaitForSeconds(duration);
-        foreach (var rendInstance in rend)
+
+        // ï¿½ï¿½ï¿½É–ß‚ï¿½
+        foreach (var mat in rend.materials)
         {
             foreach (var mat in rendInstance.materials)
             {
@@ -492,7 +493,7 @@ public class PlayerLineMove : entity
 
     public override void PlayBuffVFX(bufftypes type)
     {
-        //base.PlayBuffVFX(type); // ‹¤’Ê‚Ìˆ—‚àŒÄ‚Ôi”CˆÓj
+        //base.PlayBuffVFX(type); // ï¿½ï¿½ï¿½Ê‚Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚Ôiï¿½Cï¿½Ój
 
         switch (type)
         {
