@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: aoe_invinc
   m_EditorClassIdentifier: 
   stackable: 0
-  icon: {fileID: 21300000, guid: e1993ab7246fb7944adc3f368177ff8f, type: 3}
+  icon: {fileID: 21300000, guid: f31e184ac0192d94ab9592a25b3e5920, type: 3}
   buffname: aoe_invinc
   type: 6
   pow: 1

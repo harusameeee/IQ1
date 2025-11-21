@@ -17,4 +17,5 @@ MonoBehaviour:
   buffname: stopjump
   type: 10
   pow: 10
-  duration: 10
+  duration: 5
+  showbufficon: 0

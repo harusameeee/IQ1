@@ -8,6 +8,8 @@ public class Title : MonoBehaviour
 {
     private bool moved = false;
 
+   
+
     // Update is called once per frame
     void Update()
     {
@@ -16,11 +18,12 @@ public class Title : MonoBehaviour
             this.transform.DOLocalMoveY(0.0f, 1.0f).SetEase(Ease.OutElastic);
             moved = true;
         }
+        
     }
 
     private void OnDestroy()
     {
-        SoundManager.Instance.StopBGM().Forget();
+       //SoundManager.Instance.StopBGM().Forget();
     }
    
 }

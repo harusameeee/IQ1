@@ -26,16 +26,17 @@ public class MoveLoop : MonoBehaviour
         Physics.Raycast(transform.position + Vector3.up * 3f, Vector3.down, out RaycastHit hitInfo, 50f,LayerMask.GetMask("lvll"));
         if(hitInfo.collider != null)
         {
-            //nearest.y = hitInfo.point.y;      
+            nearest.y = hitInfo.point.y;      
         }
         transform.position = Vector3.LerpUnclamped(transform.position, nearest, 0.4f);
         Vector3 forward = Vector3.Normalize(spline.EvaluateTangent(current_t_normalized));
         Vector3 up = spline.EvaluateUpVector(current_t_normalized);
         Vector3 euler = Quaternion.LookRotation(forward, up).eulerAngles;
         transform.localRotation = Quaternion.LerpUnclamped(Quaternion.Euler(new Vector3(0, euler.y, 0)), transform.localRotation, 0.5f);
-        // à⁄ìÆùàóù
+        var newforward = transform.forward;
 
-        rb.linearVelocity = rb.linearVelocity.magnitude * 0.7f *forward + forward* speed;
+        // à⁄ìÆùàóù
+        rb.linearVelocity = rb.linearVelocity.magnitude * 0.7f * newforward + newforward * speed;
     }
     public Vector4 getobstaclespawnpos(float offsetval, float dist, out bool valid,out float New_t)
     {

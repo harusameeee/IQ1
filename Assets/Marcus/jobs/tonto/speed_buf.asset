@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: speed_buf
   m_EditorClassIdentifier: 
   stackable: 0
-  icon: {fileID: 21300000, guid: 835909f4aa635b849a8bdba21c206a21, type: 3}
+  icon: {fileID: 21300000, guid: 49f7225edf5c9d043b8aa01fac211ecb, type: 3}
   buffname: Speed_buff_aoe
   type: 2
   pow: 0.3

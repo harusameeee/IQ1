@@ -568,7 +568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e64cca281c1ab6647b6f0c4ad70d9873, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreData: {fileID: 0}
+  scoreData: {fileID: 11400000, guid: 30ff291e163b145478655a7be6a0c2b7, type: 2}
   scoreText: {fileID: 2028227380}
   rank: {fileID: 438555136}
   logo: {fileID: 933690581}

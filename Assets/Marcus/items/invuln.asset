@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: invuln
   m_EditorClassIdentifier: 
   stackable: 1
-  icon: {fileID: 21300000, guid: b71eb2ee15fc47b4286d69b8b53f9739, type: 3}
+  icon: {fileID: 21300000, guid: cdfbe422ac0084441aeff4cecd482874, type: 3}
   buffname: 
   type: 6
   pow: 3

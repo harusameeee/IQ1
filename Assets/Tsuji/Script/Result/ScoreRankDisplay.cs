@@ -36,15 +36,17 @@ public class ScoreRankDisplay : MonoBehaviour
     {
         if (rankImage == null) return;
 
-        if(score<ScoreRankBoundary.RANK_X)
+        if(score <= ScoreRankBoundary.RANK_X)
             rankImage.sprite = rankSprites[0];
-        else if (score > ScoreRankBoundary.RANK_C)
+        else if (score >= ScoreRankBoundary.RANK_C)
             rankImage.sprite = rankSprites[1];
-        else if (score > ScoreRankBoundary.RANK_B)
+        else if (score >= ScoreRankBoundary.RANK_B)
             rankImage.sprite = rankSprites[2];
-        else if (score > ScoreRankBoundary.RANK_A)
+        else if (score >= ScoreRankBoundary.RANK_A)
             rankImage.sprite = rankSprites[3];
-        else
+        else if (score >= ScoreRankBoundary.RANK_S)
             rankImage.sprite = rankSprites[4];
+        else
+            rankImage.sprite = rankSprites[0];
     }
 }

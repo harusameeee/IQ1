@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using System;
+using System.Linq; 
 public class hitbox : hurtbox
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -16,7 +15,6 @@ public class hitbox : hurtbox
     //maybe will add delay timer???
     public entity owner;
     public List<entity> alr_damaged = new List<entity>();
-    public static Action<float> dmg_dealt;
     void Awake()
     {
         
@@ -51,11 +49,6 @@ public class hitbox : hurtbox
                 }
                 Debug.Log($"{name} dealing {(int)(dmgamount * dmgmult)} damage to {d.name}");
                 d.TakeDamage((int)(dmgamount * dmgmult), true, null,new Vector2( overlap.center.x*1.5f+2, overlap.center.y-8f));
-                if(owner is PlayerLineMove)
-                {
-                    dmg_dealt?.Invoke(dmgamount * dmgmult/10f);
-                    (owner as PlayerLineMove).StartCoroutine((owner as PlayerLineMove).hitstop(Mathf.Clamp(dmgamount * dmgmult/30,0f, 0.7f)));
-                }
                 if (effects != null && effects.Count > 0) {
                     foreach (var effect in effects)
                     {
