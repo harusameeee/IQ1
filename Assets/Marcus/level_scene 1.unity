@@ -1695,7 +1695,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &436685426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1708,7 +1708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20c558394d026e42904fd74ab9eb272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
+  slider: {fileID: 1024384592}
   finishImage: {fileID: 442940379}
 --- !u!4 &436685427
 Transform:
@@ -9257,6 +9257,10 @@ MonoBehaviour:
   startColor: {r: 1, g: 1, b: 1, a: 1}
   defaultPosition: {x: 400, y: 110, z: 0}
   scoreData: {fileID: 11400000, guid: 30ff291e163b145478655a7be6a0c2b7, type: 2}
+  targetImage: {fileID: 0}
+  normalAlpha: 0.3
+  brightAlpha: 1
+  flashTime: 0.2
 --- !u!1 &1448748049
 GameObject:
   m_ObjectHideFlags: 0

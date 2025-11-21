@@ -2308,7 +2308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20c558394d026e42904fd74ab9eb272, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveLoop: {fileID: 1337516036}
+  slider: {fileID: 1043476778}
   finishImage: {fileID: 442940379}
 --- !u!4 &436685427
 Transform:
@@ -9972,7 +9972,7 @@ MonoBehaviour:
   rb: {fileID: 1337516035}
   splinecont: {fileID: 1261013213}
   current_t_normalized: 0
-  progressBar: {fileID: 0}
+  progressBar: {fileID: 1043476778}
 --- !u!4 &1343142770 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1717093017114974367, guid: 0d1946c4e41ab184f9cfe9ba9b29140f, type: 3}
@@ -10941,6 +10941,10 @@ MonoBehaviour:
   startColor: {r: 1, g: 1, b: 1, a: 1}
   defaultPosition: {x: 400, y: 110, z: 0}
   scoreData: {fileID: 11400000, guid: 30ff291e163b145478655a7be6a0c2b7, type: 2}
+  targetImage: {fileID: 0}
+  normalAlpha: 0.3
+  brightAlpha: 1
+  flashTime: 0.2
 --- !u!1 &1448748049
 GameObject:
   m_ObjectHideFlags: 0
