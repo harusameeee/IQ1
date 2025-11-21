@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class score_counter : MonoBehaviour
 {
@@ -18,13 +19,20 @@ public class score_counter : MonoBehaviour
 
     [SerializeField] private ScoreData scoreData;
 
+    [Header("Image明るさ設定")]
+    [SerializeField] private Image targetImage;   // ← Image を入れる
+    [SerializeField] private float normalAlpha = 0.3f;   // 通常の薄い状態
+    [SerializeField] private float brightAlpha = 1.0f;  // コンボ時の明るい状態
+    [SerializeField] private float flashTime = 0.2f;    // 明るくなる時間
+
+
     void Start()
     {
         entity.onHit += addscore;
         itempickup.scorechange += addscore;
         currentscore = 0;
         //scoretext.text = "Score: " + ((int)currentscore);
-        comboText.text = combo + "\nCOMBO ";
+        comboText.text = combo.ToString();
 
     }
 
@@ -45,7 +53,8 @@ public class score_counter : MonoBehaviour
             if (comboable)
             {    
             combo += 1;
-            ComboAction().Forget();
+                //ComboAction().Forget();
+                FlashImage();
             }
         }
         else
@@ -78,5 +87,27 @@ public class score_counter : MonoBehaviour
             .AsyncWaitForCompletion();
 
         comboText.rectTransform.localPosition = defaultPosition;
+    }
+
+    private void FlashImage()
+    {
+        if (targetImage == null) return;
+
+        targetImage.DOKill();
+        comboText.DOKill();
+
+        // αを1（明るい）に
+        targetImage.DOFade(brightAlpha, flashTime)
+            .OnComplete(() =>
+            {
+                // 元の薄い α に戻す
+                targetImage.DOFade(normalAlpha, flashTime);
+            });
+        comboText.DOFade(brightAlpha, flashTime)
+            .OnComplete(() =>
+            {
+                // 元の薄い α に戻す
+                comboText.DOFade(normalAlpha, flashTime);
+            });
     }
 }
