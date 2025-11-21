@@ -32,6 +32,7 @@ public class SoundManager : MonoBehaviour
     private bool usingA = true;
     private CancellationTokenSource fadeCts;
 
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -41,6 +42,8 @@ public class SoundManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        
 
         // Setup
         if (bgmSourceA == null) bgmSourceA = gameObject.AddComponent<AudioSource>();

@@ -5,7 +5,7 @@ using Cysharp.Threading.Tasks; // © UniTask‚ðŽg‚¤
 
 public class PlayToResult : MonoBehaviour
 {
-    [SerializeField] barfill slider;
+    [SerializeField] MoveLoop moveLoop;
     [SerializeField] Image finishImage;
 
     private SceneChanger changer;
@@ -26,7 +26,7 @@ public class PlayToResult : MonoBehaviour
 
     void Update()
     {
-        if (!isFinished && slider.fill_val >= 1f)
+        if (!isFinished && moveLoop.current_t_normalized >= 1f)
         {
             isFinished = true;
             OnFinishAsync().Forget();

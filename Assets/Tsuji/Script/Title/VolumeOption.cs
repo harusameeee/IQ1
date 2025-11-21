@@ -10,6 +10,7 @@ public class VolumeOption : MonoBehaviour
     [SerializeField] private TextMeshProUGUI masterText;
     [SerializeField] private TextMeshProUGUI bgmText;
     [SerializeField] private TextMeshProUGUI sfxText;
+    [SerializeField] private TextMeshProUGUI brightnessText;
 
     [SerializeField] private UnityEngine.UI.Image[] images;
 
@@ -42,7 +43,7 @@ public class VolumeOption : MonoBehaviour
         masterText.text = master.ToString();
         bgmText.text = bgm.ToString();
         sfxText.text = sfx.ToString();
-        //brightnessText.text = brightness.ToString();
+        brightnessText.text = brightness.ToString();
 
         ChangeImages(master, 0);
         ChangeImages(bgm, 1);
