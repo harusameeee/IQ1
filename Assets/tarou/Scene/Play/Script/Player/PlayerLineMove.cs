@@ -466,20 +466,18 @@ public class PlayerLineMove : entity
     {
         //_Tweak_transparency
         Debug.Log("becoming ghost for "+ duration+" seconds");
-        foreach (var rendInstance in rend)
+        // ç≈èâÇÃìßñæâª
+        foreach (var mat in rend.materials)
         {
-            foreach (var mat in rendInstance.materials)
-            {
-                mat.SetFloat("_Tweak_transparency", -0.9f);
-            }
+            mat.SetFloat("_Tweak_transparency", -0.9f);
         }
+
         yield return new WaitForSeconds(duration);
-        foreach (var rendInstance in rend)
+
+        // å≥Ç…ñﬂÇ∑
+        foreach (var mat in rend.materials)
         {
-            foreach (var mat in rendInstance.materials)
-            {
-                mat.SetFloat("_Tweak_transparency", 1);
-            }
+            mat.SetFloat("_Tweak_transparency", 0f);
         }
         current_hp = max_hp;
     }
