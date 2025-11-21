@@ -36,7 +36,7 @@ public class ScoreRankDisplay : MonoBehaviour
     {
         if (rankImage == null) return;
 
-        if(score<ScoreRankBoundary.RANK_X)
+        if(score <= ScoreRankBoundary.RANK_X)
             rankImage.sprite = rankSprites[0];
         else if (score > ScoreRankBoundary.RANK_C)
             rankImage.sprite = rankSprites[1];
