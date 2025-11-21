@@ -475,13 +475,12 @@ public class PlayerLineMove : entity
         yield return new WaitForSeconds(duration);
 
         // ���ɖ߂�
-        foreach (var mat in rend.materials)
-        {
-            foreach (var mat in rendInstance.materials)
+       
+            foreach (var mat in rend.materials)
             {
                 mat.SetFloat("_Tweak_transparency", 0);
             }
-        }
+       
         current_hp = max_hp;
     }
     public IEnumerator hitstop(float duration)

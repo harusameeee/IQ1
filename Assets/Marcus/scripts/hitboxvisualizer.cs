@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
-//¥Ò¥Ã¥È¥Ü¥Ã¥¯¥¹²Ä»ë²½¥Ä¡¼¥ë
+//¥Ò¥Ã¥È¥Ü¥Ã¥¯¥¹²Ä»E½¥Ä¡¼¥E
 public class hitboxvisualizer : MonoBehaviour
 {
-    public List<hitboxpair> additionalhitboxes = new List<hitboxpair>();//¥ê¥¹¥È¤Ë¥Ï¡¼¥È¤Î¥Ü¥Ã¥¯¥¹¤òÄÉ²Ã¤·¤ÆÉÁ²è¤¹¤ë¤À¤±
+    public List<hitboxpair> additionalhitboxes = new List<hitboxpair>();//¥E¹¥È¤Ë¥Ï¡¼¥È¤Î¥Ü¥Ã¥¯¥¹¤òÄÉ²Ã¤·¤ÆÉÁ²è¤¹¤EÀ¤±
 
     void OnDrawGizmos()
     {
