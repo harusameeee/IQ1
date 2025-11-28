@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class PlayerHitEffect : MonoBehaviour
 {
+    [Header("HitEffectSettings")]
+    [Space(10)]
     [SerializeField] private GameObject hitEffectPrefab;
-    [SerializeField] private float destroyTime = 2f;
+    [SerializeField] private float destroyTime;
     [SerializeField] private string enemyAttack_TagName;
+    [SerializeField] private float spawnDelayTime;
 
 
     private void OnCollisionEnter(Collision collision)
@@ -47,7 +50,7 @@ public class PlayerHitEffect : MonoBehaviour
 
 
     private void CreateHitEffect(Vector3 position)
-    {
+    { 
         GameObject effect = Instantiate(hitEffectPrefab, position, Quaternion.identity);
         Destroy(effect, destroyTime);
     }
