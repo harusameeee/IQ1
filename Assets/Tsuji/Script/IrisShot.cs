@@ -24,14 +24,13 @@ public class IrisShot : MonoBehaviour
         Instance = this;
         //DontDestroyOnLoad(gameObject);
 
-        // GC対策でDOTween容量を拡張
-        //DOTween.SetTweensCapacity(200, 100);
         IrisIn().Forget();
     }
 
     // フェードイン
     public async UniTask IrisIn()
     {
+
         isIrisShot = true;
 
         var seq = DOTween.Sequence();

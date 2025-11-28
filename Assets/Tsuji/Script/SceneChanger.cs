@@ -10,7 +10,7 @@ public class SceneChanger : MonoBehaviour
         await IrisShot.Instance.IrisOut();
 
         // BGMを止める
-        await SoundManager.Instance.StopBGM();
+        await SoundManager.Instance.StopBGM(1.0f);
 
         // スピナー表示
         LoadingSpinner.Instance.Show();
