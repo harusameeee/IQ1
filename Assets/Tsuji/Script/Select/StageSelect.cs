@@ -17,7 +17,7 @@ public class StageSelect : MonoBehaviour
     //選択中の番号
     int selectNum = 1;
     //動作中か？
-    bool isMove = false;
+    public bool isMove = false;
     //ステージ選択したか？
     public bool isSelect { get; set; } = false; 
 

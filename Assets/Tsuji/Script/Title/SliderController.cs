@@ -3,15 +3,15 @@ using UnityEngine.UI;
 
 public class SliderControllerUI : MonoBehaviour
 {
-    [SerializeField] private Slider[] sliders;  // 操作したいスライダーをInspectorで登録
-    [SerializeField] private float sliderMoveSpeed = 0.5f; // スライダー値の動く速さ
+    [SerializeField] private Slider[] sliders;
+    [SerializeField] private float sliderMoveSpeed = 0.5f;
 
     [SerializeField] private Button closeButton;
 
     [SerializeField] private Image[] submitImages;
 
-    private int currentIndex = 0;     // 現在選択中のスライダー番号
-    private bool isAdjusting = false; // スライダー操作中かどうか
+    private int currentIndex = 0;
+    private bool isAdjusting = false;
     private float inputCooldown = 0.2f;
     private float lastInputTime = 0f;
 
@@ -19,10 +19,13 @@ public class SliderControllerUI : MonoBehaviour
     {
         HighlightSlider(currentIndex);
 
-        for (int i = 0; i < submitImages.Length; i++) 
+        // Submit画像を全て半透明で初期化
+        for (int i = 0; i < submitImages.Length; i++)
         {
-            submitImages[i].enabled = false;
+            SetSubmitAlpha(submitImages[i], 0.1f);
         }
+        // 選択中だけ半透明表示（既に半透明なのでOK）
+        SetSubmitAlpha(submitImages[currentIndex], 0.6f);
     }
 
     void Update()
@@ -34,11 +37,12 @@ public class SliderControllerUI : MonoBehaviour
         {
             HandleSliderSelection(vertical);
 
-            // Aボタン（Submit）でスライダー調整モードに入る
+            // Aボタンで調整モードへ
             if (Input.GetButtonDown("Submit"))
             {
                 isAdjusting = true;
-                submitImages[currentIndex].enabled = true;
+                // 完全表示
+                SetSubmitAlpha(submitImages[currentIndex], 1f);
             }
 
             if (Input.GetButtonDown("Cancel"))
@@ -48,37 +52,39 @@ public class SliderControllerUI : MonoBehaviour
         }
         else
         {
-            // 左右でスライダー値を変更
+            // 左右で値調整
             HandleSliderAdjustment(horizontal);
 
-            // Bボタン（Cancel）で調整モードを抜ける
             if (Input.GetButtonDown("Cancel"))
             {
                 isAdjusting = false;
-                submitImages[currentIndex].enabled = false;
-
+                // 半透明に戻す
+                SetSubmitAlpha(submitImages[currentIndex], 0.6f);
             }
         }
     }
 
-    // スライダーを上下で選択
     void HandleSliderSelection(float vertical)
     {
         if (Time.time - lastInputTime < inputCooldown) return;
 
+        int oldIndex = currentIndex;
+
         if (vertical > 0.5f)
         {
             currentIndex = Mathf.Max(currentIndex - 1, 0);
-            UpdateSelection();
         }
         else if (vertical < -0.5f)
         {
             currentIndex = Mathf.Min(currentIndex + 1, sliders.Length - 1);
-            UpdateSelection();
+        }
+
+        if (oldIndex != currentIndex)
+        {
+            UpdateSelection(oldIndex);
         }
     }
 
-    // スライダー値を左右で操作
     void HandleSliderAdjustment(float horizontal)
     {
         if (Mathf.Abs(horizontal) > 0.1f)
@@ -87,22 +93,41 @@ public class SliderControllerUI : MonoBehaviour
         }
     }
 
-    // 選択更新
-    void UpdateSelection()
+    void UpdateSelection(int oldIndex)
     {
         lastInputTime = Time.time;
+
+        // 前選択を半透明に戻す
+        SetSubmitAlpha(submitImages[oldIndex], 0.1f);
+
+        // 新選択を少し明るめに
+        SetSubmitAlpha(submitImages[currentIndex], isAdjusting ? 1f : 0.6f);
+
         HighlightSlider(currentIndex);
     }
 
-    // 選択中スライダーを強調表示
     void HighlightSlider(int index)
     {
         for (int i = 0; i < sliders.Length; i++)
         {
-            var colors = sliders[i].colors;
-            colors.normalColor = (i == index) ? Color.yellow : Color.white;
-            if (isAdjusting) { colors.selectedColor = (i == index) ? Color.red : Color.yellow; }
+            ColorBlock colors = sliders[i].colors;
+
+            if (i == index)
+            {
+                colors.normalColor = isAdjusting ? Color.red : Color.yellow;
+            }
+            else
+            {
+                colors.normalColor = Color.white;
+            }
             sliders[i].colors = colors;
         }
+    }
+
+    void SetSubmitAlpha(Image img, float alpha)
+    {
+        var c = img.color;
+        c.a = alpha;
+        img.color = c;
     }
 }
