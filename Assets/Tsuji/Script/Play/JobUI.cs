@@ -5,13 +5,13 @@ public class JobUI : ScriptableObject
 {
 
 
-    [NamedArray(new string[] { "attack", "attack2", "skill", "defence","jobIcon" })]
-    public  Sprite[] ninja = new Sprite[5];
+    [NamedArray(new string[] { "attack", "attack2", "skill", "defence", "flag", "jobIcon","name"})]
+    public  Sprite[] ninja = new Sprite[7];
 
-    [NamedArray(new string[] { "attack", "attack2", "skill", "defence", "jobIcon" })]
-    public Sprite[] tonto = new Sprite[5];
+    [NamedArray(new string[] { "attack", "attack2", "skill", "defence", "flag", "jobIcon","name"})]
+    public Sprite[] tonto = new Sprite[7];
 
-    [NamedArray(new string[] { "attack", "attack2", "skill", "defence", "jobIcon" })]
-    public Sprite[] marlion = new Sprite[5];
+    [NamedArray(new string[] { "attack", "attack2", "skill", "defence", "flag", "jobIcon" , "name"})]
+    public Sprite[] marlion = new Sprite[7];
 
 }

@@ -5,113 +5,150 @@ using DG.Tweening;
 
 public class JobSelect : MonoBehaviour
 {
-    [Header("ジョブ画像")]
-    [NamedArray(new string[] { "Ninja", "Marlion", "Tonto" })]
-    [SerializeField] private Sprite[] jobImages = new Sprite[3];
-
-    [Header("ジョブ名")]
-    [NamedArray(new string[] { "Ninja", "Marlion", "Tonto" })]
-    [SerializeField] private Sprite[] jobNames = new Sprite[3];
-
-    [Header("矢印画像")]
+    [Header("UI")]
+    [SerializeField] private Image select;
+    [SerializeField] private Image selectJobName;
     [SerializeField] private Image[] arrows = new Image[2];
 
-    [Header("ジョブ差し替え位置")]
-    [SerializeField] private Image select;
-    
-    [Header("ジョブ差し替え位置")]
-    [SerializeField] private Image selectJobName;
-
-    [Header("プレイヤー番号 (1P=0, 2P=1)")]
-    public int playerNumber = 0;
-
-    [Header("チェック管理")]
-    [SerializeField] private PlayerCheck pc;
-
-    private bool isSelect = false;
-    private int jobNum = 0;
-    private bool isInputCooldown = false;
-
-    [SerializeField] private float inputCooldownTime = 0.4f;
-
+    [Header("Game Settings")]
+    [SerializeField] private int playerNumber = 0;
+    [SerializeField] private PlayerCheck playerCheck;
     [SerializeField] private SelectedPlayerJob job;
+    [SerializeField] private JobExplanation jobExplanation;
+
+    private bool isSelected = false;
+    private bool isFlipped = false;
+    private bool isInputCooldown = false;
+    private int jobNum = 0;
+
+    private const int MaxJobIndex = 3;
+    private const float InputCooldownTime = 0.4f;
 
     private void Start()
     {
-        select.sprite = jobImages[jobNum];
-        UpdateArrowVisibility();
+        playerCheck.InitStatus();
+        UpdateUI();
+        playerCheck.CheckSelect().Forget();
+        playerCheck.CheckBothReady().Forget();
     }
 
     private void Update()
     {
-        if (isInputCooldown || !pc.isActive) return;
+        if (isInputCooldown || !playerCheck.isActive) return;
 
-        string check = playerNumber == 0 ? "Horizontal" : "Horizontal2";
-        string submit = playerNumber == 0 ? "Submit" : "Submit2";
-        string cancel = playerNumber == 0 ? "Cancel" : "Cancel2";
-        float horizontal = Input.GetAxis(check);
-
-        // 左入力
-        if (horizontal < -0.5f)
-        {
-            if (isSelect || jobNum == 0) return;
-            jobNum--;
-            ChangeJobAsync().Forget();
-        }
-        // 右入力
-        else if (horizontal > 0.5f)
-        {
-            if (isSelect || jobNum == jobImages.Length - 1) return;
-            jobNum++;
-            ChangeJobAsync().Forget();
-        }
-
-        // 決定
-        if (Input.GetButtonDown(submit))
-        {
-            if (!isSelect)
-            {
-                isSelect = true;
-                pc.playerReady[playerNumber] = true;
-                //Debug.Log($"{playerNumber + 1}P 準備完了: {jobImages[jobNum].name}");
-                foreach (Image img in arrows)
-                    img.enabled = false;
-            }
-        }
-
-        // キャンセル
-        //if (Input.GetButtonDown(cancel))
-        //{
-        //    if (!pc.playerReady[playerNumber]) return;
-
-        //    isSelect = false;
-        //    pc.playerReady[playerNumber] = false;
-        //    foreach (Image img in arrows)
-        //        img.enabled = true;
-
-        //    Debug.Log($"{playerNumber + 1}P キャンセル");
-        //}
+        HandleMove();
+        HandleSelect();
+        HandleDetail();
+        HandleCancel();
     }
 
-    private async UniTask ChangeJobAsync()
+    // 操作処理
+    private void HandleMove()
+    {
+        string axis = playerNumber == 0 ? "Horizontal" : "Horizontal2";
+        float horizontal = Input.GetAxis(axis);
+
+        if (isSelected) return;
+        if (horizontal < -0.5f) ChangeJob(-1);
+        if (horizontal > 0.5f) ChangeJob(1);
+    }
+    private void HandleSelect()
+    {
+        string submit = playerNumber == 0 ? "Submit" : "Submit2";
+        if (!Input.GetButtonDown(submit)) return;
+
+        if (!isSelected && !playerCheck.playerReady[playerNumber])
+        {
+            isSelected = true;
+            playerCheck.PlayerReady(playerNumber, true);
+            SetArrows(false);
+        }
+        Debug.Log($"職決定: P{playerNumber + 1}");
+    }
+
+    private void HandleDetail()
+    {
+        string detailBtn = playerNumber == 0 ? "Button_X1" : "Button_X2";
+        if (!Input.GetButtonDown(detailBtn)) return;
+
+        isFlipped = !isFlipped;
+        jobExplanation.TurnOverImage(!isFlipped);
+    }
+    private void HandleCancel()
+    {
+        string cancel = playerNumber == 0 ? "Cancel" : "Cancel2";
+        if (!Input.GetButtonDown(cancel)) return;
+
+        // Ready解除
+        if (playerCheck.playerReady[playerNumber])
+        {
+            playerCheck.PlayerReady(playerNumber, false);
+            isSelected = false;
+            SetArrows(true);
+            ResetScale();
+        }
+        // 全員未準備 → 全キャンセル
+        else if (!playerCheck.playerReady[0] && !playerCheck.playerReady[1])
+        {
+            playerCheck.CancelAll();
+        }
+
+        // 裏返し表示を戻す
+        if (isFlipped)
+        {
+            isFlipped = false;
+            jobExplanation.TurnOverImage(true);
+        }
+    }
+
+    // UI演出
+    private async void ChangeJob(int direction)
     {
         isInputCooldown = true;
-        select.transform.DOScale(1.2f, 0.1f).SetEase(Ease.OutQuad);
-        await UniTask.Delay(100);
-        select.sprite = jobImages[jobNum];
-        selectJobName.sprite=jobNames[jobNum];
-        select.transform.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
-        selectJobName.transform.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
-        job.playerJobName = jobImages[jobNum].name;
-        UpdateArrowVisibility();
-        await UniTask.Delay((int)(inputCooldownTime * 1000));
+        jobNum = Mathf.Clamp(jobNum + direction, 0, MaxJobIndex);
+
+        AnimateSelection();
+        UpdateUI();
+
+        await UniTask.Delay((int)(InputCooldownTime * 1000));
         isInputCooldown = false;
+    }
+
+    private void AnimateSelection()
+    {
+        select.transform.DOScale(1.2f, 0.1f).SetEase(Ease.OutQuad)
+            .OnComplete(() =>
+            {
+                select.transform.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
+                selectJobName.transform.DOScale(1f, 0.2f).SetEase(Ease.OutBack);
+            });
+    }
+
+    private void ResetScale()
+    {
+        select.transform.DOScale(1f, 0.2f);
+        selectJobName.transform.DOScale(1f, 0.2f);
+    }
+
+    // ==========================
+    // 表示更新
+    // ==========================
+    private void UpdateUI()
+    {
+        jobExplanation.ChangeJobImage(jobNum);
+        job.playerJobName = jobExplanation.GetJobName(jobNum);
+        UpdateArrowVisibility();
     }
 
     private void UpdateArrowVisibility()
     {
-        // 左端・右端なら矢印非表示
         arrows[0].enabled = jobNum > 0;
-        arrows[1].enabled = jobNum < jobImages.Length - 1;
+        arrows[1].enabled = jobNum < MaxJobIndex;
+    }
+
+    private void SetArrows(bool state)
+    {
+        foreach (var arrow in arrows)
+            arrow.enabled = state;
     }
 }
