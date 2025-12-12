@@ -197,7 +197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 673615867912696656, guid: fd55e795066db424abdc36cc72e4c554, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 577
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 673615867912696656, guid: fd55e795066db424abdc36cc72e4c554, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -218,6 +218,14 @@ PrefabInstance:
     - target: {fileID: 673615867912696657, guid: fd55e795066db424abdc36cc72e4c554, type: 3}
       propertyPath: m_Name
       value: TitleButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 673615867912696686, guid: fd55e795066db424abdc36cc72e4c554, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 87540274463acaf439dea03609bd9688, type: 3}
+    - target: {fileID: 673615867912696687, guid: fd55e795066db424abdc36cc72e4c554, type: 3}
+      propertyPath: m_Transition
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 673615867912696687, guid: fd55e795066db424abdc36cc72e4c554, type: 3}
       propertyPath: m_Navigation.m_Mode
@@ -255,6 +263,10 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
       objectReference: {fileID: 1719329590}
+    - target: {fileID: 673615867912696687, guid: fd55e795066db424abdc36cc72e4c554, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9b6d3114fdd246141bbbd74106b2d064, type: 3}
     - target: {fileID: 673615867912696687, guid: fd55e795066db424abdc36cc72e4c554, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -1533,9 +1545,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: SelectButton
       objectReference: {fileID: 0}
+    - target: {fileID: 673615867912696686, guid: 2a056190cbb8cdc428b2a63d530adcad, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 055e76472d43a1d48b449609f39bd97c, type: 3}
     - target: {fileID: 673615867912696687, guid: 2a056190cbb8cdc428b2a63d530adcad, type: 3}
       propertyPath: m_Transition
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 673615867912696687, guid: 2a056190cbb8cdc428b2a63d530adcad, type: 3}
       propertyPath: m_Navigation.m_Mode
@@ -1573,6 +1589,10 @@ PrefabInstance:
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
       objectReference: {fileID: 783602531}
+    - target: {fileID: 673615867912696687, guid: 2a056190cbb8cdc428b2a63d530adcad, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3e2364b930a7225498052ce05c849ea2, type: 3}
     - target: {fileID: 673615867912696687, guid: 2a056190cbb8cdc428b2a63d530adcad, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1

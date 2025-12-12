@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: tontto_UI
   m_EditorClassIdentifier: 
   jobUI:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: b3697027da4390244a1dff926310af70, type: 3}
+  - {fileID: 21300000, guid: f6b26e68d61e10b49b7aa5653b870267, type: 3}
+  - {fileID: 21300000, guid: d3fda1b0cd4b97b4395bda12dafcf807, type: 3}
+  - {fileID: 21300000, guid: 32fc8592ae83e024397945a1543b4a8b, type: 3}
+  - {fileID: 21300000, guid: 36047f78e7da6aa4d8cd606360a410e8, type: 3}
+  - {fileID: 21300000, guid: 53e0d46c6f519a347b42f49bfa332552, type: 3}
+  - {fileID: 21300000, guid: 441e88829f89a29468f2f36390553808, type: 3}
+  - {fileID: 21300000, guid: ad452ef30bea1504c8d712108faba78e, type: 3}
+  - {fileID: 21300000, guid: 7c00ec7c468001d4ba3f8c044136e63c, type: 3}
+  - {fileID: 21300000, guid: 16dc6d770cbe6ba438c041fe645dfdae, type: 3}
+  - {fileID: 21300000, guid: 9a39d9aff3eef7742877a2b11bc8da42, type: 3}
