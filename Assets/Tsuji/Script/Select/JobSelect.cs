@@ -31,7 +31,6 @@ public class JobSelect : MonoBehaviour
         playerCheck.CheckSelect().Forget();
         playerCheck.CheckBothReady().Forget();
     }
-
     private void Update()
     {
         if (isInputCooldown || !playerCheck.isActive) return;
@@ -49,13 +48,13 @@ public class JobSelect : MonoBehaviour
         float horizontal = Input.GetAxis(axis);
 
         if (isSelected) return;
-        if (horizontal < -0.5f) ChangeJob(-1);
-        if (horizontal > 0.5f) ChangeJob(1);
+        if (horizontal < -0.5f||Input.GetKeyDown(KeyCode.A)) ChangeJob(-1);
+        if (horizontal > 0.5f || Input.GetKeyDown(KeyCode.D)) ChangeJob(1);
     }
     private void HandleSelect()
     {
         string submit = playerNumber == 0 ? "Submit" : "Submit2";
-        if (!Input.GetButtonDown(submit)) return;
+        if (!Input.GetButtonDown(submit) || !Input.GetKeyDown(KeyCode.Space)) return;
 
         if (!isSelected && !playerCheck.playerReady[playerNumber])
         {
@@ -63,13 +62,12 @@ public class JobSelect : MonoBehaviour
             playerCheck.PlayerReady(playerNumber, true);
             SetArrows(false);
         }
-        Debug.Log($"職決定: P{playerNumber + 1}");
     }
 
     private void HandleDetail()
     {
         string detailBtn = playerNumber == 0 ? "Button_X1" : "Button_X2";
-        if (!Input.GetButtonDown(detailBtn)) return;
+        if (!Input.GetButtonDown(detailBtn)|| !Input.GetKeyDown(KeyCode.V)) return;
 
         isFlipped = !isFlipped;
         jobExplanation.TurnOverImage(!isFlipped);
@@ -77,7 +75,7 @@ public class JobSelect : MonoBehaviour
     private void HandleCancel()
     {
         string cancel = playerNumber == 0 ? "Cancel" : "Cancel2";
-        if (!Input.GetButtonDown(cancel)) return;
+        if (!Input.GetButtonDown(cancel)||!Input.GetKeyDown(KeyCode.Backspace)) return;
 
         // Ready解除
         if (playerCheck.playerReady[playerNumber])
@@ -92,7 +90,6 @@ public class JobSelect : MonoBehaviour
         {
             playerCheck.CancelAll();
         }
-
         // 裏返し表示を戻す
         if (isFlipped)
         {
@@ -113,7 +110,6 @@ public class JobSelect : MonoBehaviour
         await UniTask.Delay((int)(InputCooldownTime * 1000));
         isInputCooldown = false;
     }
-
     private void AnimateSelection()
     {
         select.transform.DOScale(1.2f, 0.1f).SetEase(Ease.OutQuad)
@@ -130,9 +126,7 @@ public class JobSelect : MonoBehaviour
         selectJobName.transform.DOScale(1f, 0.2f);
     }
 
-    // ==========================
     // 表示更新
-    // ==========================
     private void UpdateUI()
     {
         jobExplanation.ChangeJobImage(jobNum);

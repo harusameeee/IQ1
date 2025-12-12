@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 840a284b735cbb54f920fcac81e2d5c4, type: 3}
+  m_Name: marlion_UI
+  m_EditorClassIdentifier: 
+  jobUI:
+  - {fileID: 21300000, guid: d5a649e58bd603f4b858adfdb430ea01, type: 3}
+  - {fileID: 21300000, guid: b513cf865015a7d4f9fc65f236c593af, type: 3}
+  - {fileID: 21300000, guid: f990ac19a7c6f834090ec2756876909e, type: 3}
+  - {fileID: 21300000, guid: f3e639102284a254da3743b25a47363b, type: 3}
+  - {fileID: 21300000, guid: 3e5fe4e694c51ba4c8a283bce4cdbdcb, type: 3}
+  - {fileID: 21300000, guid: 839b9baa8fe735840bdf8d51a9bc9ead, type: 3}
+  - {fileID: 21300000, guid: 441e88829f89a29468f2f36390553808, type: 3}
+  - {fileID: 21300000, guid: a8768e3a5b9fb76489c7f4ef891b5b6c, type: 3}
+  - {fileID: 21300000, guid: 39b5270c2fbe6c942a79360a5dfaade6, type: 3}
+  - {fileID: 21300000, guid: 87413ef6d9e53f64da5af84debdf385c, type: 3}
+  - {fileID: 21300000, guid: c8654a74e6d06f44c805411371ff118c, type: 3}
