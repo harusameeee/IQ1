@@ -10,7 +10,7 @@ public class JobExplanation : MonoBehaviour
     [NamedArray(new string[] { "attack", "attack2", "skill", "defence", "flag", "jobIcon","name",
         "setumei_attack","setumei_attack2","setumei_skill","setumei_defence"})]
     [SerializeField] Image[] details=new Image[11];
-
+    bool isAnimating = false;
     public void ChangeJobImage(int jobNum)
     {
         switch (jobNum)
@@ -43,10 +43,16 @@ public class JobExplanation : MonoBehaviour
 
     public void TurnOverImage(bool undo)
     {
+        if (isAnimating) { return; }
+        isAnimating = true;
         //Œ³‚É–ß‚·‚Æ‚«‚Í‹t‰ñ“]
         int a = undo ? 1 : -1;
         Vector3 rotate = new (0, 180 * a, 0);
-        this.transform.DOLocalRotate(transform.localEulerAngles + rotate, 0.5f).SetEase(Ease.OutQuad);
+        this.transform.DOLocalRotate(transform.localEulerAngles + rotate, 0.5f).SetEase(Ease.OutQuad)
+             .OnComplete(() =>
+             {
+                 isAnimating = false; // © ƒAƒjƒI—¹‚Å‰ğœ
+             });
     }
 
     public string GetJobName(int jobNum)
