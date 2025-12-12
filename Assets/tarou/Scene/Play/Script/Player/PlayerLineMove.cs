@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class PlayerLineMove : entity
 {
-    public Transform[] lanes= new Transform[5];
+    public Transform[] lanes = new Transform[5];
     public int currentLane = 0;
     public int maxLane = 2;
 
@@ -30,44 +30,44 @@ public class PlayerLineMove : entity
     public bool has_coins = false;
     public int current_coins = 0;//max coins is inf
     public float gcd_timer = 0f;
-    [HideInInspector]public float current_hp = 100;
+    [HideInInspector] public float current_hp = 100;
     public float max_hp = 100;
-    public List<skilldata> skills ;
-    public hitbox hb;    public override Vector2 position => new Vector2(-transform.localPosition.x, transform.localPosition.y + 1.5f);
+    public List<skilldata> skills;
+    public hitbox hb; public override Vector2 position => new Vector2(-transform.localPosition.x, transform.localPosition.y + 1.5f);
     public Vector2 dim;
     public override Vector2 dimension => dim;
     public player_ui ui;
     //hiddenvals
-    string joyLeft,joyRight,joyJump,joyAttack,joyAttack2,joySkill,joyDefense;
+    string joyLeft, joyRight, joyJump, joyAttack, joyAttack2, joySkill, joyDefense;
 
     KeyCode keyLeft, keyRight, keyJump, keyAttack, keyAttack2, keySkill, keyDefense;
-    
-    
+
+
     [Header("test move")]
 
     [SerializeField] Vector3 velocity = Vector3.zero;
-    
+
     [SerializeField] float speed = 10f;
     [SerializeField] bool isLine = false;
     public Animator animator;
     [HideInInspector] public PlayerLineMove otherplayer;
     public player_canvas_handler playercanvas;
-     float moveInput = 0f;
+    float moveInput = 0f;
     public override void Start()
     {
-        
+
         hb.owner = this;
-        
+
         bufficonparent = ui.skill_icon_transform;
         showbufficons = true;
         ui.hp_bar.value = (float)current_hp / max_hp;
         base.Start();
         rb = GetComponent<Rigidbody>();
         if (rb != null) rb.isKinematic = true; // ��E�Kinematic�Ǥ�OK
-        for(int i = 0; i < skills.Count; i++)
+        for (int i = 0; i < skills.Count; i++)
         {
             skills[i].currentcooldown = skills[i].cooldown;
-        
+
             skills[i].currentstacks = skills[i].maxstacks;
             Debug.Log($"skill{i}:{skills[i].skillname}");
             ui.skill_icons[i].setskill(skills[i], this);
@@ -110,12 +110,12 @@ public class PlayerLineMove : entity
 
         if (current_hp > 0)
         {
-             useskills();
+            useskills();
         }
-       //for activating skills
+        //for activating skills
         movement();// for movement
 
-        
+
     }
     void MoveToLane()
     {
@@ -130,7 +130,7 @@ public class PlayerLineMove : entity
 
 
         float skill_cd_speed = 1.0f;
-        float gcd_speed = 1.0f; 
+        float gcd_speed = 1.0f;
         foreach (var buff in buffs)
         {
             if (buff.type == bufftypes.cooldown_reduction)
@@ -144,19 +144,19 @@ public class PlayerLineMove : entity
         }
         if (gcd_timer > 0)
         {
-            gcd_timer -= Time.deltaTime*gcd_speed;
-        }        
+            gcd_timer -= Time.deltaTime * gcd_speed;
+        }
         for (int i = 0; i < skills.Count; i++)
         {
-            if(!skills[i].has_cooldown)
+            if (!skills[i].has_cooldown)
             {
                 continue;
             }
-            if (skills[i].currentcooldown > 0 )
+            if (skills[i].currentcooldown > 0)
             {
                 if (skills[i].maxstacks > skills[i].currentstacks)
                 {
-                    skills[i].currentcooldown -= Time.deltaTime*skill_cd_speed;
+                    skills[i].currentcooldown -= Time.deltaTime * skill_cd_speed;
                 }
 
             }
@@ -200,20 +200,32 @@ public class PlayerLineMove : entity
                 hb.effects = skills[atkval].onHit_effect;
                 gcd_timer = skills[atkval].gcd;
                 current_max_gcd = skills[atkval].gcd;
+                // コイン消費
                 current_coins -= skills[atkval].coincost;
-                ui.coin_text.text = current_coins.ToString();
+
+                // コイン増加（coingainが正なら追加）
+                if (skills[atkval].coingain > 0)
+                {
+                    AddCoins(skills[atkval].coingain);
+                }
+                else
+                {
+                    // 上の AddCoins が UI 更新するので、こちらは必要な時だけ表示更新
+                    ui.coin_text.text = current_coins.ToString();
+                }
                 if (skills[atkval].has_cooldown && skills[atkval].currentstacks > 0)
                 {
                     skills[atkval].currentstacks -= 1;
                 }
-                Debug.Log($"skill stacks left:{skills[atkval].currentstacks}");
+
+                Debug.Log($"Trying to play: {skills[atkval].skillname}");
                 animator.Play(skills[atkval].skillname);
             }
         }
     }
     public void resetskillcd(int skillindex)
     {
-        if(skillindex>=0&& skillindex<skills.Count)
+        if (skillindex >= 0 && skillindex < skills.Count)
         {
             skills[skillindex].currentcooldown = 12;
             skills[skillindex].currentstacks = skills[skillindex].maxstacks;
@@ -222,7 +234,7 @@ public class PlayerLineMove : entity
     }
     bool evaluateskilluse(skilldata skill)
     {
-        if(gcd_timer > 0)
+        if (gcd_timer > 0)
         {
             Debug.Log("GCD active");
             return false;
@@ -241,11 +253,11 @@ public class PlayerLineMove : entity
             //���������ȽāE
             if (current_coins < skill.coincost)
             {
-                
+
                 Debug.Log("not enough coins");
                 return false;
             }
-        }        
+        }
         return true;
     }
     void movement()
@@ -307,7 +319,7 @@ public class PlayerLineMove : entity
         }
 
         // �W�����v�����i���̂܂܁j
-        if ((Input.GetKeyDown(joyJump) || Input.GetKeyDown(keyJump)) && !isJumping&&!buffs.Any(b=>b.type == bufftypes.nojump))
+        if ((Input.GetKeyDown(joyJump) || Input.GetKeyDown(keyJump)) && !isJumping && !buffs.Any(b => b.type == bufftypes.nojump))
         {
             Debug.Log($"P{playerNumber} �W�����v");
             isJumping = true;
@@ -342,8 +354,8 @@ public class PlayerLineMove : entity
             //Debug.Log("Raycasting to adjust Y position");
             //if(Physics.Raycast(transform.position+ Vector3.up*2f, Vector3.down, out RaycastHit hitInfo, 10f, levelLayer))
             //{
-             //   Debug.Log("Hit level layer, adjusting Y position");
-             //   transform.position = new Vector3(transform.position.x,hitInfo.point.y, transform.position.z); 
+            //   Debug.Log("Hit level layer, adjusting Y position");
+            //   transform.position = new Vector3(transform.position.x,hitInfo.point.y, transform.position.z); 
             //}
 
         }
@@ -367,8 +379,8 @@ public class PlayerLineMove : entity
     }
     public override bool TakeDamage(float damageAmount, bool comboable = true, List<damagable_type> damagable_Types = null, Vector2 hitpoint = new Vector2())
     {
-        
-        if (buffs.Exists(buff => buff.type == bufftypes.invuln || buff.type == bufftypes.stealth)||current_hp <=0)
+
+        if (buffs.Exists(buff => buff.type == bufftypes.invuln || buff.type == bufftypes.stealth) || current_hp <= 0)
         {
             Debug.Log($"P{playerNumber} is invulnerable and took no damage.");
             return false;
@@ -394,9 +406,9 @@ public class PlayerLineMove : entity
         current_hp = Mathf.Min(current_hp + healamount, max_hp);
     }
     public override void addbuff(buffdata newBuff)
-    {        
+    {
         var existingBuff = buffs.Find(x => x.buffname == newBuff.buffname);
-        if (existingBuff != null )
+        if (existingBuff != null)
         {
             if (!newBuff.stackable) return;
             existingBuff.pow += newBuff.pow;
@@ -406,7 +418,7 @@ public class PlayerLineMove : entity
         {
             buffdata buffToAdd = newBuff.copy();
             buffs.Add(buffToAdd);
-            if (showbufficons&& buffToAdd.showbufficon)
+            if (showbufficons && buffToAdd.showbufficon)
             {
                 var icon = bufficons.Find(b => !b.gameObject.activeSelf);
                 if (icon != null)
@@ -418,14 +430,14 @@ public class PlayerLineMove : entity
                     icon.transform.SetAsLastSibling();
                 }
             }
-            if (buffToAdd.type == bufftypes.sticktogether|| buffToAdd.type == bufftypes.stayaway||
-                buffToAdd.type == bufftypes.keep_moving|| buffToAdd.type == bufftypes.Stop_moving)
+            if (buffToAdd.type == bufftypes.sticktogether || buffToAdd.type == bufftypes.stayaway ||
+                buffToAdd.type == bufftypes.keep_moving || buffToAdd.type == bufftypes.Stop_moving)
             {
                 playercanvas.addbuffvisual(ref buffToAdd);
             }
 
         }
-        
+
     }
 
     public void exit_stayaway_buff(float pow)
@@ -465,7 +477,7 @@ public class PlayerLineMove : entity
     public IEnumerator becomeghost(float duration)
     {
         //_Tweak_transparency
-        Debug.Log("becoming ghost for "+ duration+" seconds");
+        Debug.Log("becoming ghost for " + duration + " seconds");
         // �ŏ��̓�����
         foreach (var mat in rend.materials)
         {
@@ -475,12 +487,12 @@ public class PlayerLineMove : entity
         yield return new WaitForSeconds(duration);
 
         // ���ɖ߂�
-       
-            foreach (var mat in rend.materials)
-            {
-                mat.SetFloat("_Tweak_transparency", 0);
-            }
-       
+
+        foreach (var mat in rend.materials)
+        {
+            mat.SetFloat("_Tweak_transparency", 0);
+        }
+
         current_hp = max_hp;
     }
     public IEnumerator hitstop(float duration)
@@ -506,5 +518,11 @@ public class PlayerLineMove : entity
                 fx2.transform.SetParent(transform);
                 break;
         }
+    }
+
+    public void AddCoins(int amount)
+    {
+        current_coins += amount;
+        ui.coin_text.text = current_coins.ToString();
     }
 }

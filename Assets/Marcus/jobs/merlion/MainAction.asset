@@ -15,11 +15,12 @@ MonoBehaviour:
   skillname: MainAction
   cooldown: 0
   currentcooldown: 0
-  gcd: 1.1
+  gcd: 2
   maxstacks: 0
-  currentstacks: 0
+  currentstacks: 756
   coincost: 0
-  has_cooldown: 0
+  has_cooldown: 1
+  coingain: 1
   icon: {fileID: 21300000, guid: 40f71f8ce2f0e9542a31542055d5a3c5, type: 3}
   onHit_effect:
   - {fileID: 11400000, guid: 7fe76a4868cd5f6459103d954ec0d501, type: 2}

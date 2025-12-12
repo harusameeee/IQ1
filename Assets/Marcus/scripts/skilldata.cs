@@ -11,6 +11,7 @@ public class skilldata : ScriptableObject
     public int currentstacks;
     public int coincost;
     public bool has_cooldown;
+    public int coingain;
     public Sprite icon;
     public List<skilleffect> onHit_effect;
     public List<skilleffect> onUse_effects;
