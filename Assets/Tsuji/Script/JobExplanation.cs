@@ -5,10 +5,11 @@ using UnityEngine.UI;
 public class JobExplanation : MonoBehaviour
 {
     //UI‚Ì‰æ‘œ‚ª“ü‚Á‚Ä‚¢‚é‚â‚Â
-    [SerializeField] JobUI jobUI;
+    [SerializeField] JobUI[] jobUIs=new JobUI[3];
     //UI’u‚­‚Æ‚±‚ë
-    [NamedArray(new string[] { "attack", "attack2", "skill", "defence","flag","jobIcon","name" })]
-    [SerializeField] Image[] details=new Image[7];
+    [NamedArray(new string[] { "attack", "attack2", "skill", "defence", "flag", "jobIcon","name",
+        "setumei_attack","setumei_attack2","setumei_skill","setumei_defence"})]
+    [SerializeField] Image[] details=new Image[11];
 
     public void ChangeJobImage(int jobNum)
     {
@@ -18,7 +19,7 @@ public class JobExplanation : MonoBehaviour
             case 0:
                 for(int i=0; i<details.Length; i++)
                 {
-                    details[i].sprite=jobUI.ninja[i];
+                    details[i].sprite= jobUIs[0].jobUI[i];
                 }
                 break;
 
@@ -26,7 +27,7 @@ public class JobExplanation : MonoBehaviour
             case 1:
                 for (int i = 0; i < details.Length; i++)
                 {
-                    details[i].sprite = jobUI.marlion[i];
+                    details[i].sprite = jobUIs[1].jobUI[i];
                 }
                 break;
 
@@ -34,7 +35,7 @@ public class JobExplanation : MonoBehaviour
             case 2:
                 for (int i = 0; i < details.Length; i++)
                 {
-                    details[i].sprite = jobUI.tonto[i];
+                    details[i].sprite = jobUIs[2].jobUI[i];
                 }
                 break;
         }
