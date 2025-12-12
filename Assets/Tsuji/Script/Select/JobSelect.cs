@@ -55,7 +55,7 @@ public class JobSelect : MonoBehaviour
     private void HandleSelect()
     {
         string submit = playerNumber == 0 ? "Submit" : "Submit2";
-        if (!Input.GetButtonDown(submit)) return;
+        if (!Input.GetButtonDown(submit) || Input.GetKeyDown(KeyCode.Space)) return;
 
         if (!isSelected && !playerCheck.playerReady[playerNumber])
         {
@@ -69,7 +69,7 @@ public class JobSelect : MonoBehaviour
     private void HandleDetail()
     {
         string detailBtn = playerNumber == 0 ? "Button_X1" : "Button_X2";
-        if (!Input.GetButtonDown(detailBtn)) return;
+        if (!Input.GetButtonDown(detailBtn)||Input.GetKeyDown(KeyCode.V)) return;
 
         isFlipped = !isFlipped;
         jobExplanation.TurnOverImage(!isFlipped);
@@ -77,7 +77,7 @@ public class JobSelect : MonoBehaviour
     private void HandleCancel()
     {
         string cancel = playerNumber == 0 ? "Cancel" : "Cancel2";
-        if (!Input.GetButtonDown(cancel)) return;
+        if (!Input.GetButtonDown(cancel)||Input.GetKeyDown(KeyCode.Backspace)) return;
 
         // Readyâèú
         if (playerCheck.playerReady[playerNumber])

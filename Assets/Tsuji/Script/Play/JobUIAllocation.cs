@@ -7,7 +7,7 @@ public class JobUIAllocation : MonoBehaviour
     [SerializeField] Image[] playerImage;
 
     [SerializeField] SelectedPlayerJob playerjob;
-    [SerializeField] JobUI jobUI;
+    [SerializeField] JobUI[] jobUIs;
 
     private string lastJobName;
 
@@ -25,13 +25,13 @@ public class JobUIAllocation : MonoBehaviour
         switch (playerjob.playerJobName)
         {
             case "ninja":
-                targetSprites = jobUI.ninja;
+                targetSprites = jobUIs[0].jobUI;
                 break;
             case "tonto":
-                targetSprites = jobUI.tonto;
+                targetSprites = jobUIs[1].jobUI;
                 break;
             case "marlion":
-                targetSprites = jobUI.marlion;
+                targetSprites = jobUIs[2].jobUI;
                 break;
         }
 
