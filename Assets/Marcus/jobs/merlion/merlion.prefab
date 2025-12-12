@@ -642,7 +642,7 @@ GameObject:
   - component: {fileID: 7465702353518257338}
   - component: {fileID: 2687068164289526216}
   m_Layer: 0
-  m_Name: Merlion
+  m_Name: merlion
   m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -713,10 +713,10 @@ MonoBehaviour:
   current_hp: 100
   max_hp: 100
   skills:
-  - {fileID: 11400000, guid: 2b8f24ccd888b4643ac3fa6437d7f090, type: 2}
-  - {fileID: 11400000, guid: f458d85c785e31947a8ea88c46797605, type: 2}
-  - {fileID: 11400000, guid: 684bf076986537b4d95eb7797fe8f34e, type: 2}
-  - {fileID: 11400000, guid: fe0a8aecf16cb0e43b0a0418648ce066, type: 2}
+  - {fileID: 11400000, guid: 59c97b8a7aa793e438633849dcf9cb0d, type: 2}
+  - {fileID: 11400000, guid: 5335b7cf3ecd86a45890db94131a1c7a, type: 2}
+  - {fileID: 11400000, guid: 77c6c6ef6224de44e8d01f723a565c7a, type: 2}
+  - {fileID: 11400000, guid: d1c7d85b0ab20bf4d8efde733b6d78c5, type: 2}
   hb: {fileID: 6631549163043853476}
   dim: {x: 2.5, y: 2.5}
   ui: {fileID: 0}

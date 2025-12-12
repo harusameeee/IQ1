@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38891d8f3526cf94c97b096f35e7cd97, type: 3}
-  m_Name: testskill#2
+  m_Name: SubAction
   m_EditorClassIdentifier: 
-  skillname: testskill2
+  skillname: SubAction
   cooldown: 4
   currentcooldown: 4
   gcd: 1.5
@@ -20,6 +20,6 @@ MonoBehaviour:
   currentstacks: 1
   coincost: 2
   has_cooldown: 1
-  icon: {fileID: 21300000, guid: a447cb1538393564eb41c88b2f9af187, type: 3}
+  icon: {fileID: 21300000, guid: 0e6d80f21db2b564690a42681d7deb63, type: 3}
   onHit_effect: []
   onUse_effects: []

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38891d8f3526cf94c97b096f35e7cd97, type: 3}
-  m_Name: testskill#1
+  m_Name: MainAction
   m_EditorClassIdentifier: 
-  skillname: testskill
+  skillname: MainAction
   cooldown: 0
   currentcooldown: 0
   gcd: 1.1
