@@ -7,10 +7,16 @@ public class JobExplanation : MonoBehaviour
     //UI‚Ì‰æ‘œ‚ª“ü‚Á‚Ä‚¢‚é‚â‚Â
     [SerializeField] JobUI[] jobUIs=new JobUI[3];
     //UI’u‚­‚Æ‚±‚ë
-    [NamedArray(new string[] { "attack", "attack2", "skill", "defence", "flag", "jobIcon","name",
-        "setumei_attack","setumei_attack2","setumei_skill","setumei_defence"})]
+    [NamedArray(new string[] 
+    { "attack", "attack2", "skill", "defence", "flag", "jobIcon","name",
+      "setumei_attack","setumei_attack2","setumei_skill","setumei_defence"})]
     [SerializeField] Image[] details=new Image[11];
+<<<<<<< Updated upstream
     bool isAnimating = false;
+=======
+    [SerializeField] CoinDisplay coinDisplay;
+
+>>>>>>> Stashed changes
     public void ChangeJobImage(int jobNum)
     {
         switch (jobNum)
@@ -20,6 +26,7 @@ public class JobExplanation : MonoBehaviour
                 for(int i=0; i<details.Length; i++)
                 {
                     details[i].sprite= jobUIs[0].jobUI[i];
+                    coinDisplay.CoinDisp(false);
                 }
                 break;
 
@@ -28,6 +35,7 @@ public class JobExplanation : MonoBehaviour
                 for (int i = 0; i < details.Length; i++)
                 {
                     details[i].sprite = jobUIs[1].jobUI[i];
+                    coinDisplay.CoinDisp(true);
                 }
                 break;
 
@@ -36,6 +44,7 @@ public class JobExplanation : MonoBehaviour
                 for (int i = 0; i < details.Length; i++)
                 {
                     details[i].sprite = jobUIs[2].jobUI[i];
+                    coinDisplay.CoinDisp(false);
                 }
                 break;
         }

@@ -20,7 +20,7 @@ public class JobSelect : MonoBehaviour
     private bool isSelected = false;
     private bool isFlipped = false;
     private bool isInputCooldown = false;
-    private int jobNum = 0;
+    private int  jobNum = 0;
 
     private const int MaxJobIndex = 3;
     private const float InputCooldownTime = 0.4f;
@@ -35,7 +35,10 @@ public class JobSelect : MonoBehaviour
     private void Update()
     {
         if (isInputCooldown || !playerCheck.isActive) return;
+<<<<<<< Updated upstream
         
+=======
+>>>>>>> Stashed changes
         string submit = playerNumber == 0 ? "Submit" : "Submit2";
         string detailBtn = playerNumber == 0 ? "Button_X1" : "Button_X2";
         string cancel = playerNumber == 0 ? "Cancel" : "Cancel2";
@@ -71,6 +74,7 @@ public class JobSelect : MonoBehaviour
         isFlipped = !isFlipped;
         jobExplanation.TurnOverImage(!isFlipped);
     }
+
     private void HandleCancel()
     {
         // Ready‰ðœ
@@ -106,6 +110,7 @@ public class JobSelect : MonoBehaviour
         await UniTask.Delay((int)(InputCooldownTime * 1000));
         isInputCooldown = false;
     }
+
     private void AnimateSelection()
     {
         select.transform.DOScale(1.2f, 0.1f).SetEase(Ease.OutQuad)
@@ -127,11 +132,6 @@ public class JobSelect : MonoBehaviour
     {
         jobExplanation.ChangeJobImage(jobNum);
         job.playerJobName = jobExplanation.GetJobName(jobNum);
-        UpdateArrowVisibility();
-    }
-
-    private void UpdateArrowVisibility()
-    {
         arrows[0].enabled = jobNum > 0;
         arrows[1].enabled = jobNum < MaxJobIndex;
     }
