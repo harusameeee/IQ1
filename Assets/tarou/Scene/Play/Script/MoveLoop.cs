@@ -1,17 +1,21 @@
 using UnityEngine;
 using UnityEngine.Splines;
+using Unity.Mathematics;
 
 public class MoveLoop : MonoBehaviour
 {
-    public float speed = 2.0f;                    // base movement speed
+    public float speed = 2.0f;
     public Rigidbody rb;
 
     public SplineContainer splinecont;
-    private NativeSpline spline;
+    protected NativeSpline spline;
 
-    private float defaultSpeed;                   // store initial speed
+    protected float defaultSpeed;
 
-    public float current_t_normalized = 0f;       // normalized spline position (0-1)
+    // Current spline position (0-1)
+    public float current_t_normalized = 0f;
+
+    // Distance along spline
     public float current_t => current_t_normalized * spline.GetLength();
 
     public virtual void Start()
@@ -24,55 +28,57 @@ public class MoveLoop : MonoBehaviour
     {
         spline = new NativeSpline(splinecont.Spline);
 
-        // get nearest point on spline
-        SplineUtility.GetNearestPoint(
-            spline,
-            transform.position,
-            out var nearest,
-            out current_t_normalized
-        );
+        // Advance t based on speed (t-driven movement)
+        float splineLength = spline.GetLength();
+        float deltaT = (speed / splineLength) * Time.deltaTime;
 
-        // raycast to ground
-        Physics.Raycast(
-            transform.position + Vector3.up * 3f,
-            Vector3.down,
-            out RaycastHit hitInfo,
-            50f,
-            LayerMask.GetMask("lvll")
-        );
+        current_t_normalized += deltaT;
+        current_t_normalized = Mathf.Clamp01(current_t_normalized);
 
-        if (hitInfo.collider != null)
+        // Target position is always from spline
+        Vector3 targetPos =
+            spline.EvaluatePosition(current_t_normalized);
+
+        // Optional height offset via FloatZone
+        if (TryGetFloatZone(current_t_normalized, out FloatZone zone))
         {
-            nearest.y = hitInfo.point.y;
+            targetPos.y += zone.heightOffset;
         }
 
-        // move toward spline point
-        transform.position = Vector3.LerpUnclamped(
+        // Smooth movement
+        transform.position = Vector3.Lerp(
             transform.position,
-            nearest,
-            0.4f
+            targetPos,
+            0.25f
         );
 
-        // orientation from spline tangent
-        Vector3 forward = Vector3.Normalize(spline.EvaluateTangent(current_t_normalized));
-        Vector3 up = spline.EvaluateUpVector(current_t_normalized);
+        // Rotation from spline tangent
+        Vector3 forward =
+            Vector3.Normalize(
+                spline.EvaluateTangent(current_t_normalized)
+            );
 
-        Vector3 euler = Quaternion.LookRotation(forward, up).eulerAngles;
+        Vector3 up =
+            spline.EvaluateUpVector(current_t_normalized);
 
-        transform.localRotation = Quaternion.LerpUnclamped(
-            Quaternion.Euler(0f, euler.y, 0f),
-            transform.localRotation,
-            0.5f
+        Quaternion targetRot =
+            Quaternion.LookRotation(forward, up);
+
+        transform.rotation = Quaternion.Lerp(
+            transform.rotation,
+            targetRot,
+            0.25f
         );
 
-        // final movement
-        Vector3 newforward = transform.forward;
+        // Rigidbody forward velocity
+        Vector3 moveForward = transform.forward;
 
         rb.linearVelocity =
-            rb.linearVelocity.magnitude * 0.7f * newforward +
-            newforward * speed;
+            rb.linearVelocity.magnitude * 0.7f * moveForward +
+            moveForward * speed;
     }
 
+    // Get a position ahead on the spline
     public Vector4 getobstaclespawnpos(
         float offsetval,
         float dist,
@@ -84,7 +90,9 @@ public class MoveLoop : MonoBehaviour
 
         spline = new NativeSpline(splinecont.Spline);
 
-        new_t = current_t_normalized + dist / spline.GetLength();
+        float length = spline.GetLength();
+
+        new_t = current_t_normalized + dist / length;
 
         if (new_t > 1.0f)
         {
@@ -96,44 +104,54 @@ public class MoveLoop : MonoBehaviour
         Vector3 forward = Vector3.Normalize(spline.EvaluateTangent(new_t));
         Vector3 up = spline.EvaluateUpVector(new_t);
 
-        new_t *= spline.GetLength();
-
         pos += Vector3.Cross(forward, up).normalized * offsetval;
 
-        Vector4 temp = pos;
-        temp.w = Quaternion.LookRotation(forward, up).eulerAngles.y;
+        Vector4 result = pos;
+        result.w = Quaternion.LookRotation(forward, up).eulerAngles.y;
 
-        return temp;
+        return result;
     }
 
+    // Distance along spline between two points
     public float get_dist(Vector3 pos1, Vector3 pos2)
     {
         spline = new NativeSpline(splinecont.Spline);
 
-        // get spline t for both positions
-        SplineUtility.GetNearestPoint(spline, pos1, out _, out float t1);
-        SplineUtility.GetNearestPoint(spline, pos2, out _, out float t2);
+        float3 _;
+        float t1;
+        float t2;
+
+        SplineUtility.GetNearestPoint(
+            spline,
+            new Ray(pos1, Vector3.down),
+            out _,
+            out t1
+        );
+
+        SplineUtility.GetNearestPoint(
+            spline,
+            new Ray(pos2, Vector3.down),
+            out _,
+            out t2
+        );
 
         return Mathf.Abs(t2 - t1) * spline.GetLength();
     }
 
-    // -------------------------
-    // speed zone extension
-    // -------------------------
-
+    // Speed zones
     [System.Serializable]
     public class SpeedZone
     {
-        public float startT01 = 0f;       // zone start (0-1)
-        public float endT01 = 0.1f;       // zone end (0-1)
-        public float speedMultiplier = 1.5f;
+        public float startT01;
+        public float endT01;
+        public float speedMultiplier = 1f;
     }
 
     public SpeedZone[] speedZones;
 
-    private float GetSpeedMultiplier(float t01)
+    protected float GetSpeedMultiplier(float t01)
     {
-        if (speedZones == null || speedZones.Length == 0)
+        if (speedZones == null)
             return 1f;
 
         foreach (var z in speedZones)
@@ -141,15 +159,41 @@ public class MoveLoop : MonoBehaviour
             if (t01 >= z.startT01 && t01 <= z.endT01)
                 return z.speedMultiplier;
         }
+
         return 1f;
     }
 
-    private void LateUpdate()
+    void LateUpdate()
     {
-        float t01 = current_t_normalized;
+        speed = defaultSpeed * GetSpeedMultiplier(current_t_normalized);
+    }
 
-        float mul = GetSpeedMultiplier(t01);
+    // Float zones (height adjustment only)
+    [System.Serializable]
+    public class FloatZone
+    {
+        public float startT01;
+        public float endT01;
+        public float heightOffset;
+    }
 
-        speed = defaultSpeed * mul;
+    public FloatZone[] floatZones;
+
+    protected bool TryGetFloatZone(float t01, out FloatZone zone)
+    {
+        if (floatZones != null)
+        {
+            foreach (var z in floatZones)
+            {
+                if (t01 >= z.startT01 && t01 <= z.endT01)
+                {
+                    zone = z;
+                    return true;
+                }
+            }
+        }
+
+        zone = null;
+        return false;
     }
 }
