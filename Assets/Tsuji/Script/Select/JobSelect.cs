@@ -1,7 +1,8 @@
-using UnityEngine;
-using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class JobSelect : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class JobSelect : MonoBehaviour
     private bool isSelected = false;
     private bool isFlipped = false;
     private bool isInputCooldown = false;
-    private int jobNum = 0;
+    private int  jobNum = 0;
 
     private const int MaxJobIndex = 3;
     private const float InputCooldownTime = 0.4f;
@@ -35,10 +36,14 @@ public class JobSelect : MonoBehaviour
     {
         if (isInputCooldown || !playerCheck.isActive) return;
 
+        string submit = playerNumber == 0 ? "Submit" : "Submit2";
+        string detailBtn = playerNumber == 0 ? "Button_X1" : "Button_X2";
+        string cancel = playerNumber == 0 ? "Cancel" : "Cancel2";
+
         HandleMove();
-        HandleSelect();
-        HandleDetail();
-        HandleCancel();
+        if (Input.GetButtonDown(submit) || Input.GetKeyDown(KeyCode.Space)) HandleSelect();
+        if (Input.GetButtonDown(detailBtn) || Input.GetKeyDown(KeyCode.V))  HandleDetail();
+        if (Input.GetButtonDown(cancel) || Input.GetKeyDown(KeyCode.Backspace)) HandleCancel();
     }
 
     // ‘€ìˆ—
@@ -53,9 +58,6 @@ public class JobSelect : MonoBehaviour
     }
     private void HandleSelect()
     {
-        string submit = playerNumber == 0 ? "Submit" : "Submit2";
-        if (!Input.GetButtonDown(submit) || !Input.GetKeyDown(KeyCode.Space)) return;
-
         if (!isSelected && !playerCheck.playerReady[playerNumber])
         {
             isSelected = true;
@@ -66,17 +68,12 @@ public class JobSelect : MonoBehaviour
 
     private void HandleDetail()
     {
-        string detailBtn = playerNumber == 0 ? "Button_X1" : "Button_X2";
-        if (!Input.GetButtonDown(detailBtn)|| !Input.GetKeyDown(KeyCode.V)) return;
-
         isFlipped = !isFlipped;
         jobExplanation.TurnOverImage(!isFlipped);
     }
+
     private void HandleCancel()
     {
-        string cancel = playerNumber == 0 ? "Cancel" : "Cancel2";
-        if (!Input.GetButtonDown(cancel)||!Input.GetKeyDown(KeyCode.Backspace)) return;
-
         // Ready‰ðœ
         if (playerCheck.playerReady[playerNumber])
         {
@@ -110,6 +107,7 @@ public class JobSelect : MonoBehaviour
         await UniTask.Delay((int)(InputCooldownTime * 1000));
         isInputCooldown = false;
     }
+
     private void AnimateSelection()
     {
         select.transform.DOScale(1.2f, 0.1f).SetEase(Ease.OutQuad)
@@ -131,11 +129,6 @@ public class JobSelect : MonoBehaviour
     {
         jobExplanation.ChangeJobImage(jobNum);
         job.playerJobName = jobExplanation.GetJobName(jobNum);
-        UpdateArrowVisibility();
-    }
-
-    private void UpdateArrowVisibility()
-    {
         arrows[0].enabled = jobNum > 0;
         arrows[1].enabled = jobNum < MaxJobIndex;
     }

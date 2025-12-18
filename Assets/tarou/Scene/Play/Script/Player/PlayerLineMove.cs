@@ -38,7 +38,7 @@ public class PlayerLineMove : entity
     public override Vector2 dimension => dim;
     public player_ui ui;
     //hiddenvals
-    string joyLeft, joyRight, joyJump, joyAttack, joyAttack2, joySkill, joyDefense;
+    string joyLeft, joyRight, joyJump, joyAttack, joyAttack2, joySkill, joyDefense, joyDefense2;
 
     KeyCode keyLeft, keyRight, keyJump, keyAttack, keyAttack2, keySkill, keyDefense;
 
@@ -77,13 +77,14 @@ public class PlayerLineMove : entity
         {
             ui.coin_texttransform.gameObject.SetActive(false);
         }
-        joyLeft = playerNumber == 1 ? "joystick 1 button 5" : "joystick 2 button 5";
-        joyRight = playerNumber == 1 ? "joystick 1 button 4" : "joystick 2 button 4";
+        //joyLeft = playerNumber == 1 ? "joystick 1 button 5" : "joystick 2 button 5";
+        //joyRight = playerNumber == 1 ? "joystick 1 button 4" : "joystick 2 button 4";
         joyJump = playerNumber == 1 ? "joystick 1 button 0" : "joystick 2 button 0";
         joyAttack = playerNumber == 1 ? "joystick 1 button 1" : "joystick 2 button 1";
         joyAttack2 = playerNumber == 1 ? "joystick 1 button 2" : "joystick 2 button 2";
-        joySkill = playerNumber == 1 ? "joystick 1 button 0" : "joystick 2 button 0";
-        joyDefense = playerNumber == 1 ? "joystick 1 button 0" : "joystick 2 button 0";
+        joySkill = playerNumber == 1 ? "joystick 1 button 3" : "joystick 2 button 3";
+        joyDefense = playerNumber == 1 ? "joystick 1 button 5" : "joystick 2 button 5";
+        joyDefense2 = playerNumber == 1 ? "joystick 1 button 4" : "joystick 2 button 4";
 
         keyLeft = playerNumber == 1 ? KeyCode.RightArrow : KeyCode.D;
         keyRight = playerNumber == 1 ? KeyCode.LeftArrow : KeyCode.A;
@@ -177,7 +178,7 @@ public class PlayerLineMove : entity
         {
             atkval = 2;
         }
-        else if (Input.GetKey(keyDefense) || Input.GetKey(joyDefense))
+        else if (Input.GetKey(keyDefense) || Input.GetKey(joyDefense2) || Input.GetKey(joyDefense))
         {
             atkval = 3;
         }
@@ -271,15 +272,15 @@ public class PlayerLineMove : entity
             float stickInput = playerNumber == 1 ? Input.GetAxis("Horizontal") : Input.GetAxis("Horizontal2");
 
             // �{�^�����͂����p�i�������͑Ή��j
-            if (Input.GetKey(joyLeft) || Input.GetKey(keyLeft))
-            {
-                moveInput = -1;
-            }
-            else if (Input.GetKey(joyRight) || Input.GetKey(keyRight))
-            {
-                moveInput = 1;
-            }
-            else if (Mathf.Abs(stickInput) > 0.2f) // �X�e�B�b�N���͂����ȏ�Ȃ�̗p
+            //if (Input.GetKey(joyLeft) || Input.GetKey(keyLeft))
+            //{
+            //    moveInput = -1;
+            //}
+            //else if (Input.GetKey(joyRight) || Input.GetKey(keyRight))
+            //{
+            //    moveInput = 1;
+            //}
+            if (Mathf.Abs(stickInput) > 0.2f) // �X�e�B�b�N���͂����ȏ�Ȃ�̗p
             {
                 moveInput = -stickInput;
             }
@@ -306,16 +307,16 @@ public class PlayerLineMove : entity
         else
         {
             // ���[���ړ����[�h
-            if ((Input.GetKeyDown(joyLeft) || Input.GetKeyDown(keyLeft)) && !isJumping)
-            {
-                currentLane = Mathf.Max(0, currentLane - 1);
-                MoveToLane();
-            }
-            if ((Input.GetKeyDown(joyRight) || Input.GetKeyDown(keyRight)) && !isJumping)
-            {
-                currentLane = Mathf.Min(maxLane, currentLane + 1);
-                MoveToLane();
-            }
+            //if ((Input.GetKeyDown(joyLeft) || Input.GetKeyDown(keyLeft)) && !isJumping)
+            //{
+            //    currentLane = Mathf.Max(0, currentLane - 1);
+            //    MoveToLane();
+            //}
+            //if ((Input.GetKeyDown(joyRight) || Input.GetKeyDown(keyRight)) && !isJumping)
+            //{
+            //    currentLane = Mathf.Min(maxLane, currentLane + 1);
+            //    MoveToLane();
+            //}
         }
 
         // �W�����v�����i���̂܂܁j
