@@ -35,10 +35,7 @@ public class JobSelect : MonoBehaviour
     private void Update()
     {
         if (isInputCooldown || !playerCheck.isActive) return;
-<<<<<<< Updated upstream
-        
-=======
->>>>>>> Stashed changes
+
         string submit = playerNumber == 0 ? "Submit" : "Submit2";
         string detailBtn = playerNumber == 0 ? "Button_X1" : "Button_X2";
         string cancel = playerNumber == 0 ? "Cancel" : "Cancel2";

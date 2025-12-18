@@ -11,12 +11,8 @@ public class JobExplanation : MonoBehaviour
     { "attack", "attack2", "skill", "defence", "flag", "jobIcon","name",
       "setumei_attack","setumei_attack2","setumei_skill","setumei_defence"})]
     [SerializeField] Image[] details=new Image[11];
-<<<<<<< Updated upstream
     bool isAnimating = false;
-=======
     [SerializeField] CoinDisplay coinDisplay;
-
->>>>>>> Stashed changes
     public void ChangeJobImage(int jobNum)
     {
         switch (jobNum)
