@@ -130,7 +130,7 @@ public class JobSelect : MonoBehaviour
         jobExplanation.ChangeJobImage(jobNum);
         job.playerJobName = jobExplanation.GetJobName(jobNum);
         arrows[0].enabled = jobNum > 0;
-        arrows[1].enabled = jobNum < MaxJobIndex;
+        arrows[1].enabled = jobNum < MaxJobIndex-1;
     }
 
     private void SetArrows(bool state)
