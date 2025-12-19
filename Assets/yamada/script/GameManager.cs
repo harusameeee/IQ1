@@ -16,7 +16,9 @@ public class GameManager : MonoBehaviour
     {
 
         //Escが押された時
-        if (Input.GetKeyDown("joystick button 6"))
+        if (Input.GetKeyDown(KeyCode.Escape))
+        // Xboxコントローラ　back
+        //if (Input.GetKeyDown("joystick button 6"))
         {
             Debug.Log("ボタンが押された");
 #if UNITY_EDITOR
