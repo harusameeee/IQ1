@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: vuln
   m_EditorClassIdentifier: 
   stackable: 1
-  icon: {fileID: 21300000, guid: 327fe6823bbbe144a9a2d9771ed33485, type: 3}
+  icon: {fileID: 21300000, guid: 497d50cf924a08143a312560a03ebaec, type: 3}
   buffname: vuln
   type: 4
   pow: 0.5
   duration: 20
+  showbufficon: 1

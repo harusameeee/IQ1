@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: stealth
   m_EditorClassIdentifier: 
   stackable: 0
-  icon: {fileID: 21300000, guid: 81f75a8bcec19bf4c88ee2dc657a7b60, type: 3}
+  icon: {fileID: 21300000, guid: 09c89107104048b4997199217c137dcd, type: 3}
   buffname: stealth
   type: 5
   pow: 0
   duration: 6
+  showbufficon: 1

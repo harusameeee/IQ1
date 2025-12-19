@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: cd_aoe
   m_EditorClassIdentifier: 
   stackable: 0
-  icon: {fileID: 21300000, guid: 0a75b2e9a6b4af84bad8a1aafb7543bb, type: 3}
+  icon: {fileID: 21300000, guid: e7cb45c85aa70e240afa6a8b84b9888e, type: 3}
   buffname: cd_buff_aoe
   type: 1
   pow: 0.45
   duration: 5
+  showbufficon: 1

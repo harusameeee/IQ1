@@ -69,7 +69,7 @@ public class JobExplanation : MonoBehaviour
                 name = "ninja";
                 break;
             case 1:
-                name = "marlion";
+                name = "merlion";
                 break;
             case 2:
                 name = "tonto";

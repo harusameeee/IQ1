@@ -3,7 +3,7 @@ using UnityEngine;
 public class ResultPlayer : MonoBehaviour
 {
     //職業プレハブ
-    [NamedArray(new string[] { "ninja", "marlion", "tonto" })]
+    [NamedArray(new string[] { "ninja", "merlion", "tonto" })]
     [SerializeField] private GameObject[] jobPrehub = new GameObject[3];
 
     //配置位置
@@ -24,7 +24,9 @@ public class ResultPlayer : MonoBehaviour
                 player = Instantiate(jobPrehub[0], transforms[playerNum]);
                 break;
 
-            case "marlion":
+            case "merlion":
+                Vector3 plus=new Vector3(0.0f, 0.5f, 0.0f);
+                transforms[playerNum].position += plus;
                 player = Instantiate(jobPrehub[1], transforms[playerNum]);
                 break;
 

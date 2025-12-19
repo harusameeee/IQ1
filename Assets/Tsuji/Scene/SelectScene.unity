@@ -295,7 +295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 23615980}
   m_Layer: 0
-  m_Name: level_scene
+  m_Name: level_scene 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3837,6 +3837,14 @@ PrefabInstance:
     - target: {fileID: 7888400813743369414, guid: 78e58f51a3266c242a05305e403d8840, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9032427570962377167, guid: 78e58f51a3266c242a05305e403d8840, type: 3}
+      propertyPath: m_spriteAsset
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9032427570962377167, guid: 78e58f51a3266c242a05305e403d8840, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

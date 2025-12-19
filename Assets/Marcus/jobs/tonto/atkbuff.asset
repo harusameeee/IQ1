@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: atkbuff
   m_EditorClassIdentifier: 
   stackable: 0
-  icon: {fileID: 21300000, guid: 99c95e59d248ed2429db5f4d079a678f, type: 3}
+  icon: {fileID: 21300000, guid: 66089b4aef29ef84b8a24fa6ef400842, type: 3}
   buffname: atkbuff
   type: 3
   pow: 0.5
   duration: 5
+  showbufficon: 1
