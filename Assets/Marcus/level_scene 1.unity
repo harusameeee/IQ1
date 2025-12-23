@@ -1706,9 +1706,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2753109125188815364, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 353447df560ce444c85225f414302682, type: 3}
     - target: {fileID: 2821239390413618070, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
       propertyPath: m_Name
       value: skillicon (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941025463499862282, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 73.0252
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941025463499862282, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 48.51009
+      objectReference: {fileID: 0}
+    - target: {fileID: 6221814453503945347, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1909,7 +1925,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &486084048
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2120,10 +2136,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2753109125188815364, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 82551b30ae0559c45aaaf76eb86c6ec5, type: 3}
+    - target: {fileID: 2753109125188815364, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753109125188815364, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753109125188815364, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2753109125188815364, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2821239390413618070, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
       propertyPath: m_Name
       value: skillicon
       objectReference: {fileID: 0}
+    - target: {fileID: 3227540502202287615, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 82551b30ae0559c45aaaf76eb86c6ec5, type: 3}
     - target: {fileID: 7874868255556956387, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
       propertyPath: m_Color.a
       value: 0.972549
@@ -2453,9 +2493,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2753109125188815364, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 353447df560ce444c85225f414302682, type: 3}
     - target: {fileID: 2821239390413618070, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
       propertyPath: m_Name
       value: skillicon (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941025463499862282, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 80.0121
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941025463499862282, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 50.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5941025463499862282, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -42.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2643,8 +2699,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -918, y: -159}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchoredPosition: {x: -918, y: -164.83554}
+  m_SizeDelta: {x: 165.0524, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &674178513
 MonoBehaviour:
@@ -2887,12 +2943,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2753109125188815364, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 28ac5ead971adb3498e469bbad23fe01, type: 3}
     - target: {fileID: 2821239390413618070, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
       propertyPath: m_Name
       value: skillicon (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6878142722280906669, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
@@ -3479,6 +3540,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2753109125188815364, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bef7008fb7354f441a6deaf221ce873d, type: 3}
     - target: {fileID: 2821239390413618070, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
       propertyPath: m_Name
       value: skillicon (1)
@@ -5452,6 +5517,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2753109125188815364, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bef7008fb7354f441a6deaf221ce873d, type: 3}
     - target: {fileID: 2821239390413618070, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
       propertyPath: m_Name
       value: skillicon (1)
@@ -9171,7 +9240,6 @@ MonoBehaviour:
   comboText: {fileID: 1447554121}
   floatDistance: 50
   duration: 0.5
-  startColor: {r: 1, g: 1, b: 1, a: 1}
   defaultPosition: {x: 400, y: 110, z: 0}
   scoreData: {fileID: 11400000, guid: 30ff291e163b145478655a7be6a0c2b7, type: 2}
   targetImage: {fileID: 0}
@@ -11843,8 +11911,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 13.345, y: 73.2}
-  m_SizeDelta: {x: 75.209, y: 75.209}
+  m_AnchoredPosition: {x: 5.3725, y: 73.2}
+  m_SizeDelta: {x: 29.2544, y: 75.209}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1721349849
 MonoBehaviour:
@@ -13646,6 +13714,10 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4284547052
       objectReference: {fileID: 0}
+    - target: {fileID: 2753109125188815364, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 28ac5ead971adb3498e469bbad23fe01, type: 3}
     - target: {fileID: 2821239390413618070, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
       propertyPath: m_Name
       value: skillicon (2)
@@ -15362,6 +15434,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2753109125188815364, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 82551b30ae0559c45aaaf76eb86c6ec5, type: 3}
     - target: {fileID: 2821239390413618070, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
       propertyPath: m_Name
       value: skillicon
