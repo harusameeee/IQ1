@@ -93,7 +93,7 @@ Material:
     - _removesegment: 0.02
     - _rotation: -90
     - _segementspacing: 0.01
-    - _segmentcount: 3144
+    - _segmentcount: 2074
     - _segmentspacing: 0.01
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
