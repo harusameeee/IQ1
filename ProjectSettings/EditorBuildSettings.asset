@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/tarou/Scene/Play/Stage1.unity
     guid: 83476a6f96a00fc49935b4aa5c7d9b80
   - enabled: 0
-    path: Assets/Tsuji/Scene/StageOtamesi.unity
+    path: Assets/Tsuji/Scene/OtameScene.unity
     guid: c2d3a10a29e2d0e41a6edd7983b9fbe2
   - enabled: 0
     path: Assets/yamada/yamadaScene.unity

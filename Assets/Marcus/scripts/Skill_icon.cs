@@ -49,15 +49,7 @@ public class Skill_icon : MonoBehaviour
         owner = o;
         skill = s;
         skill_icon.sprite = skill.icon;
-        //if (skill.maxstacks > 1)
-        //{
-        //    stacks_transform.gameObject.SetActive(true);
-        //    stacks_text.text = skill.currentstacks.ToString();
-        //}
-        //else
-        //{
-        //    stacks_transform.gameObject.SetActive(false);
-        //}
+
         if (skill.coincost > 0)
         {
             coincost_transform.gameObject.SetActive(true);

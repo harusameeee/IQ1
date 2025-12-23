@@ -20,6 +20,8 @@ MonoBehaviour:
   currentstacks: 1
   coincost: 0
   has_cooldown: 0
+  coingain: 0
   icon: {fileID: 21300000, guid: f1e03ba68a08af049a761f8f1f1a0da7, type: 3}
   onHit_effect: []
   onUse_effects: []
+  se: {fileID: 8300000, guid: 9f4afe148ee8e894e81ce26f5c12194a, type: 3}

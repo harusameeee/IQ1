@@ -33,7 +33,8 @@ public class PlayerLineMove : entity
     [HideInInspector] public float current_hp = 100;
     public float max_hp = 100;
     public List<skilldata> skills;
-    public hitbox hb; public override Vector2 position => new Vector2(-transform.localPosition.x, transform.localPosition.y + 1.5f);
+    public hitbox hb; 
+    public override Vector2 position => new Vector2(-transform.localPosition.x, transform.localPosition.y + 1.5f);
     public Vector2 dim;
     public override Vector2 dimension => dim;
     public player_ui ui;
@@ -203,6 +204,8 @@ public class PlayerLineMove : entity
                 current_max_gcd = skills[atkval].gcd;
                 // コイン消費
                 current_coins -= skills[atkval].coincost;
+                //se鳴らす
+                SoundManager.Instance.PlaySFX(skills[atkval].se);
 
                 // コイン増加（coingainが正なら追加）
                 if (skills[atkval].coingain > 0)
