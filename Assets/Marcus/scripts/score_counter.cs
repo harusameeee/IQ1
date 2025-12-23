@@ -5,88 +5,63 @@ using UnityEngine.UI;
 
 public class score_counter : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public static float currentscore = 0;
-    int combo = 0;
-    //public TMPro.TMP_Text scoretext;
+    public static float currentscore = 0f;
+
+    private int combo = 0;
     public TMPro.TMP_Text comboText;
-
-    [SerializeField] private float floatDistance = 30f;
-    [SerializeField] private float duration = 2.0f;
-    [SerializeField] private Color startColor = Color.white;
-
-    [SerializeField]private Vector3 defaultPosition;
 
     [SerializeField] private ScoreData scoreData;
 
     [Header("Image明るさ設定")]
-    [SerializeField] private Image targetImage;   // ← Image を入れる
-    [SerializeField] private float normalAlpha = 0.3f;   // 通常の薄い状態
-    [SerializeField] private float brightAlpha = 1.0f;  // コンボ時の明るい状態
-    [SerializeField] private float flashTime = 0.2f;    // 明るくなる時間
-
+    [SerializeField] private Image targetImage;
+    [SerializeField] private float normalAlpha = 0.3f;
+    [SerializeField] private float brightAlpha = 1.0f;
+    [SerializeField] private float flashTime = 0.2f;
 
     void Start()
     {
+        
         entity.onHit += addscore;
         itempickup.scorechange += addscore;
+
         currentscore = 0;
-        //scoretext.text = "Score: " + ((int)currentscore);
-        comboText.text = combo.ToString();
-
+        combo = 0;
+        UpdateUI();
     }
 
-    private void Update()
+    // ★解除を追加（重要）
+    void OnDestroy()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            addscore(1,true);
-        }
+        entity.onHit -= addscore;
+        itempickup.scorechange -= addscore;
     }
-    public void addscore(float scoretoadd,bool comboable)
-    {
 
+    public void addscore(float scoretoadd, bool comboable)
+    {
         if (scoretoadd > 0)
         {
-            
-            currentscore += scoretoadd * (1f + combo * 0.1f);
             if (comboable)
-            {    
-            combo += 1;
-                //ComboAction().Forget();
+            {
+                combo++;
+               
                 FlashImage();
             }
+
+            currentscore += scoretoadd * (1f + combo * 0.1f);
         }
         else
         {
             combo = 0;
             currentscore += scoretoadd;
-            scoreData.score = (int)currentscore;
-
         }
-        
-           // scoretext.text = "Score: " +  ((int)currentscore);
-            comboText.text =  combo+ "\nCombo ";
+
+        scoreData.score = Mathf.FloorToInt(currentscore);
+        UpdateUI();
     }
 
-    //コンボ表示イベント
-    private async UniTask ComboAction()
+    private void UpdateUI()
     {
-        comboText.DOKill();
-        comboText.rectTransform.localPosition = defaultPosition;
-        comboText.color = new Color(startColor.r, startColor.g, startColor.b, 1f);
-
-        var moveTween = comboText.rectTransform.DOLocalMoveY(defaultPosition.y + floatDistance, duration)
-            .SetEase(Ease.OutQuad);
-        var fadeTween = comboText.DOFade(0f, duration);
-
-        await DOTween.Sequence()
-            .Append(moveTween)
-            .Join(fadeTween)
-            .SetEase(Ease.OutQuad)
-            .AsyncWaitForCompletion();
-
-        comboText.rectTransform.localPosition = defaultPosition;
+        comboText.text = $"{combo}\nCombo ";
     }
 
     private void FlashImage()
@@ -96,18 +71,16 @@ public class score_counter : MonoBehaviour
         targetImage.DOKill();
         comboText.DOKill();
 
-        // αを1（明るい）に
-        targetImage.DOFade(brightAlpha, flashTime)
+        targetImage
+            .DOFade(brightAlpha, flashTime)
             .OnComplete(() =>
-            {
-                // 元の薄い α に戻す
-                targetImage.DOFade(normalAlpha, flashTime);
-            });
-        comboText.DOFade(brightAlpha, flashTime)
+                targetImage.DOFade(normalAlpha, flashTime)
+            );
+
+        comboText
+            .DOFade(brightAlpha, flashTime)
             .OnComplete(() =>
-            {
-                // 元の薄い α に戻す
-                comboText.DOFade(normalAlpha, flashTime);
-            });
+                comboText.DOFade(normalAlpha, flashTime)
+            );
     }
 }

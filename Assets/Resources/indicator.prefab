@@ -94,7 +94,6 @@ MonoBehaviour:
   item_icon: {fileID: 2588961618343081186}
   timer_ring: {fileID: 8807945662579888969}
   obstacle_transform: {fileID: 0}
-  obstacleindex: 0
   offsetpos: 0
   player: {fileID: 0}
 --- !u!1 &5266186978531780876
@@ -375,7 +374,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cdfbe422ac0084441aeff4cecd482874, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c2f73cb826e68146be8b706bd4af283, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
