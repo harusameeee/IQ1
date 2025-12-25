@@ -1024,6 +1024,7 @@ GameObject:
   m_Component:
   - component: {fileID: 340173945}
   - component: {fileID: 340173946}
+  - component: {fileID: 340173947}
   m_Layer: 5
   m_Name: playerui (1)
   m_TagString: Untagged
@@ -1079,6 +1080,33 @@ MonoBehaviour:
   profilepic_img: {fileID: 1621537106}
   coin_texttransform: {fileID: 1118865995}
   skill_icon_transform: {fileID: 1499253755}
+--- !u!114 &340173947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 340173944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa1ba357af6efa04ea5ee590cac82a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp50below:
+  - {fileID: 21300000, guid: 583b61783ef088a4fa64ad0a677d36cd, type: 3}
+  - {fileID: 21300000, guid: 079871b3b974d8a47968a218a696340e, type: 3}
+  - {fileID: 21300000, guid: 62b525c20c70d6f468f242b3d21c4486, type: 3}
+  hp0:
+  - {fileID: 21300000, guid: 478b75e5df9db744886346289aed544e, type: 3}
+  - {fileID: 21300000, guid: 95e0f4a96a4691948a11b410ba400bc7, type: 3}
+  - {fileID: 21300000, guid: a81559c2f0dfad149acf74be5d78eb70, type: 3}
+  normal:
+  - {fileID: 21300000, guid: 48cc15f26d361a14c99d965e16eb85e6, type: 3}
+  - {fileID: 21300000, guid: 839b9baa8fe735840bdf8d51a9bc9ead, type: 3}
+  - {fileID: 21300000, guid: 53e0d46c6f519a347b42f49bfa332552, type: 3}
+  ui: {fileID: 340173946}
+  icon: {fileID: 1621537106}
+  job: {fileID: 11400000, guid: c9cdfd0213adb8641a27669d9953e266, type: 2}
 --- !u!224 &351824317 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 221136496881981237, guid: 9036d3a1fa83d254cb45380cd03e8103, type: 3}
@@ -14033,6 +14061,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1937640684}
   - component: {fileID: 1937640685}
+  - component: {fileID: 1937640686}
   m_Layer: 5
   m_Name: playerui
   m_TagString: Untagged
@@ -14088,6 +14117,33 @@ MonoBehaviour:
   profilepic_img: {fileID: 114692703}
   coin_texttransform: {fileID: 1239143035}
   skill_icon_transform: {fileID: 676196558}
+--- !u!114 &1937640686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937640683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa1ba357af6efa04ea5ee590cac82a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp50below:
+  - {fileID: 21300000, guid: 583b61783ef088a4fa64ad0a677d36cd, type: 3}
+  - {fileID: 21300000, guid: 079871b3b974d8a47968a218a696340e, type: 3}
+  - {fileID: 21300000, guid: 62b525c20c70d6f468f242b3d21c4486, type: 3}
+  hp0:
+  - {fileID: 21300000, guid: 478b75e5df9db744886346289aed544e, type: 3}
+  - {fileID: 21300000, guid: 95e0f4a96a4691948a11b410ba400bc7, type: 3}
+  - {fileID: 21300000, guid: a81559c2f0dfad149acf74be5d78eb70, type: 3}
+  normal:
+  - {fileID: 21300000, guid: 48cc15f26d361a14c99d965e16eb85e6, type: 3}
+  - {fileID: 21300000, guid: 839b9baa8fe735840bdf8d51a9bc9ead, type: 3}
+  - {fileID: 21300000, guid: 53e0d46c6f519a347b42f49bfa332552, type: 3}
+  ui: {fileID: 1937640685}
+  icon: {fileID: 114692703}
+  job: {fileID: 11400000, guid: db21ffe62c6f1344faaf8a34679d7ba8, type: 2}
 --- !u!4 &1945201739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8289634964073156625, guid: 6a2ac44f8711ae745befdfccb8aa72b6, type: 3}
