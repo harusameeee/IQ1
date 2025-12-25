@@ -32,7 +32,7 @@ public class witch_Ai : entity
                 dmgmult += buff.pow;
             }
         }
-        Debug.Log($"Witch took {damageAmount} damage with mult {dmgmult}");
+        //Debug.Log($"Witch took {damageAmount} damage with mult {dmgmult}");
         onHit?.Invoke((int)(damageAmount * dmgmult), comboable);
         float xOffset = rng.Next(-5, 5);
         float yOffset = rng.Next(-5, 5);

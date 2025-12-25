@@ -166,7 +166,7 @@ public class PlayerLineMove : entity
                 //Debug.Log($"skill{i} cooldown finished");
                 skills[i].currentstacks += 1;
                 skills[i].currentcooldown = skills[i].cooldown;
-                ui.skill_icons[i].stacks_text.text = skills[i].currentstacks.ToString();
+                //ui.skill_icons[i].stacks_text.text = skills[i].currentstacks.ToString();
             }
         }
 

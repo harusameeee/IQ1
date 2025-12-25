@@ -37,17 +37,17 @@ public class hitbox : hurtbox
                         if (buff.type == bufftypes.attack)
                         {
                             dmgmult += buff.pow;
-                            Debug.Log($"P{owner.name} attack buff applied: {buff.pow}");
+                            //Debug.Log($"P{owner.name} attack buff applied: {buff.pow}");
                         }
                         else if (buff.type == bufftypes.stealth)
                         {
                             dmgmult += buff.pow;
-                            Debug.Log($"P{owner.name} stealth buff applied: {buff.pow}");
+                            //Debug.Log($"P{owner.name} stealth buff applied: {buff.pow}");
                             owner.removebuff(i);
                         }
                     }
                 }
-                Debug.Log($"{name} dealing {(int)(dmgamount * dmgmult)} damage to {d.name}");
+                //Debug.Log($"{name} dealing {(int)(dmgamount * dmgmult)} damage to {d.name}");
                 d.TakeDamage((int)(dmgamount * dmgmult), true, null,new Vector2( overlap.center.x*1.5f+2, overlap.center.y-8f));
                 if (effects != null && effects.Count > 0) {
                     foreach (var effect in effects)
