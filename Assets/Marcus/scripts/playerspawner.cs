@@ -14,8 +14,8 @@ public class playerspawner : MonoBehaviour
     [HideInInspector] public PlayerLineMove[] players = new PlayerLineMove[2];
 
     [SerializeField] private SelectedPlayerJob[] playerJob;
-    [SerializeField] private GameObject prehub;
-    [SerializeField] private Sprite[] playerNumImage=new Sprite[2];
+    //[SerializeField] private GameObject prehub;
+    //[SerializeField] private Sprite[] playerNumImage=new Sprite[2];
 
 
     void Awake()
@@ -37,19 +37,16 @@ public class playerspawner : MonoBehaviour
     {
         GameObject chara = Instantiate(characters_prefabs[(int)ct], transform);
 
-        GameObject childObject = Instantiate(prehub, chara.transform);
-        childObject.transform.localPosition = new Vector3(0, 2, 0);
-        childObject.transform.localRotation = Quaternion.identity;
-        childObject.transform.localScale = new Vector3(1, 1, 1);
-
         if (playernum == 1)
         {
-            chara.transform.localPosition = new float3(lanes[2].localPosition.x, 0, 0);   
+            chara.transform.localPosition = new float3(lanes[2].localPosition.x, 0, 0);
         }
         else
         {
             chara.transform.localPosition = new float3(lanes[4].localPosition.x, 0, 0);
         }
+        
+
 
         chara.transform.localRotation = quaternion.Euler(0, math.PI, 0);
         PlayerLineMove player = chara.GetComponent<PlayerLineMove>();
