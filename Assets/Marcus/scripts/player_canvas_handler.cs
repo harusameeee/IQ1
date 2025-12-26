@@ -23,6 +23,11 @@ public class player_canvas_handler : MonoBehaviour
     float buffdurationmax = 0;
     
     float buffdurationmax2 = 0;
+
+
+    [SerializeField] private Image playerNum;
+    [SerializeField] private Sprite[] numImage;
+
     void Start()
     {
         
@@ -159,5 +164,11 @@ public class player_canvas_handler : MonoBehaviour
         stay_together_text.gameObject.SetActive(false);
         anchor_image.gameObject.SetActive(false);
         dmg_zoneimg.gameObject.SetActive(false);
+    }
+
+    //0or1
+    public void playerNumchange(int num)
+    {
+        playerNum.sprite = numImage[num];
     }
 }

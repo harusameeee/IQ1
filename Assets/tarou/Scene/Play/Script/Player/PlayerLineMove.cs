@@ -102,6 +102,8 @@ public class PlayerLineMove : entity
         {
             ui.coin_texttransform.gameObject.SetActive(false);
         }
+        playercanvas.playerNumchange(playerNumber-1);
+
         playercanvas.owner = this;
     }
 

@@ -5791,8 +5791,6 @@ MonoBehaviour:
   - {fileID: 1070294471}
   - {fileID: 463058766}
   - {fileID: 23615979}
-  - {fileID: 490589762}
-  - {fileID: 310342815}
   players:
   - {fileID: 464207815810545249}
   - {fileID: 919132149060969739}
