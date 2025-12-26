@@ -1,6 +1,4 @@
-    using System;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,52 +8,100 @@ public class indicator : MonoBehaviour
     public Transform danger_icon_transform;
     public Image item_icon;
     public Image timer_ring;
+
     public Transform obstacle_transform;
-    public float offsetpos = 0;
-    int initail_segment_count = 0;
     public player_mover player;
-    public static Action<int,float> onIndicatorEnd;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public float offsetpos = 0f;
+
+    [SerializeField] int segmentCount = 20;
+    [SerializeField] float startDelay = 0.5f;
+
+    float maxDistance;
+    float delayTimer;
+    bool started;
+
+    public static Action<int, float> onIndicatorEnd;
+
+    void Awake()
     {
-        timer_ring.material = Instantiate(timer_ring.material);
+        // Ensure unique material per indicator
+        timer_ring.material = new Material(timer_ring.material);
     }
 
-    // Update is called once per frame
+    void OnEnable()
+    {
+        delayTimer = 0f;
+        started = false;
+
+        // Reset shader state
+        timer_ring.material.SetFloat("_segmentcount", segmentCount);
+        timer_ring.material.SetFloat("_removesegment", 0);
+    }
+
     void Update()
     {
-        if (obstacle_transform != null && player != null)
+        if (obstacle_transform == null || player == null)
+            return;
+
+        // Delay start
+        if (!started)
         {
-            int val = Mathf.RoundToInt(player.get_dist(player.transform.position, obstacle_transform.position) / 2);
-            timer_ring.material.SetFloat("_removesegment", initail_segment_count-val);
-            if(initail_segment_count-val>= initail_segment_count)
-            {
-                //onIndicatorEnd?.Invoke(obstacleindex, offsetpos);
-                obstacle_transform = null;
-                player = null;
-                
-                item_icon.gameObject.SetActive(false);
-                danger_icon_transform.gameObject.SetActive(true);
-                indicator_colour.color = Color.red;
-                this.gameObject.SetActive(false);
-            }
+            delayTimer += Time.deltaTime;
+            if (delayTimer >= startDelay)
+                started = true;
+            else
+                return;
+        }
+
+        float dist = player.get_dist(
+            player.transform.position,
+            obstacle_transform.position);
+
+        float t = 1f - Mathf.Clamp01(dist / maxDistance);
+
+        int value = Mathf.Clamp(
+            Mathf.RoundToInt(segmentCount * t),
+            0,
+            segmentCount);
+
+        timer_ring.material.SetFloat("_removesegment", value);
+
+        if (value >= segmentCount)
+        {
+            EndIndicator();
         }
     }
-    public void setvalues(player_mover player, Transform obstacle, float offsetpos = 0)
+
+    public void setvalues(player_mover player, Transform obstacle, float offsetpos = 0f)
     {
         this.player = player;
-        obstacle_transform = obstacle;
+        this.obstacle_transform = obstacle;
         this.offsetpos = offsetpos;
-        initail_segment_count = Mathf.RoundToInt(this.player.get_dist(player.transform.position, obstacle_transform.transform.position) / 2);
-        timer_ring.material.SetFloat("_segmentcount", initail_segment_count);
 
+        maxDistance = player.get_dist(
+            player.transform.position,
+            obstacle_transform.position);
+
+        gameObject.SetActive(true);
     }
+
+    void EndIndicator()
+    {
+        obstacle_transform = null;
+        player = null;
+
+        indicator_colour.color = Color.red;
+        item_icon.gameObject.SetActive(true);
+
+        gameObject.SetActive(false);
+    }
+
     public void setitem(Sprite icon)
     {
         indicator_colour.color = Color.blue;
         item_icon.gameObject.SetActive(true);
         item_icon.sprite = icon;
         danger_icon_transform.gameObject.SetActive(false);
-
     }
 }
