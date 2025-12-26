@@ -8,7 +8,8 @@ public class score_counter : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public static float currentscore = 0;
     int combo = 0;
-    public TMPro.TMP_Text comboText;
+    public TMPro.TMP_Text comboText; 
+    public TMPro.TMP_Text scoreText;
 
     [SerializeField] private float floatDistance = 30f;
     [SerializeField] private float duration = 2.0f;
@@ -52,7 +53,8 @@ public class score_counter : MonoBehaviour
             currentscore += scoretoadd;
         }
         scoreData.score = (int)currentscore;
-        comboText.text =  combo+ "\nCombo ";
+        comboText.text =  combo.ToString();
+        scoreText.text = currentscore.ToString();
     }
 
     private void FlashImage()
@@ -81,6 +83,7 @@ public class score_counter : MonoBehaviour
     {
         combo = 0;
         currentscore = 0;
+        
     }
 
     private void OnDisable()
