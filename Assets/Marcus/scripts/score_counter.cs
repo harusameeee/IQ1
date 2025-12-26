@@ -52,9 +52,15 @@ public class score_counter : MonoBehaviour
             combo = 0;
             currentscore += scoretoadd;
         }
+
+        
         scoreData.score = (int)currentscore;
+        if (scoreData.score < 0)
+        {
+            scoreData.score = 0;
+        }
         comboText.text =  combo.ToString();
-        scoreText.text = currentscore.ToString();
+        scoreText.text = scoreData.score.ToString();
     }
 
     private void FlashImage()
