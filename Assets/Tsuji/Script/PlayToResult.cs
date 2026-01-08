@@ -26,7 +26,7 @@ public class PlayToResult : MonoBehaviour
 
     void Update()
     {
-        if (!isFinished && slider.value >= slider.maxValue)
+        if (!isFinished && slider.value >= 0.97f)
         {
             isFinished = true;
             OnFinishAsync().Forget();

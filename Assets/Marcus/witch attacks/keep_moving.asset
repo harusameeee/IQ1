@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: keep_moving
   m_EditorClassIdentifier: 
   stackable: 0
-  icon: {fileID: 21300000, guid: 39f857546274c3f45b4ad432b924fbb2, type: 3}
+  icon: {fileID: 21300000, guid: 38d7402ef0e2662439b76402a7f2b0b1, type: 3}
   buffname: Keep_moving
   type: 11
   pow: 10

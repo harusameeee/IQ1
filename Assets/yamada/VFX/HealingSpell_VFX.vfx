@@ -175,9 +175,9 @@ MonoBehaviour:
   uiBounds:
     serializedVersion: 2
     x: -360
-    y: -533
+    y: -582
     width: 3146
-    height: 2630
+    height: 2679
 --- !u!114 &114350483966674978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2024,7 +2024,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":0.0},{"color":{"r":0.4472559988498688,"g":1.0,"b":0.11132067441940308,"a":1.0},"time":0.7611810564994812},{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":0.9235439896583557,"time":0.7188220024108887},{"alpha":1.0,"time":0.765880823135376},{"alpha":0.0,"time":1.0}],"gradientMode":0}'
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":0.0},{"color":{"r":0.4472559988498688,"g":1.0,"b":0.11132067441940308,"a":1.0},"time":0.7611810564994812},{"color":{"r":0.8271954655647278,"g":1.0,"b":0.7226414680480957,"a":1.0},"time":0.9376516342163086},{"color":{"r":0.0,"g":0.0,"b":0.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":0.9235439896583557,"time":0.7188220024108887},{"alpha":1.0,"time":0.765880823135376},{"alpha":0.0,"time":1.0}],"gradientMode":0}'
     m_Space: -1
   m_Property:
     name: Color
@@ -9821,7 +9821,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 1198, y: -366}
+  m_UIPosition: {x: 1274, y: -429}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -9871,7 +9871,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 1486, y: -515}
+  m_UIPosition: {x: 1516, y: -582}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -9921,7 +9921,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 2018, y: -365}
+  m_UIPosition: {x: 2058, y: -365}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
