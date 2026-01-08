@@ -4259,33 +4259,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!1 &1019306189 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -7046613062614526147, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
-  m_PrefabInstance: {fileID: 1850750119}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1019306193
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1019306189}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3363493904352407131, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
 --- !u!1 &1024384590
 GameObject:
   m_ObjectHideFlags: 0
@@ -5956,635 +5929,23 @@ MonoBehaviour:
   - m_EditModeType: 1
     m_Knots:
     - Position:
-        x: 86
-        y: 43
-        z: 32.8
-      TangentIn:
-        x: 0
-        y: 0
-        z: 0
-      TangentOut:
-        x: 0
-        y: 0
-        z: 0
-      Rotation:
-        value:
-          x: 0.00089289976
-          y: 0.73436075
-          z: 0.001254722
-          w: -0.6787577
-    - Position:
-        x: -315.1
-        y: 45
-        z: 35.6
-      TangentIn:
-        x: -0
-        y: -0
-        z: -87.93808
-      TangentOut:
-        x: 0
-        y: 0
-        z: 43.088364
-      Rotation:
-        value:
-          x: -0.00073853205
-          y: -0.70476717
-          z: -0.0010252661
-          w: 0.70943767
-    - Position:
-        x: -411.4
-        y: 45
-        z: 36.2
-      TangentIn:
-        x: 0
-        y: 0
-        z: 0
-      TangentOut:
-        x: 0
-        y: 0
-        z: 0
-      Rotation:
-        value:
-          x: 0.0012411155
-          y: -0.7029799
-          z: 0.0027529467
-          w: 0.7112032
-    - Position:
-        x: -525.1
-        y: 39.11
-        z: 34.5
-      TangentIn:
-        x: 0
-        y: 0
-        z: 0
-      TangentOut:
-        x: 0
-        y: 0
-        z: 0
-      Rotation:
-        value:
-          x: 0
-          y: -0.66558456
-          z: 0
-          w: 0.7463225
-    - Position:
-        x: -576.5
-        y: 38.9
-        z: 30.2
-      TangentIn:
-        x: -0
-        y: -0
-        z: -14.539386
-      TangentOut:
-        x: 0
-        y: 0
-        z: 10.98453
-      Rotation:
-        value:
-          x: -0.0053359005
-          y: 0.7959548
-          z: -0.0070166686
-          w: -0.60529184
-    - Position:
-        x: -602.9
-        y: 38
-        z: 17.2
-      TangentIn:
-        x: -0
-        y: -0
-        z: -10.487317
-      TangentOut:
-        x: 0
-        y: 0
-        z: 12.748976
-      Rotation:
-        value:
-          x: -0.0050594737
-          y: 0.90381813
-          z: -0.01085792
-          w: -0.42774922
-    - Position:
-        x: -629.4
-        y: 37.3
-        z: -17.3
-      TangentIn:
-        x: -0
-        y: -0
-        z: -16.230644
-      TangentOut:
-        x: 0
-        y: 0
-        z: 20.778934
-      Rotation:
-        value:
-          x: -0.014324296
-          y: 0.94937444
-          z: -0.045138936
-          w: -0.31055668
-    - Position:
-        x: -669.6
-        y: 25
-        z: -74.9
-      TangentIn:
-        x: -0
-        y: -0
-        z: -26.286814
-      TangentOut:
-        x: 0
-        y: 0
-        z: 32.584866
-      Rotation:
-        value:
-          x: -0.021312755
-          y: 0.9569099
-          z: -0.07275558
-          w: -0.2803139
-    - Position:
-        x: -724.6
-        y: 10.8
-        z: -168.6
-      TangentIn:
-        x: -0
-        y: -0
-        z: -35.6162
-      TangentOut:
-        x: 0
-        y: 0
-        z: 34.129265
-      Rotation:
-        value:
-          x: -0.015599107
-          y: 0.9728498
-          z: -0.068852514
-          w: -0.22040729
-    - Position:
-        x: -759.64996
-        y: -4.4
-        z: -261.68
-      TangentIn:
-        x: 0
-        y: 0
-        z: 0
-      TangentOut:
-        x: 0
-        y: 0
-        z: 0
-      Rotation:
-        value:
-          x: -0.012380033
-          y: 0.9843795
-          z: -0.077271335
-          w: -0.15771218
-    - Position:
-        x: -818.3
-        y: -2.9
-        z: -434.8
-      TangentIn:
-        x: -0
-        y: -0
-        z: -42.975292
-      TangentOut:
-        x: 0
-        y: 0
-        z: 23.4722
-      Rotation:
-        value:
-          x: 0.00039220264
-          y: 0.98161525
-          z: 0.0020171558
-          w: -0.19085908
-    - Position:
-        x: -841.6
-        y: -2.9
-        z: -484.09998
-      TangentIn:
-        x: -0
-        y: -0
-        z: -18.939365
-      TangentOut:
-        x: 0
-        y: 0
-        z: 24.746964
-      Rotation:
-        value:
-          x: 0
-          y: 0.91208017
-          z: 0
-          w: -0.41001204
-    - Position:
-        x: -929.9
-        y: -2.9
-        z: -513.6
-      TangentIn:
-        x: -0
-        y: -0
-        z: -25.270458
-      TangentOut:
-        x: 0
-        y: 0
-        z: 17.989374
-      Rotation:
-        value:
-          x: 1.2853153e-15
-          y: 0.7474747
-          z: -1.1422761e-15
-          w: -0.6642903
-    - Position:
-        x: -976.9
-        y: -2.9
-        z: -509.5
-      TangentIn:
-        x: -0
-        y: -0
-        z: -17.948828
-      TangentOut:
-        x: 0
-        y: 0
-        z: 24.226822
-      Rotation:
-        value:
-          x: -0.0011339309
-          y: -0.632424
-          z: -0.00092577667
-          w: 0.77462107
-    - Position:
-        x: -1058.6001
-        y: -2.4
-        z: -482.8
-      TangentIn:
-        x: 0
-        y: 0
-        z: 0
-      TangentOut:
-        x: 0
-        y: 0
-        z: 0
-      Rotation:
-        value:
-          x: -0.00030361733
-          y: 0.58653957
-          z: -0.00021987787
-          w: -0.8099205
-    - Position:
-        x: -1118.7001
-        y: -2.8000016
-        z: -460.8
-      TangentIn:
-        x: -0
-        y: -0
-        z: -16.578037
-      TangentOut:
-        x: 0
-        y: 0
-        z: 10.603827
-      Rotation:
-        value:
-          x: 0.007799708
-          y: -0.5358365
-          z: 0.0049502696
-          w: 0.8442712
-    - Position:
-        x: -1141.3
-        y: -3.6
-        z: -447.59998
-      TangentIn:
-        x: -0
-        y: -0
-        z: -9.725908
-      TangentOut:
-        x: 0
-        y: 0
-        z: 13.928593
-      Rotation:
-        value:
-          x: 0.008026446
-          y: -0.34889674
-          z: 0.0029882952
-          w: 0.937122
-    - Position:
-        x: -1161.4
-        y: -3.7000003
-        z: -397.8
-      TangentIn:
-        x: -0
-        y: -0
-        z: -15.560714
-      TangentOut:
-        x: 0
-        y: 0
-        z: 12.072436
-      Rotation:
-        value:
-          x: 0.00031478386
-          y: -0.14053895
-          z: 0.001111978
-          w: 0.9900745
-    - Position:
-        x: -1167.2
-        y: -3.7000003
-        z: -366
-      TangentIn:
-        x: -0
-        y: -0
-        z: -12.165651
-      TangentOut:
-        x: 0
-        y: 0
-        z: 17.042887
-      Rotation:
-        value:
-          x: -9.606865e-10
-          y: 0.03757053
-          z: 3.6119e-11
-          w: 0.9992939
-    - Position:
-        x: -1146.6
-        y: -3.7000003
-        z: -306
-      TangentIn:
-        x: -0
-        y: -0
-        z: -27.351784
-      TangentOut:
-        x: 0
-        y: 0
-        z: 51.69253
-      Rotation:
-        value:
-          x: 0.0011433822
-          y: 0.23748828
-          z: 0.00467668
-          w: 0.97137845
-    - Position:
-        x: -1013.4
-        y: -3.7
-        z: -122.7
-      TangentIn:
-        x: -0
-        y: -0
-        z: -47.630306
-      TangentOut:
-        x: 0
-        y: 0
-        z: 21.943756
-      Rotation:
-        value:
-          x: 0.0010511638
-          y: 0.29778385
-          z: 0.0033697907
-          w: 0.95462686
-    - Position:
-        x: -987
-        y: -3.7
-        z: -82.5
-      TangentIn:
-        x: -0
-        y: -0
-        z: -15.812235
-      TangentOut:
-        x: 0
-        y: 0
-        z: 15.625128
-      Rotation:
-        value:
-          x: 0.0013650525
-          y: 0.22625299
-          z: 0.005876748
-          w: 0.97404987
-    - Position:
-        x: -971.7
-        y: -3.6999998
-        z: -38.100006
-      TangentIn:
-        x: 0
-        y: 0
-        z: 0
-      TangentOut:
-        x: 0
-        y: 0
-        z: 0
-      Rotation:
-        value:
-          x: 0
-          y: 0.1418848
-          z: 0
-          w: 0.9898832
-    - Position:
-        x: -967.7
-        y: -3.6999998
-        z: -4.200012
-      TangentIn:
-        x: -0
-        y: -0
-        z: -11.37807
-      TangentOut:
-        x: 0
-        y: 0
-        z: 16.097364
-      Rotation:
-        value:
-          x: -0.0025240348
-          y: -0.213784
-          z: -0.014540505
-          w: 0.9767695
-    - Position:
-        x: -1024.4
-        y: -2.4
-        z: 33.9
-      TangentIn:
-        x: -0
-        y: -0
-        z: -21.988792
-      TangentOut:
-        x: 0
-        y: 0
-        z: 20.712679
-      Rotation:
-        value:
-          x: -0.009507583
-          y: -0.51271254
-          z: -0.0071413885
-          w: 0.85847795
-    - Position:
-        x: -1080.3
-        y: -0.7
-        z: 57.3
-      TangentIn:
-        x: -0
-        y: -0
-        z: -16.707289
-      TangentOut:
-        x: 0
-        y: 0
-        z: 11.968422
-      Rotation:
-        value:
-          x: -0.052102346
-          y: -0.59805363
-          z: -0.02222861
-          w: 0.7994517
-    - Position:
-        x: -1110.4
-        y: 5.2
-        z: 62.5
-      TangentIn:
-        x: -0
-        y: -0
-        z: -12.255197
-      TangentOut:
-        x: 0
-        y: 0
-        z: 20.003237
-      Rotation:
-        value:
-          x: 0.020038148
-          y: 0.754575
-          z: 0.10242849
-          w: -0.6478606
-    - Position:
-        x: -1184
-        y: 18
-        z: 26.6
-      TangentIn:
-        x: -0
-        y: -0
-        z: -24.984842
-      TangentOut:
-        x: 0
-        y: 0
-        z: 20.88141
-      Rotation:
-        value:
-          x: 0.05486215
-          y: 0.8739811
-          z: 0.06368282
-          w: -0.47863513
-    - Position:
-        x: -1228
-        y: 27.9
-        z: -9.7
-      TangentIn:
-        x: -0
-        y: -0
-        z: -21.239374
-      TangentOut:
-        x: 0
-        y: 0
-        z: 26.005571
-      Rotation:
-        value:
-          x: 0.05621134
-          y: 0.9049926
-          z: 0.065629765
-          w: -0.41655892
-    - Position:
-        x: -1291.6
-        y: 41.8
-        z: -67.100006
-      TangentIn:
-        x: -0
-        y: -0
-        z: -30.826874
-      TangentOut:
-        x: 0
-        y: 0
-        z: 35.397697
-      Rotation:
-        value:
-          x: 0.03560425
-          y: 0.92659396
-          z: 0.06561486
-          w: -0.36857912
-    - Position:
-        x: -1362.5
-        y: 57.2
-        z: -155.6
-      TangentIn:
-        x: -0
-        y: -0
-        z: -38.216087
-      TangentOut:
-        x: 0
-        y: 0
-        z: 38.79964
-      Rotation:
-        value:
-          x: 0.029603058
-          y: 0.95779765
-          z: 0.05021632
-          w: -0.28147072
-    - Position:
-        x: -1415.2
-        y: 67.8
-        z: -260.6
-      TangentIn:
-        x: -0
-        y: -0
-        z: -41.566963
-      TangentOut:
-        x: 0
-        y: 0
-        z: 46.789677
-      Rotation:
-        value:
-          x: 0.016734878
-          y: 0.9689362
-          z: 0.07289173
-          w: -0.23573156
-    - Position:
-        x: -1484
-        y: 98.87
-        z: -389.59998
-      TangentIn:
-        x: -0
-        y: -0
-        z: -44.465927
-      TangentOut:
-        x: 0
-        y: 0
-        z: 36.024498
-      Rotation:
-        value:
-          x: 0.024243377
-          y: 0.9739883
-          z: 0.09442229
-          w: -0.20455672
-    - Position:
-        x: -1515.9
-        y: 116.4
-        z: -480.7
-      TangentIn:
-        x: -0
-        y: -0
-        z: -33.62056
-      TangentOut:
-        x: 0
-        y: 0
-        z: 35.924034
-      Rotation:
-        value:
-          x: 0.04510099
-          y: 0.9858548
-          z: 0.103098296
-          w: -0.124204405
-    - Position:
         x: -1532
         y: 144.2
         z: -588
       TangentIn:
         x: -0
         y: -0
-        z: -42.576267
+        z: -19.7717
       TangentOut:
         x: 0
         y: 0
-        z: 56.56777
+        z: 19.7717
       Rotation:
         value:
-          x: 0.0030431217
-          y: 0.99188685
-          z: 0.108957976
-          w: -0.06541639
+          x: -0.010673381
+          y: 0.9939604
+          z: 0.09347116
+          w: -0.05649588
     - Position:
         x: -1554.6
         y: 180.7
@@ -8134,74 +7495,6 @@ MonoBehaviour:
           z: -0.019566603
           w: 0.86306566
     m_MetaData:
-    - Mode: 1
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 1
-      Tension: 0.5
-    - Mode: 1
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 1
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 1
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 1
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
-    - Mode: 0
-      Tension: 0.5
     - Mode: 0
       Tension: 0.5
     - Mode: 0
@@ -8608,13 +7901,13 @@ MonoBehaviour:
   current_t_normalized: 0
   speedZones:
   - startT01: 0
-    endT01: 1
+    endT01: 0.17512819
     speedMultiplier: 1.5
-  - startT01: 0.3757919
-    endT01: 0.4305
-    speedMultiplier: 7
-  - startT01: 0.49
-    endT01: 0.6
+  - startT01: 0.1751282
+    endT01: 0.2525
+    speedMultiplier: 6.5
+  - startT01: 0.2525
+    endT01: 1
     speedMultiplier: 2
   floatZones: []
   progressBar: {fileID: 1024384592}
@@ -9793,103 +9086,6 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 3826003527410347583, guid: 69973388bf763a74dbcde0d28751b344, type: 3}
   m_PrefabInstance: {fileID: 7853651061014694755}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1483349920
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3015244609780354251, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_Name
-      value: indicator
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1652.3774
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -737.8997
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583142336647818214, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 669f482bcf18d514eb5312e3f5adfda8, type: 3}
 --- !u!1001 &1497594768
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13546,15 +12742,140 @@ PrefabInstance:
       value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5392398322951045289, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 8603541622604761643, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 8904447968811972288, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 3472430311517861227, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 7125027120329196913, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -750550859352844058, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -6027245814769284217, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 3229284565762509882, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -6792889981931915972, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 4103881766339141800, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -7395704305543789238, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 7975042476016782316, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 7045030354117346258, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -8455728280606582528, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 2596957926113402938, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 7917349904687423284, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 26844662620191305, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -7648502956408741331, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -652209905907201759, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 1502877291743220047, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 8009987137999418058, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 8485173162082002552, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -7271449666460269675, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 6014503084441653313, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 5194334309628646677, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 7439367086699601228, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 1197096661595382744, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -8856916482769721425, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -7046613062614526147, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 2891746525080496957, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -9203324390398772745, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -5569043992460113364, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -5764725420169720540, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 152955310288243915, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -9068619658319529961, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -4058879426038799192, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 6335250783087129314, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 3559817854460706613, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 211350780280405282, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 9086856371640495675, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 8410057375291918132, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 585220623989814957, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 5245042011116262203, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -2815641878044829716, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -3762967090738830339, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 3617665961071644646, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -8995271579679930556, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -2883731766144651485, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -7410217184532110200, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -74209933945285768, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -8034489483821853367, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -6565511838479356500, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -6638382919436510182, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 5446169893169118426, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 69942560196644347, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 781679719685557685, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 4808003802559169127, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 3684991429827676534, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 4174307374427115824, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 6362277084851265782, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 568812434329897292, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 2505271470697925691, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -7325346653114575390, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 2532525142836321865, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -7100973225522708129, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -3215555783603854218, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -4344899237426878700, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -7308213284921252466, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -3194841636407034456, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -5998301319071483956, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 47093337021275650, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 327391695916083026, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 4406072908233387757, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -251241869400619796, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -2932998491564163895, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 5914173764048766335, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -5043784451748033163, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 4424396828587804706, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -1018664272722485354, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -6345117825289443190, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 2716701620398677189, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 6320301419972642092, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 5844683770319249344, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 1558525132243500111, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -8116613859084990610, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -4851770100157099968, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 2137926850966054845, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -5486603415466280802, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 8800238943130225417, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 1644296196739873966, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 3232121955589983452, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 233588462237741088, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -1461927740683455318, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -7988223768601971068, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 3716096337188244772, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 785759276956092244, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 6094984577667223744, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -8783340758332071219, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 2489434777120061707, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -6163973925469723751, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -1371108373144935189, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 6512510688612296998, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -455485572513581032, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -7711610082809904590, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 6507901977716847365, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -516098083770646512, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -7029948723529949830, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -1690102145688852833, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 2544276820521821742, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -3653983715662582221, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 7034455982580203672, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 4356877828898064976, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 5148817236446094103, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 6849434782225810706, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -8939858222121370722, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -6014232382242948077, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -1633722789409180591, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -8380157826906577798, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -9125450459769756960, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -5546747315237514756, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 2800250516343163423, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 3849762623622064168, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 2182614957233447386, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 8573442539147778110, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -1047549274473445336, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: -2268493968148393607, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 7625273502796089172, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
+    - {fileID: 8700725330082129686, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -208595431880416365, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 299602996}
-    - targetCorrespondingSourceObject: {fileID: -7046613062614526147, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1019306193}
     - targetCorrespondingSourceObject: {fileID: 2743991894301418099, guid: e6e146752a0a7a041a3c8ce458447abe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 697011832}
@@ -15627,4 +14948,3 @@ SceneRoots:
   - {fileID: 1399920602}
   - {fileID: 1158760739}
   - {fileID: 940489375}
-  - {fileID: 1483349920}
