@@ -27,7 +27,7 @@ public class JobExplanation : MonoBehaviour
                 break;
 
             //marlion
-            case 1:
+            case 2:
                 for (int i = 0; i < details.Length; i++)
                 {
                     details[i].sprite = jobUIs[1].jobUI[i];
@@ -36,7 +36,7 @@ public class JobExplanation : MonoBehaviour
                 break;
 
             //tontto
-            case 2:
+            case 1:
                 for (int i = 0; i < details.Length; i++)
                 {
                     details[i].sprite = jobUIs[2].jobUI[i];
@@ -68,10 +68,10 @@ public class JobExplanation : MonoBehaviour
             case 0:
                 name = "ninja";
                 break;
-            case 1:
+            case 2:
                 name = "merlion";
                 break;
-            case 2:
+            case 1:
                 name = "tonto";
                 break;
         }
