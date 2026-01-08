@@ -99,7 +99,7 @@ public class JobSelect : MonoBehaviour
     private async void ChangeJob(int direction)
     {
         isInputCooldown = true;
-        jobNum = Mathf.Clamp(jobNum + direction, 0, MaxJobIndex);
+        jobNum = Mathf.Clamp(jobNum + direction, 0, MaxJobIndex-1);
 
         AnimateSelection();
         UpdateUI();

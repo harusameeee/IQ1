@@ -110,12 +110,13 @@ MonoBehaviour:
   owner: {fileID: 0}
   alr_damaged: []
   tvalue: 0
+  sprite: {fileID: 0}
   range_window: {x: -1, y: 2}
   despawn_range: 10
+  lifeTime: 8
   pos: {x: 0, y: 1}
-  player: {fileID: 0}
   dim: {x: 4, y: 3}
-  sprite: {fileID: 0}
+  player: {fileID: 0}
   hitboxvis: {fileID: 0}
 --- !u!65 &4032238380910983646
 BoxCollider:
