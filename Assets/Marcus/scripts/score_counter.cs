@@ -21,7 +21,7 @@ public class score_counter : MonoBehaviour
     [Header("Image明るさ設定")]
     [SerializeField] private Image targetImage;   
     [SerializeField] private float normalAlpha = 0.3f;   // 通常の薄い状態
-    [SerializeField] private float brightAlpha = 1.0f;  // コンボ時の明るい状態
+    [SerializeField] private float brightAlpha = 0.7f;  // コンボ時の明るい状態
     [SerializeField] private float flashTime = 0.2f;    // 明るくなる時間
 
 
