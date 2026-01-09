@@ -3387,8 +3387,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jobUIs:
   - {fileID: 11400000, guid: aaab2681248ab8941a7eb58c3c520123, type: 2}
-  - {fileID: 11400000, guid: 89547cf690af19d49a2773c7a64abb0e, type: 2}
   - {fileID: 11400000, guid: 713eac6fcdf67ea43aa7a802192c16e2, type: 2}
+  - {fileID: 11400000, guid: 89547cf690af19d49a2773c7a64abb0e, type: 2}
   details:
   - {fileID: 3642219863693341015}
   - {fileID: 1625837792}
@@ -5012,8 +5012,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jobUIs:
   - {fileID: 11400000, guid: aaab2681248ab8941a7eb58c3c520123, type: 2}
-  - {fileID: 11400000, guid: 89547cf690af19d49a2773c7a64abb0e, type: 2}
   - {fileID: 11400000, guid: 713eac6fcdf67ea43aa7a802192c16e2, type: 2}
+  - {fileID: 11400000, guid: 89547cf690af19d49a2773c7a64abb0e, type: 2}
   details:
   - {fileID: 1598458266}
   - {fileID: 907908717}

@@ -5,8 +5,8 @@ public class ScoreRankDisplay : MonoBehaviour
 {
     [SerializeField] private ScoreData scoreData;
 
-    [NamedArray(new string[] { "F","C", "B", "A", "S" })]
-    [SerializeField] private Sprite[] rankSprites = new Sprite[5];
+    [NamedArray(new string[] { "F","C", "B", "A", "S" ,"S+"})]
+    [SerializeField] private Sprite[] rankSprites = new Sprite[6];
 
     private Image rankImage;
 
@@ -38,14 +38,16 @@ public class ScoreRankDisplay : MonoBehaviour
 
         if(score <= ScoreRankBoundary.RANK_X)
             rankImage.sprite = rankSprites[0];
-        else if (score >= ScoreRankBoundary.RANK_C && score < ScoreRankBoundary.RANK_B)
+        else if (score >= ScoreRankBoundary.RANK_X && score < ScoreRankBoundary.RANK_C)
             rankImage.sprite = rankSprites[1];
-        else if (score >= ScoreRankBoundary.RANK_B && score < ScoreRankBoundary.RANK_A)
+        else if (score >= ScoreRankBoundary.RANK_C && score < ScoreRankBoundary.RANK_B)
             rankImage.sprite = rankSprites[2];
-        else if (score >= ScoreRankBoundary.RANK_A && score < ScoreRankBoundary.RANK_S)
+        else if (score >= ScoreRankBoundary.RANK_B && score < ScoreRankBoundary.RANK_A)
             rankImage.sprite = rankSprites[3];
-        else if (score >= ScoreRankBoundary.RANK_S)
+        else if (score >= ScoreRankBoundary.RANK_A && score < ScoreRankBoundary.RANK_S)
             rankImage.sprite = rankSprites[4];
+        else if (score >= ScoreRankBoundary.RANK_S)
+            rankImage.sprite = rankSprites[5];
         else
             rankImage.sprite = rankSprites[0];
     }
