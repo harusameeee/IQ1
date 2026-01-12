@@ -30,7 +30,7 @@ public class JobExplanation : MonoBehaviour
             case 2:
                 for (int i = 0; i < details.Length; i++)
                 {
-                    details[i].sprite = jobUIs[1].jobUI[i];
+                    details[i].sprite = jobUIs[2].jobUI[i];
                     coinDisplay.CoinDisp(true);
                 }
                 break;
@@ -39,7 +39,7 @@ public class JobExplanation : MonoBehaviour
             case 1:
                 for (int i = 0; i < details.Length; i++)
                 {
-                    details[i].sprite = jobUIs[2].jobUI[i];
+                    details[i].sprite = jobUIs[1].jobUI[i];
                     coinDisplay.CoinDisp(false);
                 }
                 break;
