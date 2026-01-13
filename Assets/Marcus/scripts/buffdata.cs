@@ -9,6 +9,7 @@ public class buffdata : ScriptableObject
     public float pow;
     public float duration;
     public bool showbufficon = true;
+    public AudioClip audioClip;
     public buffdata copy()
     {
         buffdata newbuff = CreateInstance<buffdata>();
@@ -19,6 +20,7 @@ public class buffdata : ScriptableObject
         newbuff.pow = pow;
         newbuff.duration = duration;
         newbuff.showbufficon = showbufficon;
+        newbuff.audioClip = audioClip;
         return newbuff;
     }
 }

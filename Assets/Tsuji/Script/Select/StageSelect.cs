@@ -6,8 +6,8 @@ using UnityEngine;
 public class StageSelect : MonoBehaviour
 {
     [Header("ステージオブジェクト")]
-    [NamedArray(new string[] { "タイトルに戻る", "スタート地点", "ステージ1" })]
-    [SerializeField] private GameObject[] stageObjects = new GameObject[3];
+    [NamedArray(new string[] { "タイトルに戻る", "スタート地点", "ステージ1","ステージ2" })]
+    [SerializeField] private GameObject[] stageObjects = new GameObject[4];
 
     [Header("プレイヤー")]
     [SerializeField] private GameObject[] players = new GameObject[2];
@@ -40,6 +40,7 @@ public class StageSelect : MonoBehaviour
             {
                 //ステージを記録
                 selectedStage.SetStageName(stageObjects[selectNum].name);
+                Debug.Log(stageObjects[selectNum].name.ToString());
                 isSelect= true;
             }
         }

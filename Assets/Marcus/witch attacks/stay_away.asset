@@ -19,3 +19,4 @@ MonoBehaviour:
   pow: 10
   duration: 5
   showbufficon: 0
+  audioClip: {fileID: 8300000, guid: 8c95ac2137ac2af47a431afc9ae2d897, type: 3}

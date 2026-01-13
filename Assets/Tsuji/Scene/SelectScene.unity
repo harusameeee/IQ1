@@ -295,7 +295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 23615980}
   m_Layer: 0
-  m_Name: level_scene 1
+  m_Name: Stage1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5786,6 +5786,7 @@ MonoBehaviour:
   - {fileID: 1070294471}
   - {fileID: 463058766}
   - {fileID: 23615979}
+  - {fileID: 490589762}
   players:
   - {fileID: 464207815810545249}
   - {fileID: 919132149060969739}

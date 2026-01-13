@@ -439,6 +439,7 @@ public class PlayerLineMove : entity
             if (buffToAdd.type == bufftypes.sticktogether || buffToAdd.type == bufftypes.stayaway ||
                 buffToAdd.type == bufftypes.keep_moving || buffToAdd.type == bufftypes.Stop_moving)
             {
+                SoundManager.Instance.PlaySFX(buffToAdd.audioClip);
                 playercanvas.addbuffvisual(ref buffToAdd);
             }
 
