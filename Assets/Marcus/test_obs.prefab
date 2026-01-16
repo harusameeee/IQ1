@@ -109,11 +109,12 @@ MonoBehaviour:
   flipx: 0
   owner: {fileID: 0}
   alr_damaged: []
-  tvalue: 0
+  positionT: 0
+  spawnT: 0
   sprite: {fileID: 0}
   range_window: {x: -1, y: 2}
   despawn_range: 10
-  lifeTime: 8
+  lifeTime: 6
   pos: {x: 0, y: 1}
   dim: {x: 4, y: 3}
   player: {fileID: 0}
