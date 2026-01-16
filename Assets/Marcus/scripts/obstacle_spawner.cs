@@ -1,19 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
 
 public class obstacle_spawner : MonoBehaviour
 {
     // -------- spawn timing --------
-    public float spawnfrequency = 2.0f;          // obstacle spawn interval
-    public float item_spawn_frequency = 5.0f;    // item spawn interval
+    public float spawnfrequency = 2.0f;
+    public float item_spawn_frequency = 5.0f;
     public float timer = 0.0f;
     public float item_timer = 0.0f;
 
+    // ★★★ 出るタイミングのランダム幅（Inspectorで調整） ★★★
+    [Header("Spawn Timing Offset (T Value)")]
+    [Tooltip("x = 最速, y = 最遅 / 0.1 = スプライン全長の10%")]
+    public Vector2 spawnOffsetRange = new Vector2(0.05f, 0.15f);
+
+    [Header("Obstacle Spawn Interval")]
+    public float spawnIntervalMin = 1f;
+    public float spawnIntervalMax = 3f;
+
+    float nextSpawnTime;
+
     // -------- lane / offset --------
-    public int maxoffset = 5;                     // max lane offset
-    public float mindist = 5;                     // minimum distance between lanes
-    public float offset_dist = 50;                // distance forward on spline
+    public int maxoffset = 5;
+    public float mindist = 5;
+    public float offset_dist = 50;
 
     // -------- references --------
     public Transform indicator_transform;
@@ -28,9 +38,6 @@ public class obstacle_spawner : MonoBehaviour
     // -------- entities --------
     public static List<entity> damagables = new List<entity>();
 
-    float indicator_countdown = 7.0f;
-
-    // ----------------------------------------
     void Awake()
     {
         damagables = new List<entity>();
@@ -39,7 +46,8 @@ public class obstacle_spawner : MonoBehaviour
 
     void Start()
     {
-        // indicator pool
+        nextSpawnTime = Random.Range(spawnIntervalMin, spawnIntervalMax);
+
         for (int i = 0; i < 30; i++)
         {
             var obj = Instantiate(
@@ -57,88 +65,64 @@ public class obstacle_spawner : MonoBehaviour
         timer += Time.deltaTime;
         item_timer += Time.deltaTime;
 
-        if (timer > spawnfrequency)
+        if (timer >= nextSpawnTime)
         {
             spawnobstacle();
+
+            timer = 0f;
+            nextSpawnTime = Random.Range(spawnIntervalMin, spawnIntervalMax);
         }
 
         if (item_timer > item_spawn_frequency)
-        {
             spawnitem();
-        }
     }
 
-    // ----------------------------------------
     void addtodamagables(entity d)
     {
         if (!damagables.Contains(d))
-        {
             damagables.Add(d);
-        }
     }
 
     // ----------------------------------------
     void spawnobstacle()
     {
-        Random rng = new Random(System.DateTime.Now.Millisecond);
-        timer = (float)rng.Next(-3, 3) / 10f;
+        timer = 0f;
 
-        // find unused indicator
-        indicator obstacleindicator = null;
-        foreach (var ind in indicators)
-        {
-            if (!ind.gameObject.activeSelf)
-            {
-                obstacleindicator = ind;
-                break;
-            }
-        }
+        indicator obstacleindicator = getFreeIndicator();
+        if (obstacleindicator == null) return;
 
-        // decide lane offset
-        bool validpos = false;
-        int attempts = 0;
-        float temp = 0;
+        float lane = getValidLane();
 
-        while (!validpos && attempts < 10)
-        {
-            rng = new Random(System.DateTime.Now.Millisecond + attempts);
-            temp = rng.Next(-maxoffset, maxoffset);
-
-            validpos = true;
-            foreach (indicator ind in indicators)
-            {
-                if (ind.gameObject.activeSelf)
-                {
-                    if (Mathf.Abs(ind.offsetpos - temp) < mindist)
-                    {
-                        validpos = false;
-                        break;
-                    }
-                }
-            }
-            attempts++;
-        }
-
-        // get spawn position on spline (t-driven)
         Vector4 spawnpos = player.getobstaclespawnpos(
-            temp,
+            lane,
             offset_dist,
             out bool valid,
-            out float new_t
+            out float newT
         );
 
-        if (!valid)
-            return;
+        if (!valid) return;
 
-        // create obstacle
         obstacle obs = Instantiate(
-            obstacles[rng.Next(0, obstacles.Count)]
+            obstacles[UnityEngine.Random.Range(0, obstacles.Count)]
         ).GetComponent<obstacle>();
 
         obs.player = player;
-        obs.pos.x = temp;
-        obs.tvalue = new_t;
-        obs.reftransform = player.transform;
+        obs.pos.x = lane;
+
+        // ===== 出るタイミングを Inspector で制御 =====
+        obs.positionT = newT;
+
+        float spawnOffset = UnityEngine.Random.Range(
+            spawnOffsetRange.x,
+            spawnOffsetRange.y
+        );
+
+        obs.spawnT = newT + spawnOffset;
+
+        if (obs.spawnT < 0f) obs.spawnT += 1f;
+        if (obs.spawnT > 1f) obs.spawnT -= 1f;
+        // ===========================================
+
         obs.hitboxvis = hitboxvis;
 
         hitboxvis.additionalhitboxes.Add(
@@ -149,14 +133,12 @@ public class obstacle_spawner : MonoBehaviour
             }
         );
 
-        // indicator
         obstacleindicator.transform.localPosition =
-            new Vector3(temp * 80f, 0f, 0f);
+            new Vector3(lane * 80f, 0f, 0f);
 
         obstacleindicator.gameObject.SetActive(true);
-        obstacleindicator.setvalues(player, obs.transform, temp);
+        obstacleindicator.setvalues(player, obs.transform, lane);
 
-        // final transform
         obs.transform.position =
             new Vector3(spawnpos.x, spawnpos.y, spawnpos.z);
 
@@ -167,61 +149,41 @@ public class obstacle_spawner : MonoBehaviour
     // ----------------------------------------
     void spawnitem()
     {
-        Random rng = new Random(System.DateTime.Now.Millisecond * 2);
-        item_timer = (float)rng.Next(-3, 3) / 10f;
+        item_timer = 0f;
 
-        indicator itemindicator = null;
-        foreach (var ind in indicators)
-        {
-            if (!ind.gameObject.activeSelf)
-            {
-                itemindicator = ind;
-                break;
-            }
-        }
+        indicator itemindicator = getFreeIndicator();
+        if (itemindicator == null) return;
 
-        bool validpos = false;
-        int attempts = 0;
-        float temp = 0;
-
-        while (!validpos && attempts < 10)
-        {
-            rng = new Random(System.DateTime.Now.Millisecond + attempts);
-            temp = rng.Next(-maxoffset, maxoffset);
-
-            validpos = true;
-            foreach (indicator ind in indicators)
-            {
-                if (ind.gameObject.activeSelf)
-                {
-                    if (Mathf.Abs(ind.offsetpos - temp) < mindist)
-                    {
-                        validpos = false;
-                        break;
-                    }
-                }
-            }
-            attempts++;
-        }
+        float lane = getValidLane();
 
         Vector4 spawnpos = player.getobstaclespawnpos(
-            temp,
+            lane,
             offset_dist,
             out bool valid,
-            out float new_t
+            out float newT
         );
 
-        if (!valid)
-            return;
+        if (!valid) return;
 
         obstacle obs = Instantiate(
-            items[rng.Next(0, items.Count)]
+            items[UnityEngine.Random.Range(0, items.Count)]
         ).GetComponent<obstacle>();
 
         obs.player = player;
-        obs.pos.x = temp;
-        obs.tvalue = new_t;
-        obs.reftransform = player.transform;
+        obs.pos.x = lane;
+
+        obs.positionT = newT;
+
+        float spawnOffset = UnityEngine.Random.Range(
+            spawnOffsetRange.x,
+            spawnOffsetRange.y
+        );
+
+        obs.spawnT = newT + spawnOffset;
+
+        if (obs.spawnT < 0f) obs.spawnT += 1f;
+        if (obs.spawnT > 1f) obs.spawnT -= 1f;
+
         obs.hitboxvis = hitboxvis;
 
         hitboxvis.additionalhitboxes.Add(
@@ -233,15 +195,49 @@ public class obstacle_spawner : MonoBehaviour
         );
 
         itemindicator.transform.localPosition =
-            new Vector3(temp * 80f, 0f, 0f);
+            new Vector3(lane * 80f, 0f, 0f);
 
         itemindicator.gameObject.SetActive(true);
         itemindicator.setitem(obs.sprite);
-        itemindicator.setvalues(player, obs.transform, temp);
+        itemindicator.setvalues(player, obs.transform, lane);
 
         obs.transform.position =
             new Vector3(spawnpos.x, spawnpos.y, spawnpos.z);
 
         obs.transform.rotation = player.transform.rotation;
+    }
+
+    // -------- helpers --------
+    indicator getFreeIndicator()
+    {
+        foreach (var ind in indicators)
+            if (!ind.gameObject.activeSelf)
+                return ind;
+        return null;
+    }
+
+    float getValidLane()
+    {
+        float lane = 0f;
+        bool valid = false;
+        int attempts = 0;
+
+        while (!valid && attempts < 10)
+        {
+            lane = UnityEngine.Random.Range(-maxoffset, maxoffset);
+            valid = true;
+
+            foreach (indicator ind in indicators)
+            {
+                if (ind.gameObject.activeSelf &&
+                    Mathf.Abs(ind.offsetpos - lane) < mindist)
+                {
+                    valid = false;
+                    break;
+                }
+            }
+            attempts++;
+        }
+        return lane;
     }
 }
