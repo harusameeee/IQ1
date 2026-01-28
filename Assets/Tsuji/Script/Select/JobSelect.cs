@@ -58,7 +58,7 @@ public class JobSelect : MonoBehaviour
     }
     private void HandleSelect()
     {
-        if (!isSelected && !playerCheck.playerReady[playerNumber])
+        if (!isSelected &&( !playerCheck.playerReady[playerNumber]) || Input.GetKeyDown(KeyCode.W))
         {
             isSelected = true;
             playerCheck.PlayerReady(playerNumber, true);

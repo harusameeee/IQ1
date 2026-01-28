@@ -27,19 +27,19 @@ public class JobExplanation : MonoBehaviour
                 break;
 
             //marlion
-            case 2:
+            case 1:
                 for (int i = 0; i < details.Length; i++)
                 {
-                    details[i].sprite = jobUIs[2].jobUI[i];
+                    details[i].sprite = jobUIs[1].jobUI[i];
                     coinDisplay.CoinDisp(true);
                 }
                 break;
 
             //tontto
-            case 1:
+            case 2:
                 for (int i = 0; i < details.Length; i++)
                 {
-                    details[i].sprite = jobUIs[1].jobUI[i];
+                    details[i].sprite = jobUIs[2].jobUI[i];
                     coinDisplay.CoinDisp(false);
                 }
                 break;
@@ -68,10 +68,10 @@ public class JobExplanation : MonoBehaviour
             case 0:
                 name = "ninja";
                 break;
-            case 2:
+            case 1:
                 name = "merlion";
                 break;
-            case 1:
+            case 2:
                 name = "tonto";
                 break;
         }
